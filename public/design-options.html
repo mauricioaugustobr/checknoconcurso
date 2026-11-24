@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3 Opções de Design (UX/UI) — Check no Concurso</title>
+  <style>
+    :root {
+      --background: #F6F7F9;
+      --card: #FFFFFF;
+      --border: #E2E8F0;
+      --foreground: #0F172A;
+      --muted-foreground: #64748B;
+      --primary: #065F46;
+      --primary-foreground: #FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--background); color: var(--foreground); }
+    .tabular { font-variant-numeric: tabular-nums; }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 24px 18px 48px; }
+    .card-box { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 20px; margin-bottom: 18px; }
+    .row-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 800; padding: 4px 10px; border-radius: 99px; }
+    .pill-em { background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
+    .pill-gold { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+    .pill-red { background: #FEE2E2; color: #B91C1C; }
+    .pill-blue { background: #DBEAFE; color: #1D4ED8; }
+    .pill-purple { background: #EDE9FE; color: #6D28D9; }
+    .pill-gray { background: #E2E8F0; color: #475569; }
+    h1 { margin: 8px 0 4px; font-size: 24px; letter-spacing: -0.02em; }
+    h2, h3, h4, p { margin: 0; }
+    .muted { color: var(--muted-foreground); font-size: 13.5px; }
+    .vp-group { display: inline-flex; gap: 4px; padding: 4px; border-radius: 12px; border: 1px solid var(--border); background: var(--background); }
+    .vp-btn { border: 0; background: transparent; padding: 7px 14px; border-radius: 8px; font-size: 12.5px; font-weight: 700; cursor: pointer; color: var(--muted-foreground); }
+    .vp-btn.active { background: var(--primary); color: #FFF; }
+    .tabs-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+    .opt-tab { text-align: left; border: 1px solid var(--border); background: var(--background); border-radius: 14px; padding: 14px; cursor: pointer; transition: all 0.15s ease; }
+    .opt-tab:hover { border-color: #059669; }
+    .opt-tab.active { border: 2px solid #065F46; background: #ECFDF5; }
+    .opt-tab strong { display: block; font-size: 15px; margin: 6px 0 3px; color: #0F172A; }
+    .opt-tab p { font-size: 12.5px; color: #475569; line-height: 1.4; }
+    .mock-frame { border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12); transition: max-width 0.25s ease; }
+    .mock-frame.mobile-mode { max-width: 392px; margin: 0 auto; border: 9px solid #0F172A; border-radius: 36px; }
+    .mock-frame.mobile-mode .hide-m { display: none !important; }
+    .mock-frame.mobile-mode .grid-3, .mock-frame.mobile-mode .grid-2, .mock-frame.mobile-mode .ws-grid { grid-template-columns: 1fr !important; }
+    .mock-frame.mobile-mode .mob-nav { display: flex !important; }
+    .mob-nav { display: none; background: #FFF; border-top: 1px solid #E2E8F0; padding: 10px 14px; justify-content: space-around; font-size: 11px; font-weight: 700; color: #64748B; }
+    .hidden { display: none !important; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .ws-grid { display: grid; grid-template-columns: 240px 1fr; min-height: 460px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #E2E8F0; }
+    th { font-size: 10.5px; text-transform: uppercase; color: #64748B; background: #F8FAFC; }
+    @media (max-width: 860px) {
+      .tabs-grid, .grid-3, .grid-2, .ws-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card-box">
+      <div class="row-between">
+        <div>
+          <span class="pill pill-em">Estudo de UX &amp; UI · Check no Concurso</span>
+          <h1>3 Opções de Design para Definir o Visual</h1>
+          <p class="muted">Compare as 3 direções com seus concursos reais de 24/11/2026 e teste em Desktop ou App Mobile. <a href="/" style="color:#065F46;font-weight:700;">← Voltar ao protótipo atual</a></p>
+        </div>
+        <div class="vp-group">
+          <button type="button" class="vp-btn active" id="vpDesktopBtn">Desktop</button>
+          <button type="button" class="vp-btn" id="vpMobileBtn">App Mobile</button>
+        </div>
+      </div>
+
+      <div class="tabs-grid">
+        <button type="button" class="opt-tab active" data-opt="1">
+          <div class="row-between"><span style="font-size:11px;font-weight:800;color:#065F46;">OPÇÃO 1</span><span class="pill pill-gold">Alta Confiança</span></div>
+          <strong>Editorial Fintech</strong>
+          <p>Fundo creme claro, verde-bandeira e âmbar. Hierarquia limpa estilo Nubank/InfoMoney com caixa de urgência da semana.</p>
+        </button>
+        <button type="button" class="opt-tab" data-opt="2">
+          <div class="row-between"><span style="font-size:11px;font-weight:800;color:#0369A1;">OPÇÃO 2</span><span class="pill pill-blue">Maior Retenção</span></div>
+          <strong>Calendário &amp; Radar Brasil</strong>
+          <p>Estilo produtividade (Notion/Google Flights). Linha do tempo de provas, alerta de choque de datas no mesmo domingo e painel lateral.</p>
+        </button>
+        <button type="button" class="opt-tab" data-opt="3">
+          <div class="row-between"><span style="font-size:11px;font-weight:800;color:#047857;">OPÇÃO 3</span><span class="pill pill-purple">Viral / App-First</span></div>
+          <strong>Check Hub Interativo</strong>
+          <p>Cabeçalho esmeralda escuro + pílulas estilo Stories + checklist clicável (“Dar Check”) em cada concurso.</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="mock-frame" id="previewStage">
+      <!-- OPÇÃO 1 -->
+      <section data-panel="1" style="background:#FAF9F6;color:#0F172A;">
+        <div style="background:#FFF;border-bottom:1px solid #E7E5E4;padding:14px 22px;" class="row-between">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:34px;height:34px;border-radius:11px;background:#064E3B;color:#FBBF24;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;">✓</div>
+            <div><strong style="display:block;font-size:15px;">Check no Concurso</strong><span style="font-size:11px;color:#64748B;">checknoconcurso.com.br</span></div>
+          </div>
+          <div class="hide-m" style="display:flex;gap:18px;font-size:12.5px;font-weight:700;color:#475569;">
+            <span style="color:#064E3B;border-bottom:2px solid #064E3B;padding-bottom:3px;">Abertos (13)</span>
+            <span>Provas Agendadas (5)</span><span>Encerrados (4)</span><span>Cursos</span><span>5 Provas</span>
+          </div>
+          <button style="border:0;background:#064E3B;color:#FFF;font-weight:700;font-size:12px;padding:9px 15px;border-radius:99px;">Assinar · R$ 6,99</button>
+        </div>
+
+        <div style="padding:26px 24px;border-bottom:1px solid #E7E5E4;background:linear-gradient(180deg,#FFF,#FAF9F6);">
+          <div class="grid-2" style="grid-template-columns:1.5fr 1fr;align-items:end;">
+            <div>
+              <span class="pill pill-em">Atualizado hoje · 24/11/2026</span>
+              <h2 style="font-size:26px;margin:10px 0 12px;line-height:1.18;">Acompanhe cada edital aberto, data de prova e encerramento sem perder prazos.</h2>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:200px;background:#FFF;border:1px solid #D6D3D1;border-radius:99px;padding:10px 16px;font-size:13px;color:#78716C;">Buscar PM-SP, TJ-SP, FGV, Vunesp, Bahia...</div>
+                <button style="border:0;background:#0F172A;color:#FFF;padding:10px 18px;border-radius:99px;font-weight:700;font-size:12.5px;">Filtrar</button>
+              </div>
+            </div>
+            <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:16px;padding:16px;">
+              <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:#B45309;margin-bottom:10px;">Atenção esta semana</div>
+              <div style="display:flex;flex-direction:column;gap:8px;font-size:12.5px;">
+                <div class="row-between"><span><strong>TRT-4 (RS)</strong> · R$ 18.380</span><span class="pill pill-red">Encerra amanhã</span></div>
+                <div class="row-between"><span><strong>TCE-MA</strong> · Auditor/Téc.</span><span class="pill pill-purple">Prova em 5d</span></div>
+                <div class="row-between"><span><strong>SEDUC-SP</strong> · 5.000 vagas</span><span class="pill pill-blue">Abre 26/11</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:24px;">
+          <div class="grid-3">
+            <div style="background:#FFF;border:1px solid #E7E5E4;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+              <div class="row-between"><span class="pill pill-em">Inscrições Abertas</span><span style="font-size:12px;font-weight:700;color:#64748B;">SP · Vunesp</span></div>
+              <div><div style="font-size:12px;color:#78716C;">Polícia Militar de SP</div><strong style="font-size:16px;">Aluno-Soldado · 2.000 vagas</strong></div>
+              <div class="row-between" style="border-top:1px solid #F5F5F4;border-bottom:1px solid #F5F5F4;padding:10px 0;">
+                <div><div style="font-size:10px;color:#78716C;font-weight:700;">SALÁRIO INICIAL</div><strong class="tabular" style="font-size:19px;color:#064E3B;">R$ 5.482,51</strong></div>
+                <div style="text-align:right;"><div style="font-size:10px;color:#78716C;font-weight:700;">DATA DA PROVA</div><strong class="tabular" style="font-size:14px;">28/02/2027</strong></div>
+              </div>
+              <div class="row-between" style="font-size:12px;"><span style="color:#57534E;">Até 22/12 · Nível Médio</span><strong style="color:#064E3B;">Edital + Cursos →</strong></div>
+            </div>
+
+            <div style="background:#FFF;border:1px solid #E7E5E4;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+              <div class="row-between"><span class="pill pill-em">Inscrições Abertas</span><span style="font-size:12px;font-weight:700;color:#64748B;">SP · FGV</span></div>
+              <div><div style="font-size:12px;color:#78716C;">SP Águas · Agência Estadual</div><strong style="font-size:16px;">Especialista e Analista · 190 vagas</strong></div>
+              <div class="row-between" style="border-top:1px solid #F5F5F4;border-bottom:1px solid #F5F5F4;padding:10px 0;">
+                <div><div style="font-size:10px;color:#78716C;font-weight:700;">SALÁRIO ATÉ</div><strong class="tabular" style="font-size:19px;color:#064E3B;">R$ 12.070,00</strong></div>
+                <div style="text-align:right;"><div style="font-size:10px;color:#78716C;font-weight:700;">DATA DA PROVA</div><strong class="tabular" style="font-size:14px;">31/01/2027</strong></div>
+              </div>
+              <div class="row-between" style="font-size:12px;"><span style="color:#57534E;">Até 17/12 · Superior</span><strong style="color:#064E3B;">Desbloquear →</strong></div>
+            </div>
+
+            <div style="background:#F5F5F4;border:1px solid #E7E5E4;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+              <div class="row-between"><span class="pill pill-gray">Encerrado · Prova Feita</span><span style="font-size:12px;font-weight:700;color:#64748B;">DF · Cebraspe</span></div>
+              <div><div style="font-size:12px;color:#78716C;">Tribunal de Contas do DF</div><strong style="font-size:16px;color:#334155;">Analista Controle · 10 + CR</strong></div>
+              <div class="row-between" style="border-top:1px solid #E7E5E4;border-bottom:1px solid #E7E5E4;padding:10px 0;">
+                <div><div style="font-size:10px;color:#78716C;font-weight:700;">SALÁRIO INICIAL</div><strong class="tabular" style="font-size:19px;color:#475569;">R$ 14.990,41</strong></div>
+                <div style="text-align:right;"><div style="font-size:10px;color:#78716C;font-weight:700;">APLICADA EM</div><strong class="tabular" style="font-size:14px;color:#475569;">22/11/2026</strong></div>
+              </div>
+              <div class="row-between" style="font-size:12px;"><span style="color:#64748B;">Gabarito preliminar hoje</span><strong style="color:#B45309;">5 Provas →</strong></div>
+            </div>
+          </div>
+
+          <div style="margin-top:18px;background:#064E3B;color:#FFF;border-radius:16px;padding:18px 20px;" class="row-between">
+            <div>
+              <div style="font-size:11px;font-weight:800;color:#FBBF24;text-transform:uppercase;">Planos Check no Concurso</div>
+              <strong style="font-size:15px;">Essencial R$ 6,99/mês · ou Completo (+ 5 provas anteriores) por R$ 199,90/ano</strong>
+            </div>
+            <button style="border:0;background:#FBBF24;color:#0F172A;font-weight:800;font-size:12.5px;padding:10px 18px;border-radius:99px;">Comparar Planos</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- OPÇÃO 2 -->
+      <section data-panel="2" class="hidden" style="background:#F1F5F9;color:#0F172A;">
+        <div style="background:#FFF;border-bottom:1px solid #E2E8F0;padding:11px 18px;" class="row-between">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:28px;height:28px;border-radius:8px;background:#0F172A;color:#34D399;display:flex;align-items:center;justify-content:center;font-weight:900;">✓</div>
+            <strong style="font-size:14px;">Check no Concurso</strong>
+            <span class="hide-m pill pill-gray">Radar Brasil · 24 editais reais</span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="display:inline-flex;background:#F1F5F9;padding:3px;border-radius:9px;">
+              <button type="button" id="opt2TimelineBtn" style="border:0;background:#FFF;color:#0F172A;font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:6px;cursor:pointer;">Calendário de Provas</button>
+              <button type="button" id="opt2TableBtn" style="border:0;background:transparent;color:#475569;font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:6px;cursor:pointer;">Tabela Rápida</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ws-grid">
+          <aside style="background:#FFF;border-right:1px solid #E2E8F0;padding:16px;display:flex;flex-direction:column;gap:16px;">
+            <div>
+              <div style="font-size:10.5px;font-weight:800;text-transform:uppercase;color:#64748B;margin-bottom:8px;">Status do Ciclo</div>
+              <div style="display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:600;">
+                <div class="row-between" style="background:#ECFDF5;color:#065F46;padding:7px 10px;border-radius:8px;"><span>Inscrições Abertas</span><span>9</span></div>
+                <div class="row-between" style="padding:7px 10px;"><span>Edital Publicado</span><span>4</span></div>
+                <div class="row-between" style="padding:7px 10px;"><span>Prova Agendada</span><span>5</span></div>
+                <div class="row-between" style="padding:7px 10px;"><span>Previstos (FGV)</span><span>2</span></div>
+                <div class="row-between" style="padding:7px 10px;color:#64748B;"><span>Encerrados 2026</span><span>4</span></div>
+              </div>
+            </div>
+            <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:12px;padding:12px;font-size:12px;">
+              <strong style="color:#92400E;">5 Provas Anteriores</strong>
+              <p style="color:#B45309;font-size:11.5px;margin-top:4px;">Incluso no Plano Completo (R$ 17,99/mês ou R$ 199,90/ano).</p>
+            </div>
+          </aside>
+
+          <div style="padding:18px;display:flex;flex-direction:column;gap:14px;">
+            <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:11px 14px;font-size:12.5px;color:#1E3A8A;">
+              <strong>Alerta de Choque de Datas:</strong> <strong>31/01/2027</strong> tem <strong>3 grandes provas no mesmo domingo</strong> (TRT-4 RS, TRF-3 SP/MS e SP Águas). Planeje antes de pagar a taxa!
+            </div>
+
+            <div id="opt2TimelineView" style="display:flex;flex-direction:column;gap:10px;">
+              <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:#64748B;">Próximas Provas no Calendário</div>
+
+              <div style="background:#FFF;border:1px solid #E2E8F0;border-radius:12px;padding:12px 14px;" class="row-between">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div style="width:52px;text-align:center;background:#F5F3FF;border:1px solid #DDD6FE;border-radius:10px;padding:6px 0;"><div style="font-size:10px;font-weight:800;color:#6D28D9;">NOV</div><strong style="font-size:17px;color:#4C1D95;">29</strong></div>
+                  <div><strong>TCE-MA</strong> <span class="pill pill-purple">em 5 dias</span><div class="muted" style="font-size:12px;">Auditor/Técnico · Cebraspe · Até R$ 20.112</div></div>
+                </div>
+                <strong style="font-size:12px;color:#065F46;">Edital + 5 Provas →</strong>
+              </div>
+
+              <div style="background:#FFF;border:1px solid #E2E8F0;border-left:4px solid #DC2626;border-radius:12px;padding:12px 14px;" class="row-between">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div style="width:52px;text-align:center;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;padding:6px 0;"><div style="font-size:10px;font-weight:800;color:#065F46;">JAN</div><strong style="font-size:17px;color:#064E3B;">31</strong></div>
+                  <div><strong>TRT 4ª Região (RS)</strong> <span class="pill pill-red">Encerra amanhã</span> <span class="pill pill-gold">Choque 31/01</span><div class="muted" style="font-size:12px;">Técnico e Analista · FCC · Até R$ 18.380,17</div></div>
+                </div>
+                <strong style="font-size:12px;color:#065F46;">Abrir →</strong>
+              </div>
+
+              <div style="background:#FFF;border:1px solid #E2E8F0;border-radius:12px;padding:12px 14px;" class="row-between">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div style="width:52px;text-align:center;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:10px;padding:6px 0;"><div style="font-size:10px;font-weight:800;color:#065F46;">FEV</div><strong style="font-size:17px;color:#064E3B;">28</strong></div>
+                  <div><strong>PM-SP (2.000 vagas)</strong> <span class="pill pill-em">Aberto até 22/12</span><div class="muted" style="font-size:12px;">Aluno-Soldado · Vunesp · R$ 5.482,51</div></div>
+                </div>
+                <strong style="font-size:12px;color:#065F46;">Abrir →</strong>
+              </div>
+            </div>
+
+            <div id="opt2TableView" class="hidden" style="background:#FFF;border:1px solid #E2E8F0;border-radius:12px;overflow-x:auto;">
+              <table>
+                <thead><tr><th>Órgão</th><th>Status</th><th>Data Prova</th><th>Vagas</th><th>Salário até</th><th>Banca</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>TRT-4 (RS)</strong></td><td><span class="pill pill-red">Até amanhã</span></td><td class="tabular"><strong>31/01/2027</strong></td><td>CR</td><td class="tabular" style="color:#065F46;font-weight:700;">R$ 18.380</td><td>FCC</td></tr>
+                  <tr><td><strong>PM-SP</strong></td><td><span class="pill pill-em">Aberto</span></td><td class="tabular"><strong>28/02/2027</strong></td><td class="tabular">2.000</td><td class="tabular" style="color:#065F46;font-weight:700;">R$ 5.482</td><td>Vunesp</td></tr>
+                  <tr><td><strong>TJ-SP</strong></td><td><span class="pill pill-em">Aberto</span></td><td class="tabular"><strong>14/03/2027</strong></td><td class="tabular">132 + CR</td><td class="tabular" style="color:#065F46;font-weight:700;">R$ 9.856</td><td>Vunesp</td></tr>
+                  <tr><td><strong>SEDUC-SP</strong></td><td><span class="pill pill-blue">Abre 26/11</span></td><td class="tabular"><strong>25/04/2027</strong></td><td class="tabular">5.000</td><td class="tabular" style="color:#065F46;font-weight:700;">R$ 5.565</td><td>FGV</td></tr>
+                  <tr style="background:#F8FAFC;color:#64748B;"><td><strong>TCDF</strong></td><td><span class="pill pill-gray">Encerrado</span></td><td class="tabular">22/11/2026</td><td class="tabular">10 + CR</td><td class="tabular">R$ 14.990</td><td>Cebraspe</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- OPÇÃO 3 -->
+      <section data-panel="3" class="hidden" style="background:#F8FAFC;color:#0F172A;">
+        <div style="background:linear-gradient(135deg,#06281F 0%,#0B3B2E 55%,#0F172A 100%);color:#FFF;padding:22px 24px;">
+          <div class="row-between">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;border-radius:12px;background:#10B981;color:#06281F;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;">✓</div>
+              <div><strong style="display:block;font-size:16px;">Check no Concurso</strong><span style="font-size:11.5px;color:#6EE7B7;">Seu checklist da aprovação</span></div>
+            </div>
+            <span style="font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:99px;background:rgba(251,191,36,0.2);border:1px solid rgba(251,191,36,0.5);color:#FCD34D;">Anual R$ 199,90</span>
+          </div>
+
+          <div style="display:flex;gap:10px;overflow-x:auto;margin-top:18px;padding-bottom:4px;">
+            <div style="min-width:130px;background:rgba(255,255,255,0.1);border:1px solid rgba(52,211,153,0.45);border-radius:14px;padding:10px 12px;"><div style="font-size:11px;color:#6EE7B7;font-weight:700;">Abertos hoje</div><strong style="font-size:17px;">9 editais</strong></div>
+            <div style="min-width:130px;background:rgba(239,68,68,0.22);border:1px solid rgba(248,113,113,0.5);border-radius:14px;padding:10px 12px;"><div style="font-size:11px;color:#FECACA;font-weight:700;">Último prazo</div><strong style="font-size:17px;">TRT-4 RS</strong></div>
+            <div style="min-width:130px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:10px 12px;"><div style="font-size:11px;color:#93C5FD;font-weight:700;">Abre 26/11</div><strong style="font-size:17px;">SEDUC-SP</strong></div>
+            <div style="min-width:130px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:10px 12px;"><div style="font-size:11px;color:#CBD5E1;font-weight:700;">Encerrados</div><strong style="font-size:17px;">4 provas</strong></div>
+          </div>
+        </div>
+
+        <div style="padding:22px 24px;">
+          <div class="grid-2">
+            <div style="background:#FFF;border:1px solid #E2E8F0;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px;">
+              <div class="row-between">
+                <div>
+                  <span class="pill pill-em">Aberto até 10/12</span>
+                  <h3 style="font-size:16px;margin-top:6px;">TJ-SP — Oficial &amp; Escrevente</h3>
+                  <p class="muted" style="font-size:12px;">Vunesp · Prova 14/03/2027 · Até R$ 9.856,95</p>
+                </div>
+                <span class="pill pill-em tabular" id="checkProgressLabel">2/4 ✓</span>
+              </div>
+              <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;font-size:12.5px;">
+                <div style="font-size:10.5px;font-weight:800;color:#64748B;text-transform:uppercase;">Seu Check neste concurso (clique para testar):</div>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="demo-check" checked /> Li o Raio-X do Edital Vunesp</label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="demo-check" checked /> Comparei cursos (Estratégia / Direção / Nova)</label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="demo-check" /> Inscrição paga até 10/12 (R$ 81 / R$ 96)</label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" class="demo-check" /> Resolvi as 5 provas anteriores <span class="pill pill-gold">Completo</span></label>
+              </div>
+            </div>
+
+            <div style="background:linear-gradient(135deg,#0F172A,#064E3B);color:#FFF;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;">
+              <div>
+                <span style="font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:99px;background:#FBBF24;color:#0F172A;">EM BREVE · MODO TREINO</span>
+                <h3 style="font-size:18px;margin-top:10px;">5 Provas Anteriores de todos os concursos abertos</h3>
+                <p style="font-size:12.5px;color:#CBD5E1;margin-top:6px;">Treine com as 5 últimas edições e gabaritos oficiais no Plano Completo.</p>
+              </div>
+              <div class="grid-2">
+                <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:12px;"><div style="font-size:10px;color:#6EE7B7;font-weight:800;">ESSENCIAL</div><strong style="font-size:18px;">R$ 6,99/mês</strong></div>
+                <div style="background:rgba(251,191,36,0.18);border:1px solid rgba(251,191,36,0.55);border-radius:12px;padding:12px;"><div style="font-size:10px;color:#FCD34D;font-weight:800;">COMPLETO ANUAL</div><strong style="font-size:18px;color:#FCD34D;">R$ 199,90/ano</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mob-nav">
+          <span style="color:#065F46;">✓ Feed</span><span>📅 Provas</span><span>📚 Cursos</span><span>⭐ Planos</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.opt-tab');
+    const panels = document.querySelectorAll('[data-panel]');
+    const stage = document.getElementById('previewStage');
+    const vpDesktop = document.getElementById('vpDesktopBtn');
+    const vpMobile = document.getElementById('vpMobileBtn');
+
+    tabs.forEach((btn) => btn.addEventListener('click', () => {
+      tabs.forEach((t) => t.classList.toggle('active', t === btn));
+      panels.forEach((p) => p.classList.toggle('hidden', p.dataset.panel !== btn.dataset.opt));
+    }));
+
+    vpDesktop.addEventListener('click', () => {
+      stage.classList.remove('mobile-mode');
+      vpDesktop.classList.add('active');
+      vpMobile.classList.remove('active');
+    });
+    vpMobile.addEventListener('click', () => {
+      stage.classList.add('mobile-mode');
+      vpMobile.classList.add('active');
+      vpDesktop.classList.remove('active');
+    });
+
+    const tBtn = document.getElementById('opt2TimelineBtn');
+    const tbBtn = document.getElementById('opt2TableBtn');
+    const tView = document.getElementById('opt2TimelineView');
+    const tbView = document.getElementById('opt2TableView');
+    tBtn.addEventListener('click', () => {
+      tView.classList.remove('hidden'); tbView.classList.add('hidden');
+      tBtn.style.background = '#FFF'; tBtn.style.color = '#0F172A';
+      tbBtn.style.background = 'transparent'; tbBtn.style.color = '#475569';
+    });
+    tbBtn.addEventListener('click', () => {
+      tbView.classList.remove('hidden'); tView.classList.add('hidden');
+      tbBtn.style.background = '#FFF'; tbBtn.style.color = '#0F172A';
+      tBtn.style.background = 'transparent'; tBtn.style.color = '#475569';
+    });
+
+    const checks = document.querySelectorAll('.demo-check');
+    const label = document.getElementById('checkProgressLabel');
+    checks.forEach((chk) => chk.addEventListener('change', () => {
+      const done = Array.from(checks).filter((c) => c.checked).length;
+      label.textContent = `${done}/${checks.length} ✓`;
+    }));
+  </script>
+</body>
+</html>

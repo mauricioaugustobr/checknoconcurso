@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prancha de Curadoria UX/UI Educacional — Check no Concurso</title>
+  <style>
+    :root { --bg:#F1F3F5; --card:#FFFFFF; --border:#E2E8F0; --fg:#0F172A; --muted:#64748B; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--fg); }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 24px 18px 48px; display: flex; flex-direction: column; gap: 18px; }
+    .bar { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:18px 20px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+    .row { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .tabular { font-variant-numeric: tabular-nums; }
+    .font-editorial { font-family: Georgia,'Times New Roman',Cambria,serif; }
+    .font-modern { font-family: system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; }
+    .seg { display:inline-flex; gap:4px; padding:4px; border-radius:12px; border:1px solid var(--border); background:#F8FAFC; }
+    .seg button { border:0; background:transparent; padding:7px 12px; border-radius:8px; font-size:12px; font-weight:700; color:var(--muted); cursor:pointer; }
+    .seg button.active { background:#0D5C46; color:#FFF; }
+    .canvas { border-radius:20px; overflow:hidden; border:1px solid; box-shadow:0 18px 45px rgba(15,23,42,0.1); transition:background 0.2s,color 0.2s; }
+    .study-paper { background:#FAF9F5; color:#151A18; border-color:#E6E2D8; }
+    .study-paper .surface { background:#FFFFFF; border-color:#E6E2D8; }
+    .study-paper .surface-soft { background:#F3F1EA; border-color:#E6E2D8; }
+    .study-paper .muted { color:#5C6661; }
+    .study-paper .ink { color:#151A18; }
+    .study-paper .divider { border-color:#E6E2D8; }
+    .study-dark { background:#111615; color:#ECEFEA; border-color:#26302D; }
+    .study-dark .surface { background:#18201E; border-color:#26302D; }
+    .study-dark .surface-soft { background:#1E2825; border-color:#2D3B37; }
+    .study-dark .muted { color:#9BA8A3; }
+    .study-dark .ink { color:#F4F6F4; }
+    .study-dark .divider { border-color:#26302D; }
+    .env-btn { border:0; background:none; padding:6px 2px; font-size:12.5px; font-weight:700; cursor:pointer; color:inherit; border-bottom:2px solid transparent; }
+    .env-btn.active { border-bottom-color:#0D5C46; }
+    .hidden { display:none !important; }
+    .btn-primary { border:0; background:#0D5C46; color:#FFF; font-weight:700; font-size:12.5px; padding:9px 15px; border-radius:10px; cursor:pointer; }
+    .btn-soft { border:1px solid; font-weight:700; font-size:12.5px; padding:9px 14px; border-radius:10px; cursor:pointer; }
+    .opt-row { border:1px solid; border-radius:12px; padding:13px 14px; display:flex; align-items:flex-start; gap:11px; cursor:pointer; transition:border-color 0.15s; }
+    .strike-btn { border:0; border-radius:7px; padding:3px 7px; font-size:12px; cursor:pointer; }
+    .struck { text-decoration:line-through; opacity:0.45; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media (max-width: 780px) { .grid-2 { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar">
+      <div>
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#0D5C46;">Curadoria Brasil (50 Referências) · Direção Educacional</div>
+        <h1 style="margin:4px 0 2px;font-size:22px;">Prancha Interativa — Check no Concurso</h1>
+        <p style="margin:0;font-size:13px;color:var(--muted);">Teste o modo <strong>Papel Quente vs. Noturno</strong>, compare a tipografia e resolva uma questão real. <a href="/" style="color:#0D5C46;font-weight:700;">← Voltar ao app</a></p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div class="seg">
+          <button type="button" id="themePaperBtn" class="active">Papel Quente</button>
+          <button type="button" id="themeDarkBtn">Estudo Noturno</button>
+        </div>
+        <div class="seg">
+          <button type="button" id="fontSerifBtn" class="active">Editorial (Serifa)</button>
+          <button type="button" id="fontSansBtn">Sans Moderna</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="designCanvas" class="canvas study-paper">
+      <header class="surface divider row" style="border-bottom:1px solid;padding:14px 24px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:9px;background:#0D5C46;color:#FAF9F5;display:flex;align-items:center;justify-content:center;font-weight:900;">✓</div>
+          <div><strong class="ink" style="display:block;font-size:14px;">Check no Concurso</strong><span class="muted" style="font-size:11px;">Educação &amp; Radar de Provas</span></div>
+        </div>
+        <nav style="display:flex;gap:18px;">
+          <button type="button" data-env="discovery" class="env-btn active ink">1. Descoberta &amp; Provas</button>
+          <button type="button" data-env="study" class="env-btn muted">2. Sala de Questões</button>
+          <button type="button" data-env="tokens" class="env-btn muted">3. Paleta &amp; Princípios</button>
+        </nav>
+        <span style="background:#0D5C46;color:#FFF;font-size:12px;font-weight:700;padding:7px 14px;border-radius:99px;">Planos · R$ 6,99</span>
+      </header>
+
+      <!-- AMBIENTE 1 -->
+      <section data-env-panel="discovery" style="padding:28px 24px;display:flex;flex-direction:column;gap:22px;">
+        <div style="max-width:660px;">
+          <div style="font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;color:#0D5C46;">Calendário verificado em 24 nov 2026 · 24 editais reais</div>
+          <h2 class="heading-sample font-editorial ink" style="font-size:30px;margin:8px 0;line-height:1.2;">Escolha seu próximo concurso com calma. Estude com as provas anteriores certas.</h2>
+          <p class="muted" style="margin:0;font-size:14.5px;line-height:1.6;">Sem banners piscando. Datas de prova atualizadas, status de encerrados e treino direto nas 5 provas anteriores de cada banca.</p>
+        </div>
+
+        <div class="surface divider row" style="border:1px solid;border-radius:14px;padding:10px 14px;">
+          <span class="muted" style="font-size:13px;">Buscar por órgão, cargo, banca ou cidade (PM-SP, TJ-SP, FGV, Vunesp...)</span>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;font-size:12px;font-weight:700;">
+            <span style="background:#0D5C46;color:#FFF;padding:6px 12px;border-radius:9px;">Abertos (13)</span>
+            <span class="surface-soft divider ink" style="border:1px solid;padding:6px 12px;border-radius:9px;">Agendados (5)</span>
+            <span class="surface-soft divider muted" style="border:1px solid;padding:6px 12px;border-radius:9px;">Encerrados (4)</span>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <article class="surface divider row" style="border:1px solid;border-radius:16px;padding:18px 20px;">
+            <div style="max-width:560px;">
+              <div style="font-size:12px;margin-bottom:5px;"><strong style="color:#0D5C46;">● Inscrições abertas até 22 dez</strong> <span class="muted">· SP · Fundação Vunesp · Nível Médio</span></div>
+              <h3 class="heading-sample font-editorial ink" style="margin:0 0 4px;font-size:19px;">Polícia Militar de São Paulo — Aluno-Soldado</h3>
+              <div class="muted" style="font-size:13px;"><strong class="ink tabular">2.000 vagas imediatas</strong> · Remuneração <strong class="ink tabular">R$ 5.482,51</strong> · Edital DP-4/321/26</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+              <div style="text-align:right;"><div class="muted" style="font-size:10.5px;font-weight:700;text-transform:uppercase;">Data da prova</div><strong class="ink tabular" style="font-size:16px;">28 fev 2027</strong><div class="muted" style="font-size:11px;">Confirmada</div></div>
+              <button type="button" data-jump-study="1" class="btn-soft surface-soft divider ink">Treinar Questões</button>
+              <button type="button" class="btn-primary">Ver Edital</button>
+            </div>
+          </article>
+
+          <article class="surface divider row" style="border:1px solid;border-radius:16px;padding:18px 20px;">
+            <div style="max-width:560px;">
+              <div style="font-size:12px;margin-bottom:5px;"><strong style="color:#C26D1F;">● Inscrições encerram amanhã (25 nov)</strong> <span class="muted">· RS · FCC · Nível Superior</span></div>
+              <h3 class="heading-sample font-editorial ink" style="margin:0 0 4px;font-size:19px;">TRT 4ª Região — Técnico e Analista Judiciário</h3>
+              <div class="muted" style="font-size:13px;"><strong class="ink">Cadastro de Reserva</strong> · Até <strong class="ink tabular">R$ 18.380,17</strong> · <strong style="color:#C26D1F;">Choque de data: TRF-3 e SP Águas</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+              <div style="text-align:right;"><div class="muted" style="font-size:10.5px;font-weight:700;text-transform:uppercase;">Data da prova</div><strong class="ink tabular" style="font-size:16px;">31 jan 2027</strong><div class="muted" style="font-size:11px;">Em 68 dias</div></div>
+              <button type="button" data-jump-study="1" class="btn-soft surface-soft divider ink">Treinar Questões</button>
+              <button type="button" class="btn-primary">Ver Edital</button>
+            </div>
+          </article>
+
+          <article class="surface-soft divider row" style="border:1px solid;border-radius:16px;padding:18px 20px;opacity:0.9;">
+            <div style="max-width:560px;">
+              <div style="font-size:12px;margin-bottom:5px;"><strong class="muted">● Encerrado · Gabarito preliminar divulgado hoje</strong> <span class="muted">· DF · Cebraspe</span></div>
+              <h3 class="heading-sample font-editorial ink" style="margin:0 0 4px;font-size:19px;">TCDF — Analista Administrativo de Controle Externo</h3>
+              <div class="muted" style="font-size:13px;">10 vagas + CR · R$ 14.990,41 · Prova já aplicada e incorporada ao acervo</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+              <div style="text-align:right;"><div class="muted" style="font-size:10.5px;font-weight:700;text-transform:uppercase;">Aplicada em</div><strong class="muted tabular" style="font-size:16px;">22 nov 2026</strong></div>
+              <button type="button" data-jump-study="1" class="btn-soft surface divider ink">Resolver 5 Provas →</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- AMBIENTE 2: SALA DE QUESTÕES -->
+      <section data-env-panel="study" class="hidden" style="padding:28px 24px;">
+        <div style="max-width:740px;margin:0 auto;display:flex;flex-direction:column;gap:18px;">
+          <div class="row divider" style="border-bottom:1px solid;padding-bottom:12px;">
+            <div>
+              <div style="font-size:12.5px;"><strong style="color:#0D5C46;">Prova Anterior · TJ-SP 2024</strong> <span class="muted">· Fundação Vunesp · Direito Constitucional</span></div>
+              <div class="muted tabular" style="font-size:11.5px;margin-top:3px;">Questão 1 de 5 (Amostra Grátis) · Clique em ✂ para riscar alternativas eliminadas</div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button type="button" id="fontDownBtn" class="btn-soft surface divider ink" style="padding:5px 10px;">A-</button>
+              <button type="button" id="fontUpBtn" class="btn-soft surface divider ink" style="padding:5px 10px;">A+</button>
+            </div>
+          </div>
+
+          <div id="questionStem" class="ink" style="font-size:16px;line-height:1.75;">
+            <strong>(Vunesp — TJ-SP · Escrevente Técnico Judiciário)</strong> Com fundamento na Constituição Federal de 1988, no capítulo dos Direitos e Garantias Fundamentais (Art. 5º), assinale a alternativa <strong>correta</strong> quanto à inviolabilidade domiciliar:
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div class="opt-row surface divider" data-letter="A">
+              <button type="button" class="strike-btn surface-soft muted" title="Riscar eliminada">✂</button>
+              <strong class="ink">A)</strong>
+              <span class="opt-text ink" style="font-size:15px;line-height:1.6;">A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou para prestar socorro, ou, durante o dia, por determinação judicial.</span>
+            </div>
+            <div class="opt-row surface divider" data-letter="B">
+              <button type="button" class="strike-btn surface-soft muted" title="Riscar eliminada">✂</button>
+              <strong class="ink">B)</strong>
+              <span class="opt-text ink" style="font-size:15px;line-height:1.6;">Mediante determinação judicial expressa, a autoridade policial pode ingressar na residência do investigado tanto durante o dia quanto no período noturno.</span>
+            </div>
+            <div class="opt-row surface divider" data-letter="C">
+              <button type="button" class="strike-btn surface-soft muted" title="Riscar eliminada">✂</button>
+              <strong class="ink">C)</strong>
+              <span class="opt-text ink" style="font-size:15px;line-height:1.6;">Mesmo em caso de flagrante delito ou desastre, o ingresso sem consentimento do morador depende de autorização prévia do Ministério Público.</span>
+            </div>
+            <div class="opt-row surface divider" data-letter="D">
+              <button type="button" class="strike-btn surface-soft muted" title="Riscar eliminada">✂</button>
+              <strong class="ink">D)</strong>
+              <span class="opt-text ink" style="font-size:15px;line-height:1.6;">A inviolabilidade domiciliar protege apenas imóveis residenciais próprios, não alcançando imóveis alugados ou escritórios profissionais fechados ao público.</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <button type="button" id="checkAnswerBtn" class="btn-primary" disabled style="opacity:0.55;">Responder Questão</button>
+            <span class="muted" style="font-size:12px;">Selecione uma opção acima e clique em Responder.</span>
+          </div>
+
+          <div id="answerFeedback" class="hidden surface" style="border:1.5px solid #0D5C46;border-radius:14px;padding:16px;">
+            <strong id="feedbackTitle" style="display:block;margin-bottom:6px;font-size:14.5px;"></strong>
+            <p class="muted" style="margin:0 0 10px;font-size:13px;line-height:1.6;"><strong>Gabarito Oficial: Letra A (Art. 5º, XI da CF/88).</strong> A regra constitucional permite o ingresso sem consentimento a qualquer hora apenas em flagrante delito, desastre ou socorro; determinação judicial somente durante o dia.</p>
+            <button type="button" id="resetQuestionBtn" style="border:0;background:none;color:#0D5C46;font-weight:700;font-size:12.5px;cursor:pointer;padding:0;">Testar novamente</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- AMBIENTE 3 -->
+      <section data-env-panel="tokens" class="hidden" style="padding:28px 24px;">
+        <div class="grid-2">
+          <div>
+            <h3 class="heading-sample font-editorial ink" style="margin:0 0 8px;font-size:20px;">Paleta Calma para Longas Sessões de Estudo</h3>
+            <p class="muted" style="font-size:13px;line-height:1.6;">Baseada na curadoria dos 50 melhores produtos digitais do Brasil (Nexo, Stone, Warren, Nubank NuDS, QuintoAndar, Sympla, TEC Concursos e Wellhub).</p>
+            <div class="grid-2" style="margin-top:14px;font-size:12px;">
+              <div class="surface divider" style="border:1px solid;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;"><span style="width:30px;height:30px;border-radius:8px;background:#FAF9F5;border:1px solid #DDD;"></span><div><strong class="ink">Papel Quente</strong><div class="muted">#FAF9F5</div></div></div>
+              <div class="surface divider" style="border:1px solid;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;"><span style="width:30px;height:30px;border-radius:8px;background:#0D5C46;"></span><div><strong class="ink">Verde Aprovação</strong><div class="muted">#0D5C46</div></div></div>
+              <div class="surface divider" style="border:1px solid;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;"><span style="width:30px;height:30px;border-radius:8px;background:#C26D1F;"></span><div><strong class="ink">Âmbar Editorial</strong><div class="muted">#C26D1F</div></div></div>
+              <div class="surface divider" style="border:1px solid;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;"><span style="width:30px;height:30px;border-radius:8px;background:#111615;"></span><div><strong class="ink">Noturno OLED</strong><div class="muted">#111615</div></div></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;">
+            <h3 class="heading-sample font-editorial ink" style="margin:0 0 2px;font-size:20px;">Diferenciais vs. Concorrentes</h3>
+            <div class="surface divider" style="border:1px solid;border-radius:12px;padding:12px;"><strong class="ink">vs. PCI Concursos:</strong> mesma objetividade, mas com UX moderna, filtros rápidos e leitura perfeita no celular.</div>
+            <div class="surface divider" style="border:1px solid;border-radius:12px;padding:12px;"><strong class="ink">vs. QConcursos / Gran:</strong> zero poluição de banners agressivos no meio da área de estudo.</div>
+            <div class="surface divider" style="border:1px solid;border-radius:12px;padding:12px;"><strong class="ink">vs. TEC Concursos:</strong> mesmo foco cirúrgico nas questões (riscar alternativas, A-/A+, modo noturno), mas acolhedor para qualquer aluno.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('designCanvas');
+    const headings = document.querySelectorAll('.heading-sample');
+    const envBtns = document.querySelectorAll('.env-btn');
+    const envPanels = document.querySelectorAll('[data-env-panel]');
+    function switchEnv(name) {
+      envBtns.forEach((b) => {
+        const active = b.dataset.env === name;
+        b.classList.toggle('active', active);
+        b.classList.toggle('ink', active);
+        b.classList.toggle('muted', !active);
+      });
+      envPanels.forEach((p) => p.classList.toggle('hidden', p.dataset.envPanel !== name));
+    }
+    envBtns.forEach((b) => b.addEventListener('click', () => switchEnv(b.dataset.env)));
+    document.querySelectorAll('[data-jump-study]').forEach((b) => b.addEventListener('click', () => switchEnv('study')));
+
+    const tp = document.getElementById('themePaperBtn');
+    const td = document.getElementById('themeDarkBtn');
+    tp.addEventListener('click', () => { canvas.className = 'canvas study-paper'; tp.classList.add('active'); td.classList.remove('active'); });
+    td.addEventListener('click', () => { canvas.className = 'canvas study-dark'; td.classList.add('active'); tp.classList.remove('active'); });
+
+    const fs = document.getElementById('fontSerifBtn');
+    const fm = document.getElementById('fontSansBtn');
+    fs.addEventListener('click', () => { headings.forEach((h) => { h.classList.add('font-editorial'); h.classList.remove('font-modern'); }); fs.classList.add('active'); fm.classList.remove('active'); });
+    fm.addEventListener('click', () => { headings.forEach((h) => { h.classList.remove('font-editorial'); h.classList.add('font-modern'); }); fm.classList.add('active'); fs.classList.remove('active'); });
+
+    let selected = null, size = 16;
+    const stem = document.getElementById('questionStem');
+    const rows = document.querySelectorAll('.opt-row');
+    const checkBtn = document.getElementById('checkAnswerBtn');
+    const fb = document.getElementById('answerFeedback');
+    const fbTitle = document.getElementById('feedbackTitle');
+
+    document.getElementById('fontUpBtn').addEventListener('click', () => { size = Math.min(20, size + 1); stem.style.fontSize = size + 'px'; });
+    document.getElementById('fontDownBtn').addEventListener('click', () => { size = Math.max(13, size - 1); stem.style.fontSize = size + 'px'; });
+    rows.forEach((row) => {
+      row.querySelector('.strike-btn').addEventListener('click', (e) => { e.stopPropagation(); row.querySelector('.opt-text').classList.toggle('struck'); });
+      row.addEventListener('click', () => {
+        selected = row.dataset.letter;
+        rows.forEach((r) => { r.style.borderColor = r === row ? '#0D5C46' : ''; r.style.boxShadow = r === row ? '0 0 0 2px rgba(13,92,70,0.22)' : ''; });
+        checkBtn.disabled = false; checkBtn.style.opacity = '1';
+      });
+    });
+    checkBtn.addEventListener('click', () => {
+      const ok = selected === 'A';
+      fb.classList.remove('hidden');
+      fb.style.borderColor = ok ? '#0D5C46' : '#C26D1F';
+      fbTitle.textContent = ok ? '✓ Acertou! Resposta correta: Letra A' : `Você marcou ${selected} — o gabarito oficial é a Letra A`;
+      fbTitle.style.color = ok ? '#0D5C46' : '#C26D1F';
+    });
+    document.getElementById('resetQuestionBtn').addEventListener('click', () => {
+      selected = null; checkBtn.disabled = true; checkBtn.style.opacity = '0.55'; fb.classList.add('hidden');
+      rows.forEach((r) => { r.style.borderColor = ''; r.style.boxShadow = ''; r.querySelector('.opt-text').classList.remove('struck'); });
+    });
+  </script>
+</body>
+</html>

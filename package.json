@@ -1,0 +1,13 @@
+{
+  "name": "check-no-concurso",
+  "version": "0.2.0",
+  "description": "Check no Concurso (checknoconcurso.com.br) — Site + App PWA com todos os concursos abertos e encerrados do Brasil, datas de prova atualizadas, editais, comparador de cursos e 5 provas anteriores.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node tests/smoke.test.mjs"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

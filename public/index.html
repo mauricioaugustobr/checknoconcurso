@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#065F46" />
+  <meta name="description" content="Check no Concurso (checknoconcurso.com.br) — Todos os concursos abertos e encerrados do Brasil, datas de prova atualizadas, editais, comparador de cursos e 5 provas anteriores." />
+  <title>Check no Concurso — Todos os Concursos Abertos do Brasil, Datas de Prova e Editais</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/icons/icon.svg" />
+  <link rel="apple-touch-icon" href="/icons/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <!-- Prototype Quick Switcher Ribbon -->
+  <div class="demo-bar" id="demoBar">
+    <div class="container demo-bar-inner">
+      <div class="demo-bar-left">
+        <span class="demo-dot"></span>
+        <span><strong>Protótipo Check no Concurso</strong> · checknoconcurso.com.br · Site + App PWA</span>
+      </div>
+      <div class="demo-bar-actions">
+        <span class="demo-label">Simular plano:</span>
+        <div class="segmented-mini" role="group" aria-label="Alternar plano de teste">
+          <button type="button" class="seg-btn active" id="simGuestBtn" data-sim="guest">Visitante</button>
+          <button type="button" class="seg-btn" id="simEssencialBtn" data-sim="essencial">Essencial (R$ 6,99)</button>
+          <button type="button" class="seg-btn" id="simCompletoBtn" data-sim="completo">Completo (R$ 17,99)</button>
+        </div>
+        <button type="button" class="btn-demo-phone" id="openAppPreviewBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Prévia do App Mobile
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulated Push Notification Banner -->
+  <div class="push-banner" id="pushBanner" aria-live="polite" hidden>
+    <div class="push-icon">
+      <img src="/icons/icon.svg" alt="" width="28" height="28" />
+    </div>
+    <div class="push-body">
+      <div class="push-top">
+        <strong>Check no Concurso · Agora</strong>
+        <button type="button" class="push-close" id="closePushBtn" aria-label="Fechar notificação">&times;</button>
+      </div>
+      <p id="pushText">Data de prova atualizada: INSS retificada para 14/03/2027.</p>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#concursos" class="brand" id="brandHomeLink">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 512 512" fill="none">
+            <rect width="512" height="512" rx="116" fill="#065F46"/>
+            <circle cx="256" cy="256" r="146" fill="#047857"/>
+            <path d="M168 262L226 320L350 188" stroke="#FFFFFF" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="386" cy="126" r="36" fill="#FBBF24"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>Check no Concurso</strong>
+          <small>Brasil</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <button type="button" class="nav-link active" data-view="concursos">Concursos &amp; Provas</button>
+        <button type="button" class="nav-link" data-view="cursos">Comparar Cursos</button>
+        <button type="button" class="nav-link" data-view="salvos">
+          Meus Salvos
+          <span class="nav-count" id="navSavedCount">0</span>
+        </button>
+        <button type="button" class="nav-link" data-view="plano">Planos</button>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="btn-ghost-sm" id="installPwaBtn" title="Instalar aplicativo no celular ou computador">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Instalar App</span>
+        </button>
+        <button type="button" class="btn-primary-sm" id="headerCtaBtn">
+          Assinar a partir de R$ 6,99
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+
+    <!-- VIEW 1: EXPLORAR CONCURSOS -->
+    <section class="view-section active" id="view-concursos" data-view-panel="concursos">
+      <div class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="hero-eyebrow">
+              <span class="live-pulse"></span>
+              Dados reais verificados em 24/11/2026 · Vunesp, FGV, Cebraspe, FCC, AOCP e mais
+            </div>
+            <h1>Todos os concursos abertos do Brasil com datas de prova sempre atualizadas.</h1>
+            <p class="hero-sub">
+              Acompanhe quais certames estão abertos, confira retificações na <strong>data da prova</strong>, saiba na hora quando já foram <strong>encerrados</strong>, acesse editais, compare cursos e — em breve — baixe as <strong>5 provas anteriores</strong> de cada concurso.
+            </p>
+
+            <div class="hero-search-wrap">
+              <div class="search-box">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="search" id="globalSearchInput" placeholder="Buscar órgão, cargo, banca ou estado (ex: PF, INSS, TJ-SP, TSE, FGV)..." autocomplete="off" />
+                <button type="button" class="search-clear" id="clearSearchBtn" hidden aria-label="Limpar busca">&times;</button>
+              </div>
+            </div>
+
+            <div class="quick-chips" id="quickChips" aria-label="Filtros rápidos">
+              <button type="button" class="chip" data-quick="abertos">Inscrições Abertas</button>
+              <button type="button" class="chip" data-quick="agendados">Prova Agendada</button>
+              <button type="button" class="chip" data-quick="encerrados">Já Encerrados</button>
+              <button type="button" class="chip" data-quick="nacional">Âmbito Nacional</button>
+              <button type="button" class="chip" data-quick="medio">Nível Médio</button>
+              <button type="button" class="chip" data-quick="10k">Salário +R$ 10 mil</button>
+              <button type="button" class="chip" data-quick="urgente">Encerram em breve</button>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Resumo Check no Concurso">
+            <div class="hero-card-header">
+              <span class="badge-emerald">Painel Brasil · Atualizado Hoje</span>
+              <span class="price-pill" id="heroPricePill">A partir de R$ 6,99/mês</span>
+            </div>
+            <div class="stats-grid" id="heroStatsGrid">
+              <div class="stat-box">
+                <strong id="statVagas">—</strong>
+                <span>Vagas em concursos ativos</span>
+              </div>
+              <div class="stat-box">
+                <strong id="statConcursos">—</strong>
+                <span>Ativos + Encerrados</span>
+              </div>
+              <div class="stat-box">
+                <strong id="statMaiorSalario">—</strong>
+                <span>Maior salário aberto</span>
+              </div>
+              <div class="stat-box">
+                <strong id="statProvas">—</strong>
+                <span>Provas anteriores (em breve)</span>
+              </div>
+            </div>
+            <div class="hero-card-footer" id="heroCardFooter">
+              <div class="mini-perk">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span><strong>Essencial (R$ 6,99/mês):</strong> Editais, datas de prova e cursos</span>
+              </div>
+              <div class="mini-perk">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span><strong>Completo (R$ 17,99/mês ou R$ 199,90/ano):</strong> + 5 provas anteriores</span>
+              </div>
+              <button type="button" class="btn-primary-full" id="heroSubscribeBtn">
+                Ver Planos e Desbloquear Tudo
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- Regions Strip -->
+      <div class="container">
+        <div class="regions-bar" id="regionsBar" role="tablist" aria-label="Filtrar por região do Brasil"></div>
+
+        <!-- Personalized Recommendations Strip -->
+        <div class="reco-banner" id="recoBanner">
+          <div class="reco-left">
+            <span class="reco-tag">Meu Check Personalizado</span>
+            <p id="recoSummary">Acompanhando concursos em <strong>Todo o Brasil</strong> com datas de prova monitoradas diariamente.</p>
+          </div>
+          <button type="button" class="btn-outline-sm" id="openPrefsBtn">Configurar meu perfil</button>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filters-card" id="filtersCard">
+          <div class="filters-row">
+            <label class="filter-field">
+              <span>Status do Concurso</span>
+              <select id="filterStatus">
+                <option value="ATIVOS">Todos os Ativos (Abertos + Agendados)</option>
+                <option value="TODOS">Todos (incluindo Encerrados)</option>
+                <option value="Inscrições Abertas">Inscrições Abertas</option>
+                <option value="Edital Publicado">Edital Publicado</option>
+                <option value="Prova Agendada">Prova Agendada (Inscrição encerrada)</option>
+                <option value="Previsto / Autorizado">Previsto / Autorizado</option>
+                <option value="Encerrado">Encerrados / Prova Realizada</option>
+              </select>
+            </label>
+            <label class="filter-field">
+              <span>Estado (UF)</span>
+              <select id="filterUf"></select>
+            </label>
+            <label class="filter-field">
+              <span>Esfera</span>
+              <select id="filterEsfera">
+                <option value="TODAS">Todas as esferas</option>
+                <option value="Federal">Federal</option>
+                <option value="Estadual">Estadual</option>
+                <option value="Municipal">Municipal</option>
+              </select>
+            </label>
+            <label class="filter-field">
+              <span>Área</span>
+              <select id="filterArea"></select>
+            </label>
+            <label class="filter-field">
+              <span>Escolaridade</span>
+              <select id="filterEscolaridade">
+                <option value="TODAS">Qualquer nível</option>
+                <option value="Médio">Ensino Médio</option>
+                <option value="Técnico">Nível Técnico</option>
+                <option value="Superior">Nível Superior</option>
+              </select>
+            </label>
+            <label class="filter-field">
+              <span>Ordenar por</span>
+              <select id="sortBy">
+                <option value="destaque">Relevância &amp; Destaques</option>
+                <option value="prova">Data da prova mais próxima</option>
+                <option value="prazo">Fim de inscrição mais próximo</option>
+                <option value="salario">Maior salário</option>
+                <option value="vagas">Mais vagas</option>
+              </select>
+            </label>
+          </div>
+          <div class="filters-meta">
+            <span id="resultsCount">Carregando concursos...</span>
+            <div class="filters-meta-actions">
+              <button type="button" class="btn-link" id="toggleClosedQuickBtn">Mostrar também encerrados</button>
+              <button type="button" class="btn-link" id="resetFiltersBtn" hidden>Limpar filtros</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contest Grid -->
+        <div class="concursos-grid" id="concursosGrid"></div>
+
+        <!-- Paywall Conversion Strip -->
+        <div class="upgrade-strip" id="upgradeStrip">
+          <div class="upgrade-strip-content">
+            <span class="badge-gold">Check no Concurso · Planos Acessíveis</span>
+            <h2>Editais, datas de prova, cursos e — em breve — as 5 provas anteriores.</h2>
+            <p>
+              Comece no <strong>Plano Essencial por R$ 6,99/mês</strong> para acompanhar editais e comparar cursos, ou garanta o <strong>Plano Completo por R$ 17,99/mês (ou R$ 199,90/ano)</strong> para ter acesso a tudo, incluindo as 5 provas anteriores com gabarito de cada concurso aberto.
+            </p>
+          </div>
+          <div class="upgrade-strip-action">
+            <div class="price-stack">
+              <span class="price-big">R$ 6,99 <small>ou</small> R$ 17,99</span>
+              <span class="price-unit">/mês · Anual por R$ 199,90</span>
+            </div>
+            <button type="button" class="btn-gold-lg" id="stripSubscribeBtn">Escolher Meu Plano</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: COMPARADOR DE CURSOS -->
+    <section class="view-section" id="view-cursos" data-view-panel="cursos" hidden>
+      <div class="container page-pad">
+        <div class="section-head">
+          <div>
+            <span class="badge-emerald">Hub de Estudos · Plataformas Parceiras</span>
+            <h2>Comparador de Cursos Preparatórios</h2>
+            <p>Compare pacotes pós-edital das principais plataformas do Brasil, veja avaliações, carga horária e use cupons exclusivos de assinante do Check no Concurso.</p>
+          </div>
+        </div>
+
+        <div class="partners-row" id="partnersRow"></div>
+
+        <div class="filters-card compact">
+          <div class="filters-row">
+            <label class="filter-field">
+              <span>Plataforma</span>
+              <select id="courseFilterPlatform"></select>
+            </label>
+            <label class="filter-field">
+              <span>Área do Concurso</span>
+              <select id="courseFilterArea"></select>
+            </label>
+            <label class="filter-field">
+              <span>Ordenar cursos</span>
+              <select id="courseSortBy">
+                <option value="menor-preco">Menor parcela mensal</option>
+                <option value="nota">Melhor avaliação</option>
+                <option value="carga">Maior carga horária</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="courses-catalog-grid" id="coursesCatalogGrid"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: MEUS SALVOS & ALERTAS -->
+    <section class="view-section" id="view-salvos" data-view-panel="salvos" hidden>
+      <div class="container page-pad">
+        <div class="section-head">
+          <div>
+            <span class="badge-emerald">Seu Painel Pessoal</span>
+            <h2>Concursos Salvos e Alertas de Prova</h2>
+            <p>Acompanhe seus concursos favoritos, avisos de retificação na data da prova e notificações antes do encerramento das inscrições.</p>
+          </div>
+          <button type="button" class="btn-outline-sm" id="testPushBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Testar Alerta Push
+          </button>
+        </div>
+
+        <div class="saved-layout">
+          <div class="saved-main" id="savedListContainer"></div>
+          <aside class="prefs-card">
+            <h3>Perfil do Meu Check</h3>
+            <p class="muted-sm">Personalize o que aparece primeiro no seu site e app.</p>
+            <form id="prefsForm" class="prefs-form">
+              <label class="filter-field">
+                <span>Meu Estado Principal</span>
+                <select id="prefUf"></select>
+              </label>
+              <label class="filter-field">
+                <span>Minha Escolaridade</span>
+                <select id="prefEscolaridade">
+                  <option value="TODAS">Qualquer nível</option>
+                  <option value="Médio">Ensino Médio</option>
+                  <option value="Técnico">Nível Técnico</option>
+                  <option value="Superior">Nível Superior</option>
+                </select>
+              </label>
+              <label class="filter-field">
+                <span>Área de Interesse</span>
+                <select id="prefArea"></select>
+              </label>
+              <label class="toggle-row">
+                <input type="checkbox" id="prefAlertWhatsapp" checked />
+                <span>Avisar quando a data da prova for alterada ou confirmada</span>
+              </label>
+              <label class="toggle-row">
+                <input type="checkbox" id="prefAlertNovos" checked />
+                <span>Alertar quando abrir novo concurso no meu perfil</span>
+              </label>
+              <button type="submit" class="btn-primary-full">Salvar Preferências</button>
+            </form>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: PLANOS & APP -->
+    <section class="view-section" id="view-plano" data-view-panel="plano" hidden>
+      <div class="container page-pad">
+        <div class="pricing-hero">
+          <span class="badge-gold">Check no Concurso · Planos Transparentes</span>
+          <h2>Escolha o plano ideal para sua aprovação</h2>
+          <p>Acompanhe todos os concursos abertos e encerrados com datas de prova atualizadas por R$ 6,99/mês, ou escolha o Plano Completo para liberar as 5 provas anteriores (em breve) com desconto no anual.</p>
+
+          <div class="billing-toggle" role="group" aria-label="Ciclo de pagamento do Plano Completo">
+            <button type="button" class="bill-btn active" id="billMonthlyBtn" data-billing="mensal">Mensal (R$ 17,99/mês)</button>
+            <button type="button" class="bill-btn" id="billAnnualBtn" data-billing="anual">
+              Anual (R$ 199,90/ano)
+              <span class="save-tag">Mais barato · -7%</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="activePlanBanner" class="active-plan-card" hidden>
+          <div>
+            <span class="badge-emerald">Assinatura Ativa</span>
+            <h3 id="activePlanHeading">Você é assinante Check no Concurso</h3>
+            <p id="activePlanDetails">Acesso liberado em Site e App.</p>
+          </div>
+          <div class="active-plan-actions">
+            <button type="button" class="btn-outline-sm" id="cancelSubBtn">Simular Cancelamento</button>
+          </div>
+        </div>
+
+        <div class="plans-grid three-cols">
+          <article class="plan-card">
+            <div class="plan-top">
+              <h3>Visitante Grátis</h3>
+              <p class="muted-sm">Para conhecer a plataforma e testar os 3 destaques</p>
+              <div class="plan-price"><strong>R$ 0</strong><span>/mês</span></div>
+            </div>
+            <ul class="plan-list">
+              <li class="ok">Ver lista de concursos abertos e encerrados</li>
+              <li class="ok">Consultar datas de prova atualizadas no calendário</li>
+              <li class="ok">Degustação completa em 3 concursos reais (PM-SP, TJ-SP e TRT-4)</li>
+              <li class="no">Editais completos e Raio-X de todos os concursos</li>
+              <li class="no">Comparador de cursos com cupons de desconto</li>
+              <li class="no">Banco com as 5 provas anteriores + gabaritos</li>
+            </ul>
+            <button type="button" class="btn-outline-full" data-view-jump="concursos">Continuar explorando</button>
+          </article>
+
+          <article class="plan-card">
+            <div class="plan-top">
+              <h3>Check Essencial</h3>
+              <p class="muted-sm">Editais, datas de prova e cursos por menos de um café</p>
+              <div class="plan-price"><strong>R$ 6,99</strong><span>/mês</span></div>
+            </div>
+            <ul class="plan-list">
+              <li class="ok"><strong>100% dos concursos ativos e encerrados</strong> do Brasil</li>
+              <li class="ok"><strong>Datas de prova atualizadas</strong> + alertas de retificação</li>
+              <li class="ok"><strong>Editais oficiais + Raio-X</strong> das matérias e pesos</li>
+              <li class="ok"><strong>Comparador de cursos</strong> em plataformas parceiras + cupons</li>
+              <li class="ok"><strong>App instalável (Android e iOS)</strong> com alertas push</li>
+              <li class="no">Acesso às 5 provas anteriores + gabaritos oficiais</li>
+            </ul>
+            <button type="button" class="btn-outline-full btn-brand-outline" id="subEssencialBtn" data-pick-plan="essencial">Assinar Essencial · R$ 6,99/mês</button>
+          </article>
+
+          <article class="plan-card featured">
+            <div class="plan-ribbon">Acesso a Tudo · + 5 Provas Anteriores</div>
+            <div class="plan-top">
+              <h3>Check Completo</h3>
+              <p class="muted-sm">Tudo do Essencial + banco com 5 provas anteriores</p>
+              <div class="plan-price" id="completoPlanPrice">
+                <strong>R$ 17,99</strong><span>/mês</span>
+              </div>
+              <p class="price-subnote" id="completoPlanSubnote">Ou <strong>R$ 199,90/ano</strong> (equivale a R$ 16,66/mês — economize R$ 15,98)</p>
+            </div>
+            <ul class="plan-list">
+              <li class="ok"><strong>Tudo do Plano Essencial</strong> (concursos, editais e cursos)</li>
+              <li class="ok"><strong>5 provas anteriores de todos os concursos abertos</strong> <span class="soon-inline">Em breve</span></li>
+              <li class="ok"><strong>Gabaritos oficiais definitivos</strong> organizados por ano e banca</li>
+              <li class="ok"><strong>Prioridade no acesso antecipado</strong> às provas já digitalizadas</li>
+              <li class="ok"><strong>Cupons exclusivos</strong> + alertas de retificação de prova</li>
+              <li class="ok">Sem fidelidade no mensal ou desconto garantido no plano anual</li>
+            </ul>
+            <button type="button" class="btn-primary-full btn-lg" id="subCompletoBtn" data-pick-plan="completo-mensal">Assinar Completo · R$ 17,99/mês</button>
+          </article>
+        </div>
+
+        <div class="app-promo-card">
+          <div>
+            <span class="badge-emerald">Site + Aplicativo Mobile (PWA)</span>
+            <h3>Use em checknoconcurso.com.br ou instale o App no celular</h3>
+            <p>O Check no Concurso funciona perfeitamente no navegador e como aplicativo instalável (PWA) para Android e iOS — pronto também para publicação futura na Google Play e App Store.</p>
+            <div class="app-promo-btns">
+              <button type="button" class="btn-primary-sm" id="planPreviewAppBtn">Abrir Prévia do App no Celular</button>
+              <button type="button" class="btn-outline-sm" id="planInstallBtn">Como instalar no Android / iOS</button>
+            </div>
+          </div>
+          <div class="faq-box">
+            <h4>Perguntas frequentes</h4>
+            <details open>
+              <summary>Qual a diferença entre o plano de R$ 6,99/mês e o de R$ 17,99/mês?</summary>
+              <p>O plano <strong>Essencial (R$ 6,99/mês)</strong> libera todos os concursos ativos e encerrados, datas de prova atualizadas, editais completos com raio-x e comparador de cursos com cupons. O plano <strong>Completo (R$ 17,99/mês ou R$ 199,90/ano)</strong> inclui tudo isso mais o acesso ao banco com as <strong>5 provas anteriores e gabaritos</strong> de cada concurso aberto (em lançamento).</p>
+            </details>
+            <details>
+              <summary>Como funciona a opção anual mais barata de R$ 199,90?</summary>
+              <p>No plano anual você paga R$ 199,90 uma única vez pelos 12 meses de acesso total (equivalente a R$ 16,66/mês), economizando R$ 15,98 em relação à assinatura mensal de R$ 17,99.</p>
+            </details>
+            <details>
+              <summary>Vocês avisam quando a data da prova muda ou quando o concurso termina?</summary>
+              <p>Sim! Essa é a nossa prioridade: manter cada certame com a data de prova sempre revisada (inclusive retificações) e marcar automaticamente como <strong>Encerrado</strong> assim que a prova for concluída.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile App Bottom Tab Navigation -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Navegação do aplicativo">
+    <button type="button" class="tab-btn active" data-view="concursos">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span>Concursos</span>
+    </button>
+    <button type="button" class="tab-btn" data-view="cursos">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      <span>Cursos</span>
+    </button>
+    <button type="button" class="tab-btn" data-view="salvos">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <span>Salvos</span>
+      <em class="tab-dot" id="mobileSavedDot" hidden></em>
+    </button>
+    <button type="button" class="tab-btn" data-view="plano">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>Planos</span>
+    </button>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="siteFooter">
+    <div class="container footer-inner">
+      <div>
+        <strong>Check no Concurso</strong> · <span class="muted-sm">checknoconcurso.com.br</span>
+        <p>Concursos abertos e encerrados em todo o Brasil, datas de prova atualizadas, editais, comparador de cursos e 5 provas anteriores.</p>
+      </div>
+      <div class="footer-meta">
+        <span>Essencial R$ 6,99/mês</span>
+        <span>·</span>
+        <span>Completo R$ 17,99/mês ou R$ 199,90/ano</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL 1: DETALHES DO CONCURSO (VISÃO GERAL / EDITAL / CURSOS / 5 PROVAS ANTERIORES) -->
+  <div class="modal-backdrop" id="detailModal" hidden role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-badges" id="detailBadges"></div>
+          <h2 id="detailTitle">Detalhes do Concurso</h2>
+          <p id="detailSubtitle" class="muted-sm"></p>
+        </div>
+        <div class="modal-header-actions">
+          <button type="button" class="icon-btn" id="detailSaveBtn" title="Salvar concurso" aria-label="Salvar concurso">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </button>
+          <button type="button" class="icon-btn close-btn" id="closeDetailBtn" aria-label="Fechar detalhes">&times;</button>
+        </div>
+      </div>
+
+      <div class="detail-kpis" id="detailKpis"></div>
+
+      <div class="modal-tabs" role="tablist">
+        <button type="button" class="modal-tab active" data-detail-tab="geral">Visão Geral</button>
+        <button type="button" class="modal-tab" data-detail-tab="edital">Edital &amp; Raio-X</button>
+        <button type="button" class="modal-tab" data-detail-tab="cursos">Cursos Parceiros</button>
+        <button type="button" class="modal-tab" data-detail-tab="provas">
+          5 Provas Anteriores
+          <span class="tab-pill-gold">Em breve</span>
+        </button>
+      </div>
+
+      <div class="modal-body" id="detailBody"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: CHECKOUT MULTI-PLANO -->
+  <div class="modal-backdrop" id="checkoutModal" hidden role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="badge-gold">Check no Concurso · Acesso Imediato</span>
+          <h2 id="checkoutTitle">Escolha seu plano e assine</h2>
+        </div>
+        <button type="button" class="icon-btn close-btn" id="closeCheckoutBtn" aria-label="Fechar checkout">&times;</button>
+      </div>
+
+      <div class="modal-body" id="checkoutBody">
+        <div class="checkout-plan-selector" id="checkoutPlanSelector" role="radiogroup" aria-label="Selecionar plano">
+          <button type="button" class="plan-choice active" data-checkout-plan="essencial">
+            <div>
+              <strong>Essencial</strong>
+              <small>Editais, datas de prova e cursos</small>
+            </div>
+            <span class="choice-price">R$ 6,99<small>/mês</small></span>
+          </button>
+          <button type="button" class="plan-choice" data-checkout-plan="completo-mensal">
+            <div>
+              <strong>Completo Mensal</strong>
+              <small>Tudo + 5 provas anteriores (em breve)</small>
+            </div>
+            <span class="choice-price">R$ 17,99<small>/mês</small></span>
+          </button>
+          <button type="button" class="plan-choice highlight" data-checkout-plan="completo-anual">
+            <div>
+              <strong>Completo Anual <span class="save-tag">Mais barato</span></strong>
+              <small>Equivale a R$ 16,66/mês · Economia de R$ 15,98</small>
+            </div>
+            <span class="choice-price">R$ 199,90<small>/ano</small></span>
+          </button>
+        </div>
+
+        <div class="pay-tabs" role="tablist">
+          <button type="button" class="pay-tab active" data-pay="pix">Pix Instantâneo</button>
+          <button type="button" class="pay-tab" data-pay="card">Cartão de Crédito</button>
+        </div>
+
+        <div class="pay-panel active" id="payPanelPix">
+          <div class="pix-box">
+            <div class="qr-mock" aria-label="QR Code Pix ilustrativo">
+              <svg viewBox="0 0 120 120" width="128" height="128">
+                <rect width="120" height="120" fill="#FFFFFF"/>
+                <rect x="8" y="8" width="28" height="28" rx="3" fill="none" stroke="#0F172A" stroke-width="5"/>
+                <rect x="16" y="16" width="12" height="12" fill="#0F172A"/>
+                <rect x="84" y="8" width="28" height="28" rx="3" fill="none" stroke="#0F172A" stroke-width="5"/>
+                <rect x="92" y="16" width="12" height="12" fill="#0F172A"/>
+                <rect x="8" y="84" width="28" height="28" rx="3" fill="none" stroke="#0F172A" stroke-width="5"/>
+                <rect x="16" y="92" width="12" height="12" fill="#0F172A"/>
+                <path d="M46 10h8v8h-8zm16 0h12v8H62zM46 26h16v8H46zm24 0h6v16h-6zM10 46h16v8H10zm24 0h12v12H34zm20 0h16v8H54zm26 0h12v8H80zm18 0h12v16H98zM10 62h8v14h-8zm16 4h14v8H26zm22-4h12v12H48zm18 4h18v8H66zm24 6h20v8H90zM46 84h14v10H46zm22 0h12v16H68zm20 8h22v8H88zM46 102h16v10H46zm24 4h14v6H70zm22 0h18v6H92z" fill="#065F46"/>
+              </svg>
+            </div>
+            <div class="pix-info">
+              <p><strong>Liberação imediata:</strong> escaneie o QR Code ou copie o código Pix abaixo para ativar no Site e no App.</p>
+              <div class="pix-copy-row">
+                <input type="text" readonly id="pixCodeInput" value="00020126580014BR.GOV.BCB.PIX0136checknoconcurso-com-br-pix-demo52040000530398654046.995802BR" />
+                <button type="button" class="btn-outline-sm" id="copyPixBtn">Copiar</button>
+              </div>
+              <button type="button" class="btn-primary-full" id="confirmPixBtn">
+                Simular Pagamento Pix Confirmado (R$ 6,99)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <form class="pay-panel" id="payPanelCard" hidden>
+          <div class="form-grid">
+            <label class="filter-field full">
+              <span>E-mail para acesso (Site + App)</span>
+              <input type="email" id="cardEmail" placeholder="voce@email.com" required />
+            </label>
+            <label class="filter-field full">
+              <span>Nome impresso no cartão</span>
+              <input type="text" id="cardName" placeholder="Ex: MARIA SILVA" required />
+            </label>
+            <label class="filter-field full">
+              <span>Número do cartão (simulação)</span>
+              <input type="text" id="cardNumber" placeholder="4532 •••• •••• 9012" maxlength="19" required />
+            </label>
+            <label class="filter-field">
+              <span>Validade</span>
+              <input type="text" id="cardExp" placeholder="08/30" maxlength="5" required />
+            </label>
+            <label class="filter-field">
+              <span>CVV</span>
+              <input type="text" id="cardCvv" placeholder="123" maxlength="4" required />
+            </label>
+          </div>
+          <button type="submit" class="btn-primary-full" id="confirmCardBtn">Ativar Assinatura · R$ 6,99/mês</button>
+          <p class="checkout-note">Ambiente de protótipo: nenhuma cobrança real é efetuada.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: DESKTOP MOBILE APP SIMULATOR -->
+  <div class="modal-backdrop" id="appPreviewModal" hidden role="dialog" aria-modal="true" aria-labelledby="appPreviewTitle">
+    <div class="phone-stage">
+      <div class="phone-sidebar">
+        <span class="badge-emerald">App Mobile Interativo</span>
+        <h2 id="appPreviewTitle">Check no Concurso no Celular</h2>
+        <p>Esta prévia roda o aplicativo real em modo mobile (PWA). Assinaturas, favoritos, datas de prova e provas anteriores sincronizam em tempo real com o site.</p>
+
+        <div class="phone-controls">
+          <button type="button" class="btn-primary-full" id="triggerPhonePushBtn">
+            Simular Push (Data de Prova / Novo Edital)
+          </button>
+          <button type="button" class="btn-outline-full" id="closeAppPreviewBtn">
+            Voltar para a Visão Web
+          </button>
+        </div>
+
+        <div class="phone-specs">
+          <strong>Pronto para evoluir para lojas:</strong>
+          <ul>
+            <li>PWA instalável imediatamente em <strong>checknoconcurso.com.br</strong></li>
+            <li>Navegação inferior nativa com 1 polegar</li>
+            <li>Mesmo código-base empacotável via Capacitor para Android/iOS</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phone-bezel">
+        <div class="phone-notch"><span></span></div>
+        <div class="phone-status-bar">
+          <span>16:35</span>
+          <span>5G · 100%</span>
+        </div>
+        <iframe id="phonePreviewFrame" title="Prévia do Aplicativo Check no Concurso" src="about:blank"></iframe>
+        <div class="phone-home-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: PWA INSTALL GUIDE -->
+  <div class="modal-backdrop" id="installModal" hidden role="dialog" aria-modal="true" aria-labelledby="installTitle">
+    <div class="modal-dialog small">
+      <div class="modal-header">
+        <div>
+          <span class="badge-emerald">Aplicativo Leve (PWA)</span>
+          <h2 id="installTitle">Instalar o App Check no Concurso</h2>
+        </div>
+        <button type="button" class="icon-btn close-btn" id="closeInstallBtn" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="modal-body install-guide">
+        <div id="nativeInstallWrap" hidden>
+          <p>Seu navegador suporta instalação direta com 1 clique:</p>
+          <button type="button" class="btn-primary-full" id="triggerNativeInstallBtn">Instalar Agora</button>
+        </div>
+        <div class="install-step">
+          <strong>No Android (Chrome):</strong>
+          <p>Toque no menu <strong>⋮</strong> no canto superior direito e selecione <strong>“Adicionar à tela inicial”</strong> ou <strong>“Instalar aplicativo”</strong>.</p>
+        </div>
+        <div class="install-step">
+          <strong>No iPhone / iOS (Safari):</strong>
+          <p>Toque no ícone de <strong>Compartilhar</strong> na barra inferior e escolha <strong>“Adicionar à Tela de Início”</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast feedback -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

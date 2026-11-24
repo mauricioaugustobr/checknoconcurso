@@ -1,0 +1,1517 @@
+import { CONCURSOS, PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA } from './data/concursos.js';
+
+const STORAGE_KEY = 'check_no_concurso_state_v3';
+const TODAY_ISO = '2026-11-24';
+
+const DEFAULT_STATE = {
+  tier: 'guest', // 'guest' | 'essencial' | 'completo-mensal' | 'completo-anual'
+  subMethod: null,
+  subSince: null,
+  savedIds: ['pm-sp-soldado-2026', 'tj-sp-2026'],
+  alertIds: ['pm-sp-soldado-2026', 'tj-sp-2026'],
+  prefs: {
+    uf: 'TODOS',
+    escolaridade: 'TODAS',
+    area: 'TODAS',
+    alertWhatsapp: true,
+    alertNovos: true
+  }
+};
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return structuredClone(DEFAULT_STATE);
+    const parsed = JSON.parse(raw);
+    return {
+      ...structuredClone(DEFAULT_STATE),
+      ...parsed,
+      prefs: { ...DEFAULT_STATE.prefs, ...(parsed.prefs || {}) }
+    };
+  } catch {
+    return structuredClone(DEFAULT_STATE);
+  }
+}
+
+let state = loadState();
+let catalog = [...CONCURSOS];
+let activeView = 'concursos';
+let activeDetailId = null;
+let activeDetailTab = 'geral';
+let billingCycle = 'mensal'; // 'mensal' | 'anual'
+let selectedCheckoutPlan = 'essencial';
+let deferredInstallPrompt = null;
+let toastTimer = null;
+let pushTimer = null;
+
+const filters = {
+  q: '',
+  regiao: 'TODAS',
+  uf: 'TODOS',
+  esfera: 'TODAS',
+  area: 'TODAS',
+  escolaridade: 'TODAS',
+  status: 'ATIVOS',
+  minSalario: 0,
+  onlyUrgent: false,
+  sort: 'destaque',
+  quick: null
+};
+
+const courseFilters = {
+  platform: 'TODAS',
+  area: 'TODAS',
+  sort: 'menor-preco'
+};
+
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // ignore storage quota errors
+  }
+}
+
+function hasEssencial() {
+  return state.tier === 'essencial' || state.tier === 'completo-mensal' || state.tier === 'completo-anual';
+}
+
+function hasCompleto() {
+  return state.tier === 'completo-mensal' || state.tier === 'completo-anual';
+}
+
+function isEditalUnlocked(concurso) {
+  return hasEssencial() || Boolean(concurso.destaqueGratuito);
+}
+
+function getPlanMeta(planId) {
+  if (planId === 'completo-anual') return PLANOS.completoAnual;
+  if (planId === 'completo-mensal') return PLANOS.completoMensal;
+  return PLANOS.essencial;
+}
+
+function escapeHtml(str) {
+  return String(str ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function formatBRL(value) {
+  return Number(value).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  });
+}
+
+function formatDateBR(isoDate) {
+  if (!isoDate) return 'A definir';
+  const [y, m, d] = isoDate.split('-');
+  if (!y || !m || !d) return isoDate;
+  return `${d}/${m}/${y}`;
+}
+
+function daysUntil(isoDate) {
+  if (!isoDate) return null;
+  const now = new Date(`${TODAY_ISO}T12:00:00`);
+  const target = new Date(`${isoDate}T12:00:00`);
+  return Math.ceil((target - now) / (1000 * 60 * 60 * 24));
+}
+
+function formatVagasLabel(c) {
+  if (c.vagas === 0 && c.vagasCR > 0) return 'Cadastro de Reserva';
+  if (c.vagas > 0 && c.vagasCR > 0) return `${c.vagas.toLocaleString('pt-BR')} + CR`;
+  return `${c.vagas.toLocaleString('pt-BR')}`;
+}
+
+function statusBadgeClass(status) {
+  if (status === 'Inscrições Abertas') return 'badge-emerald';
+  if (status === 'Edital Publicado') return 'badge-blue';
+  if (status === 'Prova Agendada') return 'badge-purple';
+  if (status === 'Encerrado') return 'badge-closed';
+  return 'badge-gold';
+}
+
+function showToast(message) {
+  const el = $('#toast');
+  if (!el) return;
+  el.textContent = message;
+  el.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    el.hidden = true;
+  }, 3600);
+}
+
+function showPushNotification(message) {
+  const banner = $('#pushBanner');
+  const textEl = $('#pushText');
+  if (!banner || !textEl) return;
+  textEl.textContent = message;
+  banner.hidden = false;
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(() => {
+    banner.hidden = true;
+  }, 5500);
+}
+
+function platformColor(platformId) {
+  const found = PLATAFORMAS_PARCEIRAS.find((p) => p.id === platformId);
+  return found ? found.cor : '#065F46';
+}
+
+/* ======================================================
+   INITIALIZATION & API HYDRATION
+   ====================================================== */
+async function hydrateFromApi() {
+  try {
+    const res = await fetch('/api/concursos');
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data.items) && data.items.length > 0) {
+        catalog = data.items;
+      }
+    }
+  } catch {
+    // Fallback to static ES module catalog
+  }
+}
+
+function detectAppMode() {
+  const params = new URLSearchParams(window.location.search);
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+  if (params.get('app') === '1' || isStandalone) {
+    document.body.classList.add('app-mode');
+  }
+}
+
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }
+}
+
+function populateSelects() {
+  const ufs = [...new Set(catalog.map((c) => c.uf))].sort((a, b) => {
+    if (a === 'Nacional') return -1;
+    if (b === 'Nacional') return 1;
+    return a.localeCompare(b);
+  });
+  const areas = [...new Set(catalog.map((c) => c.area))].sort((a, b) => a.localeCompare(b));
+
+  const ufOptions = `<option value="TODOS">Todos os estados</option>` +
+    ufs.map((uf) => `<option value="${escapeHtml(uf)}">${uf === 'Nacional' ? 'Nacional (Todo o Brasil)' : uf}</option>`).join('');
+  $('#filterUf').innerHTML = ufOptions;
+  $('#prefUf').innerHTML = ufOptions;
+
+  const areaOptions = `<option value="TODAS">Todas as áreas</option>` +
+    areas.map((area) => `<option value="${escapeHtml(area)}">${escapeHtml(area)}</option>`).join('');
+  $('#filterArea').innerHTML = areaOptions;
+  $('#courseFilterArea').innerHTML = areaOptions;
+  $('#prefArea').innerHTML = areaOptions;
+
+  $('#courseFilterPlatform').innerHTML = `<option value="TODAS">Todas as plataformas</option>` +
+    PLATAFORMAS_PARCEIRAS.map((p) => `<option value="${escapeHtml(p.id)}">${escapeHtml(p.nome)}</option>`).join('');
+
+  $('#partnersRow').innerHTML = PLATAFORMAS_PARCEIRAS.map((p) => `
+    <div class="partner-pill">
+      <span class="partner-dot" style="background:${escapeHtml(p.cor)}"></span>
+      <span>${escapeHtml(p.nome)}</span>
+    </div>
+  `).join('');
+
+  $('#prefUf').value = state.prefs.uf;
+  $('#prefEscolaridade').value = state.prefs.escolaridade;
+  $('#prefArea').value = state.prefs.area;
+  $('#prefAlertWhatsapp').checked = Boolean(state.prefs.alertWhatsapp);
+  $('#prefAlertNovos').checked = Boolean(state.prefs.alertNovos);
+}
+
+/* ======================================================
+   RENDERING — HERO, AUTH, BILLING & CONCURSOS
+   ====================================================== */
+function renderHeroStats() {
+  const ativos = catalog.filter((c) => c.status !== 'Encerrado');
+  const encerrados = catalog.filter((c) => c.status === 'Encerrado');
+  const totalVagas = ativos.reduce((sum, c) => sum + c.vagas, 0);
+  const maiorSalario = Math.max(...ativos.map((c) => c.salarioMax));
+  const totalProvas = catalog.reduce((sum, c) => sum + c.provasAnteriores.length, 0);
+
+  $('#statVagas').textContent = totalVagas.toLocaleString('pt-BR');
+  $('#statConcursos').textContent = `${ativos.length} + ${encerrados.length}`;
+  $('#statMaiorSalario').textContent = formatBRL(maiorSalario).replace(',00', '');
+  $('#statProvas').textContent = `${totalProvas} provas`;
+}
+
+function renderBillingCycleUI() {
+  const isAnual = billingCycle === 'anual';
+  $('#billMonthlyBtn').classList.toggle('active', !isAnual);
+  $('#billAnnualBtn').classList.toggle('active', isAnual);
+
+  if (isAnual) {
+    $('#completoPlanPrice').innerHTML = `<strong>R$ 199,90</strong><span>/ano</span>`;
+    $('#completoPlanSubnote').innerHTML = `Equivale a <strong>R$ 16,66/mês</strong> — economize <strong>R$ 15,98</strong> por ano vs. mensal`;
+    $('#subCompletoBtn').dataset.pickPlan = 'completo-anual';
+    if (!hasCompleto()) {
+      $('#subCompletoBtn').textContent = 'Assinar Completo Anual · R$ 199,90/ano';
+    }
+  } else {
+    $('#completoPlanPrice').innerHTML = `<strong>R$ 17,99</strong><span>/mês</span>`;
+    $('#completoPlanSubnote').innerHTML = `Ou <strong>R$ 199,90/ano</strong> (equivale a R$ 16,66/mês — economize R$ 15,98)`;
+    $('#subCompletoBtn').dataset.pickPlan = 'completo-mensal';
+    if (!hasCompleto()) {
+      $('#subCompletoBtn').textContent = 'Assinar Completo · R$ 17,99/mês';
+    }
+  }
+}
+
+function renderAuthUI() {
+  $('#simGuestBtn').classList.toggle('active', state.tier === 'guest');
+  $('#simEssencialBtn').classList.toggle('active', state.tier === 'essencial');
+  $('#simCompletoBtn').classList.toggle('active', hasCompleto());
+
+  const headerCta = $('#headerCtaBtn');
+  const heroBtn = $('#heroSubscribeBtn');
+  const heroPricePill = $('#heroPricePill');
+  const upgradeStrip = $('#upgradeStrip');
+  const activePlanBanner = $('#activePlanBanner');
+  const subEssencialBtn = $('#subEssencialBtn');
+  const subCompletoBtn = $('#subCompletoBtn');
+
+  if (hasCompleto()) {
+    const planLabel = state.tier === 'completo-anual' ? 'Check Completo Anual (R$ 199,90/ano)' : 'Check Completo (R$ 17,99/mês)';
+    headerCta.textContent = 'Check Completo ✓';
+    headerCta.classList.add('is-pro');
+    heroPricePill.textContent = 'Plano Completo Ativo ✓';
+    heroBtn.textContent = 'Acesso Total Ativo · Ver Meus Salvos';
+    upgradeStrip.hidden = true;
+    activePlanBanner.hidden = false;
+    $('#activePlanHeading').textContent = `Assinatura ativa: ${planLabel}`;
+    const methodLabel = state.subMethod ? ` via ${state.subMethod}` : '';
+    const dateLabel = state.subSince ? ` desde ${formatDateBR(state.subSince)}` : '';
+    $('#activePlanDetails').textContent = `Acesso total${methodLabel}${dateLabel}: concursos, editais, cursos + 5 provas anteriores liberadas.`;
+    subEssencialBtn.textContent = 'Incluído no seu Plano Completo ✓';
+    subEssencialBtn.disabled = true;
+    subCompletoBtn.textContent = 'Seu Plano Atual ✓';
+    subCompletoBtn.disabled = true;
+  } else if (state.tier === 'essencial') {
+    headerCta.textContent = 'Essencial Ativo ✓';
+    headerCta.classList.add('is-pro');
+    heroPricePill.textContent = 'Essencial (R$ 6,99) Ativo';
+    heroBtn.textContent = 'Fazer Upgrade para 5 Provas (R$ 17,99)';
+    upgradeStrip.hidden = false;
+    activePlanBanner.hidden = false;
+    $('#activePlanHeading').textContent = 'Assinatura ativa: Check Essencial (R$ 6,99/mês)';
+    const methodLabel = state.subMethod ? ` via ${state.subMethod}` : '';
+    const dateLabel = state.subSince ? ` desde ${formatDateBR(state.subSince)}` : '';
+    $('#activePlanDetails').textContent = `Editais, datas de prova e cursos liberados${methodLabel}${dateLabel}. Faça upgrade para o Completo para liberar as 5 provas anteriores.`;
+    subEssencialBtn.textContent = 'Seu Plano Atual ✓ (R$ 6,99/mês)';
+    subEssencialBtn.disabled = true;
+    subCompletoBtn.disabled = false;
+    renderBillingCycleUI();
+  } else {
+    headerCta.textContent = 'Assinar · R$ 6,99';
+    headerCta.classList.remove('is-pro');
+    heroPricePill.textContent = 'A partir de R$ 6,99/mês';
+    heroBtn.textContent = 'Ver Planos e Desbloquear Tudo';
+    upgradeStrip.hidden = false;
+    activePlanBanner.hidden = true;
+    subEssencialBtn.textContent = 'Assinar Essencial · R$ 6,99/mês';
+    subEssencialBtn.disabled = false;
+    subCompletoBtn.disabled = false;
+    renderBillingCycleUI();
+  }
+
+  $('#navSavedCount').textContent = String(state.savedIds.length);
+  $('#mobileSavedDot').hidden = state.savedIds.length === 0;
+}
+
+function renderRegionsBar() {
+  const html = REGIOES_BRASIL.map((reg) => {
+    const count = reg.id === 'TODAS'
+      ? catalog.length
+      : catalog.filter((c) => c.regiao === reg.id).length;
+    const activeClass = filters.regiao === reg.id ? 'active' : '';
+    return `
+      <button type="button" class="region-pill ${activeClass}" data-regiao="${escapeHtml(reg.id)}">
+        <span>${escapeHtml(reg.nome)}</span>
+        <small>${count}</small>
+      </button>
+    `;
+  }).join('');
+  $('#regionsBar').innerHTML = html;
+}
+
+function renderRecoSummary() {
+  const parts = [];
+  if (state.prefs.uf !== 'TODOS') parts.push(`Estado: ${state.prefs.uf}`);
+  if (state.prefs.area !== 'TODAS') parts.push(`Área: ${state.prefs.area}`);
+  if (state.prefs.escolaridade !== 'TODAS') parts.push(`Nível: ${state.prefs.escolaridade}`);
+
+  if (parts.length === 0) {
+    $('#recoSummary').innerHTML = `Dados reais checados em <strong>24/11/2026</strong> nas bancas oficiais (Vunesp, FGV, Cebraspe, FCC, AOCP e outras).`;
+  } else {
+    const matches = catalog.filter((c) => {
+      if (c.status === 'Encerrado') return false;
+      const ufOk = state.prefs.uf === 'TODOS' || c.uf === state.prefs.uf || c.uf === 'Nacional';
+      const areaOk = state.prefs.area === 'TODAS' || c.area === state.prefs.area;
+      const escOk = state.prefs.escolaridade === 'TODAS' || c.escolaridade.includes(state.prefs.escolaridade);
+      return ufOk && areaOk && escOk;
+    }).length;
+    $('#recoSummary').innerHTML = `Seu perfil (<strong>${escapeHtml(parts.join(' · '))}</strong>) tem <strong>${matches} concursos reais ativos compatíveis</strong> agora.`;
+  }
+}
+
+function getFilteredConcursos() {
+  const q = filters.q.trim().toLowerCase();
+
+  let list = catalog.filter((c) => {
+    if (filters.status === 'ATIVOS' && c.status === 'Encerrado') return false;
+    if (filters.status !== 'TODOS' && filters.status !== 'ATIVOS' && c.status !== filters.status) return false;
+    if (filters.regiao !== 'TODAS' && c.regiao !== filters.regiao) return false;
+    if (filters.uf !== 'TODOS' && c.uf !== filters.uf && c.uf !== 'Nacional') return false;
+    if (filters.esfera !== 'TODAS' && c.esfera !== filters.esfera) return false;
+    if (filters.area !== 'TODAS' && c.area !== filters.area) return false;
+    if (filters.escolaridade !== 'TODAS' && !c.escolaridade.includes(filters.escolaridade)) return false;
+    if (filters.minSalario > 0 && c.salarioMax < filters.minSalario) return false;
+    if (filters.onlyUrgent) {
+      const d = daysUntil(c.inscricaoFim);
+      if (!(c.status === 'Inscrições Abertas' && d !== null && d >= 0 && d <= 18)) return false;
+    }
+    if (q) {
+      const hay = `${c.orgao} ${c.sigla} ${c.titulo} ${c.banca} ${c.area} ${c.uf} ${c.regiao} ${c.escolaridade} ${c.status} ${c.fonteOficial || ''}`.toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  list = [...list].sort((a, b) => {
+    if (filters.sort === 'salario') return b.salarioMax - a.salarioMax;
+    if (filters.sort === 'vagas') return (b.vagas + b.vagasCR * 0.01) - (a.vagas + a.vagasCR * 0.01);
+    if (filters.sort === 'prazo') {
+      const da = daysUntil(a.inscricaoFim);
+      const db = daysUntil(b.inscricaoFim);
+      const scoreA = da !== null && da >= 0 ? da : 99999;
+      const scoreB = db !== null && db >= 0 ? db : 99999;
+      return scoreA - scoreB;
+    }
+    if (filters.sort === 'prova') {
+      const da = daysUntil(a.dataProva);
+      const db = daysUntil(b.dataProva);
+      const scoreA = da === null ? 99998 : (da >= 0 ? da : 50000 - da);
+      const scoreB = db === null ? 99998 : (db >= 0 ? db : 50000 - db);
+      return scoreA - scoreB;
+    }
+    if (!hasEssencial() && a.destaqueGratuito !== b.destaqueGratuito) {
+      return a.destaqueGratuito ? -1 : 1;
+    }
+    if (a.status !== b.status) {
+      const rank = {
+        'Inscrições Abertas': 0,
+        'Edital Publicado': 1,
+        'Prova Agendada': 2,
+        'Previsto / Autorizado': 3,
+        'Encerrado': 4
+      };
+      return (rank[a.status] ?? 9) - (rank[b.status] ?? 9);
+    }
+    return b.vagas - a.vagas;
+  });
+
+  return list;
+}
+
+function hasActiveFilters() {
+  return Boolean(
+    filters.q ||
+    filters.regiao !== 'TODAS' ||
+    filters.uf !== 'TODOS' ||
+    filters.esfera !== 'TODAS' ||
+    filters.area !== 'TODAS' ||
+    filters.escolaridade !== 'TODAS' ||
+    filters.status !== 'ATIVOS' ||
+    filters.minSalario > 0 ||
+    filters.onlyUrgent
+  );
+}
+
+function renderConcursosGrid() {
+  const list = getFilteredConcursos();
+  const totalVagasFiltradas = list.filter((c) => c.status !== 'Encerrado').reduce((acc, c) => acc + c.vagas, 0);
+  const closedInCatalog = catalog.filter((c) => c.status === 'Encerrado').length;
+
+  $('#resultsCount').innerHTML = `Exibindo <strong>${list.length}</strong> concursos reais · <strong>${totalVagasFiltradas.toLocaleString('pt-BR')}</strong> vagas imediatas (+ CR · ${closedInCatalog} encerrados no histórico)`;
+  $('#resetFiltersBtn').hidden = !hasActiveFilters();
+  $('#toggleClosedQuickBtn').textContent = filters.status === 'ATIVOS'
+    ? `Mostrar também ${closedInCatalog} encerrados`
+    : 'Ver apenas ativos';
+
+  if (list.length === 0) {
+    $('#concursosGrid').innerHTML = `
+      <div class="empty-state" style="grid-column: 1 / -1;">
+        <h3>Nenhum concurso encontrado com esses filtros</h3>
+        <p>Tente ampliar o estado, incluir concursos encerrados ou limpar a busca.</p>
+        <button type="button" class="btn-primary-sm" id="inlineResetBtn">Mostrar todos os concursos ativos</button>
+      </div>
+    `;
+    $('#inlineResetBtn')?.addEventListener('click', resetAllFilters);
+    return;
+  }
+
+  $('#concursosGrid').innerHTML = list.map((c) => {
+    const unlocked = isEditalUnlocked(c);
+    const saved = state.savedIds.includes(c.id);
+    const isClosed = c.status === 'Encerrado';
+    const regDays = daysUntil(c.inscricaoFim);
+    const examDays = daysUntil(c.dataProva);
+    const isUrgent = c.status === 'Inscrições Abertas' && regDays !== null && regDays >= 0 && regDays <= 15;
+
+    let deadlineCopy = c.inscricaoFim ? `Inscrições até ${formatDateBR(c.inscricaoFim)}` : 'Aguardando edital';
+    if (isClosed) {
+      deadlineCopy = 'Certame encerrado';
+    } else if (c.status === 'Prova Agendada') {
+      deadlineCopy = 'Inscrições encerradas';
+    } else if (c.status === 'Inscrições Abertas' && regDays !== null && regDays >= 0) {
+      if (regDays === 0) deadlineCopy = 'Encerra HOJE!';
+      else if (regDays === 1) deadlineCopy = `Encerra AMANHÃ (${formatDateBR(c.inscricaoFim)})`;
+      else deadlineCopy = regDays <= 15 ? `Encerra em ${regDays}d (${formatDateBR(c.inscricaoFim)})` : `Inscrição até ${formatDateBR(c.inscricaoFim)}`;
+    } else if (c.status === 'Edital Publicado' && c.inscricaoInicio) {
+      deadlineCopy = `Abre em ${formatDateBR(c.inscricaoInicio)}`;
+    } else if (c.status === 'Previsto / Autorizado') {
+      deadlineCopy = 'Edital em breve';
+    }
+
+    let examDateText = formatDateBR(c.dataProva);
+    let examCountdown = '';
+    if (isClosed) {
+      examCountdown = 'Realizada';
+    } else if (!c.dataProva) {
+      examDateText = c.status === 'Previsto / Autorizado' ? 'A definir no edital' : 'Análise de títulos';
+      examCountdown = c.status === 'Previsto / Autorizado' ? 'Previsto' : 'Sem prova';
+    } else if (examDays !== null) {
+      examCountdown = examDays === 0 ? 'HOJE' : (examDays > 0 ? `em ${examDays} dias` : 'Realizada');
+    }
+
+    const accessBadge = c.destaqueGratuito && !hasEssencial()
+      ? `<span class="badge-gold">Amostra Grátis</span>`
+      : (!unlocked ? `<span class="badge-neutral">Essencial R$ 6,99</span>` : '');
+
+    return `
+      <article class="contest-card ${isClosed ? 'is-closed' : ''}" data-contest-id="${escapeHtml(c.id)}">
+        <div class="card-top">
+          <div class="card-badges">
+            <span class="${statusBadgeClass(c.status)}">${escapeHtml(c.status)}</span>
+            ${isUrgent ? `<span class="badge-danger">${regDays <= 1 ? 'Último prazo' : 'Encerra logo'}</span>` : ''}
+            ${accessBadge}
+          </div>
+          <button type="button" class="save-icon-btn ${saved ? 'saved' : ''}" data-save-id="${escapeHtml(c.id)}" aria-label="${saved ? 'Remover dos salvos' : 'Salvar concurso'}" title="${saved ? 'Salvo' : 'Salvar concurso'}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </button>
+        </div>
+
+        <div class="card-org-row">
+          <div class="sigla-box">${escapeHtml(c.sigla)}</div>
+          <div>
+            <h3>${escapeHtml(c.orgao)}</h3>
+            <p>${escapeHtml(c.esfera)} · ${c.uf === 'Nacional' ? 'Todo o Brasil' : escapeHtml(c.uf)} · Banca ${escapeHtml(c.banca)}</p>
+          </div>
+        </div>
+
+        <p class="card-role">${escapeHtml(c.titulo)}</p>
+
+        <div class="exam-date-strip ${isClosed ? 'closed' : ''}">
+          <div>
+            <span>${isClosed ? 'Prova realizada em' : 'Data da prova'}: <strong>${escapeHtml(examDateText)}</strong></span>
+            <small style="display:block;">${escapeHtml(c.provaObservacao)}</small>
+          </div>
+          <strong class="tabular">${escapeHtml(examCountdown)}</strong>
+        </div>
+
+        <div class="card-metrics">
+          <div class="metric-item">
+            <span>Salário até</span>
+            <strong class="salary">${formatBRL(c.salarioMax)}</strong>
+          </div>
+          <div class="metric-item">
+            <span>Vagas</span>
+            <strong>${escapeHtml(formatVagasLabel(c))}</strong>
+          </div>
+        </div>
+
+        <div class="card-meta-tags">
+          <span class="meta-pill">${escapeHtml(c.escolaridade)}</span>
+          <span class="meta-pill">${escapeHtml(c.area)}</span>
+          <span class="meta-pill gold">5 provas anteriores</span>
+        </div>
+
+        <div class="card-footer">
+          <span class="deadline-text ${isUrgent ? 'urgent' : ''}">${escapeHtml(deadlineCopy)}</span>
+          <button type="button" class="btn-card-open ${unlocked ? '' : 'locked'}" data-open-id="${escapeHtml(c.id)}">
+            ${isClosed ? 'Ver Histórico & Provas' : (unlocked ? 'Edital, Cursos & Provas' : 'Ver Detalhes')}
+          </button>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+/* ======================================================
+   RENDERING — COURSES COMPARATOR VIEW
+   ====================================================== */
+function renderCoursesCatalog() {
+  const flatCourses = [];
+  for (const c of catalog) {
+    for (const course of c.cursos) {
+      flatCourses.push({
+        ...course,
+        concursoId: c.id,
+        concursoSigla: c.sigla,
+        concursoArea: c.area,
+        concursoStatus: c.status,
+        unlocked: isEditalUnlocked(c)
+      });
+    }
+  }
+
+  const filtered = flatCourses.filter((item) => {
+    if (courseFilters.platform !== 'TODAS' && item.plataformaId !== courseFilters.platform) return false;
+    if (courseFilters.area !== 'TODAS' && item.concursoArea !== courseFilters.area) return false;
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    if (courseFilters.sort === 'nota') return b.nota - a.nota || b.avaliacoes - a.avaliacoes;
+    if (courseFilters.sort === 'carga') return parseInt(b.cargaHoraria, 10) - parseInt(a.cargaHoraria, 10);
+    return a.precoMensal - b.precoMensal;
+  });
+
+  $('#coursesCatalogGrid').innerHTML = filtered.map((course) => {
+    const color = platformColor(course.plataformaId);
+    return `
+      <article class="course-card">
+        <div class="course-card-top">
+          <span class="platform-tag" style="background:${escapeHtml(color)}">${escapeHtml(course.plataforma)}</span>
+          <span class="badge-neutral">${escapeHtml(course.concursoSigla)} · ${escapeHtml(course.concursoArea)}</span>
+          <span class="badge-emerald">${escapeHtml(course.destaque)}</span>
+        </div>
+        <h4>${escapeHtml(course.titulo)}</h4>
+        <div class="course-meta">
+          <span>★ <strong>${course.nota.toFixed(1)}</strong> (${course.avaliacoes.toLocaleString('pt-BR')} avaliações)</span>
+          <span>Carga: <strong>${escapeHtml(course.cargaHoraria)}</strong></span>
+          <span>${escapeHtml(course.formato)}</span>
+        </div>
+        <div class="course-bottom">
+          <div class="course-price">
+            <strong class="tabular">${escapeHtml(course.parcelas)}</strong>
+            <small>Referência na plataforma parceira (confira promoções vigentes)</small>
+          </div>
+          <div class="edital-actions">
+            ${course.unlocked ? `
+              <button type="button" class="coupon-btn" data-copy-coupon="${escapeHtml(course.cupom)}">Cupom: ${escapeHtml(course.cupom)}</button>
+              <a class="btn-primary-sm" href="${escapeHtml(course.url)}" target="_blank" rel="noopener noreferrer">Acessar Plataforma ↗</a>
+            ` : `
+              <button type="button" class="btn-outline-sm" data-trigger-checkout="essencial">Desbloquear Link &amp; Cupom (R$ 6,99)</button>
+            `}
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+/* ======================================================
+   RENDERING — SAVED & ALERTS VIEW
+   ====================================================== */
+function renderSavedView() {
+  const savedItems = catalog.filter((c) => state.savedIds.includes(c.id));
+  const container = $('#savedListContainer');
+
+  if (savedItems.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <h3>Você ainda não salvou nenhum concurso</h3>
+        <p>Toque no ícone de marcador em qualquer concurso para acompanhar datas de prova atualizadas, editais e ativar alertas no app.</p>
+        <button type="button" class="btn-primary-sm" data-view-jump="concursos">Explorar concursos</button>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = savedItems.map((c) => {
+    const alertOn = state.alertIds.includes(c.id);
+    const examDays = daysUntil(c.dataProva);
+    const examSummary = !c.dataProva
+      ? c.provaObservacao
+      : `Data da prova: ${formatDateBR(c.dataProva)} (${examDays >= 0 ? `faltam ${examDays} dias` : 'já realizada'})`;
+    return `
+      <div class="saved-item">
+        <div>
+          <div class="card-badges" style="margin-bottom:6px;">
+            <span class="${statusBadgeClass(c.status)}">${escapeHtml(c.status)}</span>
+            <span class="badge-neutral">${escapeHtml(c.uf)} · ${escapeHtml(c.banca)}</span>
+          </div>
+          <h3>${escapeHtml(c.orgao)} — ${escapeHtml(c.sigla)}</h3>
+          <p class="muted-sm">
+            <strong>${escapeHtml(examSummary)}</strong> · Salário até ${formatBRL(c.salarioMax)}
+          </p>
+        </div>
+        <div class="saved-item-actions">
+          <button type="button" class="btn-outline-sm" data-toggle-alert="${escapeHtml(c.id)}">
+            ${alertOn ? 'Alerta Ativo ✓' : 'Ativar Alerta'}
+          </button>
+          <button type="button" class="btn-primary-sm" data-open-id="${escapeHtml(c.id)}">Abrir Concurso</button>
+          <button type="button" class="icon-btn" data-save-id="${escapeHtml(c.id)}" title="Remover dos salvos" aria-label="Remover dos salvos">&times;</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ======================================================
+   CONTEST DETAIL MODAL (GERAL / EDITAL / CURSOS / 5 PROVAS)
+   ====================================================== */
+function openContestDetail(id, initialTab = 'geral') {
+  const c = catalog.find((item) => item.id === id);
+  if (!c) return;
+  activeDetailId = id;
+  activeDetailTab = initialTab;
+
+  renderDetailModal();
+  $('#detailModal').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetailModal() {
+  $('#detailModal').hidden = true;
+  document.body.style.overflow = '';
+  activeDetailId = null;
+}
+
+function renderDetailModal() {
+  const c = catalog.find((item) => item.id === activeDetailId);
+  if (!c) return;
+  const saved = state.savedIds.includes(c.id);
+  const editalUnlocked = isEditalUnlocked(c);
+  const pastExamsUnlocked = hasCompleto();
+
+  $('#detailBadges').innerHTML = `
+    <span class="${statusBadgeClass(c.status)}">${escapeHtml(c.status)}</span>
+    <span class="badge-neutral">${escapeHtml(c.esfera)} · ${escapeHtml(c.uf)}</span>
+    <span class="badge-neutral">Banca ${escapeHtml(c.banca)}</span>
+    ${c.destaqueGratuito && !hasEssencial() ? '<span class="badge-gold">Amostra Grátis Liberada</span>' : ''}
+    ${hasCompleto() ? '<span class="badge-emerald">Check Completo Ativo</span>' : (hasEssencial() ? '<span class="badge-emerald">Check Essencial Ativo</span>' : '')}
+  `;
+  $('#detailTitle').textContent = `${c.orgao} (${c.sigla})`;
+  $('#detailSubtitle').textContent = `${c.titulo} · Fonte: ${c.fonteOficial}`;
+
+  $('#detailSaveBtn').classList.toggle('saved', saved);
+
+  const taxaLabel = c.taxaInscricao === 0 ? 'Gratuita' : formatBRL(c.taxaInscricao);
+  const provaLabel = c.dataProva ? formatDateBR(c.dataProva) : (c.status === 'Previsto / Autorizado' ? 'A definir' : 'Sem prova escrita');
+
+  $('#detailKpis').innerHTML = `
+    <div class="kpi-cell"><span>Data da Prova</span><strong>${escapeHtml(provaLabel)}</strong></div>
+    <div class="kpi-cell"><span>Remuneração</span><strong>Até ${formatBRL(c.salarioMax)}</strong></div>
+    <div class="kpi-cell"><span>Vagas</span><strong>${escapeHtml(formatVagasLabel(c))}</strong></div>
+    <div class="kpi-cell"><span>Taxa de Inscrição</span><strong>${escapeHtml(taxaLabel)}</strong></div>
+  `;
+
+  $$('.modal-tab').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.detailTab === activeDetailTab);
+  });
+
+  const body = $('#detailBody');
+  if (activeDetailTab === 'geral') {
+    body.innerHTML = `
+      <div class="info-block">
+        <h4>Cronograma Oficial (verificado em ${formatDateBR(c.dataProvaAtualizadaEm)})</h4>
+        <div class="timeline-grid">
+          <div class="timeline-step"><span>Publicação / Status</span><strong>${formatDateBR(c.edital.publicadoEm)}</strong></div>
+          <div class="timeline-step"><span>Início Inscrições</span><strong>${formatDateBR(c.inscricaoInicio)}</strong></div>
+          <div class="timeline-step"><span>Fim Inscrições</span><strong>${formatDateBR(c.inscricaoFim)}</strong></div>
+          <div class="timeline-step highlight-exam"><span>${c.status === 'Encerrado' ? 'Prova Realizada' : 'Data da Prova'}</span><strong>${escapeHtml(provaLabel)}</strong></div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <h4>Cargos, Vagas e Salários</h4>
+        <table class="cargos-table">
+          <thead>
+            <tr><th>Cargo</th><th>Escolaridade</th><th>Vagas</th><th>Inicial</th></tr>
+          </thead>
+          <tbody>
+            ${c.edital.cargos.map((cargo) => `
+              <tr>
+                <td><strong>${escapeHtml(cargo.nome)}</strong></td>
+                <td>${escapeHtml(cargo.escolaridade)}</td>
+                <td class="tabular">${cargo.vagas === 0 ? 'CR' : cargo.vagas.toLocaleString('pt-BR')}</td>
+                <td class="tabular"><strong>${formatBRL(cargo.salario)}</strong></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-block">
+        <h4>Benefícios e Etapas do Concurso</h4>
+        <p class="muted-sm" style="margin-bottom:8px;"><strong>Resumo:</strong> ${escapeHtml(c.beneficiosResumo)}</p>
+        <ul class="bullet-list">
+          ${c.edital.etapas.map((etapa) => `<li>${escapeHtml(etapa)}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="edital-actions">
+        <button type="button" class="btn-primary-sm" data-switch-tab="edital">Abrir Edital &amp; Raio-X</button>
+        <button type="button" class="btn-outline-sm" data-switch-tab="cursos">Comparar ${c.cursos.length} Cursos</button>
+        <button type="button" class="btn-outline-sm" data-switch-tab="provas">Ver 5 Provas Anteriores</button>
+      </div>
+    `;
+    return;
+  }
+
+  if (activeDetailTab === 'edital') {
+    if (!editalUnlocked) {
+      body.innerHTML = renderPaywallGate(
+        'Desbloqueie o Edital Oficial e o Raio-X Completo',
+        `Acesse o link oficial da banca ${c.banca}, resumo completo das matérias com pesos, download do Dossiê do Edital e todos os concursos reais do Brasil a partir de R$ 6,99/mês.`,
+        `<div class="disc-bar-item"><div class="disc-bar-top"><span>${escapeHtml(c.edital.disciplinas[0].nome)}</span><strong>${c.edital.disciplinas[0].peso}%</strong></div><div class="disc-track"><div class="disc-fill" style="width:${c.edital.disciplinas[0].peso}%"></div></div></div>
+         <div class="disc-bar-item"><div class="disc-bar-top"><span>${escapeHtml(c.edital.disciplinas[1]?.nome || 'Língua Portuguesa')}</span><strong>${c.edital.disciplinas[1]?.peso || 20}%</strong></div><div class="disc-track"><div class="disc-fill" style="width:${c.edital.disciplinas[1]?.peso || 20}%"></div></div></div>`,
+        'essencial'
+      );
+      return;
+    }
+
+    body.innerHTML = `
+      <div class="edital-hero-box">
+        <div>
+          <strong>${escapeHtml(c.edital.numero)}</strong>
+          <p class="muted-sm">Publicado em ${formatDateBR(c.edital.publicadoEm)}${c.edital.paginas ? ` · ${c.edital.paginas} páginas` : ''} · Banca ${escapeHtml(c.banca)}</p>
+        </div>
+        <div class="edital-actions">
+          <button type="button" class="btn-primary-sm" id="downloadDossierBtn">Baixar Raio-X do Edital</button>
+          <a class="btn-outline-sm" href="${escapeHtml(c.edital.urlPdf)}" target="_blank" rel="noopener noreferrer">Portal Oficial da Banca ↗</a>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <h4>Raio-X das Disciplinas e Peso na Prova</h4>
+        ${c.edital.disciplinas.map((d) => `
+          <div class="disc-bar-item">
+            <div class="disc-bar-top">
+              <span><strong>${escapeHtml(d.nome)}</strong>${d.questoes > 1 ? ` (${d.questoes} questões)` : ''}</span>
+              <strong class="tabular">${d.peso}% do peso</strong>
+            </div>
+            <div class="disc-track">
+              <div class="disc-fill" style="width:${Math.min(100, d.peso)}%"></div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="info-block">
+        <h4>Pontos-Chave Verificados no Edital</h4>
+        <ul class="bullet-list">
+          ${c.edital.requisitosChave.map((req) => `<li>${escapeHtml(req)}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+
+    $('#downloadDossierBtn')?.addEventListener('click', () => downloadEditalDossier(c));
+    return;
+  }
+
+  if (activeDetailTab === 'cursos') {
+    if (!editalUnlocked) {
+      body.innerHTML = renderPaywallGate(
+        `Compare ${c.cursos.length} Cursos para ${c.sigla} com Links Diretos`,
+        `Veja opções nas principais plataformas preparatórias (Estratégia, Gran Cursos, Direção, QConcursos, AlfaCon e Nova) a partir de R$ 6,99/mês.`,
+        `<div class="course-card"><h4>${escapeHtml(c.cursos[0].titulo)}</h4><div class="course-meta"><span>★ ${c.cursos[0].nota}</span><span>${escapeHtml(c.cursos[0].cargaHoraria)}</span><span>${escapeHtml(c.cursos[0].parcelas)}</span></div></div>`,
+        'essencial'
+      );
+      return;
+    }
+
+    body.innerHTML = `
+      <p class="muted-sm" style="margin-bottom:14px;">
+        Links diretos para as principais plataformas preparatórias voltadas para <strong>${escapeHtml(c.orgao)}</strong>. <em>Valores exibidos são estimativas de referência — consulte o preço atualizado no site da plataforma.</em>
+      </p>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        ${c.cursos.map((course) => `
+          <article class="course-card">
+            <div class="course-card-top">
+              <span class="platform-tag" style="background:${escapeHtml(platformColor(course.plataformaId))}">${escapeHtml(course.plataforma)}</span>
+              <span class="badge-emerald">${escapeHtml(course.destaque)}</span>
+              <span class="muted-sm">★ <strong>${course.nota.toFixed(1)}</strong> (${course.avaliacoes.toLocaleString('pt-BR')})</span>
+            </div>
+            <h4>${escapeHtml(course.titulo)}</h4>
+            <div class="course-meta">
+              <span>${escapeHtml(course.formato)}</span>
+              <span>· Carga horária: <strong>${escapeHtml(course.cargaHoraria)}</strong></span>
+            </div>
+            <div class="course-bottom">
+              <div class="course-price">
+                <strong class="tabular">${escapeHtml(course.parcelas)}</strong>
+                <small>Valor de referência · compra direto na plataforma</small>
+              </div>
+              <div class="edital-actions">
+                <button type="button" class="coupon-btn" data-copy-coupon="${escapeHtml(course.cupom)}">Cupom demo: ${escapeHtml(course.cupom)}</button>
+                <a class="btn-primary-sm" href="${escapeHtml(course.url)}" target="_blank" rel="noopener noreferrer">Ir para ${escapeHtml(course.plataforma.split(' ')[0])} ↗</a>
+              </div>
+            </div>
+          </article>
+        `).join('')}
+      </div>
+    `;
+    return;
+  }
+
+  if (activeDetailTab === 'provas') {
+    if (!pastExamsUnlocked) {
+      const sampleRow = c.provasAnteriores.slice(0, 2).map((p) => `
+        <div class="past-exam-row">
+          <div class="past-exam-left">
+            <div class="past-exam-year">${p.ano}</div>
+            <div><strong>${escapeHtml(p.edicao)} — Banca ${escapeHtml(p.banca)}</strong><p class="muted-sm">${p.questoes} questões · ${escapeHtml(p.gabarito)}</p></div>
+          </div>
+          <span class="badge-gold">Plano Completo</span>
+        </div>
+      `).join('');
+
+      body.innerHTML = renderPaywallGate(
+        `5 Provas Anteriores de ${c.sigla} + Gabaritos Oficiais (Em Breve)`,
+        `Exclusivo do Plano Check Completo (R$ 17,99/mês ou R$ 199,90/ano — economize R$ 15,98). Acesso a tudo na plataforma mais o banco com as 5 últimas provas de todos os concursos abertos do Brasil.`,
+        sampleRow,
+        'completo-anual'
+      );
+      return;
+    }
+
+    body.innerHTML = `
+      <div class="edital-hero-box gold-box">
+        <div>
+          <span class="badge-gold" style="margin-bottom:4px;">Recurso em Lançamento · Exclusivo Check Completo</span>
+          <div><strong>Banco das 5 Provas Anteriores — ${escapeHtml(c.orgao)} (${escapeHtml(c.sigla)})</strong></div>
+          <p class="muted-sm">Seu plano Completo garante acesso prioritário às 5 provas anteriores com gabarito definitivo oficial.</p>
+        </div>
+      </div>
+
+      ${c.provasAnteriores.map((exam, idx) => `
+        <div class="past-exam-row">
+          <div class="past-exam-left">
+            <div class="past-exam-year">${exam.ano}</div>
+            <div>
+              <strong>${escapeHtml(exam.edicao)} · Banca ${escapeHtml(exam.banca)}</strong>
+              <p class="muted-sm">${escapeHtml(exam.cargo)} · ${exam.questoes} questões · ${escapeHtml(exam.gabarito)}</p>
+            </div>
+          </div>
+          <div class="edital-actions">
+            <span class="${idx === 0 ? 'badge-emerald' : 'badge-gold'}">${escapeHtml(exam.disponibilidade)}</span>
+            <button type="button" class="btn-outline-sm" data-download-exam="${idx}">
+              ${idx === 0 ? 'Baixar Prévia + Gabarito' : 'Avise-me / Baixar Modelo'}
+            </button>
+          </div>
+        </div>
+      `).join('')}
+    `;
+
+    body.querySelectorAll('[data-download-exam]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.dataset.downloadExam);
+        downloadPastExamSample(c, c.provasAnteriores[idx]);
+      });
+    });
+  }
+}
+
+function renderPaywallGate(title, desc, blurredPreviewHtml, targetPlan = 'essencial') {
+  const isCompletoTarget = targetPlan !== 'essencial';
+  return `
+    <div class="paywall-gate">
+      <div class="paywall-preview-blur">${blurredPreviewHtml}</div>
+      <span class="badge-gold">${isCompletoTarget ? 'Exclusivo Plano Check Completo' : 'Disponível a partir do Plano Essencial'}</span>
+      <h3>${escapeHtml(title)}</h3>
+      <p>${escapeHtml(desc)}</p>
+      <div class="paywall-cta-row">
+        ${isCompletoTarget ? `
+          <button type="button" class="btn-primary-sm" style="padding:11px 18px;" data-trigger-checkout="completo-anual">
+            Assinar Anual · R$ 199,90/ano (Mais barato)
+          </button>
+          <button type="button" class="btn-outline-sm" style="padding:11px 16px;" data-trigger-checkout="completo-mensal">
+            Mensal · R$ 17,99/mês
+          </button>
+        ` : `
+          <button type="button" class="btn-primary-sm" style="padding:11px 18px;" data-trigger-checkout="essencial">
+            Assinar Essencial · R$ 6,99/mês
+          </button>
+          <button type="button" class="btn-outline-sm" style="padding:11px 16px;" data-trigger-checkout="completo-anual">
+            Ou Completo Anual (R$ 199,90)
+          </button>
+        `}
+      </div>
+    </div>
+  `;
+}
+
+function downloadEditalDossier(c) {
+  const html = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><title>Raio-X do Edital — ${escapeHtml(c.orgao)}</title>
+  <style>body{font-family:Segoe UI,Arial,sans-serif;max-width:820px;margin:32px auto;padding:0 20px;color:#0F172A;line-height:1.5}
+  h1{color:#065F46;margin-bottom:4px} .meta{color:#475569;margin-bottom:20px} table{width:100%;border-collapse:collapse;margin:14px 0}
+  th,td{border:1px solid #CBD5E1;padding:8px 10px;text-align:left} th{background:#F1F5F9} .box{background:#ECFDF5;border:1px solid #A7F3D0;padding:12px 16px;border-radius:8px;margin:16px 0}</style>
+  </head><body>
+  <h1>${escapeHtml(c.orgao)} (${escapeHtml(c.sigla)})</h1>
+  <div class="meta">${escapeHtml(c.edital.numero)} · Fonte: ${escapeHtml(c.fonteOficial)} · Gerado por ${MARCA.nome} (${MARCA.dominio})</div>
+  <div class="box"><strong>Status:</strong> ${escapeHtml(c.status)} · <strong>Data da Prova:</strong> ${formatDateBR(c.dataProva)} (${escapeHtml(c.provaObservacao)}) · <strong>Vagas:</strong> ${escapeHtml(formatVagasLabel(c))} · <strong>Salário até:</strong> ${formatBRL(c.salarioMax)}.</div>
+  <h2>Cargos</h2><table><thead><tr><th>Cargo</th><th>Escolaridade</th><th>Vagas</th><th>Inicial</th></tr></thead><tbody>
+  ${c.edital.cargos.map((cg) => `<tr><td>${escapeHtml(cg.nome)}</td><td>${escapeHtml(cg.escolaridade)}</td><td>${cg.vagas === 0 ? 'CR' : cg.vagas}</td><td>${formatBRL(cg.salario)}</td></tr>`).join('')}
+  </tbody></table>
+  <h2>Disciplinas e Pesos</h2><ul>${c.edital.disciplinas.map((d) => `<li><strong>${escapeHtml(d.nome)}</strong> (${d.peso}% do peso)</li>`).join('')}</ul>
+  <h2>Pontos-Chave</h2><ul>${c.edital.requisitosChave.map((r) => `<li>${escapeHtml(r)}</li>`).join('')}</ul>
+  <h2>Portal Oficial da Banca</h2><p><a href="${escapeHtml(c.edital.urlPdf)}">${escapeHtml(c.edital.urlPdf)}</a></p>
+  </body></html>`;
+
+  triggerFileDownload(html, `check-no-concurso-edital-${c.id}.html`);
+  showToast(`Raio-X do edital ${c.sigla} baixado!`);
+}
+
+function downloadPastExamSample(c, exam) {
+  const html = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><title>Caderno de Prova — ${escapeHtml(exam.edicao)}</title>
+  <style>body{font-family:Segoe UI,Arial,sans-serif;max-width:780px;margin:32px auto;padding:0 20px;color:#0F172A;line-height:1.6}
+  h1{color:#065F46;margin-bottom:4px} .tag{background:#FFFBEB;border:1px solid #FDE68A;color:#92400E;padding:8px 12px;border-radius:8px;margin:14px 0}</style>
+  </head><body>
+  <h1>${escapeHtml(exam.edicao)} — Caderno de Prova + Gabarito</h1>
+  <p><strong>Órgão:</strong> ${escapeHtml(c.orgao)} · <strong>Cargo:</strong> ${escapeHtml(exam.cargo)} · <strong>Banca:</strong> ${escapeHtml(exam.banca)} · <strong>Total:</strong> ${exam.questoes} questões</p>
+  <div class="tag"><strong>Prévia do Check no Concurso (${MARCA.dominio}):</strong> Em produção, este botão entregará o PDF completo da prova de ${exam.ano} + gabarito definitivo oficial.</div>
+  <h2>Estrutura de Cobrança</h2>
+  <ul>${c.edital.disciplinas.map((d) => `<li>${escapeHtml(d.nome)} — peso estimado de ${d.peso}%</li>`).join('')}</ul>
+  </body></html>`;
+
+  triggerFileDownload(html, `prova-${c.sigla.toLowerCase().replace(/\s+/g, '-')}-${exam.ano}.html`);
+  showToast(`Prévia da prova ${exam.edicao} baixada!`);
+}
+
+function triggerFileDownload(content, filename) {
+  const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/* ======================================================
+   CHECKOUT & MULTI-PLAN FLOW
+   ====================================================== */
+function selectCheckoutPlan(planId) {
+  selectedCheckoutPlan = planId;
+  const meta = getPlanMeta(planId);
+  $$('[data-checkout-plan]').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.checkoutPlan === planId);
+  });
+  const precoFmt = meta.preco.toFixed(2).replace('.', ',');
+  $('#pixCodeInput').value = `00020126580014BR.GOV.BCB.PIX0136checknoconcurso-com-br-${planId}5204000053039865405${meta.preco.toFixed(2)}5802BR`;
+  $('#confirmPixBtn').textContent = `Simular Pagamento Pix Confirmado (R$ ${precoFmt})`;
+  $('#confirmCardBtn').textContent = `Ativar ${meta.nome} · ${meta.rotuloPreco}`;
+}
+
+function openCheckoutModal(initialPlan = 'essencial') {
+  selectCheckoutPlan(initialPlan);
+  $('#checkoutModal').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckoutModal() {
+  $('#checkoutModal').hidden = true;
+  if ($('#detailModal').hidden && $('#appPreviewModal').hidden) {
+    document.body.style.overflow = '';
+  }
+}
+
+function activateSubscription(method) {
+  state.tier = selectedCheckoutPlan;
+  state.subMethod = method;
+  state.subSince = TODAY_ISO;
+  saveState();
+  closeCheckoutModal();
+  renderAll();
+  if (activeDetailId && !$('#detailModal').hidden) {
+    renderDetailModal();
+  }
+  const meta = getPlanMeta(state.tier);
+  showToast(`${meta.nome} (${meta.rotuloPreco}) ativado via ${method}!`);
+}
+
+/* ======================================================
+   NAVIGATION, FILTERS & EVENTS
+   ====================================================== */
+function switchView(viewName) {
+  activeView = viewName;
+  $$('[data-view-panel]').forEach((panel) => {
+    const match = panel.dataset.viewPanel === viewName;
+    panel.hidden = !match;
+    panel.classList.toggle('active', match);
+  });
+  $$('.nav-link[data-view], .tab-btn[data-view]').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.view === viewName);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (viewName === 'cursos') renderCoursesCatalog();
+  if (viewName === 'salvos') renderSavedView();
+}
+
+function toggleSaveContest(id) {
+  const idx = state.savedIds.indexOf(id);
+  if (idx >= 0) {
+    state.savedIds.splice(idx, 1);
+    state.alertIds = state.alertIds.filter((a) => a !== id);
+    showToast('Concurso removido dos seus salvos.');
+  } else {
+    state.savedIds.push(id);
+    state.alertIds.push(id);
+    showToast('Concurso salvo! Avisaremos sobre alterações na data da prova.');
+  }
+  saveState();
+  renderAuthUI();
+  renderConcursosGrid();
+  if (activeView === 'salvos') renderSavedView();
+  if (activeDetailId === id && !$('#detailModal').hidden) renderDetailModal();
+}
+
+function resetAllFilters() {
+  filters.q = '';
+  filters.regiao = 'TODAS';
+  filters.uf = 'TODOS';
+  filters.esfera = 'TODAS';
+  filters.area = 'TODAS';
+  filters.escolaridade = 'TODAS';
+  filters.status = 'ATIVOS';
+  filters.minSalario = 0;
+  filters.onlyUrgent = false;
+  filters.sort = 'destaque';
+  filters.quick = null;
+
+  $('#globalSearchInput').value = '';
+  $('#clearSearchBtn').hidden = true;
+  $('#filterUf').value = 'TODOS';
+  $('#filterEsfera').value = 'TODAS';
+  $('#filterArea').value = 'TODAS';
+  $('#filterEscolaridade').value = 'TODAS';
+  $('#filterStatus').value = 'ATIVOS';
+  $('#sortBy').value = 'destaque';
+  $$('.chip').forEach((ch) => ch.classList.remove('active'));
+
+  renderRegionsBar();
+  renderConcursosGrid();
+}
+
+function applyQuickChip(key) {
+  const wasActive = filters.quick === key;
+  resetAllFilters();
+  if (wasActive) return;
+
+  filters.quick = key;
+  const chipEl = $(`.chip[data-quick="${key}"]`);
+  if (chipEl) chipEl.classList.add('active');
+
+  if (key === 'abertos') {
+    filters.status = 'Inscrições Abertas';
+    $('#filterStatus').value = 'Inscrições Abertas';
+  } else if (key === 'agendados') {
+    filters.status = 'Prova Agendada';
+    $('#filterStatus').value = 'Prova Agendada';
+    filters.sort = 'prova';
+    $('#sortBy').value = 'prova';
+  } else if (key === 'encerrados') {
+    filters.status = 'Encerrado';
+    $('#filterStatus').value = 'Encerrado';
+  } else if (key === 'nacional') {
+    filters.regiao = 'Nacional';
+  } else if (key === 'medio') {
+    filters.escolaridade = 'Médio';
+    $('#filterEscolaridade').value = 'Médio';
+  } else if (key === '10k') {
+    filters.minSalario = 10000;
+    filters.sort = 'salario';
+    $('#sortBy').value = 'salario';
+  } else if (key === 'urgente') {
+    filters.onlyUrgent = true;
+    filters.sort = 'prazo';
+    $('#sortBy').value = 'prazo';
+  }
+
+  renderRegionsBar();
+  renderConcursosGrid();
+}
+
+async function copyText(text, successMsg) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast(successMsg);
+  } catch {
+    showToast(`${successMsg} (${text})`);
+  }
+}
+
+function renderAll() {
+  renderHeroStats();
+  renderAuthUI();
+  renderRegionsBar();
+  renderRecoSummary();
+  renderConcursosGrid();
+  if (activeView === 'cursos') renderCoursesCatalog();
+  if (activeView === 'salvos') renderSavedView();
+}
+
+function bindEvents() {
+  document.addEventListener('click', (e) => {
+    const viewBtn = e.target.closest('[data-view]');
+    if (viewBtn) {
+      switchView(viewBtn.dataset.view);
+      return;
+    }
+
+    const jumpBtn = e.target.closest('[data-view-jump]');
+    if (jumpBtn) {
+      switchView(jumpBtn.dataset.viewJump);
+      return;
+    }
+
+    const regionBtn = e.target.closest('[data-regiao]');
+    if (regionBtn) {
+      filters.regiao = regionBtn.dataset.regiao;
+      renderRegionsBar();
+      renderConcursosGrid();
+      return;
+    }
+
+    const saveBtn = e.target.closest('[data-save-id]');
+    if (saveBtn) {
+      e.stopPropagation();
+      toggleSaveContest(saveBtn.dataset.saveId);
+      return;
+    }
+
+    const openBtn = e.target.closest('[data-open-id]');
+    if (openBtn) {
+      openContestDetail(openBtn.dataset.openId);
+      return;
+    }
+
+    const switchTabBtn = e.target.closest('[data-switch-tab]');
+    if (switchTabBtn) {
+      activeDetailTab = switchTabBtn.dataset.switchTab;
+      renderDetailModal();
+      return;
+    }
+
+    const couponBtn = e.target.closest('[data-copy-coupon]');
+    if (couponBtn) {
+      const code = couponBtn.dataset.copyCoupon;
+      copyText(code, `Cupom ilustrativo ${code} copiado!`);
+      return;
+    }
+
+    const checkoutTrigger = e.target.closest('[data-trigger-checkout]');
+    if (checkoutTrigger) {
+      const plan = checkoutTrigger.dataset.triggerCheckout || 'essencial';
+      openCheckoutModal(plan === '1' ? 'essencial' : plan);
+      return;
+    }
+
+    const pickPlanBtn = e.target.closest('[data-pick-plan]');
+    if (pickPlanBtn && !pickPlanBtn.disabled) {
+      openCheckoutModal(pickPlanBtn.dataset.pickPlan);
+      return;
+    }
+
+    const checkoutPlanChoice = e.target.closest('[data-checkout-plan]');
+    if (checkoutPlanChoice) {
+      selectCheckoutPlan(checkoutPlanChoice.dataset.checkoutPlan);
+      return;
+    }
+
+    const alertToggle = e.target.closest('[data-toggle-alert]');
+    if (alertToggle) {
+      const id = alertToggle.dataset.toggleAlert;
+      if (state.alertIds.includes(id)) {
+        state.alertIds = state.alertIds.filter((x) => x !== id);
+        showToast('Alerta pausado para este concurso.');
+      } else {
+        state.alertIds.push(id);
+        showToast('Alerta ativado! Avisaremos sobre mudanças na data da prova.');
+      }
+      saveState();
+      renderSavedView();
+      return;
+    }
+  });
+
+  $('#brandHomeLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    switchView('concursos');
+  });
+
+  $('#simGuestBtn').addEventListener('click', () => {
+    state.tier = 'guest';
+    saveState();
+    renderAll();
+    if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
+    showToast('Modo Visitante (3 destaques reais liberados: PM-SP, TJ-SP e TRT-4).');
+  });
+
+  $('#simEssencialBtn').addEventListener('click', () => {
+    state.tier = 'essencial';
+    state.subMethod = state.subMethod || 'Simulação';
+    state.subSince = state.subSince || TODAY_ISO;
+    saveState();
+    renderAll();
+    if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
+    showToast('Modo Check Essencial (R$ 6,99/mês): editais e cursos liberados!');
+  });
+
+  $('#simCompletoBtn').addEventListener('click', () => {
+    state.tier = 'completo-anual';
+    state.subMethod = state.subMethod || 'Simulação';
+    state.subSince = state.subSince || TODAY_ISO;
+    saveState();
+    renderAll();
+    if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
+    showToast('Modo Check Completo (R$ 17,99/mês · R$ 199,90/ano): tudo + 5 provas anteriores!');
+  });
+
+  $$('[data-billing]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      billingCycle = btn.dataset.billing;
+      renderBillingCycleUI();
+    });
+  });
+
+  $('#globalSearchInput').addEventListener('input', (e) => {
+    filters.q = e.target.value;
+    $('#clearSearchBtn').hidden = !filters.q;
+    renderConcursosGrid();
+  });
+
+  $('#clearSearchBtn').addEventListener('click', () => {
+    filters.q = '';
+    $('#globalSearchInput').value = '';
+    $('#clearSearchBtn').hidden = true;
+    renderConcursosGrid();
+  });
+
+  $('#quickChips').addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip');
+    if (chip) applyQuickChip(chip.dataset.quick);
+  });
+
+  $('#filterStatus').addEventListener('change', (e) => { filters.status = e.target.value; renderConcursosGrid(); });
+  $('#filterUf').addEventListener('change', (e) => { filters.uf = e.target.value; renderConcursosGrid(); });
+  $('#filterEsfera').addEventListener('change', (e) => { filters.esfera = e.target.value; renderConcursosGrid(); });
+  $('#filterArea').addEventListener('change', (e) => { filters.area = e.target.value; renderConcursosGrid(); });
+  $('#filterEscolaridade').addEventListener('change', (e) => { filters.escolaridade = e.target.value; renderConcursosGrid(); });
+  $('#sortBy').addEventListener('change', (e) => { filters.sort = e.target.value; renderConcursosGrid(); });
+  $('#resetFiltersBtn').addEventListener('click', resetAllFilters);
+
+  $('#toggleClosedQuickBtn').addEventListener('click', () => {
+    filters.status = filters.status === 'ATIVOS' ? 'TODOS' : 'ATIVOS';
+    $('#filterStatus').value = filters.status;
+    renderConcursosGrid();
+  });
+
+  $('#courseFilterPlatform').addEventListener('change', (e) => { courseFilters.platform = e.target.value; renderCoursesCatalog(); });
+  $('#courseFilterArea').addEventListener('change', (e) => { courseFilters.area = e.target.value; renderCoursesCatalog(); });
+  $('#courseSortBy').addEventListener('change', (e) => { courseFilters.sort = e.target.value; renderCoursesCatalog(); });
+
+  $('#openPrefsBtn').addEventListener('click', () => switchView('salvos'));
+  $('#prefsForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    state.prefs = {
+      uf: $('#prefUf').value,
+      escolaridade: $('#prefEscolaridade').value,
+      area: $('#prefArea').value,
+      alertWhatsapp: $('#prefAlertWhatsapp').checked,
+      alertNovos: $('#prefAlertNovos').checked
+    };
+    saveState();
+    renderRecoSummary();
+    showToast('Preferências salvas com sucesso!');
+  });
+
+  $('#headerCtaBtn').addEventListener('click', () => {
+    if (hasEssencial()) switchView('plano');
+    else openCheckoutModal('essencial');
+  });
+
+  $('#heroSubscribeBtn').addEventListener('click', () => {
+    if (hasCompleto()) switchView('salvos');
+    else if (state.tier === 'essencial') openCheckoutModal('completo-anual');
+    else switchView('plano');
+  });
+
+  $('#stripSubscribeBtn').addEventListener('click', () => switchView('plano'));
+
+  $('#cancelSubBtn').addEventListener('click', () => {
+    state.tier = 'guest';
+    state.subMethod = null;
+    saveState();
+    renderAll();
+    showToast('Assinatura cancelada na simulação. Você voltou ao modo Visitante.');
+  });
+
+  $('#closeDetailBtn').addEventListener('click', closeDetailModal);
+  $('#detailModal').addEventListener('click', (e) => {
+    if (e.target.id === 'detailModal') closeDetailModal();
+  });
+  $('#detailSaveBtn').addEventListener('click', () => {
+    if (activeDetailId) toggleSaveContest(activeDetailId);
+  });
+  $$('.modal-tab').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeDetailTab = btn.dataset.detailTab;
+      renderDetailModal();
+    });
+  });
+
+  $('#closeCheckoutBtn').addEventListener('click', closeCheckoutModal);
+  $('#checkoutModal').addEventListener('click', (e) => {
+    if (e.target.id === 'checkoutModal') closeCheckoutModal();
+  });
+
+  $$('.pay-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const mode = tab.dataset.pay;
+      $$('.pay-tab').forEach((t) => t.classList.toggle('active', t.dataset.pay === mode));
+      $('#payPanelPix').hidden = mode !== 'pix';
+      $('#payPanelCard').hidden = mode !== 'card';
+    });
+  });
+
+  $('#copyPixBtn').addEventListener('click', () => {
+    copyText($('#pixCodeInput').value, 'Código Pix Copia e Cola copiado!');
+  });
+
+  $('#confirmPixBtn').addEventListener('click', () => activateSubscription('Pix'));
+
+  $('#cardNumber').addEventListener('input', (e) => {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 16);
+    e.target.value = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
+  });
+
+  $('#cardExp').addEventListener('input', (e) => {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 4);
+    e.target.value = digits.length > 2 ? `${digits.slice(0, 2)}/${digits.slice(2)}` : digits;
+  });
+
+  $('#payPanelCard').addEventListener('submit', (e) => {
+    e.preventDefault();
+    activateSubscription('Cartão de Crédito');
+  });
+
+  const openAppPreview = () => {
+    const modal = $('#appPreviewModal');
+    const frame = $('#phonePreviewFrame');
+    frame.src = '/?app=1';
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+  const closeAppPreview = () => {
+    $('#appPreviewModal').hidden = true;
+    $('#phonePreviewFrame').src = 'about:blank';
+    document.body.style.overflow = '';
+  };
+
+  $('#openAppPreviewBtn').addEventListener('click', openAppPreview);
+  $('#planPreviewAppBtn').addEventListener('click', openAppPreview);
+  $('#closeAppPreviewBtn').addEventListener('click', closeAppPreview);
+  $('#appPreviewModal').addEventListener('click', (e) => {
+    if (e.target.id === 'appPreviewModal') closeAppPreview();
+  });
+
+  const sampleAlerts = [
+    'URGENTE: Inscrições do TRT-4 (RS) encerram AMANHÃ (25/11) — salários até R$ 18.380.',
+    'TCDF (DF): Gabarito preliminar da prova de 22/11 liberado hoje pelo Cebraspe.',
+    'SEDUC-SP (5.000 vagas, FGV): Inscrições abrem em 26/11 com prova em 25/04/2027.'
+  ];
+  let alertCounter = 0;
+
+  $('#triggerPhonePushBtn').addEventListener('click', () => {
+    const msg = sampleAlerts[alertCounter % sampleAlerts.length];
+    alertCounter += 1;
+    $('#phonePreviewFrame').contentWindow?.postMessage({ type: 'SIMULATE_PUSH', text: msg }, '*');
+  });
+
+  $('#testPushBtn').addEventListener('click', () => {
+    const msg = sampleAlerts[alertCounter % sampleAlerts.length];
+    alertCounter += 1;
+    showPushNotification(msg);
+  });
+
+  $('#closePushBtn').addEventListener('click', () => {
+    $('#pushBanner').hidden = true;
+  });
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    $('#nativeInstallWrap').hidden = false;
+  });
+
+  const openInstall = () => { $('#installModal').hidden = false; };
+  const closeInstall = () => { $('#installModal').hidden = true; };
+
+  $('#installPwaBtn').addEventListener('click', openInstall);
+  $('#planInstallBtn').addEventListener('click', openInstall);
+  $('#closeInstallBtn').addEventListener('click', closeInstall);
+  $('#installModal').addEventListener('click', (e) => {
+    if (e.target.id === 'installModal') closeInstall();
+  });
+
+  $('#triggerNativeInstallBtn').addEventListener('click', async () => {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    $('#nativeInstallWrap').hidden = true;
+    closeInstall();
+  });
+
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY) {
+      state = loadState();
+      renderAll();
+      if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
+    }
+  });
+
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'SIMULATE_PUSH' && e.data.text) {
+      showPushNotification(e.data.text);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!$('#checkoutModal').hidden) closeCheckoutModal();
+    else if (!$('#detailModal').hidden) closeDetailModal();
+    else if (!$('#appPreviewModal').hidden) closeAppPreview();
+    else if (!$('#installModal').hidden) closeInstall();
+  });
+}
+
+async function init() {
+  detectAppMode();
+  registerServiceWorker();
+  await hydrateFromApi();
+  populateSelects();
+  bindEvents();
+  renderAll();
+}
+
+init();
