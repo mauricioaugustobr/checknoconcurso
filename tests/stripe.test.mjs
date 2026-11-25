@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
-import { verifyStripeSignature, handleCheckout, handleWebhook, handleConfirm, PLANOS_STRIPE, stripeApi } from '../lib/stripe.js';
+import { verifyStripeSignature, handleCheckout, handleWebhook, handleConfirm, PLANOS_STRIPE, stripeApi, stripeMode } from '../lib/stripe.js';
 import { createSessionToken, handleAuthConfig } from '../lib/auth.js';
 
 delete process.env.DATABASE_URL;
@@ -57,8 +57,18 @@ async function run() {
   assert.ok(captured.opts.body.includes('metadata%5Bemail%5D=a%40b.com'));
   assert.equal(captured.opts.headers.Authorization, 'Bearer sk_test_fakefakefake123');
 
+  // 6. Sem chave secreta, mas com aviso configurado: modo "link de pagamento"
+  delete process.env.STRIPE_SECRET_KEY;
+  process.env.STRIPE_WEBHOOK_SECRET = whsec;
+  assert.equal(stripeMode(), 'link');
+  const linkRes = await handleCheckout(post('/api/stripe/checkout', { body: { plan: 'essencial' } }));
+  assert.equal(linkRes.status, 200);
+  const { url: linkUrl } = await linkRes.json();
+  assert.ok(linkUrl.startsWith('https://buy.stripe.com/') && linkUrl.includes('prefilled_email=aluno%40exemplo.com') && linkUrl.includes('client_reference_id=1'));
+
   delete process.env.STRIPE_SECRET_KEY;
   delete process.env.STRIPE_WEBHOOK_SECRET;
+  assert.equal(stripeMode(), null);
   console.log('OK: pagamentos Stripe — login obrigatório, planos, avisos assinados e chamadas à API validados.');
 }
 

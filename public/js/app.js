@@ -428,7 +428,13 @@ async function handleStripeReturn(params) {
   if (status === 'gerenciada') { limpar(); return; }
   if (status === 'sucesso' && params.get('session_id')) {
     try {
-      const r = await stripePost('confirm', { session_id: params.get('session_id') });
+      showToast('Confirmando seu pagamento…');
+      let r = { ativo: false };
+      // O aviso da Stripe pode levar alguns segundos: tenta por até ~25 segundos
+      for (let i = 0; i < 10 && !r.ativo; i++) {
+        r = await stripePost('confirm', { session_id: params.get('session_id') });
+        if (!r.ativo) await new Promise((ok) => setTimeout(ok, 2500));
+      }
       if (r.ativo) {
         state.tier = r.plan;
         state.paidGranted = true;
