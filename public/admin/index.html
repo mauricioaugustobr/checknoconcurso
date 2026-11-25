@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin — Check no Concurso</title>
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/tokens.css?v=10" />
+  <link rel="stylesheet" href="/admin/admin.css?v=1" />
+</head>
+<body>
+  <header class="ad-top">
+    <a href="/" class="ad-logo" aria-label="Voltar ao site"><img src="/brand/logo-horizontal-claro.svg" alt="Check no Concurso" height="28"></a>
+    <span class="ad-tag">Admin</span>
+    <div class="ad-user" id="adUser"></div>
+  </header>
+
+  <!-- Sem acesso -->
+  <section class="ad-gate" id="adGate" hidden>
+    <h1>Área do administrador</h1>
+    <p id="adGateMsg">Entre no site com a sua conta Google de administrador e volte para esta página.</p>
+    <p><a class="ad-btn" href="/?entrar=1&voltar=/admin">Ir para o site e entrar</a></p>
+  </section>
+
+  <div class="ad-layout" id="adApp" hidden>
+    <nav class="ad-tabs" aria-label="Seções do painel" role="tablist">
+      <button type="button" role="tab" data-tab="geral" aria-selected="true">Visão geral</button>
+      <button type="button" role="tab" data-tab="concursos" aria-selected="false">Concursos</button>
+      <button type="button" role="tab" data-tab="blog" aria-selected="false">Blog</button>
+      <button type="button" role="tab" data-tab="usuarios" aria-selected="false">Usuários</button>
+      <button type="button" role="tab" data-tab="registro" aria-selected="false">Registro</button>
+    </nav>
+
+    <main class="ad-main">
+      <!-- VISÃO GERAL -->
+      <section data-panel="geral">
+        <h1>Visão geral</h1>
+        <div class="ad-cards" id="adStats"></div>
+        <div class="ad-warn" id="adNoDb" hidden>O banco de dados não está ligado neste ambiente. Blog, usuários e edições de concursos só funcionam no site publicado.</div>
+        <h2>Prazo de inscrição já passou, mas o status ainda diz "Inscrições Abertas"</h2>
+        <p class="ad-muted">Atualize o status desses concursos (por exemplo, para "Prova Agendada" ou "Encerrado").</p>
+        <ul class="ad-list" id="adVencidos"></ul>
+        <h2>Atalhos</h2>
+        <p class="ad-links"><a href="/" target="_blank" rel="noopener">Ver o site</a> · <a href="/blog" target="_blank" rel="noopener">Ver o blog</a> · <a href="/sitemap.xml" target="_blank" rel="noopener">Ver o sitemap</a></p>
+      </section>
+
+      <!-- CONCURSOS -->
+      <section data-panel="concursos" hidden>
+        <h1>Concursos</h1>
+        <form class="ad-filters" id="adConcFilters">
+          <input type="search" id="adConcQ" placeholder="Buscar por órgão, sigla, banca ou estado" aria-label="Buscar concurso" />
+          <select id="adConcFiltro" aria-label="Filtro">
+            <option value="">Todos</option>
+            <option value="vencidos">Prazo vencido</option>
+            <option value="editados">Editados por mim</option>
+            <option value="ocultos">Ocultos do site</option>
+          </select>
+          <button type="submit" class="ad-btn">Buscar</button>
+        </form>
+        <p class="ad-muted" id="adConcCount"></p>
+        <div class="ad-table-wrap"><table class="ad-table">
+          <thead><tr><th>Concurso</th><th>UF</th><th>Status</th><th>Inscrições até</th><th>Prova</th><th></th></tr></thead>
+          <tbody id="adConcRows"></tbody>
+        </table></div>
+      </section>
+
+      <!-- BLOG -->
+      <section data-panel="blog" hidden>
+        <div class="ad-row-between"><h1>Blog</h1><button type="button" class="ad-btn" id="adNewPost">+ Novo post</button></div>
+        <div class="ad-table-wrap"><table class="ad-table">
+          <thead><tr><th>Título</th><th>Situação</th><th>Data</th><th></th></tr></thead>
+          <tbody id="adPostRows"></tbody>
+        </table></div>
+      </section>
+
+      <!-- USUÁRIOS -->
+      <section data-panel="usuarios" hidden>
+        <h1>Usuários</h1>
+        <p class="ad-muted">Pessoas que já entraram com o Google. O plano pago aparece aqui quando os pagamentos reais forem ligados.</p>
+        <div class="ad-table-wrap"><table class="ad-table">
+          <thead><tr><th>Nome</th><th>E-mail</th><th>Acessos</th><th>Primeiro acesso</th><th>Último acesso</th></tr></thead>
+          <tbody id="adUserRows"></tbody>
+        </table></div>
+      </section>
+
+      <!-- REGISTRO -->
+      <section data-panel="registro" hidden>
+        <h1>Registro de alterações</h1>
+        <p class="ad-muted">Tudo o que foi alterado pelo painel, com quem fez e quando.</p>
+        <ul class="ad-list" id="adAuditRows"></ul>
+      </section>
+    </main>
+  </div>
+
+  <!-- Editor de concurso -->
+  <dialog class="ad-dialog" id="adConcDialog">
+    <form method="dialog" id="adConcForm" class="ad-form">
+      <div class="ad-row-between"><h2 id="adConcTitle">Editar concurso</h2><button type="button" class="ad-x" data-close aria-label="Fechar">×</button></div>
+      <p class="ad-muted" id="adConcSub"></p>
+      <div class="ad-grid" id="adConcFields"></div>
+      <label class="ad-check"><input type="checkbox" id="adConcHidden" /> Ocultar este concurso do site</label>
+      <p class="ad-error" id="adConcError" hidden></p>
+      <div class="ad-actions">
+        <button type="button" class="ad-btn-ghost" id="adConcReset">Desfazer minhas edições</button>
+        <a class="ad-btn-ghost" id="adConcView" target="_blank" rel="noopener">Ver página</a>
+        <button type="submit" class="ad-btn" id="adConcSave">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Editor de post -->
+  <dialog class="ad-dialog ad-dialog-wide" id="adPostDialog">
+    <form method="dialog" id="adPostForm" class="ad-form">
+      <div class="ad-row-between"><h2 id="adPostTitle">Novo post</h2><button type="button" class="ad-x" data-close aria-label="Fechar">×</button></div>
+      <div class="ad-grid">
+        <label class="ad-span2">Título<input name="title" required maxlength="160" /></label>
+        <label>Endereço (slug)<input name="slug" maxlength="80" placeholder="gerado a partir do título" /></label>
+        <label>Tags (separadas por vírgula)<input name="tags" placeholder="PM-SP, edital, dicas" /></label>
+        <label class="ad-span2">Resumo (aparece na lista e no Google)<textarea name="excerpt" rows="2" maxlength="300"></textarea></label>
+        <label class="ad-span2">Imagem de capa (link https://)<input name="cover_url" placeholder="https://..." /></label>
+        <label>Título para o Google (até 70 letras)<input name="seo_title" maxlength="70" /></label>
+        <label>Descrição para o Google (até 170 letras)<input name="seo_description" maxlength="170" /></label>
+      </div>
+      <div class="ad-editor">
+        <label>Texto<textarea name="content_md" id="adPostMd" rows="18" placeholder="# Título de seção&#10;&#10;Texto do parágrafo. **negrito**, *itálico*, [link](https://...)&#10;&#10;- item de lista"></textarea></label>
+        <div><span class="ad-label">Pré-visualização</span><div class="ad-preview pg-prose" id="adPostPreview"></div></div>
+      </div>
+      <p class="ad-muted">Formatação: <code># Seção</code>, <code>**negrito**</code>, <code>*itálico*</code>, <code>[texto](https://link)</code>, <code>- lista</code>, <code>&gt; citação</code>.</p>
+      <p class="ad-error" id="adPostError" hidden></p>
+      <div class="ad-actions">
+        <button type="button" class="ad-btn-ghost ad-danger" id="adPostDelete" hidden>Excluir post</button>
+        <button type="button" class="ad-btn-ghost" id="adPostDraft">Salvar rascunho</button>
+        <button type="button" class="ad-btn" id="adPostPublish">Publicar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="ad-toast" id="adToast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="/admin/admin.js?v=1"></script>
+</body>
+</html>

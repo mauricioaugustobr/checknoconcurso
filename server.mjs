@@ -10,6 +10,23 @@ import {
   getConcursosPayload
 } from './lib/catalog-api.js';
 import { handleAuthConfig, handleGoogleLogin, handleSession, handleLogout } from './lib/auth.js';
+import { getLiveCatalog } from './lib/catalog-overrides.js';
+import { renderConcursoPage, renderEstadoPage, renderBlogIndex, renderBlogPost, renderSitemap } from './lib/pages.js';
+import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts } from './lib/admin-api.js';
+
+// Mesmas rotas das funções e "rewrites" da Vercel (vercel.json), para testar localmente
+const DYNAMIC_ROUTES = [
+  [/^\/api\/admin\/overview$/, (r) => handleOverview(r)],
+  [/^\/api\/admin\/users$/, (r) => handleUsers(r)],
+  [/^\/api\/admin\/audit$/, (r) => handleAudit(r)],
+  [/^\/api\/admin\/concursos$/, (r) => handleAdminConcursos(r)],
+  [/^\/api\/admin\/posts$/, (r) => handleAdminPosts(r)],
+  [/^\/concurso\/([^/]+)\/?$/, (r, m) => renderConcursoPage(r, decodeURIComponent(m[1]))],
+  [/^\/concursos\/([a-zA-Z]{2})\/?$/, (r, m) => renderEstadoPage(r, m[1])],
+  [/^\/blog\/?$/, (r) => renderBlogIndex(r)],
+  [/^\/blog\/([^/]+)\/?$/, (r, m) => renderBlogPost(r, decodeURIComponent(m[1]))],
+  [/^\/sitemap\.xml$/, (r) => renderSitemap(r)]
+];
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -90,14 +107,19 @@ export function createServer() {
       }
 
       if (pathname === '/api/concursos') {
-        return sendJson(res, 200, getConcursosPayload(url.searchParams));
+        return sendJson(res, 200, getConcursosPayload(url.searchParams, await getLiveCatalog()));
+      }
+
+      for (const [pattern, handler] of DYNAMIC_ROUTES) {
+        const m = pathname.match(pattern);
+        if (m) return sendWebResponse(res, await handler(await toWebRequest(req, url), m));
       }
 
       if (AUTH_ROUTES[pathname]) {
         return sendWebResponse(res, await AUTH_ROUTES[pathname](await toWebRequest(req, url)));
       }
 
-      const safeRelPath = pathname === '/' ? '/index.html' : pathname;
+      const safeRelPath = pathname === '/' ? '/index.html' : (pathname === '/admin' ? '/admin/index.html' : pathname);
       const resolvedPath = path.normalize(path.join(PUBLIC_DIR, safeRelPath));
       if (!resolvedPath.startsWith(PUBLIC_DIR)) {
         res.writeHead(403);

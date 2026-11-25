@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
-    "test": "node tests/smoke.test.mjs && node tests/auth.test.mjs && node tests/search.test.mjs"
+    "test": "node tests/smoke.test.mjs && node tests/auth.test.mjs && node tests/search.test.mjs && node tests/admin.test.mjs"
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.1"
   }
 }

@@ -1960,6 +1960,20 @@ async function init() {
   // O login pode ter avisado quem está conectado antes desta tela ficar pronta: reaplica
   const lastAuth = window.__cncAuthLast;
   if (lastAuth) window.dispatchEvent(new CustomEvent('cnc:auth-session', { detail: lastAuth.detail }));
+  openFromLink();
+}
+
+// Links vindos das páginas públicas (/concurso/...) e do painel de admin
+function openFromLink() {
+  const params = new URLSearchParams(window.location.search);
+  const concursoId = params.get('concurso');
+  if (concursoId && catalog.some((c) => c.id === concursoId)) openContestDetail(concursoId);
+  if (params.has('entrar') && !state.user) openAuthModal('login');
+  // Veio do painel: depois de entrar, volta para o /admin
+  if (params.get('voltar') === '/admin') {
+    if (state.user && state.user.role === 'admin') window.location.href = '/admin';
+    window.addEventListener('cnc:auth-login', () => setTimeout(() => { window.location.href = '/admin'; }, 600), { once: true });
+  }
 }
 
 init();

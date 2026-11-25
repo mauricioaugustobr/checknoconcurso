@@ -1,0 +1,6 @@
+/* Links por estado no rodapé (SEO): discretos, quebram linha no celular */
+.footer-seo { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-subtle, #DFE8F0); font-size: .85rem; }
+.footer-seo-title { margin: 0 0 8px; }
+.footer-seo-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0; }
+.footer-seo a { color: var(--text-secondary, #2E465E); text-decoration: none; }
+.footer-seo a:hover { color: var(--brand-primary, #0C4F83); text-decoration: underline; }

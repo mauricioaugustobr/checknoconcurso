@@ -15,6 +15,8 @@
   <meta property="og:title" content="Check no Concurso — Todos os concursos do Brasil" />
   <meta property="og:description" content="Todos os concursos do Brasil, com a data da prova sempre em dia." />
   <meta property="og:url" content="https://checknoconcurso.vercel.app/" />
+  <link rel="canonical" href="https://checknoconcurso.vercel.app/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://checknoconcurso.vercel.app/#org","name":"Check no Concurso","url":"https://checknoconcurso.vercel.app/","logo":"https://checknoconcurso.vercel.app/icons/icon-512.png"},{"@type":"WebSite","@id":"https://checknoconcurso.vercel.app/#site","name":"Check no Concurso","url":"https://checknoconcurso.vercel.app/","inLanguage":"pt-BR","publisher":{"@id":"https://checknoconcurso.vercel.app/#org"}}]}</script>
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:image" content="https://checknoconcurso.vercel.app/og-image.png" />
   <meta property="og:image:secure_url" content="https://checknoconcurso.vercel.app/og-image.png" />
@@ -32,6 +34,7 @@
   <link rel="stylesheet" href="/css/auth-cta.css?v=11" />
   <link rel="stylesheet" href="/css/brand.css?v=1" />
   <link rel="stylesheet" href="/css/fonts.css?v=1" />
+  <link rel="stylesheet" href="/css/pages-footer.css?v=1" />
 </head>
 <body>
   <!-- Faixa de testes da equipe: escondida para o público. Para ver, abra o site com ?demo=1 -->
@@ -585,6 +588,38 @@
         <span>Completo R$ 17,99/mês ou R$ 199,90/ano</span>
       </div>
     </div>
+    <nav class="container footer-seo" aria-label="Concursos por estado">
+      <p class="footer-seo-title"><strong>Concursos por estado</strong> · <a href="/blog">Blog</a> · <a href="/privacidade.html">Política de Privacidade</a></p>
+      <p class="footer-seo-links">
+          <a href="/concursos/ac">Concursos Acre</a>
+          <a href="/concursos/al">Concursos Alagoas</a>
+          <a href="/concursos/am">Concursos Amazonas</a>
+          <a href="/concursos/ap">Concursos Amapá</a>
+          <a href="/concursos/ba">Concursos Bahia</a>
+          <a href="/concursos/ce">Concursos Ceará</a>
+          <a href="/concursos/df">Concursos Distrito Federal</a>
+          <a href="/concursos/es">Concursos Espírito Santo</a>
+          <a href="/concursos/go">Concursos Goiás</a>
+          <a href="/concursos/ma">Concursos Maranhão</a>
+          <a href="/concursos/mg">Concursos Minas Gerais</a>
+          <a href="/concursos/ms">Concursos Mato Grosso do Sul</a>
+          <a href="/concursos/mt">Concursos Mato Grosso</a>
+          <a href="/concursos/pa">Concursos Pará</a>
+          <a href="/concursos/pb">Concursos Paraíba</a>
+          <a href="/concursos/pe">Concursos Pernambuco</a>
+          <a href="/concursos/pi">Concursos Piauí</a>
+          <a href="/concursos/pr">Concursos Paraná</a>
+          <a href="/concursos/rj">Concursos Rio de Janeiro</a>
+          <a href="/concursos/rn">Concursos Rio Grande do Norte</a>
+          <a href="/concursos/ro">Concursos Rondônia</a>
+          <a href="/concursos/rr">Concursos Roraima</a>
+          <a href="/concursos/rs">Concursos Rio Grande do Sul</a>
+          <a href="/concursos/sc">Concursos Santa Catarina</a>
+          <a href="/concursos/se">Concursos Sergipe</a>
+          <a href="/concursos/sp">Concursos São Paulo</a>
+          <a href="/concursos/to">Concursos Tocantins</a>
+      </p>
+    </nav>
   </footer>
 
   <!-- MODAL 1: DETALHES DO CONCURSO (VISÃO GERAL / EDITAL / CURSOS / 5 PROVAS ANTERIORES) -->
@@ -865,7 +900,7 @@
   <!-- Toast feedback -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script type="module" src="/js/app.js?v=19"></script>
+  <script type="module" src="/js/app.js?v=20"></script>
   <script type="module" src="/js/google-auth.js?v=2"></script>
 </body>
 </html>
