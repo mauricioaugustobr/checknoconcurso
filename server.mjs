@@ -9,6 +9,7 @@ import {
   getEstadosPayload,
   getConcursosPayload
 } from './lib/catalog-api.js';
+import { handleAuthConfig, handleGoogleLogin, handleSession, handleLogout } from './lib/auth.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -39,6 +40,37 @@ function sendJson(res, statusCode, payload) {
   res.end(body);
 }
 
+// Rotas de login (mesma lógica das funções da Vercel em api/auth/*)
+const AUTH_ROUTES = {
+  '/api/auth/config': () => handleAuthConfig(),
+  '/api/auth/google': (request) => handleGoogleLogin(request),
+  '/api/auth/session': (request) => handleSession(request),
+  '/api/auth/logout': (request) => handleLogout(request)
+};
+
+async function toWebRequest(req, url) {
+  const chunks = [];
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    for await (const chunk of req) chunks.push(chunk);
+  }
+  const headers = new Headers();
+  for (const [k, v] of Object.entries(req.headers)) {
+    if (typeof v === 'string') headers.set(k, v);
+  }
+  return new Request(url, {
+    method: req.method,
+    headers,
+    body: chunks.length ? Buffer.concat(chunks) : undefined
+  });
+}
+
+async function sendWebResponse(res, response) {
+  const headers = {};
+  response.headers.forEach((value, key) => { headers[key] = value; });
+  res.writeHead(response.status, headers);
+  res.end(Buffer.from(await response.arrayBuffer()));
+}
+
 export function createServer() {
   return http.createServer(async (req, res) => {
     try {
@@ -59,6 +91,10 @@ export function createServer() {
 
       if (pathname === '/api/concursos') {
         return sendJson(res, 200, getConcursosPayload(url.searchParams));
+      }
+
+      if (AUTH_ROUTES[pathname]) {
+        return sendWebResponse(res, await AUTH_ROUTES[pathname](await toWebRequest(req, url)));
       }
 
       const safeRelPath = pathname === '/' ? '/index.html' : pathname;

@@ -494,9 +494,34 @@ function bindAuthEvents() {
     showToast(email ? `Enviamos um link de redefinição para ${email} (simulação).` : 'Digite seu e-mail acima para receber o link de redefinição.');
     if (!email) $('#authEmail').focus();
   });
+  // Botão reserva: só aparece se o botão oficial do Google não carregar (google-auth.js).
   $('#googleLoginBtn').addEventListener('click', () => {
-    completeLogin({ name: 'Concurseiro Check', email: 'conta.google@exemplo.com', provider: 'google' });
+    showToast('O login com Google não carregou. Verifique a internet ou bloqueadores e tente de novo.');
   });
+
+  // Login real com Google (eventos enviados por /js/google-auth.js)
+  window.addEventListener('cnc:auth-login', (e) => {
+    const u = e.detail || {};
+    if (!u.email) return;
+    completeLogin({ name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: 'google' });
+  });
+  window.addEventListener('cnc:auth-session', (e) => {
+    const u = e.detail;
+    if (u === undefined) return; // sem internet: mantém o estado local
+    if (u && u.email) {
+      if (!state.user || state.user.email !== u.email) {
+        state.user = { name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: 'google' };
+        saveState();
+        renderAll();
+      }
+    } else if (state.user && state.user.provider === 'google') {
+      // A sessão do Google expirou no servidor: encerra também no navegador
+      state.user = null;
+      saveState();
+      renderAll();
+    }
+  });
+  window.addEventListener('cnc:auth-error', (e) => showToast(e.detail || 'Não foi possível entrar com o Google.'));
 
   $('#accountChipBtn').addEventListener('click', (e) => {
     e.stopPropagation();
@@ -509,6 +534,7 @@ function bindAuthEvents() {
     if (!e.target.closest('#accountWrap')) closeAccountMenu();
   });
   $('#logoutBtn').addEventListener('click', () => {
+    if (state.user && state.user.provider === 'google') window.dispatchEvent(new CustomEvent('cnc:auth-logout'));
     state.user = null;
     saveState();
     renderAll();
