@@ -386,6 +386,8 @@ function renderAccountUI() {
   $('#headerLoginBtn').hidden = Boolean(user);
   $('#accountWrap').hidden = !user;
   $('#mobileAccountLabel').textContent = user ? 'Conta' : 'Entrar';
+  const freeSignup = $('#freeSignupBtn');
+  if (freeSignup) freeSignup.hidden = Boolean(user);
   if (!user) return;
   const firstName = user.name.split(/\s+/)[0];
   $('#accountAvatar').textContent = userInitials(user.name);
@@ -446,6 +448,9 @@ function closeAuthModal() {
 
 function completeLogin(user) {
   state.user = user;
+  const resumePlan = pendingCheckoutPlan;
+  pendingCheckoutPlan = null;
+  if (resumePlan && user.role !== 'admin') setTimeout(() => openCheckoutModal(resumePlan), 400);
   saveState();
   closeAuthModal();
   renderAll();
@@ -484,6 +489,8 @@ function closeAccountMenu() {
 
 function bindAuthEvents() {
   $('#headerLoginBtn').addEventListener('click', () => openAuthModal('login'));
+  const freeSignupBtn = $('#freeSignupBtn');
+  if (freeSignupBtn) freeSignupBtn.addEventListener('click', () => { pendingCheckoutPlan = null; openAuthModal('signup'); });
   $('#mobileAccountTab').addEventListener('click', () => {
     if (state.user) switchView('plano');
     else openAuthModal('login');
@@ -1336,7 +1343,22 @@ function selectCheckoutPlan(planId) {
   $('#confirmCardBtn').textContent = `Ativar ${meta.nome} · ${meta.rotuloPreco}`;
 }
 
+// Plano escolhido antes do login: abre o pagamento logo depois que a pessoa entra
+let pendingCheckoutPlan = null;
+
 function openCheckoutModal(initialPlan = 'essencial') {
+  // Os planos pagos exigem conta: primeiro cadastro/login, depois o pagamento
+  if (!state.user) {
+    pendingCheckoutPlan = initialPlan;
+    openAuthModal('signup');
+    showToast('Crie sua conta grátis ou entre para continuar com o plano.');
+    return;
+  }
+  // ADMIN já tem todos os planos liberados, sem pagar
+  if (state.user.role === 'admin') {
+    showToast('Você é admin: todos os planos já estão liberados para você.');
+    return;
+  }
   selectCheckoutPlan(initialPlan);
   $('#checkoutModal').hidden = false;
   document.body.style.overflow = 'hidden';
