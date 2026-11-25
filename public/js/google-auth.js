@@ -82,6 +82,13 @@ function renderOfficialButton(google) {
 }
 
 async function init() {
+  // 0. Configuração pública (Client ID do Google e se os pagamentos Stripe estão ligados)
+  let cfg = window.__cncConfig || null;
+  try {
+    cfg = await (await fetch('/api/auth/config')).json();
+    window.__cncConfig = cfg;
+  } catch { /* offline */ }
+
   // 1. Restaura a sessão do servidor (se existir)
   try {
     const res = await fetch('/api/auth/session', { credentials: 'same-origin' });
@@ -94,7 +101,7 @@ async function init() {
 
   // 2. Prepara o botão oficial do Google
   try {
-    const cfg = await (await fetch('/api/auth/config')).json();
+    if (!cfg) cfg = window.__cncConfig = await (await fetch('/api/auth/config')).json();
     clientId = cfg.googleClientId;
     if (!clientId) return;
     const google = await loadGsi();

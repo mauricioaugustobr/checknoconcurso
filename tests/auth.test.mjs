@@ -45,19 +45,19 @@ async function run() {
   assert.equal(isAdminEmail('qualquer@exemplo.com'), false);
   process.env.SESSION_SECRET = SECRET;
   const adminCookie = createSessionToken({ sub: '9', email: 'chefe@exemplo.com', name: 'Chefe', provider: 'google' }, SECRET);
-  const adminSess = await handleSession(new Request('https://x.app/api/auth/session', { headers: { cookie: 'cnc_session=' + adminCookie } })).json();
+  const adminSess = await (await handleSession(new Request('https://x.app/api/auth/session', { headers: { cookie: 'cnc_session=' + adminCookie } }))).json();
   assert.equal(adminSess.user.role, 'admin', 'sessão do admin deve voltar com role admin');
-  const userSess = await handleSession(new Request('https://x.app/api/auth/session', { headers: { cookie: 'cnc_session=' + token } })).json();
+  const userSess = await (await handleSession(new Request('https://x.app/api/auth/session', { headers: { cookie: 'cnc_session=' + token } }))).json();
   assert.equal(userSess.user.role, 'user', 'usuário comum não é admin');
   delete process.env.ADMIN_EMAILS;
-  const revoked = await handleSession(new Request('https://x.app/api/auth/session', { headers: { cookie: 'cnc_session=' + adminCookie } })).json();
+  const revoked = await (await handleSession(new Request('https://x.app/api/auth/session', { headers: { cookie: 'cnc_session=' + adminCookie } }))).json();
   assert.equal(revoked.user.role, 'user', 'tirar o e-mail da lista remove o admin na hora');
   delete process.env.SESSION_SECRET;
 
   // 3. Handlers HTTP
   const cfg = await handleAuthConfig().json();
   assert.ok(cfg.googleClientId.endsWith('.apps.googleusercontent.com'));
-  const noSession = await handleSession(new Request('https://checknoconcurso.vercel.app/api/auth/session')).json();
+  const noSession = await (await handleSession(new Request('https://checknoconcurso.vercel.app/api/auth/session'))).json();
   assert.equal(noSession.user, null);
   const crossLogout = await handleLogout(new Request('https://checknoconcurso.vercel.app/api/auth/logout', { method: 'POST', headers: { origin: 'https://evil.com', host: 'checknoconcurso.vercel.app' } }));
   assert.equal(crossLogout.status, 403, 'logout vindo de outro site deve ser bloqueado');

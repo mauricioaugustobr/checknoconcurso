@@ -371,6 +371,78 @@ function applyServerRole(u) {
     state.tier = state.tierBeforeAdmin || 'guest';
     state.adminGranted = false;
   }
+  // Pagamentos reais (Stripe): o plano vem só do servidor, nunca da simulação
+  if (!isAdmin && stripeOn()) {
+    if (u && u.plan) {
+      state.tier = u.plan;
+      state.paidGranted = true;
+      state.planInfo = { status: u.planStatus, renovaEm: u.planRenewsAt, cancelaNoFim: u.planCancelAtPeriodEnd };
+    } else if (state.paidGranted || (u && u.email)) {
+      state.tier = 'guest';
+      state.paidGranted = false;
+      state.planInfo = null;
+    }
+  }
+}
+
+function stripeOn() {
+  return Boolean(window.__cncConfig && window.__cncConfig.stripeEnabled);
+}
+
+async function stripePost(acao, body = {}) {
+  const res = await fetch(`/api/stripe/${acao}`, {
+    method: 'POST', credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || 'Não foi possível falar com o pagamento agora.');
+  return data;
+}
+
+// Leva para a página de pagamento segura da Stripe
+async function startStripeCheckout(plan) {
+  showToast('Abrindo o pagamento seguro da Stripe…');
+  try {
+    const { url } = await stripePost('checkout', { plan });
+    window.location.href = url;
+  } catch (err) {
+    showToast(err.message);
+  }
+}
+
+async function openStripePortal() {
+  try {
+    const { url } = await stripePost('portal');
+    window.location.href = url;
+  } catch (err) {
+    showToast(err.message);
+  }
+}
+
+// Volta da Stripe: confirma a assinatura e libera o plano na hora
+async function handleStripeReturn(params) {
+  const status = params.get('assinatura');
+  if (!status) return;
+  const limpar = () => history.replaceState(null, '', window.location.pathname);
+  if (status === 'cancelada') { showToast('Pagamento não concluído. Você pode assinar quando quiser.'); limpar(); return; }
+  if (status === 'gerenciada') { limpar(); return; }
+  if (status === 'sucesso' && params.get('session_id')) {
+    try {
+      const r = await stripePost('confirm', { session_id: params.get('session_id') });
+      if (r.ativo) {
+        state.tier = r.plan;
+        state.paidGranted = true;
+        saveState();
+        renderAll();
+        showToast(`Assinatura ativa: ${getPlanMeta(r.plan).nome}. Bons estudos!`);
+      } else {
+        showToast('Pagamento recebido. A liberação pode levar alguns segundos — atualize a página.');
+      }
+    } catch (err) {
+      showToast(err.message);
+    }
+    limpar();
+  }
 }
 
 function planTagLabel() {
@@ -1360,6 +1432,11 @@ function openCheckoutModal(initialPlan = 'essencial') {
     showToast('Você é admin: todos os planos já estão liberados para você.');
     return;
   }
+  // Pagamento real: página segura da Stripe
+  if (stripeOn()) {
+    startStripeCheckout(initialPlan);
+    return;
+  }
   selectCheckoutPlan(initialPlan);
   $('#checkoutModal').hidden = false;
   document.body.style.overflow = 'hidden';
@@ -1794,6 +1871,8 @@ function bindEvents() {
   $('#stripSubscribeBtn').addEventListener('click', () => switchView('plano'));
 
   $('#cancelSubBtn').addEventListener('click', () => {
+    // Assinatura real: cancelar/gerenciar no portal da Stripe
+    if (stripeOn() && state.paidGranted) { openStripePortal(); return; }
     state.tier = 'guest';
     state.subMethod = null;
     saveState();
@@ -1966,6 +2045,7 @@ async function init() {
 // Links vindos das páginas públicas (/concurso/...) e do painel de admin
 function openFromLink() {
   const params = new URLSearchParams(window.location.search);
+  handleStripeReturn(params);
   const concursoId = params.get('concurso');
   if (concursoId && catalog.some((c) => c.id === concursoId)) openContestDetail(concursoId);
   if (params.has('entrar') && !state.user) openAuthModal('login');

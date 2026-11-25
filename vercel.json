@@ -99,6 +99,10 @@
       "destination": "/api/admin?acao=:acao"
     },
     {
+      "source": "/api/stripe/:acao",
+      "destination": "/api/stripe?acao=:acao"
+    },
+    {
       "source": "/admin",
       "destination": "/admin/index.html"
     }
