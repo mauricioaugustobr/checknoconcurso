@@ -43,7 +43,7 @@ async function run() {
   assert.equal(verifyStripeSignature(payload, `t=${t},v1=${'0'.repeat(64)}`, whsec), false, 'assinatura falsa');
   assert.equal(verifyStripeSignature(payload + 'x', `t=${t},v1=${sig}`, whsec), false, 'corpo alterado');
   assert.equal(verifyStripeSignature(payload, `t=${t - 3600},v1=${crypto.createHmac('sha256', whsec).update(`${t - 3600}.${payload}`).digest('hex')}`, whsec), false, 'aviso antigo');
-  process.env.STRIPE_WEBHOOK_SECRET = whsec;
+  process.env.STRIPE_WEBHOOK_SECRET = 'whsec_outra_conta, ' + whsec;
   const forged = new Request(BASE + '/api/stripe/webhook', { method: 'POST', headers: { 'stripe-signature': 't=1,v1=abc' }, body: payload });
   assert.equal((await handleWebhook(forged)).status, 400, 'aviso falso é recusado');
   const good = new Request(BASE + '/api/stripe/webhook', { method: 'POST', headers: { 'stripe-signature': `t=${t},v1=${sig}` }, body: payload });
