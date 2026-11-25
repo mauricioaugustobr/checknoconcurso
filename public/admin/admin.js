@@ -158,7 +158,7 @@ async function saveConcurso(e) {
   try {
     await api(`/api/admin/concursos?id=${encodeURIComponent(editingConcurso.id)}`, { method: 'PUT', body: { data: { ...(editingConcurso._admin ? pickCampos(editingConcurso) : {}), ...data }, hidden: $('#adConcHidden').checked } });
     $('#adConcDialog').close();
-    toast('Concurso salvo. No site, a mudança aparece em até 1 minuto.');
+    toast('Concurso salvo. No site, a mudança aparece em até 2 minutos.');
     loadConcursos().catch(() => {});
     if (!$('[data-panel="geral"]').hidden) loadOverview().catch(() => {});
   } catch (err) {
@@ -247,7 +247,7 @@ async function savePost(status) {
     const path = editingPost ? `/api/admin/posts?id=${editingPost.id}` : '/api/admin/posts';
     const { post } = await api(path, { method: editingPost ? 'PUT' : 'POST', body });
     $('#adPostDialog').close();
-    toast(status === 'published' ? `Publicado em /blog/${post.slug}` : 'Rascunho salvo.');
+    toast(status === 'published' ? `Publicado em /blog/${post.slug} (no ar em até 2 minutos)` : 'Rascunho salvo.');
     loadPosts().catch(() => {});
   } catch (err) {
     $('#adPostError').textContent = err.message;
