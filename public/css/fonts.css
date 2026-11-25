@@ -1,0 +1,55 @@
+/* ======================================================
+   Check no Concurso — Tipografia oficial (opção 1 aprovada)
+   Títulos: Newsreader (serifada editorial, tom de Diário Oficial)
+   Texto, botões e números: Inter (números alinhados em coluna)
+   Logotipo: Plus Jakarta Sans (o desenho da marca não muda)
+   ====================================================== */
+:root {
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-numeric: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-brand: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Títulos em serifa: peso 600, leve aperto e tamanho ótico automático */
+h1, h2, h3, h4,
+.auth-title, .auth-side-title, .free-access-head h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  font-optical-sizing: auto;
+}
+h1 { font-weight: 600; letter-spacing: -0.018em; }
+
+/* Logotipo continua na fonte da marca */
+.brand-text, .brand-wordmark, .auth-side-brand { font-family: var(--font-brand); }
+
+/* Números, preços, datas e etiquetas: Inter com dígitos de largura fixa */
+.price-pill,
+.stat-box strong,
+.sigla-box,
+.exam-date-strip strong,
+.metric-item strong,
+.course-price strong,
+.past-exam-year,
+.choice-price,
+.hero-kpi-featured strong,
+.exam-date-val,
+.price-big,
+.plan-price strong,
+.kpi-cell strong {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Rótulos pequenos em caixa alta continuam sem serifa */
+.free-access-col h3,
+.hero-panel-label {
+  font-family: var(--font-body);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+/* Botões sempre na fonte de texto */
+button, .btn-cta-subscribe { font-family: var(--font-body); }

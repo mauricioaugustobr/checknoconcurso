@@ -1,4 +1,4 @@
-const CACHE_NAME = 'check-no-concurso-v12';
+const CACHE_NAME = 'check-no-concurso-v13';
 const ASSETS = [
   '/',
   '/index.html',
@@ -17,7 +17,8 @@ const ASSETS = [
   '/manifest.webmanifest',
   '/icons/icon.svg',
   '/icons/icon-192.png',
-  '/css/brand.css'
+  '/css/brand.css',
+  '/css/fonts.css'
 ];
 
 self.addEventListener('install', (event) => {

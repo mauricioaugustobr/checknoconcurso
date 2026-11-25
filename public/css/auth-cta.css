@@ -10,36 +10,29 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 46px;
-  padding: 0 20px;
-  border: 1.5px solid #C9AA12;
-  border-radius: 12px;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 10px;
   background: var(--accent-premium);
   color: var(--text-on-accent);
-  font-family: var(--font-display, inherit);
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.01em;
+  font-family: var(--font-body, inherit);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 3px 0 #B8980C, 0 8px 22px rgba(244, 214, 50, 0.42);
-  transition: transform 0.12s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: inset 0 0 0 1px rgba(11, 34, 57, 0.10);
+  transition: background 0.15s ease;
 }
-.btn-cta-subscribe:hover {
-  background: #FBE04A;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 0 #B8980C, 0 12px 28px rgba(244, 214, 50, 0.55);
-}
-.btn-cta-subscribe:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 #B8980C, 0 4px 10px rgba(244, 214, 50, 0.35);
-}
+.btn-cta-subscribe:hover { background: var(--accent-hover, #E2C21A); }
+.btn-cta-subscribe:active { background: #D4B514; }
 .btn-cta-subscribe:focus-visible {
   outline: 3px solid var(--focus-ring, #0C4F83);
   outline-offset: 3px;
 }
-.btn-cta-subscribe .cta-arrow { transition: transform 0.15s ease; }
-.btn-cta-subscribe:hover .cta-arrow { transform: translateX(3px); }
+.btn-cta-subscribe .cta-arrow { width: 14px; height: 14px; transition: transform 0.15s ease; }
+.btn-cta-subscribe:hover .cta-arrow { transform: translateX(2px); }
 .btn-cta-subscribe.is-pro {
   background: var(--brand-soft);
   color: var(--brand);
@@ -52,8 +45,8 @@
 
 .btn-cta-block {
   width: 100%;
-  min-height: 54px;
-  font-size: 16.5px;
+  min-height: 50px;
+  font-size: 16px;
 }
 .hero-cta-note {
   margin-top: 10px;
@@ -62,40 +55,26 @@
   color: var(--muted);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .btn-cta-subscribe:not(.is-pro)::after {
-    content: "";
-    position: absolute;
-    inset: -1.5px;
-    border-radius: inherit;
-    pointer-events: none;
-    animation: cta-pulse 2.8s ease-out 1.2s 3;
-  }
-}
-@keyframes cta-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(244, 214, 50, 0.65); }
-  70%  { box-shadow: 0 0 0 12px rgba(244, 214, 50, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(244, 214, 50, 0); }
-}
-
-/* BOTÃO ENTRAR + MENU DA CONTA */
+/* BOTÃO ENTRAR + MENU DA CONTA (discreto, sem borda) */
 .btn-login {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 0 16px;
-  border: 1.5px solid var(--brand-border);
-  border-radius: 12px;
-  background: var(--bg-surface);
-  color: var(--brand);
+  gap: 7px;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
   font-size: 14.5px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
+.btn-login svg { width: 17px; height: 17px; color: var(--muted); }
 .btn-login[hidden], .account-wrap[hidden] { display: none; }
-.btn-login:hover { background: var(--brand-soft); border-color: var(--brand); }
+.btn-login:hover { background: var(--surface-alt); color: var(--brand); }
+.btn-login:hover svg { color: var(--brand); }
 .btn-login:focus-visible, .account-chip:focus-visible { outline: 3px solid var(--focus-ring, #0C4F83); outline-offset: 2px; }
 
 .account-wrap { position: relative; }
@@ -364,6 +343,13 @@
   .auth-side { display: none; }
 }
 
+/* Faixa de testes da equipe: fora do site público (aparece só com ?demo=1) */
+.demo-bar[hidden] { display: none !important; }
+
+/* Botão "Instalar App" no topo: mesmo estilo discreto do Entrar */
+.site-header #installPwaBtn { border: 0; background: transparent; color: var(--muted); border-radius: 10px; }
+.site-header #installPwaBtn:hover { background: var(--surface-alt); color: var(--brand); }
+
 /* Header sem quebra de linha com Entrar + CTA */
 .site-header .nav-link,
 .site-header .brand-text,
@@ -405,7 +391,7 @@
   .site-header .brand-text small { display: none; }
   .header-actions { gap: 6px; flex-shrink: 0; }
   .btn-login { width: 40px; min-height: 40px; }
-  .btn-cta-subscribe:not(.btn-cta-block) { min-height: 40px; padding: 0 12px; font-size: 13.5px; }
+  .btn-cta-subscribe:not(.btn-cta-block) { min-height: 38px; padding: 0 12px; font-size: 13.5px; }
 }
 /* ======================================================
    BLOCO "GRÁTIS, SEM ASSINAR" — primeira tela
@@ -517,6 +503,7 @@
 @media (max-width: 768px) {
   .concursos-grid { grid-template-columns: minmax(0, 1fr); }
   .contest-card, .contest-card > * { min-width: 0; max-width: 100%; }
+  .contest-card .card-metrics > * { min-width: 0; overflow-wrap: anywhere; }
 }
 @media (max-width: 360px) {
   .btn-cta-subscribe:not(.btn-cta-block) .cta-label-extra { display: none; }

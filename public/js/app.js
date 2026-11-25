@@ -1778,7 +1778,14 @@ function bindEvents() {
   });
 }
 
+function showTeamDemoBar() {
+  // Faixa de testes (simular plano / prévia do app) só aparece com ?demo=1
+  const bar = document.getElementById('demoBar');
+  if (bar && new URLSearchParams(window.location.search).has('demo')) bar.hidden = false;
+}
+
 async function init() {
+  showTeamDemoBar();
   detectAppMode();
   registerServiceWorker();
   await hydrateFromApi();
