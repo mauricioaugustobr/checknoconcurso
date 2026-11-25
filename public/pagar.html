@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Pagamento | Check no Concurso</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font: 1rem/1.5 system-ui;
+        background: #f8f7f3;
+        color: #18251f;
+        margin: 0;
+      }
+      main {
+        max-width: 32rem;
+        margin: 3vh auto;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 1rem;
+      }
+      label {
+        display: block;
+        margin: 1rem 0;
+      }
+      input,
+      textarea,
+      button {
+        display: block;
+        width: 100%;
+        font: inherit;
+        padding: 0.7rem;
+        border: 1px solid #87958d;
+        border-radius: 0.4rem;
+      }
+      button {
+        background: #0b5d47;
+        color: white;
+        margin: 0.7rem 0;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.7;
+      }
+      a {
+        color: #0b5d47;
+      }
+      textarea {
+        overflow-wrap: anywhere;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a href="/">← Check no Concurso</a>
+      <h1>Pagamento</h1>
+      <h2 id="plan"></h2>
+      <form id="buyer">
+        <p>
+          Informe os dados do comprador para contato e eventual emissão de nota
+          fiscal.
+        </p>
+        <label
+          >Nome completo<input
+            name="name"
+            autocomplete="name"
+            required
+            maxlength="150" /></label
+        ><label
+          >CPF<input
+            name="cpf"
+            inputmode="numeric"
+            required
+            maxlength="14" /></label
+        ><label
+          >E-mail<input
+            name="email"
+            type="email"
+            autocomplete="email"
+            required /></label
+        ><label
+          >WhatsApp com DDD<input
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            required
+        /></label>
+        <p>O Pix dá acesso por um período, sem renovação automática.</p>
+        <button value="pix">Gerar Pix</button
+        ><button value="card">Assinar com cartão</button>
+      </form>
+      <section id="payment" hidden>
+        <label>Pix copia e cola<textarea id="code" readonly></textarea></label
+        ><button id="copy">Copiar código Pix</button>
+        <p>
+          Pague pelo app do banco em até 30 minutos. O acesso é liberado após a
+          confirmação do Inter.
+        </p>
+      </section>
+      <p role="status" id="message"></p>
+    </main>
+    <script type="module" src="/js/pagar.js"></script>
+  </body>
+</html>

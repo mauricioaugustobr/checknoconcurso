@@ -376,6 +376,7 @@ function applyServerRole(u) {
     if (u && u.plan) {
       state.tier = u.plan;
       state.paidGranted = true;
+      state.subMethod = u.planMethod;
       state.planInfo = { status: u.planStatus, renovaEm: u.planRenewsAt, cancelaNoFim: u.planCancelAtPeriodEnd };
     } else if (state.paidGranted || (u && u.email)) {
       state.tier = 'guest';
@@ -1440,7 +1441,7 @@ function openCheckoutModal(initialPlan = 'essencial') {
   }
   // Pagamento real: página segura da Stripe
   if (stripeOn()) {
-    startStripeCheckout(initialPlan);
+    window.location.assign('/pagar.html?plan=' + encodeURIComponent(initialPlan));
     return;
   }
   selectCheckoutPlan(initialPlan);
@@ -1878,6 +1879,7 @@ function bindEvents() {
 
   $('#cancelSubBtn').addEventListener('click', () => {
     // Assinatura real: cancelar/gerenciar no portal da Stripe
+    if (state.paidGranted && state.subMethod === 'Pix') { showToast('Seu acesso por Pix termina ao final do per?odo pago.'); return; }
     if (stripeOn() && state.paidGranted) { openStripePortal(); return; }
     state.tier = 'guest';
     state.subMethod = null;

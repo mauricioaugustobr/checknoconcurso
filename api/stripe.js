@@ -2,7 +2,8 @@
 import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from '../lib/stripe.js';
 import { authJson as json } from '../lib/auth.js';
 
-const ACOES = { checkout: handleCheckout, confirm: handleConfirm, portal: handlePortal, webhook: handleWebhook };
+import { handlePix } from '../lib/pix.js';
+const ACOES = { pix: handlePix, checkout: handleCheckout, confirm: handleConfirm, portal: handlePortal, webhook: handleWebhook };
 
 export async function POST(request) {
   const handler = ACOES[new URL(request.url).searchParams.get('acao')];

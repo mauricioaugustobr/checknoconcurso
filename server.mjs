@@ -15,7 +15,8 @@ import { renderConcursoPage, renderEstadoPage, renderBlogIndex, renderBlogPost, 
 import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts } from './lib/admin-api.js';
 import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from './lib/stripe.js';
 
-const STRIPE_ROUTES = { checkout: handleCheckout, confirm: handleConfirm, portal: handlePortal, webhook: handleWebhook };
+import { handlePix } from './lib/pix.js';
+const STRIPE_ROUTES = { pix: handlePix, checkout: handleCheckout, confirm: handleConfirm, portal: handlePortal, webhook: handleWebhook };
 
 // Mesmas rotas das funções e "rewrites" da Vercel (vercel.json), para testar localmente
 const DYNAMIC_ROUTES = [
