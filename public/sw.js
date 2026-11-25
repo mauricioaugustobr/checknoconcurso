@@ -1,10 +1,18 @@
-const CACHE_NAME = 'check-no-concurso-v3';
+const CACHE_NAME = 'check-no-concurso-v10';
 const ASSETS = [
   '/',
   '/index.html',
+  '/css/tokens.css',
   '/css/styles.css',
   '/js/app.js',
   '/js/data/concursos.js',
+  '/js/data/estado-builder.js',
+  '/js/data/estados-norte.js',
+  '/js/data/estados-nordeste.js',
+  '/js/data/estados-centro-oeste.js',
+  '/js/data/estados-sudeste.js',
+  '/js/data/estados-sul.js',
+  '/js/data/estados-ativos-2026-11.js',
   '/manifest.webmanifest',
   '/icons/icon.svg'
 ];
@@ -23,6 +31,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Network-first so UI/CSS updates appear immediately, falling back to cache offline
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
@@ -35,15 +44,14 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const networkFetch = fetch(event.request).then((response) => {
+    fetch(event.request)
+      .then((response) => {
         if (response && response.status === 200) {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
         }
         return response;
-      }).catch(() => cached);
-      return cached || networkFetch;
-    })
+      })
+      .catch(() => caches.match(event.request))
   );
 });

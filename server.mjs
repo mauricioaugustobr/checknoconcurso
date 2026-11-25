@@ -2,7 +2,13 @@ import http from 'node:http';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { CONCURSOS, PLATAFORMAS_PARCEIRAS, PLANOS, MARCA } from './public/js/data/concursos.js';
+import { MARCA } from './public/js/data/concursos.js';
+import {
+  getHealthPayload,
+  computeStats,
+  getEstadosPayload,
+  getConcursosPayload
+} from './lib/catalog-api.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,29 +39,6 @@ function sendJson(res, statusCode, payload) {
   res.end(body);
 }
 
-function computeStats(items) {
-  const ativos = items.filter((c) => c.status !== 'Encerrado');
-  const encerrados = items.filter((c) => c.status === 'Encerrado');
-  const totalVagasAbertas = ativos.reduce((acc, c) => acc + c.vagas, 0);
-  const inscricoesAbertas = items.filter((c) => c.status === 'Inscrições Abertas').length;
-  const totalCursos = items.reduce((acc, c) => acc + c.cursos.length, 0);
-  const totalProvasAnteriores = items.reduce((acc, c) => acc + c.provasAnteriores.length, 0);
-  const maiorSalario = Math.max(...ativos.map((c) => c.salarioMax));
-  return {
-    marca: MARCA.nome,
-    dominio: MARCA.dominio,
-    totalConcursos: items.length,
-    concursosAtivos: ativos.length,
-    concursosEncerrados: encerrados.length,
-    totalVagasAbertas,
-    inscricoesAbertas,
-    totalCursos,
-    totalProvasAnteriores,
-    maiorSalario,
-    planos: PLANOS
-  };
-}
-
 export function createServer() {
   return http.createServer(async (req, res) => {
     try {
@@ -63,46 +46,19 @@ export function createServer() {
       const pathname = decodeURIComponent(url.pathname);
 
       if (pathname === '/api/health') {
-        return sendJson(res, 200, {
-          ok: true,
-          service: 'check-no-concurso',
-          domain: MARCA.dominio,
-          timestamp: new Date().toISOString()
-        });
+        return sendJson(res, 200, getHealthPayload());
       }
 
       if (pathname === '/api/stats') {
-        return sendJson(res, 200, computeStats(CONCURSOS));
+        return sendJson(res, 200, computeStats());
+      }
+
+      if (pathname === '/api/estados') {
+        return sendJson(res, 200, getEstadosPayload());
       }
 
       if (pathname === '/api/concursos') {
-        const uf = url.searchParams.get('uf');
-        const esfera = url.searchParams.get('esfera');
-        const area = url.searchParams.get('area');
-        const status = url.searchParams.get('status');
-        const q = (url.searchParams.get('q') || '').trim().toLowerCase();
-
-        let filtered = CONCURSOS;
-        if (uf && uf !== 'TODOS') filtered = filtered.filter((c) => c.uf === uf || c.uf === 'Nacional');
-        if (esfera && esfera !== 'TODAS') filtered = filtered.filter((c) => c.esfera === esfera);
-        if (area && area !== 'TODAS') filtered = filtered.filter((c) => c.area === area);
-        if (status && status !== 'TODOS') {
-          if (status === 'ATIVOS') filtered = filtered.filter((c) => c.status !== 'Encerrado');
-          else filtered = filtered.filter((c) => c.status === status);
-        }
-        if (q) {
-          filtered = filtered.filter((c) =>
-            `${c.orgao} ${c.sigla} ${c.titulo} ${c.banca} ${c.area} ${c.uf}`.toLowerCase().includes(q)
-          );
-        }
-
-        return sendJson(res, 200, {
-          total: filtered.length,
-          marca: MARCA,
-          planos: PLANOS,
-          plataformas: PLATAFORMAS_PARCEIRAS,
-          items: filtered
-        });
+        return sendJson(res, 200, getConcursosPayload(url.searchParams));
       }
 
       const safeRelPath = pathname === '/' ? '/index.html' : pathname;

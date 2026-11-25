@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import { createServer } from '../server.mjs';
-import { CONCURSOS, PLATAFORMAS_PARCEIRAS, PLANOS, MARCA } from '../public/js/data/concursos.js';
+import { GET as healthGET } from '../api/health.js';
+import { GET as statsGET } from '../api/stats.js';
+import { GET as estadosGET } from '../api/estados.js';
+import { GET as concursosGET } from '../api/concursos.js';
+import { CONCURSOS, PLATAFORMAS_PARCEIRAS, PLANOS, MARCA, ESTADOS_BRASIL } from '../public/js/data/concursos.js';
 
 async function runTests() {
   // 1. Validate branding and pricing tiers
@@ -61,6 +65,26 @@ async function runTests() {
     const closedRes = await (await fetch(`${baseUrl}/api/concursos?status=Encerrado`)).json();
     assert.equal(closedRes.items.length, closed.length);
 
+    // 4. Validate 27-state nationwide coverage (>= 10 active concursos in every UF)
+    const allUfs = Object.keys(ESTADOS_BRASIL);
+    assert.equal(allUfs.length, 27, 'Devem existir exatamente 27 UFs mapeadas');
+    for (const uf of allUfs) {
+      const ufItems = CONCURSOS.filter((c) => c.uf === uf);
+      const ufActive = ufItems.filter((c) => c.status !== 'Encerrado');
+      assert.ok(ufItems.length >= 10, `Esperado >= 10 concursos em ${uf}, encontrado ${ufItems.length}`);
+      assert.ok(ufActive.length >= 10, `Esperado >= 10 concursos ativos em ${uf}, encontrado ${ufActive.length}`);
+    }
+
+    const estadosRes = await (await fetch(`${baseUrl}/api/estados`)).json();
+    assert.equal(estadosRes.totalEstados, 27);
+    assert.ok(estadosRes.estados.every((e) => e.ativos >= 10), 'Todos os 27 estados devem ter >= 10 ativos em /api/estados');
+
+    const acRes = await (await fetch(`${baseUrl}/api/concursos?uf=AC&status=ATIVOS`)).json();
+    assert.ok(acRes.items.filter((i) => i.uf === 'AC').length >= 10, 'Filtro ?uf=AC deve retornar >= 10 concursos do Acre');
+
+    const norteRes = await (await fetch(`${baseUrl}/api/concursos?regiao=Norte`)).json();
+    assert.ok(norteRes.items.length >= 70, 'Região Norte (7 estados) deve retornar >= 70 concursos');
+
     for (const asset of ['/', '/css/styles.css', '/js/app.js', '/manifest.webmanifest', '/sw.js', '/icons/icon.svg']) {
       const res = await fetch(`${baseUrl}${asset}`);
       assert.equal(res.status, 200, `Falha ao servir ${asset}`);
@@ -69,6 +93,16 @@ async function runTests() {
     const html = await (await fetch(`${baseUrl}/`)).text();
     assert.ok(html.includes('Check no Concurso'), 'HTML deve conter marca Check no Concurso');
     assert.ok(html.includes('PM-SP, TJ-SP e TRT-4'), 'HTML deve listar os novos destaques reais');
+
+    // 5. Validate Vercel Functions API handlers directly
+    const vHealth = await (await healthGET()).json();
+    assert.equal(vHealth.ok, true);
+    const vStats = await (await statsGET()).json();
+    assert.equal(vStats.totalConcursos, CONCURSOS.length);
+    const vEstados = await (await estadosGET()).json();
+    assert.equal(vEstados.totalEstados, 27);
+    const vConcursos = await (await concursosGET(new Request('https://checknoconcurso.com.br/api/concursos?uf=SP&status=ATIVOS'))).json();
+    assert.ok(vConcursos.items.filter((i) => i.uf === 'SP').length >= 10, 'Handler Vercel /api/concursos?uf=SP deve retornar >= 10 ativos');
 
     console.log(`OK: ${CONCURSOS.length} concursos REAIS validados (${stats.concursosAtivos} ativos + ${stats.concursosEncerrados} encerrados, ${stats.totalVagasAbertas.toLocaleString('pt-BR')} vagas imediatas abertas/previstas, ${stats.totalProvasAnteriores} provas anteriores mapeadas).`);
   } finally {

@@ -1,0 +1,239 @@
+/* ============================================================================
+   Check no Concurso (checknoconcurso.com.br) — Tokens Semânticos Oficiais
+   Paleta Oficial Aprovada: Opção 2 — Família Check (Azul Institucional & Selo Ouro)
+   Mantém opcao-1 e opcao-3 disponíveis via html[data-palette="..."] (evolução cumulativa)
+   ============================================================================ */
+
+:root {
+  --font-display: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Cores fixas das 6 plataformas parceiras */
+  --partner-estrategia: #DC2626;
+  --partner-gran: #1D4ED8;
+  --partner-direcao: #0F766E;
+  --partner-qconcursos: #EA580C;
+  --partner-alfacon: #B45309;
+  --partner-nova: #7C3AED;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 999px;
+}
+
+/* ============================================================================
+   OFICIAL (PADRÃO) — OPÇÃO 2: Família Check (Azul Institucional & Selo Ouro)
+   Parentesco direto com o Check no Enem.
+   REGRA: --accent-premium (#F4D632) é sempre superfície/selo com --text-on-accent
+   (#0B2239) — nunca usar amarelo como texto em fundo claro (usar --accent-text #734B00).
+   manifest.webmanifest: theme_color="#0C4F83", background_color="#F4F8FB"
+   ============================================================================ */
+:root,
+html[data-palette="opcao-2"] {
+  color-scheme: light;
+
+  /* Superfícies */
+  --bg-canvas: #F4F8FB;
+  --bg-surface: #FFFFFF;
+  --bg-surface-alt: #E9F0F6;
+  --bg-elevated: #FFFFFF;
+  --bg-inverse: #0B2540;
+
+  /* Bordas e foco */
+  --border-subtle: #DFE8F0;
+  --border-default: #C5D5E4;
+  --border-strong: #7E9CB8;
+  --focus-ring: #0C4F83;
+
+  /* Textos */
+  --text-primary: #0F2236;
+  --text-secondary: #2E465E;
+  --text-muted: #4D657C;
+  --text-on-brand: #FFFFFF;
+  --text-on-accent: #0B2239;
+  --text-on-inverse: #F4F8FB;
+  --text-on-inverse-muted: #C5D5E4;
+
+  /* Marca (ação principal / Check Essencial) */
+  --brand-primary: #0C4F83;
+  --brand-hover: #083A61;
+  --brand-soft: #E6F1FA;
+  --brand-border: #9CC4E4;
+
+  /* Destaque comercial (Check Completo / Selo) */
+  --accent-premium: #F4D632;
+  --accent-hover: #E2C21A;
+  --accent-soft: #FEF9DC;
+  --accent-border: #E3C540;
+  --accent-text: #734B00;
+
+  /* Semânticos: 5 status + 2 alertas críticos (WCAG AA/AAA) */
+  --status-open-fg: #0C6B3B;
+  --status-open-bg: #E6F7EE;
+  --status-open-border: #88D8AF;
+
+  --status-edital-fg: #0C4F83;
+  --status-edital-bg: #E6F1FA;
+  --status-edital-border: #93C0E4;
+
+  --status-scheduled-fg: #5B21B6;
+  --status-scheduled-bg: #F3EFFF;
+  --status-scheduled-border: #C4B5FD;
+
+  --status-upcoming-fg: #155E75;
+  --status-upcoming-bg: #ECFEFF;
+  --status-upcoming-border: #8AD7E4;
+
+  --status-closed-fg: #3E4E5E;
+  --status-closed-bg: #E6ECF2;
+  --status-closed-border: #BCC8D4;
+
+  --status-warning-fg: #8A4600;
+  --status-warning-bg: #FFF3D6;
+  --status-warning-border: #E8A627;
+
+  --status-danger-fg: #B91C1C;
+  --status-danger-bg: #FEF2F2;
+  --status-danger-border: #FCA5A5;
+
+  /* Sombras & PWA */
+  --shadow-sm: 0 1px 2px rgba(15, 34, 54, 0.06);
+  --shadow-md: 0 10px 26px rgba(15, 34, 54, 0.09);
+  --shadow-lg: 0 22px 50px rgba(15, 34, 54, 0.18);
+  --backdrop-scrim: rgba(11, 37, 64, 0.58);
+  --pwa-theme-color: #0C4F83;
+  --pwa-background-color: #F4F8FB;
+}
+
+/* OPÇÃO 1 — Papel de Prova & Esmeralda (preservada para uso opcional) */
+html[data-palette="opcao-1"] {
+  color-scheme: light;
+  --bg-canvas: #F5F6F3;
+  --bg-surface: #FFFFFF;
+  --bg-surface-alt: #ECEFE9;
+  --bg-elevated: #FFFFFF;
+  --bg-inverse: #10231C;
+  --border-subtle: #E4E8E0;
+  --border-default: #CDD5C8;
+  --border-strong: #8A9A86;
+  --focus-ring: #047857;
+  --text-primary: #111C17;
+  --text-secondary: #34443C;
+  --text-muted: #52635A;
+  --text-on-brand: #FFFFFF;
+  --text-on-accent: #FFFFFF;
+  --text-on-inverse: #F4F7F5;
+  --text-on-inverse-muted: #CBD5E1;
+  --brand-primary: #065F46;
+  --brand-hover: #044A36;
+  --brand-soft: #E6F6F0;
+  --brand-border: #92D7BE;
+  --accent-premium: #B45309;
+  --accent-hover: #92400E;
+  --accent-soft: #FEF3C7;
+  --accent-border: #F5C26B;
+  --accent-text: #92400E;
+  --status-open-fg: #065F46;
+  --status-open-bg: #E6F6F0;
+  --status-open-border: #8AD4B9;
+  --status-edital-fg: #1D4ED8;
+  --status-edital-bg: #EFF6FF;
+  --status-edital-border: #93C5FD;
+  --status-scheduled-fg: #6D28D9;
+  --status-scheduled-bg: #F5F3FF;
+  --status-scheduled-border: #C4B5FD;
+  --status-upcoming-fg: #0F5E6B;
+  --status-upcoming-bg: #ECFEFF;
+  --status-upcoming-border: #8AD7E4;
+  --status-closed-fg: #3F4B45;
+  --status-closed-bg: #E6EAE5;
+  --status-closed-border: #BFC7BE;
+  --status-warning-fg: #92400E;
+  --status-warning-bg: #FEF3C7;
+  --status-warning-border: #F59E0B;
+  --status-danger-fg: #B91C1C;
+  --status-danger-bg: #FEF2F2;
+  --status-danger-border: #FCA5A5;
+  --shadow-sm: 0 1px 2px rgba(17, 28, 23, 0.06);
+  --shadow-md: 0 10px 26px rgba(17, 28, 23, 0.08);
+  --shadow-lg: 0 22px 50px rgba(17, 28, 23, 0.16);
+  --backdrop-scrim: rgba(16, 35, 28, 0.58);
+  --pwa-theme-color: #065F46;
+  --pwa-background-color: #F5F6F3;
+}
+
+/* OPÇÃO 3 — Obsidiana & Ouro Editorial (pronta para modo noturno futuro) */
+html[data-palette="opcao-3"] {
+  color-scheme: dark;
+  --bg-canvas: #0B0E14;
+  --bg-surface: #141923;
+  --bg-surface-alt: #1B2230;
+  --bg-elevated: #222B3C;
+  --bg-inverse: #F5F7FA;
+  --border-subtle: #222A3A;
+  --border-default: #2F3A4F;
+  --border-strong: #4C5C78;
+  --focus-ring: #FACC15;
+  --text-primary: #F5F7FA;
+  --text-secondary: #CBD4E1;
+  --text-muted: #93A2B8;
+  --text-on-brand: #062016;
+  --text-on-accent: #0B0E14;
+  --text-on-inverse: #0B0E14;
+  --text-on-inverse-muted: #334155;
+  --brand-primary: #10B981;
+  --brand-hover: #34D399;
+  --brand-soft: #0E2D25;
+  --brand-border: #1F6E57;
+  --accent-premium: #EAB308;
+  --accent-hover: #FACC15;
+  --accent-soft: #2B240E;
+  --accent-border: #7A5E12;
+  --accent-text: #FDE047;
+  --status-open-fg: #5EEAD4;
+  --status-open-bg: #0D2B27;
+  --status-open-border: #1E6B60;
+  --status-edital-fg: #93C5FD;
+  --status-edital-bg: #11223E;
+  --status-edital-border: #264C88;
+  --status-scheduled-fg: #D8B4FE;
+  --status-scheduled-bg: #231738;
+  --status-scheduled-border: #57378E;
+  --status-upcoming-fg: #67E8F9;
+  --status-upcoming-bg: #0D2833;
+  --status-upcoming-border: #1E6178;
+  --status-closed-fg: #B8C4D4;
+  --status-closed-bg: #1E2533;
+  --status-closed-border: #3E4A60;
+  --status-warning-fg: #FCD34D;
+  --status-warning-bg: #2D230B;
+  --status-warning-border: #856214;
+  --status-danger-fg: #FCA5A5;
+  --status-danger-bg: #331418;
+  --status-danger-border: #8C2D38;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.65);
+  --backdrop-scrim: rgba(0, 0, 0, 0.72);
+  --pwa-theme-color: #0B0E14;
+  --pwa-background-color: #0B0E14;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2.5px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

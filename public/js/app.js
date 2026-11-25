@@ -1,4 +1,4 @@
-import { CONCURSOS, PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA } from './data/concursos.js';
+import { CONCURSOS, PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/concursos.js';
 
 const STORAGE_KEY = 'check_no_concurso_state_v3';
 const TODAY_ISO = '2026-11-24';
@@ -7,6 +7,7 @@ const DEFAULT_STATE = {
   tier: 'guest', // 'guest' | 'essencial' | 'completo-mensal' | 'completo-anual'
   subMethod: null,
   subSince: null,
+  user: null, // { name, email, provider } — simulado; produção usa Supabase Auth
   savedIds: ['pm-sp-soldado-2026', 'tj-sp-2026'],
   alertIds: ['pm-sp-soldado-2026', 'tj-sp-2026'],
   prefs: {
@@ -43,6 +44,9 @@ let selectedCheckoutPlan = 'essencial';
 let deferredInstallPrompt = null;
 let toastTimer = null;
 let pushTimer = null;
+const PAGE_SIZE = 24;
+let visibleConcursosLimit = PAGE_SIZE;
+let visibleCoursesLimit = PAGE_SIZE;
 
 const filters = {
   q: '',
@@ -162,7 +166,7 @@ function showPushNotification(message) {
 
 function platformColor(platformId) {
   const found = PLATAFORMAS_PARCEIRAS.find((p) => p.id === platformId);
-  return found ? found.cor : '#065F46';
+  return found ? found.cor : '#0C4F83';
 }
 
 /* ======================================================
@@ -204,8 +208,15 @@ function populateSelects() {
   });
   const areas = [...new Set(catalog.map((c) => c.area))].sort((a, b) => a.localeCompare(b));
 
-  const ufOptions = `<option value="TODOS">Todos os estados</option>` +
-    ufs.map((uf) => `<option value="${escapeHtml(uf)}">${uf === 'Nacional' ? 'Nacional (Todo o Brasil)' : uf}</option>`).join('');
+  const ufOptions = `<option value="TODOS">Todos os estados (27 UFs)</option>` +
+    ufs.map((uf) => {
+      const countUf = catalog.filter((c) => c.uf === uf && c.status !== 'Encerrado').length;
+      const nomeEstado = ESTADOS_BRASIL[uf]?.nome;
+      const label = uf === 'Nacional'
+        ? `Nacional (Todo o Brasil · ${countUf})`
+        : (nomeEstado ? `${uf} — ${nomeEstado} (${countUf})` : `${uf} (${countUf})`);
+      return `<option value="${escapeHtml(uf)}">${escapeHtml(label)}</option>`;
+    }).join('');
   $('#filterUf').innerHTML = ufOptions;
   $('#prefUf').innerHTML = ufOptions;
 
@@ -245,7 +256,7 @@ function renderHeroStats() {
   $('#statVagas').textContent = totalVagas.toLocaleString('pt-BR');
   $('#statConcursos').textContent = `${ativos.length} + ${encerrados.length}`;
   $('#statMaiorSalario').textContent = formatBRL(maiorSalario).replace(',00', '');
-  $('#statProvas').textContent = `${totalProvas} provas`;
+  $('#statProvas').textContent = `${totalProvas.toLocaleString('pt-BR')} provas`;
 }
 
 function renderBillingCycleUI() {
@@ -285,7 +296,7 @@ function renderAuthUI() {
 
   if (hasCompleto()) {
     const planLabel = state.tier === 'completo-anual' ? 'Check Completo Anual (R$ 199,90/ano)' : 'Check Completo (R$ 17,99/mês)';
-    headerCta.textContent = 'Check Completo ✓';
+    headerCta.innerHTML = '<span class="cta-label">Check Completo ✓</span>';
     headerCta.classList.add('is-pro');
     heroPricePill.textContent = 'Plano Completo Ativo ✓';
     heroBtn.textContent = 'Acesso Total Ativo · Ver Meus Salvos';
@@ -300,8 +311,8 @@ function renderAuthUI() {
     subCompletoBtn.textContent = 'Seu Plano Atual ✓';
     subCompletoBtn.disabled = true;
   } else if (state.tier === 'essencial') {
-    headerCta.textContent = 'Essencial Ativo ✓';
-    headerCta.classList.add('is-pro');
+    headerCta.innerHTML = `<span class="cta-label">Liberar provas</span>${CTA_ARROW_SVG}`;
+    headerCta.classList.remove('is-pro');
     heroPricePill.textContent = 'Essencial (R$ 6,99) Ativo';
     heroBtn.textContent = 'Fazer Upgrade para 5 Provas (R$ 17,99)';
     upgradeStrip.hidden = false;
@@ -315,10 +326,10 @@ function renderAuthUI() {
     subCompletoBtn.disabled = false;
     renderBillingCycleUI();
   } else {
-    headerCta.textContent = 'Assinar · R$ 6,99';
+    headerCta.innerHTML = `<span class="cta-label">Assinar<span class="cta-label-extra"> agora</span></span>${CTA_ARROW_SVG}`;
     headerCta.classList.remove('is-pro');
     heroPricePill.textContent = 'A partir de R$ 6,99/mês';
-    heroBtn.textContent = 'Ver Planos e Desbloquear Tudo';
+    heroBtn.textContent = 'Assinar agora · a partir de R$ 6,99';
     upgradeStrip.hidden = false;
     activePlanBanner.hidden = true;
     subEssencialBtn.textContent = 'Assinar Essencial · R$ 6,99/mês';
@@ -329,6 +340,178 @@ function renderAuthUI() {
 
   $('#navSavedCount').textContent = String(state.savedIds.length);
   $('#mobileSavedDot').hidden = state.savedIds.length === 0;
+  renderAccountUI();
+}
+
+/* ======================================================
+   LOGIN / CONTA (simulado em localStorage no protótipo)
+   ====================================================== */
+const CTA_ARROW_SVG = '<svg class="cta-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+let authMode = 'login'; // 'login' | 'signup'
+let authReturnFocus = null;
+
+function userInitials(name) {
+  const parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return '?';
+  return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase();
+}
+
+function planTagLabel() {
+  if (state.tier === 'completo-anual') return 'Check Completo Anual';
+  if (state.tier === 'completo-mensal') return 'Check Completo';
+  if (state.tier === 'essencial') return 'Check Essencial';
+  return 'Plano Visitante';
+}
+
+function renderAccountUI() {
+  const user = state.user;
+  $('#headerLoginBtn').hidden = Boolean(user);
+  $('#accountWrap').hidden = !user;
+  $('#mobileAccountLabel').textContent = user ? 'Conta' : 'Entrar';
+  if (!user) return;
+  const firstName = user.name.split(/\s+/)[0];
+  $('#accountAvatar').textContent = userInitials(user.name);
+  $('#accountChipName').textContent = firstName;
+  $('#accountMenuName').textContent = user.name;
+  $('#accountMenuEmail').textContent = user.email;
+  const tag = $('#accountMenuPlan');
+  tag.textContent = planTagLabel();
+  tag.classList.toggle('is-completo', hasCompleto());
+  tag.classList.toggle('is-essencial', state.tier === 'essencial');
+}
+
+function setAuthMode(mode) {
+  authMode = mode;
+  const isSignup = mode === 'signup';
+  $$('.auth-tab').forEach((tab) => {
+    const on = tab.dataset.authMode === mode;
+    tab.classList.toggle('active', on);
+    tab.setAttribute('aria-selected', String(on));
+  });
+  $('#authTitle').textContent = isSignup ? 'Crie sua conta grátis' : 'Que bom te ver de novo';
+  $('#authSub').textContent = isSignup
+    ? 'Leva 30 segundos. Salve concursos e receba alertas de mudança de data.'
+    : 'Entre para ver seus concursos salvos e alertas.';
+  $('#authNameField').hidden = !isSignup;
+  $('#forgotPasswordBtn').hidden = isSignup;
+  $('#authRememberRow').hidden = isSignup;
+  $('#authLegal').hidden = !isSignup;
+  $('#authPassword').autocomplete = isSignup ? 'new-password' : 'current-password';
+  $('#authSubmitBtn').textContent = isSignup ? 'Criar minha conta' : 'Entrar';
+  $('#authSwitchText').innerHTML = isSignup
+    ? 'Já tem conta? <button type="button" class="auth-link" data-auth-mode="login">Entrar</button>'
+    : 'Ainda não tem conta? <button type="button" class="auth-link" data-auth-mode="signup">Criar conta grátis</button>';
+  clearAuthErrors();
+}
+
+function clearAuthErrors() {
+  ['authEmail', 'authPassword', 'authName'].forEach((id) => $(`#${id}`).removeAttribute('aria-invalid'));
+  $('#authEmailError').hidden = true;
+  $('#authPasswordError').hidden = true;
+}
+
+function openAuthModal(mode = 'login') {
+  authReturnFocus = document.activeElement;
+  setAuthMode(mode);
+  $('#authForm').reset();
+  $('#authRemember').checked = true;
+  $('#authModal').hidden = false;
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => (mode === 'signup' ? $('#authName') : $('#authEmail')).focus(), 30);
+}
+
+function closeAuthModal() {
+  $('#authModal').hidden = true;
+  document.body.style.overflow = '';
+  if (authReturnFocus && typeof authReturnFocus.focus === 'function') authReturnFocus.focus();
+}
+
+function completeLogin(user) {
+  state.user = user;
+  saveState();
+  closeAuthModal();
+  renderAll();
+  showToast(`Pronto, ${user.name.split(/\s+/)[0]}! Você está conectado.`);
+}
+
+function handleAuthSubmit(e) {
+  e.preventDefault();
+  clearAuthErrors();
+  const email = $('#authEmail').value.trim();
+  const password = $('#authPassword').value;
+  let ok = true;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    $('#authEmail').setAttribute('aria-invalid', 'true');
+    $('#authEmailError').hidden = false;
+    ok = false;
+  }
+  if (password.length < 8) {
+    $('#authPassword').setAttribute('aria-invalid', 'true');
+    $('#authPasswordError').hidden = false;
+    ok = false;
+  }
+  if (!ok) {
+    (email && $('#authEmailError').hidden ? $('#authPassword') : $('#authEmail')).focus();
+    return;
+  }
+  const typedName = $('#authName').value.trim();
+  const fallbackName = email.split('@')[0].replace(/[._-]+/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase());
+  completeLogin({ name: (authMode === 'signup' && typedName) || fallbackName, email, provider: 'email' });
+}
+
+function closeAccountMenu() {
+  $('#accountMenu').hidden = true;
+  $('#accountChipBtn').setAttribute('aria-expanded', 'false');
+}
+
+function bindAuthEvents() {
+  $('#headerLoginBtn').addEventListener('click', () => openAuthModal('login'));
+  $('#mobileAccountTab').addEventListener('click', () => {
+    if (state.user) switchView('plano');
+    else openAuthModal('login');
+  });
+  $('#closeAuthBtn').addEventListener('click', closeAuthModal);
+  $('#authModal').addEventListener('click', (e) => {
+    if (e.target.id === 'authModal') { closeAuthModal(); return; }
+    const modeBtn = e.target.closest('[data-auth-mode]');
+    if (modeBtn) {
+      setAuthMode(modeBtn.dataset.authMode);
+      (authMode === 'signup' ? $('#authName') : $('#authEmail')).focus();
+    }
+  });
+  $('#authForm').addEventListener('submit', handleAuthSubmit);
+  $('#togglePasswordBtn').addEventListener('click', () => {
+    const input = $('#authPassword');
+    const show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    $('#togglePasswordBtn').setAttribute('aria-pressed', String(show));
+    $('#togglePasswordBtn').setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
+  });
+  $('#forgotPasswordBtn').addEventListener('click', () => {
+    const email = $('#authEmail').value.trim();
+    showToast(email ? `Enviamos um link de redefinição para ${email} (simulação).` : 'Digite seu e-mail acima para receber o link de redefinição.');
+    if (!email) $('#authEmail').focus();
+  });
+  $('#googleLoginBtn').addEventListener('click', () => {
+    completeLogin({ name: 'Concurseiro Check', email: 'conta.google@exemplo.com', provider: 'google' });
+  });
+
+  $('#accountChipBtn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const menu = $('#accountMenu');
+    menu.hidden = !menu.hidden;
+    $('#accountChipBtn').setAttribute('aria-expanded', String(!menu.hidden));
+  });
+  $('#accountMenu').addEventListener('click', () => closeAccountMenu());
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#accountWrap')) closeAccountMenu();
+  });
+  $('#logoutBtn').addEventListener('click', () => {
+    state.user = null;
+    saveState();
+    renderAll();
+    showToast('Você saiu da sua conta.');
+  });
 }
 
 function renderRegionsBar() {
@@ -354,7 +537,7 @@ function renderRecoSummary() {
   if (state.prefs.escolaridade !== 'TODAS') parts.push(`Nível: ${state.prefs.escolaridade}`);
 
   if (parts.length === 0) {
-    $('#recoSummary').innerHTML = `Dados reais checados em <strong>24/11/2026</strong> nas bancas oficiais (Vunesp, FGV, Cebraspe, FCC, AOCP e outras).`;
+    $('#recoSummary').innerHTML = `Mostrando concursos em <strong>Todo o Brasil</strong> — filtre por estado, área e escolaridade.`;
   } else {
     const matches = catalog.filter((c) => {
       if (c.status === 'Encerrado') return false;
@@ -384,7 +567,8 @@ function getFilteredConcursos() {
       if (!(c.status === 'Inscrições Abertas' && d !== null && d >= 0 && d <= 18)) return false;
     }
     if (q) {
-      const hay = `${c.orgao} ${c.sigla} ${c.titulo} ${c.banca} ${c.area} ${c.uf} ${c.regiao} ${c.escolaridade} ${c.status} ${c.fonteOficial || ''}`.toLowerCase();
+      const estadoNome = ESTADOS_BRASIL[c.uf]?.nome || '';
+      const hay = `${c.orgao} ${c.sigla} ${c.titulo} ${c.banca} ${c.area} ${c.uf} ${estadoNome} ${c.regiao} ${c.escolaridade} ${c.status} ${c.fonteOficial || ''}`.toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
@@ -420,6 +604,9 @@ function getFilteredConcursos() {
       };
       return (rank[a.status] ?? 9) - (rank[b.status] ?? 9);
     }
+    if (typeof a.importancia === 'number' && typeof b.importancia === 'number' && a.importancia !== b.importancia) {
+      return b.importancia - a.importancia;
+    }
     return b.vagas - a.vagas;
   });
 
@@ -451,7 +638,12 @@ function renderConcursosGrid() {
     ? `Mostrar também ${closedInCatalog} encerrados`
     : 'Ver apenas ativos';
 
+  const paginationEl = $('#concursosPagination');
   if (list.length === 0) {
+    if (paginationEl) {
+      paginationEl.hidden = true;
+      paginationEl.innerHTML = '';
+    }
     $('#concursosGrid').innerHTML = `
       <div class="empty-state" style="grid-column: 1 / -1;">
         <h3>Nenhum concurso encontrado com esses filtros</h3>
@@ -463,7 +655,10 @@ function renderConcursosGrid() {
     return;
   }
 
-  $('#concursosGrid').innerHTML = list.map((c) => {
+  const shownList = list.slice(0, visibleConcursosLimit);
+  const remaining = list.length - shownList.length;
+
+  $('#concursosGrid').innerHTML = shownList.map((c) => {
     const unlocked = isEditalUnlocked(c);
     const saved = state.savedIds.includes(c.id);
     const isClosed = c.status === 'Encerrado';
@@ -471,17 +666,17 @@ function renderConcursosGrid() {
     const examDays = daysUntil(c.dataProva);
     const isUrgent = c.status === 'Inscrições Abertas' && regDays !== null && regDays >= 0 && regDays <= 15;
 
-    let deadlineCopy = c.inscricaoFim ? `Inscrições até ${formatDateBR(c.inscricaoFim)}` : 'Aguardando edital';
+    let deadlineCopy = c.inscricaoFim ? `Até ${formatDateBR(c.inscricaoFim).slice(0, 5)}` : 'Aguardando edital';
     if (isClosed) {
-      deadlineCopy = 'Certame encerrado';
+      deadlineCopy = 'Encerrado';
     } else if (c.status === 'Prova Agendada') {
       deadlineCopy = 'Inscrições encerradas';
     } else if (c.status === 'Inscrições Abertas' && regDays !== null && regDays >= 0) {
-      if (regDays === 0) deadlineCopy = 'Encerra HOJE!';
-      else if (regDays === 1) deadlineCopy = `Encerra AMANHÃ (${formatDateBR(c.inscricaoFim)})`;
-      else deadlineCopy = regDays <= 15 ? `Encerra em ${regDays}d (${formatDateBR(c.inscricaoFim)})` : `Inscrição até ${formatDateBR(c.inscricaoFim)}`;
+      if (regDays === 0) deadlineCopy = 'Encerra hoje';
+      else if (regDays === 1) deadlineCopy = 'Encerra amanhã';
+      else deadlineCopy = regDays <= 15 ? `Encerra em ${regDays}d` : `Até ${formatDateBR(c.inscricaoFim).slice(0, 5)}`;
     } else if (c.status === 'Edital Publicado' && c.inscricaoInicio) {
-      deadlineCopy = `Abre em ${formatDateBR(c.inscricaoInicio)}`;
+      deadlineCopy = `Abre ${formatDateBR(c.inscricaoInicio).slice(0, 5)}`;
     } else if (c.status === 'Previsto / Autorizado') {
       deadlineCopy = 'Edital em breve';
     }
@@ -489,47 +684,52 @@ function renderConcursosGrid() {
     let examDateText = formatDateBR(c.dataProva);
     let examCountdown = '';
     if (isClosed) {
-      examCountdown = 'Realizada';
+      examCountdown = 'Encerrado';
     } else if (!c.dataProva) {
-      examDateText = c.status === 'Previsto / Autorizado' ? 'A definir no edital' : 'Análise de títulos';
+      examDateText = c.status === 'Previsto / Autorizado' ? 'A definir' : 'Análise de títulos';
       examCountdown = c.status === 'Previsto / Autorizado' ? 'Previsto' : 'Sem prova';
     } else if (examDays !== null) {
-      examCountdown = examDays === 0 ? 'HOJE' : (examDays > 0 ? `em ${examDays} dias` : 'Realizada');
+      examCountdown = examDays === 0 ? 'Hoje' : (examDays > 0 ? `em ${examDays}d` : 'Realizada');
     }
 
-    const accessBadge = c.destaqueGratuito && !hasEssencial()
-      ? `<span class="badge-gold">Amostra Grátis</span>`
-      : (!unlocked ? `<span class="badge-neutral">Essencial R$ 6,99</span>` : '');
+    // Strict max 2 pills in card top row so all 3 columns align horizontally
+    let secondaryBadge = '';
+    if (isUrgent) {
+      secondaryBadge = `<span class="badge-danger">${regDays <= 1 ? 'Último prazo' : 'Encerra logo'}</span>`;
+    } else if (c.destaqueGratuito && !hasEssencial()) {
+      secondaryBadge = '<span class="badge-gold">Grátis</span>';
+    } else if (!unlocked) {
+      secondaryBadge = '<span class="badge-neutral">Essencial</span>';
+    }
+
+    const ufLabel = c.uf === 'Nacional' ? 'Nacional' : c.uf;
+    const shortBanca = c.banca.replace(/^Fundação\s+/i, '').replace(/\s*\(Própria\)/i, '');
+    const vagasShort = c.vagas === 0 ? 'Cadastro Reserva' : formatVagasLabel(c);
 
     return `
       <article class="contest-card ${isClosed ? 'is-closed' : ''}" data-contest-id="${escapeHtml(c.id)}">
         <div class="card-top">
           <div class="card-badges">
             <span class="${statusBadgeClass(c.status)}">${escapeHtml(c.status)}</span>
-            ${isUrgent ? `<span class="badge-danger">${regDays <= 1 ? 'Último prazo' : 'Encerra logo'}</span>` : ''}
-            ${accessBadge}
+            ${secondaryBadge}
           </div>
           <button type="button" class="save-icon-btn ${saved ? 'saved' : ''}" data-save-id="${escapeHtml(c.id)}" aria-label="${saved ? 'Remover dos salvos' : 'Salvar concurso'}" title="${saved ? 'Salvo' : 'Salvar concurso'}">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
           </button>
         </div>
 
-        <div class="card-org-row">
-          <div class="sigla-box">${escapeHtml(c.sigla)}</div>
-          <div>
-            <h3>${escapeHtml(c.orgao)}</h3>
-            <p>${escapeHtml(c.esfera)} · ${c.uf === 'Nacional' ? 'Todo o Brasil' : escapeHtml(c.uf)} · Banca ${escapeHtml(c.banca)}</p>
-          </div>
+        <div class="card-identity">
+          <span class="card-eyebrow">${escapeHtml(c.sigla)} · ${escapeHtml(ufLabel)} · ${escapeHtml(shortBanca)}</span>
+          <h3 title="${escapeHtml(c.orgao)}">${escapeHtml(c.orgao)}</h3>
+          <p class="card-role" title="${escapeHtml(c.titulo)}">${escapeHtml(c.titulo)}</p>
         </div>
 
-        <p class="card-role">${escapeHtml(c.titulo)}</p>
-
-        <div class="exam-date-strip ${isClosed ? 'closed' : ''}">
-          <div>
-            <span>${isClosed ? 'Prova realizada em' : 'Data da prova'}: <strong>${escapeHtml(examDateText)}</strong></span>
-            <small style="display:block;">${escapeHtml(c.provaObservacao)}</small>
+        <div class="exam-date-strip ${isClosed ? 'closed' : ''}" title="${escapeHtml(c.provaObservacao)}">
+          <div class="exam-date-main">
+            <span class="exam-date-kicker">${isClosed ? 'Prova realizada' : 'Data da prova'}</span>
+            <strong class="exam-date-val tabular">${escapeHtml(examDateText)}</strong>
           </div>
-          <strong class="tabular">${escapeHtml(examCountdown)}</strong>
+          <span class="exam-countdown-pill tabular">${escapeHtml(examCountdown)}</span>
         </div>
 
         <div class="card-metrics">
@@ -537,27 +737,51 @@ function renderConcursosGrid() {
             <span>Salário até</span>
             <strong class="salary">${formatBRL(c.salarioMax)}</strong>
           </div>
-          <div class="metric-item">
+          <div class="metric-item metric-divider">
             <span>Vagas</span>
-            <strong>${escapeHtml(formatVagasLabel(c))}</strong>
+            <strong>${escapeHtml(vagasShort)}</strong>
           </div>
-        </div>
-
-        <div class="card-meta-tags">
-          <span class="meta-pill">${escapeHtml(c.escolaridade)}</span>
-          <span class="meta-pill">${escapeHtml(c.area)}</span>
-          <span class="meta-pill gold">5 provas anteriores</span>
         </div>
 
         <div class="card-footer">
           <span class="deadline-text ${isUrgent ? 'urgent' : ''}">${escapeHtml(deadlineCopy)}</span>
           <button type="button" class="btn-card-open ${unlocked ? '' : 'locked'}" data-open-id="${escapeHtml(c.id)}">
-            ${isClosed ? 'Ver Histórico & Provas' : (unlocked ? 'Edital, Cursos & Provas' : 'Ver Detalhes')}
+            ${isClosed ? 'Ver histórico' : (unlocked ? 'Ver edital' : 'Desbloquear')}
           </button>
         </div>
       </article>
     `;
   }).join('');
+
+  if (paginationEl) {
+    if (remaining > 0) {
+      const nextStep = Math.min(PAGE_SIZE, remaining);
+      paginationEl.hidden = false;
+      paginationEl.innerHTML = `
+        <p class="pagination-info">Mostrando <strong>${shownList.length}</strong> de <strong>${list.length}</strong> concursos</p>
+        <div class="pagination-actions">
+          <button type="button" class="btn-primary-sm" id="loadMoreConcursosBtn">Carregar mais ${nextStep} concursos</button>
+          <button type="button" class="btn-outline-sm" id="showAllConcursosBtn">Ver todos (${list.length})</button>
+        </div>
+      `;
+      $('#loadMoreConcursosBtn')?.addEventListener('click', () => {
+        visibleConcursosLimit += PAGE_SIZE;
+        renderConcursosGrid();
+      });
+      $('#showAllConcursosBtn')?.addEventListener('click', () => {
+        visibleConcursosLimit = list.length;
+        renderConcursosGrid();
+      });
+    } else if (list.length > PAGE_SIZE) {
+      paginationEl.hidden = false;
+      paginationEl.innerHTML = `
+        <p class="pagination-info">Todos os <strong>${list.length}</strong> concursos exibidos</p>
+      `;
+    } else {
+      paginationEl.hidden = true;
+      paginationEl.innerHTML = '';
+    }
+  }
 }
 
 /* ======================================================
@@ -590,7 +814,9 @@ function renderCoursesCatalog() {
     return a.precoMensal - b.precoMensal;
   });
 
-  $('#coursesCatalogGrid').innerHTML = filtered.map((course) => {
+  const shownCourses = filtered.slice(0, visibleCoursesLimit);
+  const remainingCourses = filtered.length - shownCourses.length;
+  $('#coursesCatalogGrid').innerHTML = shownCourses.map((course) => {
     const color = platformColor(course.plataformaId);
     return `
       <article class="course-card">
@@ -622,6 +848,27 @@ function renderCoursesCatalog() {
       </article>
     `;
   }).join('');
+
+  const coursesPagEl = $('#coursesPagination');
+  if (coursesPagEl) {
+    if (remainingCourses > 0) {
+      const nextStep = Math.min(PAGE_SIZE, remainingCourses);
+      coursesPagEl.hidden = false;
+      coursesPagEl.innerHTML = `
+        <p class="pagination-info">Mostrando <strong>${shownCourses.length}</strong> de <strong>${filtered.length}</strong> cursos comparados</p>
+        <div class="pagination-actions">
+          <button type="button" class="btn-primary-sm" id="loadMoreCoursesBtn">Carregar mais ${nextStep} cursos</button>
+        </div>
+      `;
+      $('#loadMoreCoursesBtn')?.addEventListener('click', () => {
+        visibleCoursesLimit += PAGE_SIZE;
+        renderCoursesCatalog();
+      });
+    } else {
+      coursesPagEl.hidden = true;
+      coursesPagEl.innerHTML = '';
+    }
+  }
 }
 
 /* ======================================================
@@ -959,9 +1206,9 @@ function renderPaywallGate(title, desc, blurredPreviewHtml, targetPlan = 'essenc
 
 function downloadEditalDossier(c) {
   const html = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><title>Raio-X do Edital — ${escapeHtml(c.orgao)}</title>
-  <style>body{font-family:Segoe UI,Arial,sans-serif;max-width:820px;margin:32px auto;padding:0 20px;color:#0F172A;line-height:1.5}
-  h1{color:#065F46;margin-bottom:4px} .meta{color:#475569;margin-bottom:20px} table{width:100%;border-collapse:collapse;margin:14px 0}
-  th,td{border:1px solid #CBD5E1;padding:8px 10px;text-align:left} th{background:#F1F5F9} .box{background:#ECFDF5;border:1px solid #A7F3D0;padding:12px 16px;border-radius:8px;margin:16px 0}</style>
+  <style>body{font-family:Segoe UI,Arial,sans-serif;max-width:820px;margin:32px auto;padding:0 20px;color:#0F2236;line-height:1.5}
+  h1{color:#0C4F83;margin-bottom:4px} .meta{color:#475569;margin-bottom:20px} table{width:100%;border-collapse:collapse;margin:14px 0}
+  th,td{border:1px solid #CBD5E1;padding:8px 10px;text-align:left} th{background:#F1F5F9} .box{background:#E6F1FA;border:1px solid #9CC4E4;padding:12px 16px;border-radius:8px;margin:16px 0}</style>
   </head><body>
   <h1>${escapeHtml(c.orgao)} (${escapeHtml(c.sigla)})</h1>
   <div class="meta">${escapeHtml(c.edital.numero)} · Fonte: ${escapeHtml(c.fonteOficial)} · Gerado por ${MARCA.nome} (${MARCA.dominio})</div>
@@ -980,8 +1227,8 @@ function downloadEditalDossier(c) {
 
 function downloadPastExamSample(c, exam) {
   const html = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><title>Caderno de Prova — ${escapeHtml(exam.edicao)}</title>
-  <style>body{font-family:Segoe UI,Arial,sans-serif;max-width:780px;margin:32px auto;padding:0 20px;color:#0F172A;line-height:1.6}
-  h1{color:#065F46;margin-bottom:4px} .tag{background:#FFFBEB;border:1px solid #FDE68A;color:#92400E;padding:8px 12px;border-radius:8px;margin:14px 0}</style>
+  <style>body{font-family:Segoe UI,Arial,sans-serif;max-width:780px;margin:32px auto;padding:0 20px;color:#0F2236;line-height:1.6}
+  h1{color:#0C4F83;margin-bottom:4px} .tag{background:#FEF9DC;border:1px solid #E3C540;color:#734B00;padding:8px 12px;border-radius:8px;margin:14px 0}</style>
   </head><body>
   <h1>${escapeHtml(exam.edicao)} — Caderno de Prova + Gabarito</h1>
   <p><strong>Órgão:</strong> ${escapeHtml(c.orgao)} · <strong>Cargo:</strong> ${escapeHtml(exam.cargo)} · <strong>Banca:</strong> ${escapeHtml(exam.banca)} · <strong>Total:</strong> ${exam.questoes} questões</p>
@@ -1096,6 +1343,7 @@ function resetAllFilters() {
   filters.onlyUrgent = false;
   filters.sort = 'destaque';
   filters.quick = null;
+  visibleConcursosLimit = PAGE_SIZE;
 
   $('#globalSearchInput').value = '';
   $('#clearSearchBtn').hidden = true;
@@ -1186,6 +1434,14 @@ function bindEvents() {
     const regionBtn = e.target.closest('[data-regiao]');
     if (regionBtn) {
       filters.regiao = regionBtn.dataset.regiao;
+      if (filters.regiao !== 'TODAS' && filters.uf !== 'TODOS') {
+        const ufReg = filters.uf === 'Nacional' ? 'Nacional' : ESTADOS_BRASIL[filters.uf]?.regiao;
+        if (ufReg !== filters.regiao) {
+          filters.uf = 'TODOS';
+          $('#filterUf').value = 'TODOS';
+        }
+      }
+      visibleConcursosLimit = PAGE_SIZE;
       renderRegionsBar();
       renderConcursosGrid();
       return;
@@ -1296,6 +1552,7 @@ function bindEvents() {
   $('#globalSearchInput').addEventListener('input', (e) => {
     filters.q = e.target.value;
     $('#clearSearchBtn').hidden = !filters.q;
+    visibleConcursosLimit = PAGE_SIZE;
     renderConcursosGrid();
   });
 
@@ -1303,6 +1560,7 @@ function bindEvents() {
     filters.q = '';
     $('#globalSearchInput').value = '';
     $('#clearSearchBtn').hidden = true;
+    visibleConcursosLimit = PAGE_SIZE;
     renderConcursosGrid();
   });
 
@@ -1311,12 +1569,20 @@ function bindEvents() {
     if (chip) applyQuickChip(chip.dataset.quick);
   });
 
-  $('#filterStatus').addEventListener('change', (e) => { filters.status = e.target.value; renderConcursosGrid(); });
-  $('#filterUf').addEventListener('change', (e) => { filters.uf = e.target.value; renderConcursosGrid(); });
-  $('#filterEsfera').addEventListener('change', (e) => { filters.esfera = e.target.value; renderConcursosGrid(); });
-  $('#filterArea').addEventListener('change', (e) => { filters.area = e.target.value; renderConcursosGrid(); });
-  $('#filterEscolaridade').addEventListener('change', (e) => { filters.escolaridade = e.target.value; renderConcursosGrid(); });
-  $('#sortBy').addEventListener('change', (e) => { filters.sort = e.target.value; renderConcursosGrid(); });
+  $('#filterStatus').addEventListener('change', (e) => { filters.status = e.target.value; visibleConcursosLimit = PAGE_SIZE; renderConcursosGrid(); });
+  $('#filterUf').addEventListener('change', (e) => {
+    filters.uf = e.target.value;
+    if (filters.uf !== 'TODOS') {
+      filters.regiao = 'TODAS';
+      renderRegionsBar();
+    }
+    visibleConcursosLimit = PAGE_SIZE;
+    renderConcursosGrid();
+  });
+  $('#filterEsfera').addEventListener('change', (e) => { filters.esfera = e.target.value; visibleConcursosLimit = PAGE_SIZE; renderConcursosGrid(); });
+  $('#filterArea').addEventListener('change', (e) => { filters.area = e.target.value; visibleConcursosLimit = PAGE_SIZE; renderConcursosGrid(); });
+  $('#filterEscolaridade').addEventListener('change', (e) => { filters.escolaridade = e.target.value; visibleConcursosLimit = PAGE_SIZE; renderConcursosGrid(); });
+  $('#sortBy').addEventListener('change', (e) => { filters.sort = e.target.value; visibleConcursosLimit = PAGE_SIZE; renderConcursosGrid(); });
   $('#resetFiltersBtn').addEventListener('click', resetAllFilters);
 
   $('#toggleClosedQuickBtn').addEventListener('click', () => {
@@ -1325,9 +1591,9 @@ function bindEvents() {
     renderConcursosGrid();
   });
 
-  $('#courseFilterPlatform').addEventListener('change', (e) => { courseFilters.platform = e.target.value; renderCoursesCatalog(); });
-  $('#courseFilterArea').addEventListener('change', (e) => { courseFilters.area = e.target.value; renderCoursesCatalog(); });
-  $('#courseSortBy').addEventListener('change', (e) => { courseFilters.sort = e.target.value; renderCoursesCatalog(); });
+  $('#courseFilterPlatform').addEventListener('change', (e) => { courseFilters.platform = e.target.value; visibleCoursesLimit = PAGE_SIZE; renderCoursesCatalog(); });
+  $('#courseFilterArea').addEventListener('change', (e) => { courseFilters.area = e.target.value; visibleCoursesLimit = PAGE_SIZE; renderCoursesCatalog(); });
+  $('#courseSortBy').addEventListener('change', (e) => { courseFilters.sort = e.target.value; visibleCoursesLimit = PAGE_SIZE; renderCoursesCatalog(); });
 
   $('#openPrefsBtn').addEventListener('click', () => switchView('salvos'));
   $('#prefsForm').addEventListener('submit', (e) => {
@@ -1345,14 +1611,17 @@ function bindEvents() {
   });
 
   $('#headerCtaBtn').addEventListener('click', () => {
-    if (hasEssencial()) switchView('plano');
+    if (hasCompleto()) switchView('plano');
+    else if (state.tier === 'essencial') openCheckoutModal('completo-anual');
     else openCheckoutModal('essencial');
   });
+
+  bindAuthEvents();
 
   $('#heroSubscribeBtn').addEventListener('click', () => {
     if (hasCompleto()) switchView('salvos');
     else if (state.tier === 'essencial') openCheckoutModal('completo-anual');
-    else switchView('plano');
+    else openCheckoutModal('essencial');
   });
 
   $('#stripSubscribeBtn').addEventListener('click', () => switchView('plano'));
@@ -1498,7 +1767,9 @@ function bindEvents() {
 
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
-    if (!$('#checkoutModal').hidden) closeCheckoutModal();
+    if (!$('#accountMenu').hidden) closeAccountMenu();
+    else if (!$('#authModal').hidden) closeAuthModal();
+    else if (!$('#checkoutModal').hidden) closeCheckoutModal();
     else if (!$('#detailModal').hidden) closeDetailModal();
     else if (!$('#appPreviewModal').hidden) closeAppPreview();
     else if (!$('#installModal').hidden) closeInstall();

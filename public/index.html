@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-palette="opcao-2">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#065F46" />
+  <meta name="theme-color" content="#0C4F83" />
   <meta name="description" content="Check no Concurso (checknoconcurso.com.br) — Todos os concursos abertos e encerrados do Brasil, datas de prova atualizadas, editais, comparador de cursos e 5 provas anteriores." />
   <title>Check no Concurso — Todos os Concursos Abertos do Brasil, Datas de Prova e Editais</title>
   <link rel="manifest" href="/manifest.webmanifest" />
@@ -12,7 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/tokens.css?v=10" />
+  <link rel="stylesheet" href="/css/styles.css?v=10" />
 </head>
 <body>
   <!-- Prototype Quick Switcher Ribbon -->
@@ -57,10 +58,10 @@
       <a href="#concursos" class="brand" id="brandHomeLink">
         <span class="brand-mark" aria-hidden="true">
           <svg width="30" height="30" viewBox="0 0 512 512" fill="none">
-            <rect width="512" height="512" rx="116" fill="#065F46"/>
-            <circle cx="256" cy="256" r="146" fill="#047857"/>
+            <rect width="512" height="512" rx="116" fill="#0C4F83"/>
+            <circle cx="256" cy="256" r="146" fill="#083A61"/>
             <path d="M168 262L226 320L350 188" stroke="#FFFFFF" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="386" cy="126" r="36" fill="#FBBF24"/>
+            <circle cx="386" cy="126" r="36" fill="#F4D632"/>
           </svg>
         </span>
         <span class="brand-text">
@@ -84,8 +85,32 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Instalar App</span>
         </button>
-        <button type="button" class="btn-primary-sm" id="headerCtaBtn">
-          Assinar a partir de R$ 6,99
+        <button type="button" class="btn-login" id="headerLoginBtn" aria-haspopup="dialog" aria-controls="authModal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+          <span class="btn-login-label">Entrar</span>
+        </button>
+
+        <div class="account-wrap" id="accountWrap" hidden>
+          <button type="button" class="account-chip" id="accountChipBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="accountMenu">
+            <span class="account-avatar" id="accountAvatar" aria-hidden="true">CC</span>
+            <span class="account-chip-name" id="accountChipName">Minha conta</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="account-menu" id="accountMenu" role="menu" hidden>
+            <div class="account-menu-head">
+              <strong id="accountMenuName">—</strong>
+              <small id="accountMenuEmail">—</small>
+              <span class="account-plan-tag" id="accountMenuPlan">Plano Visitante</span>
+            </div>
+            <button type="button" role="menuitem" class="account-menu-item" data-view="salvos">Meus salvos e alertas</button>
+            <button type="button" role="menuitem" class="account-menu-item" data-view="plano">Minha assinatura</button>
+            <button type="button" role="menuitem" class="account-menu-item is-danger" id="logoutBtn">Sair da conta</button>
+          </div>
+        </div>
+
+        <button type="button" class="btn-cta-subscribe" id="headerCtaBtn">
+          <span class="cta-label">Assinar agora</span>
+          <svg class="cta-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
       </div>
     </div>
@@ -101,98 +126,99 @@
           <div class="hero-copy">
             <div class="hero-eyebrow">
               <span class="live-pulse"></span>
-              Dados reais verificados em 24/11/2026 · Vunesp, FGV, Cebraspe, FCC, AOCP e mais
+              Atualizado em 24/11/2026 · Bancas oficiais
             </div>
-            <h1>Todos os concursos abertos do Brasil com datas de prova sempre atualizadas.</h1>
+            <h1>Todos os concursos do Brasil com datas de prova atualizadas.</h1>
             <p class="hero-sub">
-              Acompanhe quais certames estão abertos, confira retificações na <strong>data da prova</strong>, saiba na hora quando já foram <strong>encerrados</strong>, acesse editais, compare cursos e — em breve — baixe as <strong>5 provas anteriores</strong> de cada concurso.
+              Acompanhe editais abertos, prazos, cursos parceiros e provas anteriores em um só lugar.
             </p>
 
             <div class="hero-search-wrap">
               <div class="search-box">
-                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="search" id="globalSearchInput" placeholder="Buscar órgão, cargo, banca ou estado (ex: PF, INSS, TJ-SP, TSE, FGV)..." autocomplete="off" />
+                <svg class="search-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="search" id="globalSearchInput" placeholder="Buscar órgão, cargo ou banca (ex: PM-SP, TJ-SP, FGV, Cebraspe)..." autocomplete="off" />
                 <button type="button" class="search-clear" id="clearSearchBtn" hidden aria-label="Limpar busca">&times;</button>
               </div>
             </div>
 
             <div class="quick-chips" id="quickChips" aria-label="Filtros rápidos">
-              <button type="button" class="chip" data-quick="abertos">Inscrições Abertas</button>
+              <button type="button" class="chip" data-quick="abertos">Abertos</button>
               <button type="button" class="chip" data-quick="agendados">Prova Agendada</button>
-              <button type="button" class="chip" data-quick="encerrados">Já Encerrados</button>
-              <button type="button" class="chip" data-quick="nacional">Âmbito Nacional</button>
-              <button type="button" class="chip" data-quick="medio">Nível Médio</button>
-              <button type="button" class="chip" data-quick="10k">Salário +R$ 10 mil</button>
-              <button type="button" class="chip" data-quick="urgente">Encerram em breve</button>
+              <button type="button" class="chip" data-quick="nacional">Nacional</button>
+              <button type="button" class="chip" data-quick="medio">Médio</button>
+              <button type="button" class="chip" data-quick="10k">+R$ 10 mil</button>
+              <button type="button" class="chip" data-quick="urgente">Últimos dias</button>
+              <button type="button" class="chip" data-quick="encerrados">Encerrados</button>
             </div>
           </div>
 
           <aside class="hero-card" aria-label="Resumo Check no Concurso">
             <div class="hero-card-header">
-              <span class="badge-emerald">Painel Brasil · Atualizado Hoje</span>
+              <span class="hero-panel-label">Radar Brasil</span>
               <span class="price-pill" id="heroPricePill">A partir de R$ 6,99/mês</span>
             </div>
-            <div class="stats-grid" id="heroStatsGrid">
-              <div class="stat-box">
-                <strong id="statVagas">—</strong>
-                <span>Vagas em concursos ativos</span>
-              </div>
+
+            <div class="hero-kpi-featured">
+              <strong id="statVagas">—</strong>
+              <span>Vagas imediatas em concursos ativos agora</span>
+            </div>
+
+            <div class="stats-grid stats-grid-3" id="heroStatsGrid">
               <div class="stat-box">
                 <strong id="statConcursos">—</strong>
-                <span>Ativos + Encerrados</span>
+                <span>Concursos</span>
               </div>
               <div class="stat-box">
                 <strong id="statMaiorSalario">—</strong>
-                <span>Maior salário aberto</span>
+                <span>Maior salário</span>
               </div>
               <div class="stat-box">
                 <strong id="statProvas">—</strong>
-                <span>Provas anteriores (em breve)</span>
+                <span>Provas (em breve)</span>
               </div>
             </div>
+
             <div class="hero-card-footer" id="heroCardFooter">
-              <div class="mini-perk">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
-                <span><strong>Essencial (R$ 6,99/mês):</strong> Editais, datas de prova e cursos</span>
-              </div>
-              <div class="mini-perk">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
-                <span><strong>Completo (R$ 17,99/mês ou R$ 199,90/ano):</strong> + 5 provas anteriores</span>
-              </div>
-              <button type="button" class="btn-primary-full" id="heroSubscribeBtn">
-                Ver Planos e Desbloquear Tudo
+              <p class="hero-plan-summary">
+                <strong>Essencial</strong> R$ 6,99/mês · <strong>Completo</strong> R$ 17,99/mês
+              </p>
+              <button type="button" class="btn-cta-subscribe btn-cta-block" id="heroSubscribeBtn">
+                Assinar agora
               </button>
+              <p class="hero-cta-note">Cancele quando quiser · Pix ou cartão</p>
             </div>
           </aside>
         </div>
       </div>
 
-      <!-- Regions Strip -->
-      <div class="container">
-        <div class="regions-bar" id="regionsBar" role="tablist" aria-label="Filtrar por região do Brasil"></div>
-
-        <!-- Personalized Recommendations Strip -->
-        <div class="reco-banner" id="recoBanner">
-          <div class="reco-left">
-            <span class="reco-tag">Meu Check Personalizado</span>
-            <p id="recoSummary">Acompanhando concursos em <strong>Todo o Brasil</strong> com datas de prova monitoradas diariamente.</p>
+      <!-- Catalog Section with clear hierarchy & breathing room -->
+      <div class="container catalog-section">
+        <div class="catalog-header">
+          <div>
+            <h2 class="catalog-title">Concursos em andamento</h2>
+            <p class="catalog-sub" id="recoSummary">Mostrando concursos em <strong>Todo o Brasil</strong> — filtre por estado, área e escolaridade.</p>
           </div>
-          <button type="button" class="btn-outline-sm" id="openPrefsBtn">Configurar meu perfil</button>
+          <div class="catalog-header-actions" id="recoBanner">
+            <button type="button" class="btn-outline-sm" id="openPrefsBtn">Personalizar perfil</button>
+          </div>
         </div>
 
-        <!-- Filter Bar -->
+        <!-- Regions Strip -->
+        <div class="regions-bar" id="regionsBar" role="tablist" aria-label="Filtrar por região do Brasil"></div>
+
+        <!-- Quiet Filter Bar -->
         <div class="filters-card" id="filtersCard">
           <div class="filters-row">
             <label class="filter-field">
-              <span>Status do Concurso</span>
+              <span>Status</span>
               <select id="filterStatus">
-                <option value="ATIVOS">Todos os Ativos (Abertos + Agendados)</option>
-                <option value="TODOS">Todos (incluindo Encerrados)</option>
+                <option value="ATIVOS">Ativos</option>
+                <option value="TODOS">Todos (c/ encerrados)</option>
                 <option value="Inscrições Abertas">Inscrições Abertas</option>
                 <option value="Edital Publicado">Edital Publicado</option>
-                <option value="Prova Agendada">Prova Agendada (Inscrição encerrada)</option>
+                <option value="Prova Agendada">Prova Agendada</option>
                 <option value="Previsto / Autorizado">Previsto / Autorizado</option>
-                <option value="Encerrado">Encerrados / Prova Realizada</option>
+                <option value="Encerrado">Encerrados</option>
               </select>
             </label>
             <label class="filter-field">
@@ -202,7 +228,7 @@
             <label class="filter-field">
               <span>Esfera</span>
               <select id="filterEsfera">
-                <option value="TODAS">Todas as esferas</option>
+                <option value="TODAS">Todas</option>
                 <option value="Federal">Federal</option>
                 <option value="Estadual">Estadual</option>
                 <option value="Municipal">Municipal</option>
@@ -224,9 +250,9 @@
             <label class="filter-field">
               <span>Ordenar por</span>
               <select id="sortBy">
-                <option value="destaque">Relevância &amp; Destaques</option>
-                <option value="prova">Data da prova mais próxima</option>
-                <option value="prazo">Fim de inscrição mais próximo</option>
+                <option value="destaque">Relevância</option>
+                <option value="prova">Prova mais próxima</option>
+                <option value="prazo">Prazo mais curto</option>
                 <option value="salario">Maior salário</option>
                 <option value="vagas">Mais vagas</option>
               </select>
@@ -243,6 +269,7 @@
 
         <!-- Contest Grid -->
         <div class="concursos-grid" id="concursosGrid"></div>
+        <div class="catalog-pagination" id="concursosPagination" hidden></div>
 
         <!-- Paywall Conversion Strip -->
         <div class="upgrade-strip" id="upgradeStrip">
@@ -299,6 +326,7 @@
         </div>
 
         <div class="courses-catalog-grid" id="coursesCatalogGrid"></div>
+        <div class="catalog-pagination" id="coursesPagination" hidden></div>
       </div>
     </section>
 
@@ -490,6 +518,10 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       <span>Planos</span>
     </button>
+    <button type="button" class="tab-btn" id="mobileAccountTab" aria-haspopup="dialog">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+      <span id="mobileAccountLabel">Entrar</span>
+    </button>
   </nav>
 
   <!-- Footer -->
@@ -537,6 +569,84 @@
       </div>
 
       <div class="modal-body" id="detailBody"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 5: LOGIN / CRIAR CONTA (simulado no protótipo; produção usa Supabase Auth no servidor) -->
+  <div class="modal-backdrop auth-backdrop" id="authModal" hidden role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="auth-dialog">
+      <aside class="auth-side" aria-hidden="true">
+        <div class="auth-side-brand">
+          <svg width="34" height="34" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="116" fill="#0C4F83"/><circle cx="256" cy="256" r="146" fill="#083A61"/><path d="M168 262L226 320L350 188" stroke="#FFFFFF" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/><circle cx="386" cy="126" r="36" fill="#F4D632"/></svg>
+          <strong>Check no Concurso</strong>
+        </div>
+        <h3 class="auth-side-title">Seu concurso no radar, todos os dias.</h3>
+        <ul class="auth-benefits">
+          <li>Alerta quando a data da prova mudar</li>
+          <li>Seus concursos salvos em qualquer aparelho</li>
+          <li>Edital destrinchado por matéria</li>
+          <li>Provas anteriores no plano Completo</li>
+        </ul>
+        <p class="auth-side-foot">Mais de 280 concursos ativos nos 27 estados.</p>
+      </aside>
+
+      <div class="auth-main">
+        <button type="button" class="icon-btn close-btn auth-close" id="closeAuthBtn" aria-label="Fechar">&times;</button>
+
+        <div class="auth-tabs" role="tablist" aria-label="Acesso à conta">
+          <button type="button" role="tab" class="auth-tab active" id="authTabLogin" data-auth-mode="login" aria-selected="true">Entrar</button>
+          <button type="button" role="tab" class="auth-tab" id="authTabSignup" data-auth-mode="signup" aria-selected="false">Criar conta grátis</button>
+        </div>
+
+        <h2 id="authTitle" class="auth-title">Que bom te ver de novo</h2>
+        <p class="auth-sub" id="authSub">Entre para ver seus concursos salvos e alertas.</p>
+
+        <button type="button" class="btn-google" id="googleLoginBtn">
+          <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+          Continuar com Google
+        </button>
+
+        <div class="auth-divider"><span>ou com seu e-mail</span></div>
+
+        <form class="auth-form" id="authForm" novalidate>
+          <div class="auth-field" id="authNameField" hidden>
+            <label for="authName">Nome</label>
+            <input type="text" id="authName" name="name" autocomplete="name" placeholder="Como quer ser chamado" />
+          </div>
+
+          <div class="auth-field">
+            <label for="authEmail">E-mail</label>
+            <input type="email" id="authEmail" name="email" autocomplete="email" inputmode="email" placeholder="voce@email.com" required aria-describedby="authEmailError" />
+            <small class="auth-error" id="authEmailError" hidden>Digite um e-mail válido.</small>
+          </div>
+
+          <div class="auth-field">
+            <div class="auth-label-row">
+              <label for="authPassword">Senha</label>
+              <button type="button" class="auth-link" id="forgotPasswordBtn">Esqueci minha senha</button>
+            </div>
+            <div class="auth-password">
+              <input type="password" id="authPassword" name="password" autocomplete="current-password" placeholder="Mínimo 8 caracteres" minlength="8" required aria-describedby="authPasswordError" />
+              <button type="button" class="auth-eye" id="togglePasswordBtn" aria-label="Mostrar senha" aria-pressed="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <small class="auth-error" id="authPasswordError" hidden>A senha precisa ter pelo menos 8 caracteres.</small>
+          </div>
+
+          <label class="auth-remember" id="authRememberRow">
+            <input type="checkbox" id="authRemember" checked />
+            <span>Manter conectado neste aparelho</span>
+          </label>
+
+          <button type="submit" class="btn-auth-submit" id="authSubmitBtn">Entrar</button>
+        </form>
+
+        <p class="auth-switch" id="authSwitchText">
+          Ainda não tem conta? <button type="button" class="auth-link" data-auth-mode="signup">Criar conta grátis</button>
+        </p>
+        <p class="auth-legal" id="authLegal" hidden>Ao criar a conta você concorda com os Termos de Uso e a Política de Privacidade.</p>
+      </div>
     </div>
   </div>
 
@@ -592,7 +702,7 @@
                 <rect x="92" y="16" width="12" height="12" fill="#0F172A"/>
                 <rect x="8" y="84" width="28" height="28" rx="3" fill="none" stroke="#0F172A" stroke-width="5"/>
                 <rect x="16" y="92" width="12" height="12" fill="#0F172A"/>
-                <path d="M46 10h8v8h-8zm16 0h12v8H62zM46 26h16v8H46zm24 0h6v16h-6zM10 46h16v8H10zm24 0h12v12H34zm20 0h16v8H54zm26 0h12v8H80zm18 0h12v16H98zM10 62h8v14h-8zm16 4h14v8H26zm22-4h12v12H48zm18 4h18v8H66zm24 6h20v8H90zM46 84h14v10H46zm22 0h12v16H68zm20 8h22v8H88zM46 102h16v10H46zm24 4h14v6H70zm22 0h18v6H92z" fill="#065F46"/>
+                <path d="M46 10h8v8h-8zm16 0h12v8H62zM46 26h16v8H46zm24 0h6v16h-6zM10 46h16v8H10zm24 0h12v12H34zm20 0h16v8H54zm26 0h12v8H80zm18 0h12v16H98zM10 62h8v14h-8zm16 4h14v8H26zm22-4h12v12H48zm18 4h18v8H66zm24 6h20v8H90zM46 84h14v10H46zm22 0h12v16H68zm20 8h22v8H88zM46 102h16v10H46zm24 4h14v6H70zm22 0h18v6H92z" fill="#0C4F83"/>
               </svg>
             </div>
             <div class="pix-info">
@@ -707,6 +817,6 @@
   <!-- Toast feedback -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script type="module" src="/js/app.js"></script>
+  <script type="module" src="/js/app.js?v=10"></script>
 </body>
 </html>

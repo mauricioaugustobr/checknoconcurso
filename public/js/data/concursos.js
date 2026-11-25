@@ -1,3 +1,13 @@
+import { ESTADOS_BRASIL } from './estado-builder.js';
+import { ESTADOS_NORTE } from './estados-norte.js';
+import { ESTADOS_NORDESTE } from './estados-nordeste.js';
+import { ESTADOS_CENTRO_OESTE } from './estados-centro-oeste.js';
+import { ESTADOS_SUDESTE } from './estados-sudeste.js';
+import { ESTADOS_SUL } from './estados-sul.js';
+import { ESTADOS_ATIVOS_2026_11 } from './estados-ativos-2026-11.js';
+
+export { ESTADOS_BRASIL };
+
 export const MARCA = {
   nome: 'Check no Concurso',
   dominio: 'checknoconcurso.com.br',
@@ -2188,8 +2198,33 @@ const RAW_CONCURSOS = [
   }
 ];
 
-export const CONCURSOS = RAW_CONCURSOS.map(({ anosAnteriores, questoesPadrao, ...rest }) => ({
+const ALL_RAW_CONCURSOS = [
+  ...RAW_CONCURSOS,
+  ...ESTADOS_NORTE,
+  ...ESTADOS_NORDESTE,
+  ...ESTADOS_CENTRO_OESTE,
+  ...ESTADOS_SUDESTE,
+  ...ESTADOS_SUL,
+  ...ESTADOS_ATIVOS_2026_11
+];
+
+/**
+ * Nota de importância (0–200 aprox.): vagas, salário, esfera, carreiras de elite e
+ * penalidade para seleção temporária. Usada para ordenar o Top 10 de cada estado.
+ */
+export function calcImportancia(c) {
+  const temp = /seletiv|substitut|tempor|pss|contrata[cç][aã]o/i.test(`${c.titulo} ${c.banca}`);
+  let sc = Math.log10((c.vagas || 0) + 1) * 30 + (Math.min(c.salarioMax || 0, 30000) / 1000) * 2.2;
+  if (c.esfera === 'Estadual') sc += 14;
+  if (c.esfera === 'Federal') sc += 12;
+  if (temp) sc -= 22;
+  if (['Policial', 'Tribunais', 'Fiscal'].includes(c.area)) sc += 8;
+  return Math.round(sc * 10) / 10;
+}
+
+export const CONCURSOS = ALL_RAW_CONCURSOS.map(({ anosAnteriores, questoesPadrao, ...rest }) => ({
   ...rest,
+  importancia: calcImportancia(rest),
   provasAnteriores: buildFivePastExams(
     rest.sigla,
     rest.banca,
