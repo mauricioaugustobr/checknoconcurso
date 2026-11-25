@@ -1934,6 +1934,9 @@ async function init() {
   populateSelects();
   bindEvents();
   renderAll();
+  // O login pode ter avisado quem está conectado antes desta tela ficar pronta: reaplica
+  const lastAuth = window.__cncAuthLast;
+  if (lastAuth) window.dispatchEvent(new CustomEvent('cnc:auth-session', { detail: lastAuth.detail }));
 }
 
 init();

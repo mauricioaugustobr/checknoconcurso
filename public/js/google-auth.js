@@ -16,6 +16,10 @@ let gsiReady = null;
 let clientId = null;
 
 function emit(name, detail) {
+  // Guarda o último aviso: o app.js pode ainda estar carregando e reaplica ao ficar pronto
+  if (name === 'cnc:auth-session' || name === 'cnc:auth-login') {
+    window.__cncAuthLast = { name, detail };
+  }
   window.dispatchEvent(new CustomEvent(name, { detail }));
 }
 
