@@ -1,4 +1,5 @@
 import { CONCURSOS, PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/concursos.js';
+import { scoreConcurso, SEARCH_SUGGESTIONS } from './search.js?v=2';
 
 const STORAGE_KEY = 'check_no_concurso_state_v3';
 const TODAY_ISO = '2026-11-24';
@@ -579,7 +580,8 @@ function renderRecoSummary() {
 }
 
 function getFilteredConcursos() {
-  const q = filters.q.trim().toLowerCase();
+  const q = filters.q.trim();
+  const searchScores = new Map();
 
   let list = catalog.filter((c) => {
     if (filters.status === 'ATIVOS' && c.status === 'Encerrado') return false;
@@ -595,14 +597,19 @@ function getFilteredConcursos() {
       if (!(c.status === 'Inscrições Abertas' && d !== null && d >= 0 && d <= 18)) return false;
     }
     if (q) {
-      const estadoNome = ESTADOS_BRASIL[c.uf]?.nome || '';
-      const hay = `${c.orgao} ${c.sigla} ${c.titulo} ${c.banca} ${c.area} ${c.uf} ${estadoNome} ${c.regiao} ${c.escolaridade} ${c.status} ${c.fonteOficial || ''}`.toLowerCase();
-      if (!hay.includes(q)) return false;
+      const score = scoreConcurso(c, q, ESTADOS_BRASIL[c.uf]?.nome || '');
+      if (!score) return false;
+      searchScores.set(c, score);
     }
     return true;
   });
 
   list = [...list].sort((a, b) => {
+    // Com busca e ordenação padrão: o que mais combina com o texto vem primeiro
+    if (q && filters.sort === 'destaque') {
+      const diff = (searchScores.get(b) || 0) - (searchScores.get(a) || 0);
+      if (diff) return diff;
+    }
     if (filters.sort === 'salario') return b.salarioMax - a.salarioMax;
     if (filters.sort === 'vagas') return (b.vagas + b.vagasCR * 0.01) - (a.vagas + a.vagasCR * 0.01);
     if (filters.sort === 'prazo') {
@@ -660,7 +667,7 @@ function renderConcursosGrid() {
   const totalVagasFiltradas = list.filter((c) => c.status !== 'Encerrado').reduce((acc, c) => acc + c.vagas, 0);
   const closedInCatalog = catalog.filter((c) => c.status === 'Encerrado').length;
 
-  $('#resultsCount').innerHTML = `Exibindo <strong>${list.length}</strong> concursos reais · <strong>${totalVagasFiltradas.toLocaleString('pt-BR')}</strong> vagas imediatas (+ CR · ${closedInCatalog} encerrados no histórico)`;
+  $('#resultsCount').innerHTML = `Exibindo <strong>${list.length}</strong> ${list.length === 1 ? 'concurso real' : 'concursos reais'} · <strong>${totalVagasFiltradas.toLocaleString('pt-BR')}</strong> vagas imediatas (+ CR · ${closedInCatalog} encerrados no histórico)`;
   $('#resetFiltersBtn').hidden = !hasActiveFilters();
   $('#toggleClosedQuickBtn').textContent = filters.status === 'ATIVOS'
     ? `Mostrar também ${closedInCatalog} encerrados`
@@ -672,7 +679,19 @@ function renderConcursosGrid() {
       paginationEl.hidden = true;
       paginationEl.innerHTML = '';
     }
-    $('#concursosGrid').innerHTML = `
+    const q = filters.q.trim();
+    const suggestions = SEARCH_SUGGESTIONS
+      .map((s) => `<button type="button" class="chip" data-search-suggest="${escapeHtml(s)}">${escapeHtml(s)}</button>`)
+      .join('');
+    $('#concursosGrid').innerHTML = q ? `
+      <div class="empty-state search-empty" style="grid-column: 1 / -1;">
+        <h3>Nenhum concurso encontrado para “${escapeHtml(q)}”</h3>
+        <p>Confira a grafia ou tente o nome do órgão, a sigla, o cargo ou a banca.</p>
+        ${hasNonSearchFilters() ? '<button type="button" class="btn-primary-sm" data-search-everywhere>Buscar em todo o Brasil, sem filtros</button>' : ''}
+        <div class="search-suggest-row"><span>Tente:</span>${suggestions}</div>
+        <button type="button" class="btn-ghost-sm" id="inlineResetBtn">Limpar busca e mostrar todos</button>
+      </div>
+    ` : `
       <div class="empty-state" style="grid-column: 1 / -1;">
         <h3>Nenhum concurso encontrado com esses filtros</h3>
         <p>Tente ampliar o estado, incluir concursos encerrados ou limpar a busca.</p>
@@ -1359,6 +1378,43 @@ function toggleSaveContest(id) {
   if (activeDetailId === id && !$('#detailModal').hidden) renderDetailModal();
 }
 
+/* ---------- Busca: aviso de resultados e atalhos ---------- */
+function hasNonSearchFilters() {
+  return filters.regiao !== 'TODAS' || filters.uf !== 'TODOS' || filters.esfera !== 'TODAS' ||
+    filters.area !== 'TODAS' || filters.escolaridade !== 'TODAS' || filters.minSalario > 0 || filters.onlyUrgent;
+}
+
+function renderSearchHint() {
+  const hint = $('#searchHint');
+  if (!hint) return;
+  const q = filters.q.trim();
+  if (!q) { hint.hidden = true; hint.innerHTML = ''; return; }
+  const total = getFilteredConcursos().length;
+  hint.hidden = false;
+  hint.classList.toggle('is-empty', total === 0);
+  hint.innerHTML = total
+    ? `<strong>${total}</strong> ${total === 1 ? 'concurso encontrado' : 'concursos encontrados'} para “${escapeHtml(q)}” · <button type="button" class="search-hint-link" data-search-jump>Ver resultados ↓</button>`
+    : `Nenhum concurso para “${escapeHtml(q)}”. <button type="button" class="search-hint-link" data-search-jump>Ver sugestões ↓</button>`;
+}
+
+function scrollToSearchResults() {
+  const target = $('#resultsCount') || $('#concursosGrid');
+  if (!target) return;
+  const y = target.getBoundingClientRect().top + window.scrollY - 96;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+}
+
+function searchEverywhere() {
+  const keep = filters.q;
+  resetAllFilters();
+  filters.q = keep;
+  $('#globalSearchInput').value = keep;
+  $('#clearSearchBtn').hidden = !keep;
+  renderConcursosGrid();
+  renderSearchHint();
+}
+
 function resetAllFilters() {
   filters.q = '';
   filters.regiao = 'TODAS';
@@ -1375,6 +1431,7 @@ function resetAllFilters() {
 
   $('#globalSearchInput').value = '';
   $('#clearSearchBtn').hidden = true;
+  if ($('#searchHint')) { $('#searchHint').hidden = true; $('#searchHint').innerHTML = ''; }
   $('#filterUf').value = 'TODOS';
   $('#filterEsfera').value = 'TODAS';
   $('#filterArea').value = 'TODAS';
@@ -1577,11 +1634,30 @@ function bindEvents() {
     });
   });
 
+  let searchTimer = null;
   $('#globalSearchInput').addEventListener('input', (e) => {
     filters.q = e.target.value;
     $('#clearSearchBtn').hidden = !filters.q;
     visibleConcursosLimit = PAGE_SIZE;
+    if (activeView !== 'concursos') switchView('concursos');
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { renderConcursosGrid(); renderSearchHint(); }, 120);
+  });
+
+  $('#globalSearchInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && filters.q) {
+      e.stopPropagation();
+      $('#clearSearchBtn').click();
+    }
+  });
+
+  $('#searchForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    clearTimeout(searchTimer);
     renderConcursosGrid();
+    renderSearchHint();
+    scrollToSearchResults();
+    $('#globalSearchInput').blur(); // fecha o teclado no celular
   });
 
   $('#clearSearchBtn').addEventListener('click', () => {
@@ -1590,6 +1666,25 @@ function bindEvents() {
     $('#clearSearchBtn').hidden = true;
     visibleConcursosLimit = PAGE_SIZE;
     renderConcursosGrid();
+    renderSearchHint();
+    $('#globalSearchInput').focus();
+  });
+
+  $('#searchHint').addEventListener('click', (e) => {
+    if (e.target.closest('[data-search-jump]')) scrollToSearchResults();
+  });
+
+  $('#concursosGrid').addEventListener('click', (e) => {
+    const sug = e.target.closest('[data-search-suggest]');
+    if (sug) {
+      $('#globalSearchInput').value = sug.dataset.searchSuggest;
+      filters.q = sug.dataset.searchSuggest;
+      $('#clearSearchBtn').hidden = false;
+      renderConcursosGrid();
+      renderSearchHint();
+      return;
+    }
+    if (e.target.closest('[data-search-everywhere]')) searchEverywhere();
   });
 
   $('#quickChips').addEventListener('click', (e) => {

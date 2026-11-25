@@ -343,6 +343,49 @@
   .auth-side { display: none; }
 }
 
+/* ======================================================
+   BUSCA — aviso de resultados, sugestões e foco
+   ====================================================== */
+.search-box { margin: 0; }
+.search-box:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 16%, transparent);
+}
+#globalSearchInput { font-size: 16px; } /* evita zoom automático no iPhone */
+#globalSearchInput::-webkit-search-cancel-button,
+#globalSearchInput::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+.search-clear { min-width: 36px; min-height: 36px; border-radius: 9px; }
+.search-clear:hover { background: var(--surface-alt); }
+.search-hint {
+  margin: 10px 2px 0;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.search-hint[hidden] { display: none; }
+.search-hint strong { color: var(--brand); font-variant-numeric: tabular-nums; }
+.search-hint.is-empty { color: var(--status-danger-fg, #B91C1C); }
+.search-hint-link {
+  border: 0;
+  background: transparent;
+  padding: 2px 0;
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 13.5px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.search-empty { display: grid; justify-items: center; gap: 12px; text-align: center; }
+.search-suggest-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
 /* Faixa de testes da equipe: fora do site público (aparece só com ?demo=1) */
 .demo-bar[hidden] { display: none !important; }
 

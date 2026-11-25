@@ -1,4 +1,4 @@
-const CACHE_NAME = 'check-no-concurso-v13-auth';
+const CACHE_NAME = 'check-no-concurso-v14';
 const ASSETS = [
   '/',
   '/index.html',
@@ -6,6 +6,7 @@ const ASSETS = [
   '/css/styles.css',
   '/css/auth-cta.css',
   '/js/app.js',
+  '/js/search.js',
   '/js/google-auth.js',
   '/js/data/concursos.js',
   '/js/data/estado-builder.js',
