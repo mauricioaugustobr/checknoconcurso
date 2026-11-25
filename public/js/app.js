@@ -1,5 +1,5 @@
 import { CONCURSOS, PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/concursos.js';
-import { scoreConcurso, SEARCH_SUGGESTIONS } from './search.js?v=2';
+import { scoreConcurso, SEARCH_SUGGESTIONS } from './search.js?v=3';
 
 const STORAGE_KEY = 'check_no_concurso_state_v3';
 const TODAY_ISO = '2026-11-24';
@@ -359,7 +359,22 @@ function userInitials(name) {
   return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase();
 }
 
+// ADMIN: papel definido pelo servidor (lista ADMIN_EMAILS na Vercel). Libera todos os planos sem pagar.
+function applyServerRole(u) {
+  const isAdmin = Boolean(u && u.role === 'admin');
+  if (state.user) state.user.role = isAdmin ? 'admin' : 'user';
+  if (isAdmin && !state.adminGranted) {
+    state.tierBeforeAdmin = state.tier;
+    state.tier = 'completo-anual';
+    state.adminGranted = true;
+  } else if (!isAdmin && state.adminGranted) {
+    state.tier = state.tierBeforeAdmin || 'guest';
+    state.adminGranted = false;
+  }
+}
+
 function planTagLabel() {
+  if (state.user && state.user.role === 'admin') return 'Admin · acesso total';
   if (state.tier === 'completo-anual') return 'Check Completo Anual';
   if (state.tier === 'completo-mensal') return 'Check Completo';
   if (state.tier === 'essencial') return 'Check Essencial';
@@ -504,7 +519,10 @@ function bindAuthEvents() {
   window.addEventListener('cnc:auth-login', (e) => {
     const u = e.detail || {};
     if (!u.email) return;
-    completeLogin({ name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: 'google' });
+    completeLogin({ name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: 'google', role: u.role || 'user' });
+    applyServerRole(u);
+    saveState();
+    renderAll();
   });
   window.addEventListener('cnc:auth-session', (e) => {
     const u = e.detail;
@@ -512,12 +530,14 @@ function bindAuthEvents() {
     if (u && u.email) {
       if (!state.user || state.user.email !== u.email) {
         state.user = { name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: 'google' };
-        saveState();
-        renderAll();
       }
+      applyServerRole(u);
+      saveState();
+      renderAll();
     } else if (state.user && state.user.provider === 'google') {
       // A sessão do Google expirou no servidor: encerra também no navegador
       state.user = null;
+      applyServerRole(null);
       saveState();
       renderAll();
     }
@@ -537,6 +557,7 @@ function bindAuthEvents() {
   $('#logoutBtn').addEventListener('click', () => {
     if (state.user && state.user.provider === 'google') window.dispatchEvent(new CustomEvent('cnc:auth-logout'));
     state.user = null;
+    applyServerRole(null);
     saveState();
     renderAll();
     showToast('Você saiu da sua conta.');

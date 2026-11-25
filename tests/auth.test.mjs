@@ -4,6 +4,7 @@ import {
   readSessionToken,
   verifyGoogleCredential,
   getGoogleClientId,
+  isAdminEmail,
   handleSession,
   handleLogout,
   handleGoogleLogin,
@@ -37,6 +38,21 @@ async function run() {
   await assert.rejects(verifyGoogleCredential('tok', { fetchImpl: fakeFetch({ ...base, exp: '1' }) }), /expirado/);
   await assert.rejects(verifyGoogleCredential('tok', { fetchImpl: fakeFetch({}, false) }), /recusado/);
   await assert.rejects(verifyGoogleCredential(''), /ausente/);
+
+  // 2b. Admin vem só da variável de ambiente ADMIN_EMAILS (nunca do navegador)
+  process.env.ADMIN_EMAILS = 'chefe@exemplo.com, outra@exemplo.com';
+  assert.equal(isAdminEmail('Chefe@Exemplo.com '), true, 'admin ignora maiúsculas e espaços');
+  assert.equal(isAdminEmail('qualquer@exemplo.com'), false);
+  process.env.SESSION_SECRET = SECRET;
+  const adminCookie = createSessionToken({ sub: '9', email: 'chefe@exemplo.com', name: 'Chefe', provider: 'google' }, SECRET);
+  const adminSess = await handleSession(new Request('https://x.app/api/auth/session', { headers: { cookie: 'cnc_session=' + adminCookie } })).json();
+  assert.equal(adminSess.user.role, 'admin', 'sessão do admin deve voltar com role admin');
+  const userSess = await handleSession(new Request('https://x.app/api/auth/session', { headers: { cookie: 'cnc_session=' + token } })).json();
+  assert.equal(userSess.user.role, 'user', 'usuário comum não é admin');
+  delete process.env.ADMIN_EMAILS;
+  const revoked = await handleSession(new Request('https://x.app/api/auth/session', { headers: { cookie: 'cnc_session=' + adminCookie } })).json();
+  assert.equal(revoked.user.role, 'user', 'tirar o e-mail da lista remove o admin na hora');
+  delete process.env.SESSION_SECRET;
 
   // 3. Handlers HTTP
   const cfg = await handleAuthConfig().json();
