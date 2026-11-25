@@ -441,6 +441,7 @@ function openAuthModal(mode = 'login') {
 }
 
 function closeAuthModal() {
+  pendingCheckoutPlan = null; // fechou sem entrar: não abre o pagamento depois
   $('#authModal').hidden = true;
   document.body.style.overflow = '';
   if (authReturnFocus && typeof authReturnFocus.focus === 'function') authReturnFocus.focus();
