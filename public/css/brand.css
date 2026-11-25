@@ -1,0 +1,9 @@
+/* Check no Concurso — Logotipo oficial (v2)
+   Símbolo: anel em "C" (bolinha do gabarito) + check ouro que rompe a abertura.
+   Arquivos-fonte: /brand/*.svg  ·  Ícones: /icons/*  ·  Open Graph: /og-image.png */
+.brand-wordmark { font-weight: 800; letter-spacing: -0.02em; color: var(--bg-inverse, #0B2540); }
+.brand-wordmark span { font-weight: 600; letter-spacing: -0.01em; color: var(--brand-primary, #0C4F83); }
+.brand-on-dark .brand-wordmark,
+.brand-on-dark strong { color: #FFFFFF; }
+.brand-on-dark .brand-wordmark span { color: #9CC4E4; }
+.brand-mark svg { border-radius: 26%; }

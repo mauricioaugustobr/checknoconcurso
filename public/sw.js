@@ -1,9 +1,10 @@
-const CACHE_NAME = 'check-no-concurso-v10';
+const CACHE_NAME = 'check-no-concurso-v12';
 const ASSETS = [
   '/',
   '/index.html',
   '/css/tokens.css',
   '/css/styles.css',
+  '/css/auth-cta.css',
   '/js/app.js',
   '/js/data/concursos.js',
   '/js/data/estado-builder.js',
@@ -14,7 +15,9 @@ const ASSETS = [
   '/js/data/estados-sul.js',
   '/js/data/estados-ativos-2026-11.js',
   '/manifest.webmanifest',
-  '/icons/icon.svg'
+  '/icons/icon.svg',
+  '/icons/icon-192.png',
+  '/css/brand.css'
 ];
 
 self.addEventListener('install', (event) => {

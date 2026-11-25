@@ -340,6 +340,8 @@ function renderAuthUI() {
 
   $('#navSavedCount').textContent = String(state.savedIds.length);
   $('#mobileSavedDot').hidden = state.savedIds.length === 0;
+  const freeBox = $('#freeAccessBox');
+  if (freeBox) freeBox.hidden = hasEssencial();
   renderAccountUI();
 }
 
