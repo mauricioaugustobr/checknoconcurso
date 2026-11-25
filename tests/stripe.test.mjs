@@ -24,8 +24,11 @@ async function run() {
   assert.equal((await handleCheckout(post('/api/stripe/checkout', { body: { plan: 'essencial' } }))).status, 503);
 
   // 3. Com chave: exige login, mesmo site e plano válido
-  process.env.STRIPE_SECRET_KEY = 'sk_test_fake';
+  process.env.STRIPE_SECRET_KEY = 'sk_test_fakefakefake123';
   assert.equal((await handleAuthConfig().json()).stripeEnabled, true);
+  process.env.STRIPE_SECRET_KEY = 'mk_qualquer_coisa_errada';
+  assert.equal((await handleAuthConfig().json()).stripeEnabled, false, 'chave que não é secreta desliga os pagamentos');
+  process.env.STRIPE_SECRET_KEY = 'sk_test_fakefakefake123';
   assert.equal((await handleCheckout(post('/api/stripe/checkout', { body: { plan: 'essencial' }, withCookie: false }))).status, 401);
   assert.equal((await handleCheckout(post('/api/stripe/checkout', { body: { plan: 'essencial' }, origin: 'https://evil.com' }))).status, 403);
   assert.equal((await handleCheckout(post('/api/stripe/checkout', { body: { plan: 'vip-gratis' } }))).status, 400);
@@ -52,7 +55,7 @@ async function run() {
     { fetchImpl: async (url, opts) => { captured = { url, opts }; return { ok: true, json: async () => ({ id: 'cs_test_1' }) }; } });
   assert.ok(captured.opts.body.includes('line_items%5B0%5D%5Bprice%5D=price_1'));
   assert.ok(captured.opts.body.includes('metadata%5Bemail%5D=a%40b.com'));
-  assert.equal(captured.opts.headers.Authorization, 'Bearer sk_test_fake');
+  assert.equal(captured.opts.headers.Authorization, 'Bearer sk_test_fakefakefake123');
 
   delete process.env.STRIPE_SECRET_KEY;
   delete process.env.STRIPE_WEBHOOK_SECRET;
