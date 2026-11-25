@@ -85,6 +85,12 @@ async function run() {
     await new Promise((r) => server.close(r));
   }
 
+  // 6. Plano Hobby da Vercel: no máximo 12 funções de servidor por site
+  const fsm = await import('node:fs');
+  const contar = (dir) => fsm.readdirSync(dir, { withFileTypes: true }).reduce((n, e) => n + (e.isDirectory() ? contar(dir + '/' + e.name) : (e.name.endsWith('.js') ? 1 : 0)), 0);
+  const funcoes = contar(new URL('../api', import.meta.url).pathname.replace(/^/([A-Za-z]:)/, '$1'));
+  assert.ok(funcoes <= 12, `São ${funcoes} funções em api/ — o limite do plano Hobby da Vercel é 12`);
+
   console.log('OK: painel de admin (permissões e edições), páginas para o Google, blog e sitemap validados.');
 }
 

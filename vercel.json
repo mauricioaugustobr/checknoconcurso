@@ -76,23 +76,27 @@
   "rewrites": [
     {
       "source": "/concurso/:id",
-      "destination": "/api/page-concurso?id=:id"
+      "destination": "/api/page?tipo=concurso&id=:id"
     },
     {
       "source": "/concursos/:uf",
-      "destination": "/api/page-estado?uf=:uf"
+      "destination": "/api/page?tipo=estado&uf=:uf"
     },
     {
       "source": "/blog",
-      "destination": "/api/blog"
+      "destination": "/api/page?tipo=blog"
     },
     {
       "source": "/blog/:slug",
-      "destination": "/api/blog?slug=:slug"
+      "destination": "/api/page?tipo=blog&slug=:slug"
     },
     {
       "source": "/sitemap.xml",
-      "destination": "/api/sitemap"
+      "destination": "/api/page?tipo=sitemap"
+    },
+    {
+      "source": "/api/admin/:acao",
+      "destination": "/api/admin?acao=:acao"
     },
     {
       "source": "/admin",
