@@ -245,6 +245,7 @@ a { color: var(--brand-primary); }
 .nav-q.is-correct { background: var(--status-open-bg); border-color: var(--status-open-border); color: var(--status-open-fg); }
 .nav-q.is-wrong { background: #FEF2F2; border-color: #FCA5A5; color: #991B1B; }
 .nav-q.is-skipped { background: var(--bg-surface-alt); border-style: dashed; }
+.nav-q.is-annulled { background: #F3F4F6; border-style: dotted; color: var(--text-muted); }
 
 /* Card da questão */
 .card {

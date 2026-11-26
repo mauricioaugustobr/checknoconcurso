@@ -179,6 +179,7 @@ function renderProgress() {
 
 function navClass(q) {
   const classes = ["nav-q"];
+  if (q.annulled) classes.push("is-annulled");
   const a = answers[q.number];
   if (a) {
     if (a === q.answer) classes.push("is-correct");
@@ -292,6 +293,19 @@ function renderQuestion() {
   checkBtn.hidden = isRevealed;
   el("skipBtn").hidden = isRevealed;
 
+  if (q.annulled) {
+    fieldset.disabled = true;
+    fieldset.classList.add("is-locked");
+    checkBtn.hidden = true;
+    el("skipBtn").hidden = true;
+    const fb = el("feedback");
+    fb.hidden = false;
+    fb.className = "exam-feedback";
+    fb.innerHTML = "<h3>Questão anulada pela banca</h3><p>Esta questão foi anulada no gabarito definitivo e não conta como acerto nem como erro.</p>";
+    el("explanation").hidden = true;
+    return;
+  }
+
   if (isRevealed) {
     paintAnswer(q, chosen);
   }
@@ -305,7 +319,8 @@ function paintSelection(letter) {
 
 function checkAnswer() {
   const q = questionAt(current);
-  if (revealed[q.number] || (answers[q.number] && answers[q.number] !== "—")) return;
+  if (q.annulled) return;
+  if (revealed[q.number] || (answers[q.number] && answers[q.number] !== "-")) return;
   const input = document.querySelector('input[name="choice"]:checked');
   if (!input) {
     const feedback = el("feedback");
@@ -365,6 +380,7 @@ function showResult() {
   const answered = answeredCount();
   const correct = correctCount();
   const skipped = Object.values(answers).filter((a) => a === "-").length;
+  const annulled = exam.questoes.filter((q) => q.annulled).length;
   const valid = Math.max(answered - skipped, 0);
   const wrong = Math.max(valid - correct, 0);
   const pct = valid ? Math.round((correct / valid) * 100) : 0;
@@ -381,7 +397,7 @@ function showResult() {
 
   panel.innerHTML = `
     <h2>Seu resultado até aqui</h2>
-    <p>${correct} ${correct === 1 ? "acerto" : "acertos"} em ${valid} ${valid === 1 ? "questão respondida" : "questões respondidas"} · ${pct}% de aproveitamento${skipped ? ` · ${skipped} ${skipped === 1 ? "pulada" : "puladas"}` : ""}${wrong ? ` · ${wrong} ${wrong === 1 ? "erro" : "erros"}` : ""}.</p>
+    <p>${correct} ${correct === 1 ? "acerto" : "acertos"} em ${valid} ${valid === 1 ? "questão respondida" : "questões respondidas"} · ${pct}% de aproveitamento${skipped ? ` · ${skipped} ${skipped === 1 ? "pulada" : "puladas"}` : ""}${wrong ? ` · ${wrong} ${wrong === 1 ? "erro" : "erros"}` : ""}${annulled ? ` · ${annulled} ${annulled === 1 ? "anulada" : "anuladas"} pela banca` : ""}.</p>
     <div class="result-grid">
       ${Object.entries(bySubject)
         .filter(([, v]) => v.answered > 0)
