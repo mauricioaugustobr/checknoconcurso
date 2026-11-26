@@ -76,9 +76,41 @@
           "value": "no-cache"
         }
       ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "checknoconcurso.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/(llms.txt|llms-full.txt|robots.txt)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=3600"
+        }
+      ]
     }
   ],
   "rewrites": [
+    {
+      "source": "/llms.txt",
+      "destination": "/api/page?tipo=llms"
+    },
+    {
+      "source": "/llms-full.txt",
+      "destination": "/api/page?tipo=llms&completo=1"
+    },
     {
       "source": "/concurso/:id",
       "destination": "/api/page?tipo=concurso&id=:id"

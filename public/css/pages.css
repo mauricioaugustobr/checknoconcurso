@@ -60,3 +60,16 @@ h2 { font-size: 1.35rem; margin: 36px 0 12px; }
   .pg-card a, .pg-post-card a { padding: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Blog e páginas públicas: tabelas, perguntas frequentes e dados ao vivo do concurso */
+.pg-table { overflow-x: auto; margin: 18px 0; border: 1px solid var(--border-subtle, #DFE8F0); border-radius: 12px; -webkit-overflow-scrolling: touch; }
+.pg-table table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.pg-table th, .pg-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border-subtle, #DFE8F0); vertical-align: top; }
+.pg-table th { background: #E9F0F6; color: #0C4F83; font-weight: 600; white-space: nowrap; }
+.pg-table tbody tr:last-child td { border-bottom: 0; }
+.pg-faq { margin-top: 36px; }
+.pg-faq h3 { font-family: Inter, system-ui, sans-serif; font-size: 1.02rem; font-weight: 700; color: #0F2236; margin: 20px 0 6px; }
+.pg-faq p { margin: 0; color: var(--text-secondary, #2E465E); }
+.pg-live { border-color: #BCD3E6; }
+.pg-live h2 { font-size: 1.2rem; margin: 4px 0 12px; }
+.pg-live .pg-muted { margin: 0; font-size: .85rem; }
