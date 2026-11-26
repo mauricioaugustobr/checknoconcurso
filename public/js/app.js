@@ -1951,7 +1951,7 @@ function bindEvents() {
   };
 
   $('#openAppPreviewBtn').addEventListener('click', openAppPreview);
-  $('#planPreviewAppBtn').addEventListener('click', openAppPreview);
+  $('#planPreviewAppBtn')?.addEventListener('click', openAppPreview);
   $('#closeAppPreviewBtn').addEventListener('click', closeAppPreview);
   $('#appPreviewModal').addEventListener('click', (e) => {
     if (e.target.id === 'appPreviewModal') closeAppPreview();
@@ -1990,7 +1990,7 @@ function bindEvents() {
   const closeInstall = () => { $('#installModal').hidden = true; };
 
   $('#installPwaBtn').addEventListener('click', openInstall);
-  $('#planInstallBtn').addEventListener('click', openInstall);
+  $('#planInstallBtn')?.addEventListener('click', openInstall);
   $('#closeInstallBtn').addEventListener('click', closeInstall);
   $('#installModal').addEventListener('click', (e) => {
     if (e.target.id === 'installModal') closeInstall();
