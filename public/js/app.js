@@ -1,10 +1,25 @@
 import { CONCURSOS, PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/concursos.js';
 // Índice leve das provas resolvíveis (o conteúdo de cada prova fica em /provas/<id>.json).
 const PROVAS = {};
-fetch('/provas/index.json', { cache: 'no-cache' })
+const provasReady = fetch('/provas/index.json', { cache: 'no-cache' })
   .then((r) => (r.ok ? r.json() : {}))
   .then((d) => Object.assign(PROVAS, d))
   .catch(() => {});
+import { SEM_PROVA_ANTERIOR } from './data/sem-prova.js?v=1';
+// Concurso sem prova anterior: está na lista e ainda não tem prova publicada no site.
+const semProvaAnterior = (id) => SEM_PROVA_ANTERIOR.has(id) && !PROVAS[id];
+const SEM_PROVA_TITULO = 'Este concurso não tem prova anterior';
+const SEM_PROVA_TEXTO = 'Não encontramos prova pública de um concurso anterior deste órgão. Pode ser o primeiro concurso dele, ou a prova anterior não foi divulgada. Se uma prova anterior for publicada, ela aparece aqui para você treinar.';
+function semProvaNotice() {
+  return `
+      <div class="edital-hero-box no-past-exam-box" role="note">
+        <div>
+          <span class="badge-neutral" style="margin-bottom:4px;">Sem prova anterior</span>
+          <div><strong>${SEM_PROVA_TITULO}</strong></div>
+          <p class="muted-sm">${SEM_PROVA_TEXTO}</p>
+        </div>
+      </div>`;
+}
 import { scoreConcurso, SEARCH_SUGGESTIONS } from './search.js?v=3';
 
 const STORAGE_KEY = 'check_no_concurso_state_v3';
@@ -258,7 +273,8 @@ function renderHeroStats() {
   const encerrados = catalog.filter((c) => c.status === 'Encerrado');
   const totalVagas = ativos.reduce((sum, c) => sum + c.vagas, 0);
   const maiorSalario = Math.max(...ativos.map((c) => c.salarioMax));
-  const totalProvas = catalog.reduce((sum, c) => sum + c.provasAnteriores.length, 0);
+  // Provas reais para treinar (as do índice publicado); antes mostrava as edições mapeadas no catálogo.
+  const totalProvas = Object.keys(PROVAS).length || catalog.reduce((sum, c) => sum + c.provasAnteriores.length, 0);
 
   $('#statVagas').textContent = totalVagas.toLocaleString('pt-BR');
   $('#statConcursos').textContent = `${ativos.length} + ${encerrados.length}`;
@@ -873,6 +889,7 @@ function renderConcursosGrid() {
           <div class="card-badges">
             <span class="${statusBadgeClass(c.status)}">${escapeHtml(c.status)}</span>
             ${secondaryBadge}
+            ${semProvaAnterior(c.id) ? `<span class="badge-neutral" title="${escapeHtml(SEM_PROVA_TEXTO)}">Sem prova anterior</span>` : ''}
           </div>
           <button type="button" class="save-icon-btn ${saved ? 'saved' : ''}" data-save-id="${escapeHtml(c.id)}" aria-label="${saved ? 'Remover dos salvos' : 'Salvar concurso'}" title="${saved ? 'Salvo' : 'Salvar concurso'}">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
@@ -1275,6 +1292,11 @@ function renderDetailModal() {
         `).join('')}
       </div>
     `;
+    return;
+  }
+
+  if (activeDetailTab === 'provas' && semProvaAnterior(c.id)) {
+    body.innerHTML = semProvaNotice();
     return;
   }
 
@@ -2045,6 +2067,12 @@ async function init() {
   populateSelects();
   bindEvents();
   renderAll();
+  // O índice de provas chega depois: atualiza selos, contador e a aba aberta
+  provasReady.then(() => {
+    renderHeroStats();
+    renderConcursosGrid();
+    if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
+  });
   // O login pode ter avisado quem está conectado antes desta tela ficar pronta: reaplica
   const lastAuth = window.__cncAuthLast;
   if (lastAuth) window.dispatchEvent(new CustomEvent('cnc:auth-session', { detail: lastAuth.detail }));
