@@ -552,3 +552,32 @@
 @media (max-width: 360px) {
   .btn-cta-subscribe:not(.btn-cta-block) .cta-label-extra { display: none; }
 }
+
+/* Celular com a pessoa logada: o nome da marca não fica por baixo da conta
+   e do selo do plano. Nome em duas linhas; abaixo de 350 px, só o ícone. */
+@media (max-width: 480px) {
+  .site-header .brand { min-width: 0; }
+  .site-header:has(#accountWrap:not([hidden])) .brand-wordmark {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    line-height: 1.05;
+    white-space: nowrap;
+  }
+  .site-header:has(#accountWrap:not([hidden])) .brand-wordmark span { font-size: 12.5px; }
+  .btn-cta-subscribe.is-pro .cta-pro-prefix { display: none; }
+}
+@media (max-width: 350px) {
+  .site-header:has(#accountWrap:not([hidden])) .brand-text { display: none; }
+}
+
+/* Celular: a etiqueta do plano Completo não cobre o título do cartão */
+@media (max-width: 480px) {
+  .plan-ribbon {
+    position: static;
+    display: inline-block;
+    margin: 0 0 12px;
+    line-height: 1.35;
+    border-radius: 12px;
+  }
+}

@@ -1,0 +1,140 @@
+/* ======================================================
+   DETALHE DO CONCURSO — CELULAR E TABLET
+   Ajustes só para telas menores que o desktop.
+   O visual de desktop (acima de 1024 px) não muda.
+   ====================================================== */
+
+/* Rótulos curtos das abas só aparecem no celular */
+.modal-tab .tab-short { display: none; }
+
+/* Raio-X: o percentual nunca quebra em duas linhas */
+#detailModal .disc-bar-top { gap: 12px; align-items: baseline; }
+#detailModal .disc-bar-top > strong { flex-shrink: 0; white-space: nowrap; text-align: right; }
+
+/* ---------- Tablets (em pé e deitados) ---------- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Janela mais alta; ela rola inteira e as abas ficam presas no topo,
+     para o conteúdo não ficar espremido abaixo do resumo */
+  #detailModal .modal-sheet {
+    max-height: min(94vh, 1180px);
+    max-height: min(94dvh, 1180px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  #detailModal .modal-sheet > * { flex-shrink: 0; }
+  #detailModal .modal-sheet > #detailBody { overflow: visible; flex: none; }
+  #detailModal .modal-tabs { position: sticky; top: 0; z-index: 2; }
+
+  /* Faixa de treino vira cartão, alinhado ao cartão de números */
+  #detailModal .train-now {
+    margin: 16px 28px 0;
+    padding: 14px 18px;
+    border: 1px solid var(--brand-border);
+    border-radius: 14px;
+  }
+}
+
+/* ---------- Celulares ---------- */
+@media (max-width: 640px) {
+  /* A janela do concurso ocupa a tela toda */
+  #detailModal { padding: 0; align-items: stretch; }
+  #detailModal .modal-sheet {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  #detailModal .modal-sheet > .modal-header {
+    padding-top: calc(18px + env(safe-area-inset-top, 0px));
+  }
+  #detailModal .modal-sheet .modal-header-actions { top: calc(12px + env(safe-area-inset-top, 0px)); right: 12px; }
+  #detailModal #detailBody { padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
+
+  /* Faixa de treino vira cartão, com a mesma margem do cartão de números */
+  #detailModal .train-now {
+    margin: 14px 18px 0;
+    padding: 14px 16px;
+    border: 1px solid var(--brand-border);
+    border-radius: 14px;
+    gap: 12px;
+  }
+  #detailModal .train-now-text strong { font-size: 14.5px; }
+  #detailModal .train-now-btn { width: 100%; white-space: normal; text-align: center; }
+
+  /* Abas: as quatro cabem na tela, sem rolagem escondida */
+  #detailModal .modal-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    padding: 0 10px;
+    margin-top: 14px;
+  }
+  #detailModal .modal-tab {
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 4px;
+    font-size: 14px;
+  }
+  #detailModal .modal-tab .tab-full,
+  #detailModal .modal-tab .tab-pill-gold { display: none; }
+  #detailModal .modal-tab .tab-short { display: inline; }
+
+  /* Botões do edital ocupam a largura toda, como os do fim da visão geral */
+  #detailModal .edital-actions { width: 100%; flex-direction: column; }
+  #detailModal .edital-actions > * { width: 100%; justify-content: center; text-align: center; }
+}
+
+/* Celular deitado ou tela muito baixa: janela em tela cheia */
+@media (max-height: 500px) and (max-width: 1024px) {
+  #detailModal { padding: 0; align-items: stretch; }
+  #detailModal .modal-sheet {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  #detailModal .modal-sheet > .modal-header {
+    padding: 14px max(28px, env(safe-area-inset-right, 0px)) 12px max(28px, env(safe-area-inset-left, 0px));
+  }
+  #detailModal .modal-sheet .modal-header h2 { font-size: 21px; margin-bottom: 4px; }
+  #detailModal .modal-sheet .modal-badges { margin-bottom: 8px; }
+  #detailModal .kpi-cell { padding: 10px 16px; }
+  #detailModal .train-now { padding-top: 10px; padding-bottom: 10px; }
+  #detailModal .train-now-btn { min-height: 40px; }
+  #detailModal .modal-tabs { margin-top: 12px; }
+}
+
+/* Celulares compactos (320 a 380 px) */
+@media (max-width: 380px) {
+  #detailModal .modal-sheet > .modal-header { padding-left: 16px; padding-right: 16px; }
+  #detailModal .modal-sheet .modal-header h2 { font-size: 20px; }
+  #detailModal .detail-kpis { margin: 0 16px; }
+  #detailModal .kpi-cell { padding: 11px 12px; }
+  #detailModal .kpi-cell strong { font-size: 14.5px; }
+  #detailModal .kpi-cell.kpi-primary strong { font-size: 15.5px; white-space: nowrap; overflow-wrap: normal; }
+  #detailModal .train-now { margin-left: 16px; margin-right: 16px; }
+  #detailModal .modal-tabs { padding: 0 6px; }
+  #detailModal .modal-tab { font-size: 13px; }
+  #detailModal #detailBody { padding-left: 16px; padding-right: 16px; }
+}
+
+/* Telas de toque: botões com área mínima de 44 px */
+@media (pointer: coarse) {
+  #detailModal .icon-btn { width: 44px; height: 44px; }
+  #detailModal .detail-cta > *,
+  #detailModal .edital-actions > *,
+  #detailModal #detailBody .btn-primary-sm,
+  #detailModal #detailBody .btn-outline-sm {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (pointer: coarse) and (max-width: 640px) {
+  #detailModal .modal-sheet .modal-badges { padding-right: 104px; }
+}

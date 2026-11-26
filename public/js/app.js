@@ -321,7 +321,7 @@ function renderAuthUI() {
 
   if (hasCompleto()) {
     const planLabel = state.tier === 'completo-anual' ? 'Check Completo Anual (R$ 199,90/ano)' : 'Check Completo (R$ 17,99/mês)';
-    headerCta.innerHTML = '<span class="cta-label">Check Completo ✓</span>';
+    headerCta.innerHTML = '<span class="cta-label"><span class="cta-label-extra cta-pro-prefix">Check </span>Completo ✓</span>';
     headerCta.classList.add('is-pro');
     heroPricePill.textContent = 'Plano Completo Ativo ✓';
     heroBtn.textContent = 'Acesso Total Ativo · Ver Meus Salvos';
@@ -1429,7 +1429,22 @@ function renderTrainNow(c) {
   $('#trainNowTabBtn')?.addEventListener('click', () => {
     activeDetailTab = 'provas';
     renderDetailModal();
+    showDetailTabTop();
   });
+}
+
+// Ao trocar de aba, mostra o começo do conteúdo novo (no celular a janela inteira rola).
+function showDetailTabTop() {
+  const sheet = document.querySelector('#detailModal .modal-sheet');
+  const tabs = document.querySelector('#detailModal .modal-tabs');
+  const body = $('#detailBody');
+  if (body) body.scrollTop = 0;
+  if (sheet && tabs && body && sheet.scrollHeight > sheet.clientHeight) {
+    // As abas ficam presas no topo; o alvo é o começo do conteúdo logo abaixo delas.
+    const inicioConteudo = sheet.scrollTop + body.getBoundingClientRect().top - sheet.getBoundingClientRect().top;
+    const alvo = Math.max(0, Math.round(inicioConteudo - tabs.offsetHeight));
+    if (sheet.scrollTop > alvo) sheet.scrollTop = alvo;
+  }
 }
 
 function renderPaywallGate(title, desc, blurredPreviewHtml, targetPlan = 'essencial') {
@@ -1779,6 +1794,7 @@ function bindEvents() {
     if (switchTabBtn) {
       activeDetailTab = switchTabBtn.dataset.switchTab;
       renderDetailModal();
+      showDetailTabTop();
       return;
     }
 
@@ -1992,6 +2008,7 @@ function bindEvents() {
     btn.addEventListener('click', () => {
       activeDetailTab = btn.dataset.detailTab;
       renderDetailModal();
+      showDetailTabTop();
     });
   });
 
