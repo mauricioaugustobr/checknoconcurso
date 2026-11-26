@@ -344,6 +344,9 @@ function renderQuestion() {
 
   if (isRevealed) {
     paintAnswer(q, chosen);
+  } else {
+    // Começa a preparar a explicação enquanto a pessoa lê a questão: ao responder, ela já está pronta
+    prepararExplicacao(q);
   }
 }
 
@@ -424,30 +427,61 @@ function renderExplanation(paragrafos) {
   });
 }
 
-async function loadExplanation(q) {
-  const body = el("explanationBody");
-  if (!body || q.annulled) return;
+function explicacaoGuardada(q) {
   try {
     const saved = JSON.parse(localStorage.getItem(EXPL_KEY(q.number)) || "null");
-    if (saved && saved.answer === q.answer && Array.isArray(saved.paragrafos) && saved.paragrafos.length === 3) {
-      renderExplanation(saved.paragrafos);
-      return;
-    }
+    if (saved && saved.answer === q.answer && Array.isArray(saved.paragrafos) && saved.paragrafos.length === 3) return saved.paragrafos;
   } catch {
     /* sem cache local */
   }
+  return null;
+}
+
+// Um só pedido por questão: o mesmo pedido serve para a busca antecipada e para a exibição
+const pedidosExplicacao = new Map();
+
+function prepararExplicacao(q) {
+  if (!q || q.annulled || explicacaoGuardada(q)) return null;
+  if (pedidosExplicacao.has(q.number)) return pedidosExplicacao.get(q.number);
+  const numero = q.number;
+  const pedido = (async () => {
+    try {
+      const res = await fetch(`/api/explicacao?c=${encodeURIComponent(examKey)}&q=${numero}`, { cache: "no-store" });
+      const data = await res.json().catch(() => ({}));
+      const ok = res.ok && Array.isArray(data.paragrafos) && data.paragrafos.length === 3;
+      if (ok) {
+        try {
+          localStorage.setItem(EXPL_KEY(numero), JSON.stringify({ answer: q.answer, paragrafos: data.paragrafos }));
+        } catch {
+          /* armazenamento cheio: segue sem guardar */
+        }
+      }
+      return { ok, data };
+    } catch {
+      return { ok: false, data: {} };
+    }
+  })();
+  pedidosExplicacao.set(numero, pedido);
+  // Se falhar, o próximo pedido tenta de novo
+  pedido.then((r) => { if (!r.ok) pedidosExplicacao.delete(numero); });
+  return pedido;
+}
+
+async function loadExplanation(q) {
+  const body = el("explanationBody");
+  if (!body || q.annulled) return;
+  const guardada = explicacaoGuardada(q);
+  if (guardada) {
+    renderExplanation(guardada);
+    prepararExplicacao(questionAt(current + 1));
+    return;
+  }
   body.innerHTML = '<p class="explanation-loading">Preparando a explicação desta questão…</p>';
   const numero = q.number;
-  let data = {};
-  let ok = false;
-  try {
-    const res = await fetch(`/api/explicacao?c=${encodeURIComponent(examKey)}&q=${numero}`, { cache: "no-store" });
-    data = await res.json().catch(() => ({}));
-    ok = res.ok && Array.isArray(data.paragrafos) && data.paragrafos.length === 3;
-  } catch {
-    ok = false;
-  }
+  const { ok, data } = (await prepararExplicacao(q)) || { ok: false, data: {} };
   if (questionAt(current).number !== numero) return; // a pessoa já mudou de questão
+  // Já deixa a próxima questão a caminho
+  if (ok) prepararExplicacao(questionAt(current + 1));
   if (ok) {
     renderExplanation(data.paragrafos);
     try {
