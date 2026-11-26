@@ -146,6 +146,10 @@
       "destination": "/api/page?tipo=blog&slug=:slug"
     },
     {
+      "source": "/api/blog-recentes",
+      "destination": "/api/page?tipo=blog-recentes"
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/api/page?tipo=sitemap"
     },

@@ -11,7 +11,7 @@ import {
 } from './lib/catalog-api.js';
 import { handleAuthConfig, handleGoogleLogin, handleSession, handleLogout } from './lib/auth.js';
 import { getLiveCatalog } from './lib/catalog-overrides.js';
-import { renderConcursoPage, renderEstadoPage, renderBlogIndex, renderBlogPost, renderSitemap, renderLlms } from './lib/pages.js';
+import { renderConcursoPage, renderEstadoPage, renderBlogIndex, renderBlogPost, renderBlogRecentes, renderSitemap, renderLlms } from './lib/pages.js';
 import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts, handleCancelamentos } from './lib/admin-api.js';
 import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from './lib/stripe.js';
 
@@ -43,6 +43,7 @@ const DYNAMIC_ROUTES = [
   [/^\/concursos\/([a-zA-Z]{2})\/?$/, (r, m) => renderEstadoPage(r, m[1])],
   [/^\/blog\/?$/, (r) => renderBlogIndex(r)],
   [/^\/blog\/([^/]+)\/?$/, (r, m) => renderBlogPost(r, decodeURIComponent(m[1]))],
+  [/^\/api\/blog-recentes$/, (r) => renderBlogRecentes(r)],
   [/^\/sitemap\.xml$/, (r) => renderSitemap(r)],
   [/^\/llms\.txt$/, (r) => renderLlms(r)],
   [/^\/llms-full\.txt$/, (r) => renderLlms(r, { completo: true })],
