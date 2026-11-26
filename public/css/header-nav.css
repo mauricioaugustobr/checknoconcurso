@@ -1,0 +1,186 @@
+/* ======================================================
+   Check no Concurso — Separação da barra de navegação
+   Computador: menu em trilho com divisórias + área da conta separada.
+   Tablet: menu em faixa própria, abas de largura igual.
+   Celular: barra de baixo com divisórias e aba ativa marcada.
+   Carregar por último (depois de blog-links.css).
+   ====================================================== */
+
+.site-header {
+  --hn-track: var(--bg-surface-alt, #E9F0F6);
+  --hn-divider: var(--border-default, #C5D5E4);
+  --hn-ink: var(--text-secondary, #2E465E);
+  --hn-brand: var(--brand-primary, #0C4F83);
+  --hn-brand-soft: var(--brand-soft, #E6F1FA);
+}
+
+/* ---------- Computador (a partir de 1141 px) ---------- */
+@media (min-width: 1141px) {
+  .site-header .desktop-nav {
+    gap: 0;
+    padding: 4px;
+    border-radius: 12px;
+    background: var(--hn-track);
+  }
+  .site-header .nav-link {
+    position: relative;
+    padding: 8px 14px;
+    color: var(--hn-ink);
+  }
+  /* divisória fina entre um item e outro */
+  .site-header .nav-link + .nav-link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 18px;
+    transform: translateY(-50%);
+    background: var(--hn-divider);
+  }
+  /* some a divisória perto do item ativo ou com o mouse em cima */
+  .site-header .nav-link.active::before,
+  .site-header .nav-link:hover::before,
+  .site-header .nav-link.active + .nav-link::before,
+  .site-header .nav-link:hover + .nav-link::before { opacity: 0; }
+
+  .site-header .nav-link:hover { background: rgba(255, 255, 255, 0.7); color: var(--hn-brand); }
+  .site-header .nav-link.active {
+    background: var(--bg-surface, #fff);
+    color: var(--hn-brand);
+    box-shadow: 0 1px 2px rgba(15, 34, 54, 0.10), 0 0 0 1px var(--border-subtle, #DFE8F0);
+  }
+  .site-header .nav-link .nav-count { background: var(--bg-surface, #fff); }
+  .site-header .nav-link.active .nav-count { background: var(--hn-brand); color: #fff; }
+
+  /* área da conta separada do menu por uma linha vertical */
+  .site-header .header-actions {
+    position: relative;
+    gap: 12px;
+    padding-left: 18px;
+  }
+  .site-header .header-actions::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 28px;
+    transform: translateY(-50%);
+    background: var(--hn-divider);
+  }
+}
+
+/* Computador: tudo cabe numa linha, sem cortar o botão da direita */
+@media (min-width: 1141px) {
+  .site-header .brand,
+  .site-header .header-actions { flex-shrink: 0; }
+  /* "Instalar App" vira só o ícone (o nome aparece ao passar o mouse) */
+  .site-header #installPwaBtn { padding: 0; width: 40px; height: 40px; justify-content: center; }
+  .site-header #installPwaBtn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  /* com a conta logada, o selo "Brasil" sai para dar espaço */
+  .site-header:has(#accountWrap:not([hidden])) .brand-text small { display: none; }
+}
+
+/* Notebook pequeno: menos espaço interno para caber tudo em uma linha */
+@media (min-width: 1141px) and (max-width: 1280px) {
+  .site-header .nav-link { padding: 8px 11px; }
+  .site-header .header-actions { gap: 8px; padding-left: 14px; }
+  .site-header .btn-cta-subscribe.is-pro .cta-pro-prefix { display: none; }
+}
+
+/* ---------- Tablet (769 a 1140 px) ---------- */
+@media (min-width: 769px) and (max-width: 1140px) {
+  .site-header .header-inner { row-gap: 0; padding-bottom: 0; }
+  .site-header .header-actions { gap: 8px; }
+  .site-header .desktop-nav {
+    gap: 0;
+    margin-top: 8px;
+    margin-inline: -28px;          /* faixa de ponta a ponta */
+    padding-inline: 20px;
+    border-top: 1px solid var(--border-subtle, #DFE8F0);
+    flex-basis: calc(100% + 56px);
+  }
+  .site-header .nav-link {
+    position: relative;
+    flex: 1 0 auto;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 14px;
+    border-radius: 0;
+    background: transparent;
+    color: var(--hn-ink);
+  }
+  .site-header .nav-link + .nav-link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 18px;
+    transform: translateY(-50%);
+    background: var(--hn-divider);
+  }
+  .site-header .nav-link:hover { background: var(--hn-track); color: var(--hn-brand); }
+  .site-header .nav-link.active { background: transparent; color: var(--hn-brand); }
+  /* aba ativa: barra azul embaixo */
+  .site-header .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 0;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    background: var(--hn-brand);
+  }
+  /* o ponto amarelo do Blog continua (ele usa ::after só no Blog) */
+  .site-header .nav-link-blog.active::after { display: none; }
+}
+
+/* ---------- Celular (até 768 px) ---------- */
+@media (max-width: 768px) {
+  /* topo: conta e botão de assinar com respiro */
+  .site-header .header-actions { gap: 8px; }
+
+  /* barra de baixo: divisórias entre as abas e aba ativa destacada */
+  .mobile-bottom-nav {
+    padding-top: 6px;
+    box-shadow: 0 -4px 16px rgba(15, 34, 54, 0.06);
+  }
+  .mobile-bottom-nav .tab-btn {
+    position: relative;
+    gap: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: var(--text-muted, #4D657C);
+  }
+  .mobile-bottom-nav .tab-btn + .tab-btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 26px;
+    transform: translateY(-50%);
+    background: var(--border-subtle, #DFE8F0);
+  }
+  .mobile-bottom-nav .tab-btn svg {
+    box-sizing: content-box;
+    padding: 4px 14px;
+    border-radius: 999px;
+    transition: background 0.15s ease;
+  }
+  .mobile-bottom-nav .tab-btn.active { color: var(--brand-primary, #0C4F83); }
+  .mobile-bottom-nav .tab-btn.active svg { background: var(--brand-soft, #E6F1FA); }
+}
+@media (max-width: 400px) {
+  .mobile-bottom-nav .tab-btn svg { padding: 3px 10px; }
+}
+@media (max-width: 340px) {
+  .mobile-bottom-nav .tab-btn svg { padding: 3px 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-bottom-nav .tab-btn svg { transition: none; }
+}
