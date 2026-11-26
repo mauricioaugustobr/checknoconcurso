@@ -434,8 +434,8 @@
   .site-header .brand-text { font-size: 14.5px; }
   .site-header .brand-text small { display: none; }
   .header-actions { gap: 6px; flex-shrink: 0; }
-  .btn-login { width: 40px; min-height: 40px; }
-  .btn-cta-subscribe:not(.btn-cta-block) { min-height: 38px; padding: 0 12px; font-size: 13.5px; }
+  .btn-login { width: 44px; min-height: 44px; }
+  .btn-cta-subscribe:not(.btn-cta-block) { min-height: 44px; padding: 0 12px; font-size: 13.5px; }
 }
 /* ======================================================
    BLOCO "GRÁTIS, SEM ASSINAR" — primeira tela
