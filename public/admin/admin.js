@@ -49,6 +49,7 @@ async function boot() {
   bindTabs();
   bindConcursos();
   bindPosts();
+  bindUsers();
   openTab(location.hash.replace('#', '') || 'geral');
 }
 
@@ -266,12 +267,92 @@ async function removePost() {
 }
 
 /* ---------------- Usuários e registro ---------------- */
+const NOME_PLANO = { essencial: 'Essencial', 'completo-mensal': 'Completo mensal', 'completo-anual': 'Completo anual', completo: 'Completo' };
+const SITUACAO_ACESSO = {
+  admin: ['Admin', 'is-ok'], liberado: ['Liberado', 'is-ok'], bloqueado: ['Bloqueado', 'is-danger'], 'sem-plano': ['Sem plano', '']
+};
+
+function celulaSituacao(s) {
+  const [rotulo, cls] = SITUACAO_ACESSO[s.acesso] || [s.acesso, ''];
+  const plano = s.plano ? ` · ${esc(NOME_PLANO[s.plano] || s.plano)}` : '';
+  const ate = s.ate ? `<br><span class="ad-muted">até ${dia(s.ate)}</span>` : '';
+  return `<span class="ad-pill ${cls}">${rotulo}</span>${plano}<br><span class="ad-muted">${esc(s.origem || '')}</span>${ate}`;
+}
+
+function celulaPago(p) {
+  if (!p.totalCentavos) return '<span class="ad-muted">Nada pago</span>';
+  const partes = [];
+  if (p.pixCentavos) partes.push(`Pix ${brl(p.pixCentavos / 100)} (${p.pixPagamentos}x)`);
+  if (p.cartaoCentavos) partes.push(`Cartão ${brl(p.cartaoCentavos / 100)} (${p.cartaoPagamentos}x)${p.cartaoReal ? '' : ' · teste'}`);
+  return `<strong>${brl(p.totalCentavos / 100)}</strong><br><span class="ad-muted">${partes.join(' · ')}</span>${p.ultimo ? `<br><span class="ad-muted">último em ${dia(p.ultimo)}</span>` : ''}`;
+}
+
+function valorAtual(u) {
+  if (!u.regra) return 'automatico';
+  if (u.regra.modo === 'bloqueado') return 'bloquear';
+  return u.regra.tier === 'essencial' ? 'liberar-essencial' : 'liberar-completo';
+}
+
+function celulaAcao(u) {
+  if (u.situacao.acesso === 'admin') return '<span class="ad-muted">—</span>';
+  const v = valorAtual(u);
+  const opt = (val, txt) => `<option value="${val}"${v === val ? ' selected' : ''}>${txt}</option>`;
+  const ate = u.regra?.ate ? String(u.regra.ate).slice(0, 10) : '';
+  return `<form class="ad-user-acao" data-email="${esc(u.email)}">
+      <select name="acao" aria-label="Acesso de ${esc(u.email)}">
+        ${opt('automatico', 'Automático (pelo pagamento)')}${opt('liberar-essencial', 'Liberar Essencial')}${opt('liberar-completo', 'Liberar Completo')}${opt('bloquear', 'Bloquear')}
+      </select>
+      <label class="ad-user-ate" ${v.startsWith('liberar') ? '' : 'hidden'}>até <input type="date" name="ate" value="${ate}" aria-label="Liberado até (vazio = sem prazo)"></label>
+      <button type="submit" class="ad-btn ad-btn-sm">Salvar</button>
+      ${u.regra?.nota ? `<span class="ad-muted">${esc(u.regra.nota)}</span>` : ''}
+    </form>`;
+}
+
 async function loadUsers() {
   const { users } = await api('/api/admin/users');
+  const resumo = users.reduce((a, u) => { a[u.situacao.acesso] = (a[u.situacao.acesso] || 0) + 1; a.total += u.pago.totalCentavos; return a; }, { total: 0 });
+  const r = $('#adUserResumo');
+  if (r) r.textContent = `${num(users.length)} cadastros · ${num(resumo.liberado || 0)} com acesso · ${num(resumo['sem-plano'] || 0)} sem plano · ${num(resumo.bloqueado || 0)} bloqueados · ${brl(resumo.total / 100)} recebidos`;
   $('#adUserRows').innerHTML = users.map((u) => `<tr>
-      <td>${esc(u.name || '—')}</td><td>${esc(u.email)}</td><td>${num(u.logins)}</td>
-      <td>${quando(u.first_login_at)}</td><td>${quando(u.last_login_at)}</td></tr>`).join('')
+      <td>${esc(u.name || '—')}<br><span class="ad-muted">${esc(u.email)}</span></td>
+      <td>${celulaSituacao(u.situacao)}</td>
+      <td>${celulaPago(u.pago)}</td>
+      <td>${celulaAcao(u)}</td>
+      <td class="ad-nowrap">${num(u.logins)}x<br><span class="ad-muted">${quando(u.last_login_at)}</span></td></tr>`).join('')
     || '<tr><td colspan="5" class="ad-muted">Ninguém entrou com o Google ainda.</td></tr>';
+}
+
+function bindUsers() {
+  const rows = $('#adUserRows');
+  rows.addEventListener('change', (e) => {
+    if (e.target.name !== 'acao') return;
+    const label = e.target.closest('form').querySelector('.ad-user-ate');
+    label.hidden = !e.target.value.startsWith('liberar');
+  });
+  rows.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.dataset.email;
+    const escolha = form.acao.value;
+    const [acao, plano] = escolha.split('-');
+    let nota = '';
+    if (acao === 'bloquear') {
+      if (!confirm(`Bloquear ${email}? A pessoa perde o acesso mesmo que tenha pago e não consegue comprar. A cobrança do cartão NÃO é cancelada por aqui.`)) return;
+      nota = prompt('Motivo do bloqueio (opcional):') || '';
+    } else if (acao === 'liberar') {
+      nota = prompt(`Motivo da liberação de ${email} (opcional):`) || '';
+    }
+    const btn = form.querySelector('button');
+    btn.disabled = true;
+    try {
+      await api('/api/admin/users', { method: 'POST', body: { email, acao: acao === 'automatico' ? 'automatico' : acao, plano, ate: acao === 'liberar' ? form.ate.value : '', nota } });
+      toast(acao === 'bloquear' ? 'Usuário bloqueado.' : acao === 'liberar' ? 'Acesso liberado.' : 'Voltou ao automático (pelo pagamento).');
+      await loadUsers();
+    } catch (err) {
+      toast(err.message);
+      btn.disabled = false;
+    }
+  });
 }
 
 /* ---------------- Cancelamentos ---------------- */
@@ -295,7 +376,8 @@ async function loadCancelamentos() {
 
 const ACOES = {
   'concurso.editar': 'editou o concurso', 'concurso.ocultar': 'ocultou o concurso', 'concurso.restaurar': 'desfez as edições do concurso',
-  'post.criar': 'criou o post', 'post.editar': 'editou o post', 'post.excluir': 'excluiu o post'
+  'post.criar': 'criou o post', 'post.editar': 'editou o post', 'post.excluir': 'excluiu o post',
+  'usuario.liberar': 'liberou o acesso de', 'usuario.bloquear': 'bloqueou', 'usuario.automatico': 'voltou ao automático o acesso de'
 };
 
 async function loadAudit() {

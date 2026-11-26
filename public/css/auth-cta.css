@@ -611,3 +611,6 @@ body.sem-plano #upgradeStrip { display: none !important; }
 
 /* Sem plano: sem o contador de "Meus Salvos" */
 body.sem-plano #navSavedCount, body.sem-plano #mobileSavedDot { display: none !important; }
+
+/* Conta bloqueada pelo admin */
+.plan-gate-bloqueado { margin: 0 0 12px; padding: 10px 14px; border-radius: 10px; background: #FDECEC; color: #A01B1B; font-weight: 600; font-size: 14px; }

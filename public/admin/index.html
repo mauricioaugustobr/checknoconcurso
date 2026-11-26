@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/tokens.css?v=10" />
-  <link rel="stylesheet" href="/admin/admin.css?v=2" />
+  <link rel="stylesheet" href="/admin/admin.css?v=3" />
 </head>
 <body>
   <header class="ad-top">
@@ -81,9 +81,10 @@
       <!-- USUÁRIOS -->
       <section data-panel="usuarios" hidden>
         <h1>Usuários</h1>
-        <p class="ad-muted">Pessoas que já entraram com o Google. O plano pago aparece aqui quando os pagamentos reais forem ligados.</p>
+        <p class="ad-muted">Pessoas que já entraram com o Google. <strong>Automático</strong>: o acesso segue o pagamento (Pix ou cartão). <strong>Liberar</strong>: dá o plano sem pagamento, com ou sem data final. <strong>Bloquear</strong>: tira o acesso mesmo de quem pagou e impede novas compras (não cancela a cobrança do cartão; para isso use a Stripe ou a aba Cancelamentos).</p>
+        <p class="ad-muted" id="adUserResumo"></p>
         <div class="ad-table-wrap"><table class="ad-table">
-          <thead><tr><th>Nome</th><th>E-mail</th><th>Acessos</th><th>Primeiro acesso</th><th>Último acesso</th></tr></thead>
+          <thead><tr><th>Usuário</th><th>Situação</th><th>Pagou</th><th>Acesso (admin)</th><th>Acessos</th></tr></thead>
           <tbody id="adUserRows"></tbody>
         </table></div>
       </section>
@@ -151,6 +152,6 @@
   </dialog>
 
   <div class="ad-toast" id="adToast" role="status" aria-live="polite" hidden></div>
-  <script type="module" src="/admin/admin.js?v=3"></script>
+  <script type="module" src="/admin/admin.js?v=4"></script>
 </body>
 </html>

@@ -448,6 +448,20 @@ function renderPlanGate() {
       onLogout: () => $('#logoutBtn')?.click()
     });
   }
+  if (gate) {
+    let aviso = gate.querySelector('.plan-gate-bloqueado');
+    if (semPlano && state.bloqueado && state.user) {
+      if (!aviso) {
+        aviso = document.createElement('p');
+        aviso.className = 'plan-gate-bloqueado';
+        aviso.setAttribute('role', 'alert');
+        gate.prepend(aviso);
+      }
+      aviso.textContent = 'O acesso desta conta está bloqueado. Fale com o suporte do Check no Concurso.';
+    } else if (aviso) {
+      aviso.remove();
+    }
+  }
   const login = $('#planGateLogin');
   if (login) login.hidden = Boolean(state.user);
   if (semPlano && (activeView === 'cursos' || activeView === 'salvos')) switchView('plano');
@@ -478,6 +492,8 @@ function applyServerRole(u) {
     state.tier = state.tierBeforeAdmin || 'guest';
     state.adminGranted = false;
   }
+  // Conta bloqueada pelo admin (o servidor já nega o acesso; aqui só avisamos a pessoa)
+  state.bloqueado = Boolean(u && u.bloqueado);
   // Pagamentos reais (Stripe): o plano vem só do servidor, nunca da simulação
   if (!isAdmin && stripeOn()) {
     if (u && u.plan) {
