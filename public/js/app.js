@@ -1,4 +1,5 @@
 import { CONCURSOS, PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/concursos.js';
+import { PROVAS } from './data/provas.js';
 import { scoreConcurso, SEARCH_SUGGESTIONS } from './search.js?v=3';
 
 const STORAGE_KEY = 'check_no_concurso_state_v3';
@@ -1289,7 +1290,7 @@ function renderDetailModal() {
         `Exclusivo do Plano Check Completo (R$ 17,99/mês ou R$ 199,90/ano — economize R$ 15,98). Acesso a tudo na plataforma mais o banco com as 5 últimas provas de todos os concursos abertos do Brasil.`,
         sampleRow,
         'completo-anual'
-      );
+      ) + `<p class="muted-sm" style="text-align:center;margin:4px 0 0;"><a href="/prova.html?concurso=pm-sp-soldado-2026&amp;ano=2025">Ver como funciona a resolução de questões →</a></p>`;
       return;
     }
 
@@ -1302,23 +1303,28 @@ function renderDetailModal() {
         </div>
       </div>
 
-      ${c.provasAnteriores.map((exam, idx) => `
+      ${c.provasAnteriores.map((exam) => {
+        const resolvivel = Boolean(PROVAS[c.id]?.[exam.ano]);
+        return `
         <div class="past-exam-row">
           <div class="past-exam-left">
             <div class="past-exam-year">${exam.ano}</div>
             <div>
               <strong>${escapeHtml(exam.edicao)} · Banca ${escapeHtml(exam.banca)}</strong>
-              <p class="muted-sm">${escapeHtml(exam.cargo)} · ${exam.questoes} questões · ${escapeHtml(exam.gabarito)}</p>
+              <p class="muted-sm">${escapeHtml(exam.cargo)} · ${resolvivel ? `${PROVAS[c.id][exam.ano].questoes.length} questões comentadas` : `${exam.questoes} questões · ${escapeHtml(exam.gabarito)}`}</p>
             </div>
           </div>
           <div class="edital-actions">
-            <span class="${idx === 0 ? 'badge-emerald' : 'badge-gold'}">${escapeHtml(exam.disponibilidade)}</span>
-            <button type="button" class="btn-outline-sm" data-download-exam="${idx}">
-              ${idx === 0 ? 'Baixar Prévia + Gabarito' : 'Avise-me / Baixar Modelo'}
-            </button>
+            <span class="${resolvivel ? 'badge-emerald' : 'badge-gold'}">${resolvivel ? 'Disponível' : escapeHtml(exam.disponibilidade)}</span>
+            ${resolvivel
+              ? `<a class="btn-primary-sm" style="padding:11px 18px;text-decoration:none;display:inline-flex;align-items:center;" href="/prova.html?concurso=${encodeURIComponent(c.id)}&amp;ano=${exam.ano}">Resolver prova</a>`
+              : `<button type="button" class="btn-outline-sm" data-download-exam="${c.provasAnteriores.indexOf(exam)}">
+                  Baixar modelo
+                </button>`}
           </div>
         </div>
-      `).join('')}
+      `;
+      }).join('')}
     `;
 
     body.querySelectorAll('[data-download-exam]').forEach((btn) => {
