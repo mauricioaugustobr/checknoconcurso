@@ -51,6 +51,26 @@
       textarea {
         overflow-wrap: anywhere;
       }
+      .qr {
+        display: flex;
+        justify-content: center;
+        margin: 1.2rem 0 0.6rem;
+      }
+      .qr svg {
+        width: min(15rem, 78vw);
+        height: auto;
+        display: block;
+        background: #fff;
+        padding: 0.6rem;
+        border: 1px solid #e2ded5;
+        border-radius: 0.6rem;
+      }
+      .qr-hint {
+        text-align: center;
+        font-size: 0.92rem;
+        color: #4b5b53;
+        margin: 0 0 1rem;
+      }
     </style>
   </head>
   <body>
@@ -93,6 +113,11 @@
         ><button value="card">Assinar com cartão</button>
       </form>
       <section id="payment" hidden>
+        <div id="qr" class="qr" role="img" aria-label="QR Code Pix para pagamento"></div>
+        <p class="qr-hint">
+          Abra o app do seu banco, escolha Pix e escaneie o QR Code. Se
+          preferir, use o código copia e cola abaixo.
+        </p>
         <label>Pix copia e cola<textarea id="code" readonly></textarea></label
         ><button id="copy">Copiar código Pix</button>
         <p>
@@ -102,6 +127,7 @@
       </section>
       <p role="status" id="message"></p>
     </main>
+    <script src="/js/vendor/qrcode.js"></script>
     <script type="module" src="/js/pagar.js"></script>
   </body>
 </html>

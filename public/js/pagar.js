@@ -17,10 +17,32 @@ async function post(route, data) {
   if (!res.ok) throw new Error(result.error || "Tente novamente.");
   return result;
 }
+function renderQr(code) {
+  const box = elem("qr");
+  if (!box) return;
+  if (!code || typeof window.qrcode !== "function") {
+    box.hidden = true;
+    return;
+  }
+  try {
+    const qr = window.qrcode(0, "M");
+    qr.addData(code);
+    qr.make();
+    box.innerHTML = qr.createSvgTag({
+      cellSize: 4,
+      margin: 2,
+      scalable: true,
+    });
+    box.hidden = false;
+  } catch {
+    box.hidden = true;
+  }
+}
 async function display(order) {
   elem("buyer").hidden = true;
   elem("payment").hidden = false;
   elem("code").value = order.code;
+  renderQr(order.code);
   while (Date.now() < order.until) {
     try {
       if ((await post("pix", { txid: order.txid })).paid) {
