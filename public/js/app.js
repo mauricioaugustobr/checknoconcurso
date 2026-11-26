@@ -1298,7 +1298,7 @@ function renderDetailModal() {
         <div>
           <span class="badge-gold" style="margin-bottom:4px;">Recurso em Lançamento · Exclusivo Check Completo</span>
           <div><strong>Banco das 5 Provas Anteriores — ${escapeHtml(c.orgao)} (${escapeHtml(c.sigla)})</strong></div>
-          <p class="muted-sm">Seu plano Completo garante acesso prioritário às 5 provas anteriores com gabarito definitivo oficial.</p>
+          <p class="muted-sm">Seu plano Completo dá acesso às 5 provas anteriores em modelo de resolução de questões, com gabarito oficial e a explicação da questão logo abaixo, depois que você responde.</p>
         </div>
       </div>
 
