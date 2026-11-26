@@ -363,7 +363,7 @@ function confirmar() {
   renderLateral();
   renderBarraMovel(false);
   const box = document.querySelector(".explain");
-  if (box) box.focus({ preventScroll: true });
+  if (box) box.scrollIntoView({ block: "nearest", behavior: "smooth" });
   anunciar(
     estado.respostas[q.numero].certa
       ? `Resposta certa. Alternativa ${q.correta}.`
