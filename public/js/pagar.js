@@ -15,14 +15,14 @@ const PLANS = {
   },
   "completo-mensal": {
     name: "Check Completo",
-    desc: "Tudo do Essencial + provas anteriores resolvidas",
+    desc: "Tudo do Essencial + treinar com questões de provas anteriores",
     price: "R$ 17,99",
     cadence: "/mês",
     note: "Assinatura mensal no cartão, com renovação automática. No Pix, o acesso não se renova.",
     features: [
       "Tudo do Check Essencial: concursos, editais e cursos",
-      "5 provas anteriores de cada concurso",
-      "Questões em formato de resolução, com a explicação abaixo de cada resposta",
+      "Treinar com questões de provas anteriores",
+      "Todas as questões com resposta e explicação em 3 parágrafos logo abaixo",
       "Gabaritos oficiais organizados por ano e banca",
     ],
   },
@@ -34,8 +34,8 @@ const PLANS = {
     note: "Pagamento anual: 12 meses de acesso. No cartão a renovação é automática; no Pix, não.",
     features: [
       "Tudo do Check Essencial: concursos, editais e cursos",
-      "5 provas anteriores de cada concurso",
-      "Questões em formato de resolução, com a explicação abaixo de cada resposta",
+      "Treinar com questões de provas anteriores",
+      "Todas as questões com resposta e explicação em 3 parágrafos logo abaixo",
       "Gabaritos oficiais organizados por ano e banca",
     ],
   },

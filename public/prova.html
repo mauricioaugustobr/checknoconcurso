@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/css/tokens.css?v=10" />
     <link rel="stylesheet" href="/css/brand.css?v=1" />
     <link rel="stylesheet" href="/css/fonts.css?v=1" />
-    <link rel="stylesheet" href="/css/prova.css?v=6" />
+    <link rel="stylesheet" href="/css/prova.css?v=7" />
   </head>
   <body>
     <header class="exam-header">
@@ -36,7 +36,7 @@
 
     <main class="exam-shell exam-main" id="examMain">
       <section class="exam-intro" id="examIntro" hidden>
-        <p class="eyebrow">Banco de provas</p>
+        <p class="eyebrow">Treinar com questões de provas anteriores</p>
         <h1 id="examTitle"></h1>
         <p class="exam-sub" id="examSub"></p>
         <ul class="exam-facts" id="examFacts"></ul>
@@ -46,7 +46,8 @@
         </div>
         <p class="exam-note">
           O enunciado de cada questão é o do caderno oficial. A correção usa o gabarito
-          definitivo da banca. A explicação comentada entra em uma próxima etapa.
+          definitivo da banca. Toda questão respondida mostra a resposta certa e, logo abaixo,
+          uma explicação em 3 parágrafos.
         </p>
       </section>
 
@@ -102,13 +103,10 @@
 
           <div class="exam-feedback" id="feedback" hidden aria-live="polite"></div>
 
-          <div class="exam-explanation" id="explanation" hidden>
-            <h3>Explicação da questão</h3>
-            <p>
-              A explicação comentada desta questão está em preparação e será gerada
-              automaticamente, com o passo a passo da resolução.
-            </p>
-          </div>
+          <section class="exam-explanation" id="explanation" hidden aria-live="polite" aria-labelledby="explanationTitle">
+            <h3 id="explanationTitle">Resposta comentada</h3>
+            <div class="explanation-body" id="explanationBody"></div>
+          </section>
 
           <div class="exam-pager">
             <button type="button" class="btn-ghost" id="prevBtn">Anterior</button>
@@ -138,6 +136,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/js/prova.js?v=8"></script>
+    <script type="module" src="/js/prova.js?v=9"></script>
   </body>
 </html>

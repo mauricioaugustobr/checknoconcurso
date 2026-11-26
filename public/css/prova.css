@@ -422,6 +422,18 @@ a { color: var(--brand-primary); }
 }
 .exam-explanation h3 { margin: 0 0 4px; font-size: 15px; color: var(--accent-text); }
 .exam-explanation p { margin: 0; font-size: 14px; color: var(--text-secondary); }
+.explanation-body p { margin: 0 0 10px; font-size: 15px; line-height: 1.65; color: var(--text-primary, #0F2236); }
+.explanation-body p:last-child { margin-bottom: 0; }
+.explanation-body .explanation-status { font-size: 14px; color: var(--text-secondary); }
+.explanation-body .explanation-loading { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-secondary); }
+.explanation-body .explanation-loading::before {
+  content: ""; width: 16px; height: 16px; flex: none; border-radius: 50%;
+  border: 2px solid var(--accent-border); border-top-color: var(--accent-text);
+  animation: explanation-spin 0.8s linear infinite;
+}
+.explanation-body .btn-ghost { margin-top: 10px; }
+@keyframes explanation-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .explanation-body .explanation-loading::before { animation: none; } }
 
 .exam-pager {
   display: flex;

@@ -392,6 +392,67 @@ function paintAnswer(q, chosen) {
   el("skipBtn").hidden = true;
   fieldset.disabled = true;
   fieldset.classList.add("is-locked");
+  loadExplanation(q);
+}
+
+// Resposta comentada: 3 parágrafos gerados no servidor e guardados também neste aparelho.
+const EXPL_KEY = (n) => `check-explicacao:${examKey}:${n}`;
+
+function renderExplanation(paragrafos) {
+  const body = el("explanationBody");
+  body.innerHTML = "";
+  paragrafos.forEach((texto) => {
+    const p = document.createElement("p");
+    p.textContent = texto;
+    body.append(p);
+  });
+}
+
+async function loadExplanation(q) {
+  const body = el("explanationBody");
+  if (!body || q.annulled) return;
+  try {
+    const saved = JSON.parse(localStorage.getItem(EXPL_KEY(q.number)) || "null");
+    if (saved && saved.answer === q.answer && Array.isArray(saved.paragrafos) && saved.paragrafos.length === 3) {
+      renderExplanation(saved.paragrafos);
+      return;
+    }
+  } catch {
+    /* sem cache local */
+  }
+  body.innerHTML = '<p class="explanation-loading">Preparando a explicação desta questão…</p>';
+  const numero = q.number;
+  let data = {};
+  let ok = false;
+  try {
+    const res = await fetch(`/api/explicacao?c=${encodeURIComponent(examKey)}&q=${numero}`, { cache: "no-store" });
+    data = await res.json().catch(() => ({}));
+    ok = res.ok && Array.isArray(data.paragrafos) && data.paragrafos.length === 3;
+  } catch {
+    ok = false;
+  }
+  if (questionAt(current).number !== numero) return; // a pessoa já mudou de questão
+  if (ok) {
+    renderExplanation(data.paragrafos);
+    try {
+      localStorage.setItem(EXPL_KEY(numero), JSON.stringify({ answer: q.answer, paragrafos: data.paragrafos }));
+    } catch {
+      /* armazenamento cheio: segue sem guardar */
+    }
+    return;
+  }
+  body.innerHTML = "";
+  const msg = document.createElement("p");
+  msg.className = "explanation-status";
+  msg.textContent = data.pendente
+    ? "A explicação desta questão está sendo preparada. Volte em instantes."
+    : data.error || "Não foi possível carregar a explicação agora.";
+  const retry = document.createElement("button");
+  retry.type = "button";
+  retry.className = "btn-ghost";
+  retry.textContent = "Tentar de novo";
+  retry.addEventListener("click", () => loadExplanation(q));
+  body.append(msg, retry);
 }
 
 function showResult() {

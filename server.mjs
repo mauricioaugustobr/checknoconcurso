@@ -17,6 +17,7 @@ import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from './li
 
 import { handlePix } from './lib/pix.js';
 import { handleCancel, handleCancelRequest } from './lib/cancel.js';
+import { handleExplicacao } from './lib/explicacao.js';
 const STRIPE_ROUTES = {
   pix: handlePix,
   checkout: handleCheckout,
@@ -40,6 +41,7 @@ const DYNAMIC_ROUTES = [
   [/^\/blog\/?$/, (r) => renderBlogIndex(r)],
   [/^\/blog\/([^/]+)\/?$/, (r, m) => renderBlogPost(r, decodeURIComponent(m[1]))],
   [/^\/sitemap\.xml$/, (r) => renderSitemap(r)],
+  [/^\/api\/explicacao$/, (r) => handleExplicacao(r)],
   [/^\/api\/stripe\/([a-z]+)$/, (r, m) => (STRIPE_ROUTES[m[1]]
     ? STRIPE_ROUTES[m[1]](r)
     : Response.json({ error: 'Rota de pagamento não encontrada' }, { status: 404 }))]

@@ -312,7 +312,7 @@ function renderAuthUI() {
     $('#activePlanHeading').textContent = `Assinatura ativa: ${planLabel}`;
     const methodLabel = state.subMethod ? ` via ${state.subMethod}` : '';
     const dateLabel = state.subSince ? ` desde ${formatDateBR(state.subSince)}` : '';
-    $('#activePlanDetails').textContent = `Acesso total${methodLabel}${dateLabel}: concursos, editais, cursos + 5 provas anteriores liberadas.`;
+    $('#activePlanDetails').textContent = `Acesso total${methodLabel}${dateLabel}: concursos, editais, cursos + treino com questões de provas anteriores liberado.`;
     subEssencialBtn.textContent = 'Incluído no seu Plano Completo ✓';
     subEssencialBtn.disabled = true;
     subCompletoBtn.textContent = 'Seu Plano Atual ✓';
@@ -321,13 +321,13 @@ function renderAuthUI() {
     headerCta.innerHTML = `<span class="cta-label">Liberar provas</span>${CTA_ARROW_SVG}`;
     headerCta.classList.remove('is-pro');
     heroPricePill.textContent = 'Essencial (R$ 6,99) Ativo';
-    heroBtn.textContent = 'Fazer Upgrade para 5 Provas (R$ 17,99)';
+    heroBtn.textContent = 'Treinar com questões de provas (R$ 17,99)';
     upgradeStrip.hidden = false;
     activePlanBanner.hidden = false;
     $('#activePlanHeading').textContent = 'Assinatura ativa: Check Essencial (R$ 6,99/mês)';
     const methodLabel = state.subMethod ? ` via ${state.subMethod}` : '';
     const dateLabel = state.subSince ? ` desde ${formatDateBR(state.subSince)}` : '';
-    $('#activePlanDetails').textContent = `Editais, datas de prova e cursos liberados${methodLabel}${dateLabel}. Faça upgrade para o Completo para liberar as 5 provas anteriores.`;
+    $('#activePlanDetails').textContent = `Editais, datas de prova e cursos liberados${methodLabel}${dateLabel}. Faça upgrade para o Completo para treinar com questões de provas anteriores.`;
     subEssencialBtn.textContent = 'Seu Plano Atual ✓ (R$ 6,99/mês)';
     subEssencialBtn.disabled = true;
     subCompletoBtn.disabled = false;
@@ -1176,7 +1176,7 @@ function renderDetailModal() {
       <div class="edital-actions">
         <button type="button" class="btn-primary-sm" data-switch-tab="edital">Abrir Edital &amp; Raio-X</button>
         <button type="button" class="btn-outline-sm" data-switch-tab="cursos">Comparar ${c.cursos.length} Cursos</button>
-        <button type="button" class="btn-outline-sm" data-switch-tab="provas">Ver 5 Provas Anteriores</button>
+        <button type="button" class="btn-outline-sm" data-switch-tab="provas">Treinar com questões de provas anteriores</button>
       </div>
     `;
     return;
@@ -1291,8 +1291,8 @@ function renderDetailModal() {
       `).join('');
 
       body.innerHTML = renderPaywallGate(
-        `5 Provas Anteriores de ${c.sigla} + Gabaritos Oficiais (Em Breve)`,
-        `Exclusivo do Plano Check Completo (R$ 17,99/mês ou R$ 199,90/ano — economize R$ 15,98). Acesso a tudo na plataforma mais o banco com as 5 últimas provas de todos os concursos abertos do Brasil.`,
+        `Treinar com questões de provas anteriores · ${c.sigla}`,
+        `Exclusivo do Plano Check Completo (R$ 17,99/mês ou R$ 199,90/ano — economize R$ 15,98). Acesso a tudo na plataforma e às questões de provas anteriores: toda questão respondida mostra a resposta certa e, logo abaixo, uma explicação em 3 parágrafos.`,
         sampleRow,
         'completo-anual'
       );
@@ -1302,9 +1302,9 @@ function renderDetailModal() {
     body.innerHTML = `
       <div class="edital-hero-box gold-box">
         <div>
-          <span class="badge-gold" style="margin-bottom:4px;">Recurso em Lançamento · Exclusivo Check Completo</span>
-          <div><strong>Banco das 5 Provas Anteriores — ${escapeHtml(c.orgao)} (${escapeHtml(c.sigla)})</strong></div>
-          <p class="muted-sm">Seu plano Completo dá acesso às 5 provas anteriores em modelo de resolução de questões, com gabarito oficial e a explicação da questão logo abaixo, depois que você responde.</p>
+          <span class="badge-gold" style="margin-bottom:4px;">Exclusivo Check Completo</span>
+          <div><strong>Treinar com questões de provas anteriores — ${escapeHtml(c.orgao)} (${escapeHtml(c.sigla)})</strong></div>
+          <p class="muted-sm">Responda cada questão e confira na hora pelo gabarito oficial. Toda questão respondida mostra a resposta certa e, logo abaixo, uma explicação em 3 parágrafos.</p>
         </div>
       </div>
 
@@ -1762,7 +1762,7 @@ function bindEvents() {
     saveState();
     renderAll();
     if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
-    showToast('Modo Check Completo (R$ 17,99/mês · R$ 199,90/ano): tudo + 5 provas anteriores!');
+    showToast('Modo Check Completo (R$ 17,99/mês · R$ 199,90/ano): tudo + treino com questões de provas anteriores!');
   });
 
   $$('[data-billing]').forEach((btn) => {

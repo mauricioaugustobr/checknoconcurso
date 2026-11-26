@@ -30,7 +30,7 @@ export const PLANOS = {
     preco: 17.99,
     periodicidade: 'mês',
     rotuloPreco: 'R$ 17,99/mês',
-    resumo: 'Tudo do Essencial + acesso às 5 provas anteriores com gabarito de todos os concursos abertos (em breve).'
+    resumo: 'Tudo do Essencial + treinar com questões de provas anteriores, com resposta e explicação em 3 parágrafos abaixo de cada questão.'
   },
   completoAnual: {
     id: 'completo-anual',
@@ -40,7 +40,7 @@ export const PLANOS = {
     economiaAnual: 15.98,
     periodicidade: 'ano',
     rotuloPreco: 'R$ 199,90/ano',
-    resumo: 'Acesso total por 12 meses com desconto especial (equivale a R$ 16,66/mês), incluindo as 5 provas anteriores.'
+    resumo: 'Acesso total por 12 meses com desconto especial (equivale a R$ 16,66/mês), incluindo o treino com questões de provas anteriores.'
   }
 };
 
