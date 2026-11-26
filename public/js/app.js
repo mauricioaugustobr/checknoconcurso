@@ -1,4 +1,5 @@
 import { CONCURSOS, PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/concursos.js';
+import { PROVAS } from './data/provas.js';
 import { scoreConcurso, SEARCH_SUGGESTIONS } from './search.js?v=3';
 
 const STORAGE_KEY = 'check_no_concurso_state_v3';
@@ -1308,14 +1309,18 @@ function renderDetailModal() {
             <div class="past-exam-year">${exam.ano}</div>
             <div>
               <strong>${escapeHtml(exam.edicao)} · Banca ${escapeHtml(exam.banca)}</strong>
-              <p class="muted-sm">${escapeHtml(exam.cargo)} · ${exam.questoes} questões · ${escapeHtml(exam.gabarito)}</p>
+              <p class="muted-sm">${escapeHtml(exam.cargo)} · ${exam.questoes} questões · ${PROVAS[c.id] && idx === 0 ? 'gabarito oficial e resolução no site' : escapeHtml(exam.gabarito)}</p>
             </div>
           </div>
           <div class="edital-actions">
             <span class="${idx === 0 ? 'badge-emerald' : 'badge-gold'}">${escapeHtml(exam.disponibilidade)}</span>
-            <button type="button" class="btn-outline-sm" data-download-exam="${idx}">
-              ${idx === 0 ? 'Baixar Prévia + Gabarito' : 'Avise-me / Baixar Modelo'}
-            </button>
+            ${idx === 0 && PROVAS[c.id] ? `
+              <a class="btn-outline-sm" href="/prova.html?c=${encodeURIComponent(c.id)}">Resolver prova de ${exam.ano}</a>
+            ` : `
+              <button type="button" class="btn-outline-sm" data-download-exam="${idx}">
+                ${idx === 0 ? 'Baixar Prévia + Gabarito' : 'Avise-me / Baixar Modelo'}
+              </button>
+            `}
           </div>
         </div>
       `).join('')}

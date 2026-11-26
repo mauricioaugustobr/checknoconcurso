@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR" data-palette="opcao-2">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0C4F83" />
+    <meta name="robots" content="noindex" />
+    <title>Prova anterior | Check no Concurso</title>
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Plus+Jakarta+Sans:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/tokens.css?v=10" />
+    <link rel="stylesheet" href="/css/brand.css?v=1" />
+    <link rel="stylesheet" href="/css/fonts.css?v=1" />
+    <link rel="stylesheet" href="/css/prova.css?v=3" />
+  </head>
+  <body>
+    <header class="exam-header">
+      <div class="exam-shell exam-header-row">
+        <a class="brand" href="/" aria-label="Check no Concurso — voltar ao site">
+          <svg width="32" height="32" viewBox="0 0 512 512" fill="none" aria-hidden="true">
+            <rect width="512" height="512" rx="116" fill="#0C4F83" />
+            <path d="M385.7 265.6A138 138 0 1 1 295.2 126.3" stroke="#FFFFFF" stroke-width="50" stroke-linecap="round" />
+            <path d="M172 262L230 320L404 138" stroke="#F4D632" stroke-width="50" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <strong class="brand-wordmark">Check <span>no Concurso</span></strong>
+        </a>
+        <span class="exam-tag">Prova anterior</span>
+        <a class="exam-back" href="/">Voltar ao site</a>
+      </div>
+    </header>
+
+    <main class="exam-shell exam-main" id="examMain">
+      <section class="exam-intro" id="examIntro" hidden>
+        <p class="eyebrow">Banco de provas</p>
+        <h1 id="examTitle"></h1>
+        <p class="exam-sub" id="examSub"></p>
+        <ul class="exam-facts" id="examFacts"></ul>
+        <div class="exam-start">
+          <button type="button" class="btn-primary" id="startBtn">Começar a resolver</button>
+          <a class="btn-ghost" id="cadernoLink" target="_blank" rel="noopener">Abrir caderno oficial</a>
+        </div>
+        <p class="exam-note">
+          O enunciado de cada questão é o do caderno oficial. A correção usa o gabarito
+          definitivo da banca. A explicação comentada entra em uma próxima etapa.
+        </p>
+      </section>
+
+      <section id="examRunner" hidden>
+        <div class="exam-top">
+          <div>
+            <p class="eyebrow" id="examRunnerLabel"></p>
+            <p class="exam-progress-text" id="progressText">0 de 60 respondidas</p>
+          </div>
+          <div class="exam-top-actions">
+            <button type="button" class="btn-ghost" id="finishBtn">Ver resultado</button>
+          </div>
+        </div>
+        <div class="exam-progress" role="progressbar" aria-labelledby="progressText" aria-valuemin="0" aria-valuemax="60" aria-valuenow="0">
+          <span id="progressBar"></span>
+        </div>
+
+        <nav class="exam-nav" id="questionNav" aria-label="Ir para uma questão"></nav>
+
+        <article class="card exam-card" id="questionCard">
+          <header class="exam-card-head">
+            <span class="badge" id="questionSubject"></span>
+            <span class="exam-counter" id="questionCounter"></span>
+          </header>
+          <h2 class="exam-stem" id="questionStem"></h2>
+
+          <p class="exam-source" id="questionSource" hidden>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            <span>Esta questão usa um texto ou imagem do caderno oficial.</span>
+            <a id="questionSourceLink" target="_blank" rel="noopener">Abrir na página <span id="questionPage"></span></a>
+          </p>
+
+          <form id="answerForm">
+            <fieldset class="exam-options" id="optionsFieldset">
+              <legend class="sr-only">Escolha uma alternativa</legend>
+            </fieldset>
+            <div class="exam-actions">
+              <button type="submit" class="btn-primary" id="checkBtn">Conferir resposta</button>
+              <button type="button" class="btn-ghost" id="skipBtn">Pular</button>
+            </div>
+          </form>
+
+          <div class="exam-feedback" id="feedback" hidden aria-live="polite"></div>
+
+          <div class="exam-explanation" id="explanation" hidden>
+            <h3>Explicação da questão</h3>
+            <p>
+              A explicação comentada desta questão está em preparação e será gerada
+              automaticamente, com o passo a passo da resolução.
+            </p>
+          </div>
+
+          <div class="exam-pager">
+            <button type="button" class="btn-ghost" id="prevBtn">Anterior</button>
+            <button type="button" class="btn-primary" id="nextBtn">Próxima questão</button>
+          </div>
+        </article>
+
+        <section class="card exam-result" id="resultPanel" hidden aria-live="polite"></section>
+      </section>
+
+      <p class="exam-empty" id="examEmpty" hidden>
+        A prova deste concurso ainda não está disponível.
+        <a href="/">Voltar ao site</a>
+      </p>
+    </main>
+
+    <footer class="exam-footer">
+      <div class="exam-shell">
+        <p id="examSourceNote"></p>
+        <p>
+          <a id="footerCaderno" target="_blank" rel="noopener">Caderno oficial</a>
+          <span aria-hidden="true">·</span>
+          <a id="footerGabarito" target="_blank" rel="noopener">Gabarito oficial</a>
+          <span aria-hidden="true">·</span>
+          <a href="/privacidade.html">Privacidade</a>
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="/js/prova.js?v=3"></script>
+  </body>
+</html>
