@@ -17,6 +17,7 @@ ALT_STYLES = {
     'dot':   re.compile(r'^\s*([A-E])[\.\-–]\s+(.*)$'),
     'bare':  re.compile(r'^\s*([A-E])\s{1,4}(\S.*)$'),
     'solo':  re.compile(r'^\s*([A-E])\s*$()'),
+    'dotsolo': re.compile(r'^\s*([A-Ea-e])[\.\)]\s*$()'),
 }
 SUPPORT = re.compile(r'(leia|considere|observe|analise|texto|tira|charge|gr[aá]fico|tabela|figura|poema|cart[uo]m|fragmento|trecho)[^\n]{0,90}?quest(?:[oõ]es|[aã]o)\s+(?:de\s+)?(?:n[ºo°.]*\s*)?(\d{1,3})\s*(?:a|e|até|-|–)\s*(\d{1,3})', re.I)
 LEAD_SUPPORT = re.compile(r'^\s*(leia o texto|leia a tira|leia o poema|leia a charge|leia o trecho|considere o texto|texto para as quest|texto\s+[A-Z0-9][\w-]{0,10}\s*$)', re.I)
@@ -80,22 +81,47 @@ def strip_repeated(lines, npages):
     return out
 
 
+ANY_ALT = re.compile(r'^\s*(?:\(([A-Ea-e])\)|([A-Ea-e])\)|([A-E])[\.\-–]|([A-E])\s{1,4}\S|([A-E])\s*$)')
+
+
+def _alt_score(lines, hits):
+    """Quantos trechos de questão têm as alternativas A..D em ordem."""
+    good = 0
+    for k, (i, _) in enumerate(hits):
+        end = hits[k + 1][0] if k + 1 < len(hits) else min(len(lines), i + 80)
+        exp = 'A'
+        for _, l in lines[i + 1:end]:
+            m = ANY_ALT.match(l)
+            if m:
+                g = next(x for x in m.groups() if x).upper()
+                if g == exp:
+                    exp = chr(ord(exp) + 1)
+                elif g == 'A':
+                    exp = 'B'
+            if exp > 'D':
+                good += 1
+                break
+    return good
+
+
 def find_questions(lines, expected=None):
-    """Escolhe o padrão de cabeçalho que produz a maior sequência consecutiva N, N+1, ..."""
-    best = None
+    """Escolhe o padrão de cabeçalho e o ponto de partida cuja sequência N, N+1, ... tem alternativas."""
+    best, best_key = None, None
     for pat in QHEAD:
         nums = []
         for i, (p, l) in enumerate(lines):
             m = pat.match(l)
             if m:
                 nums.append((i, int(m.group(1))))
-        for s0 in sorted({n for _, n in nums})[:12]:
-            hits, nxt = [], s0
-            for i, n in nums:
+        starts = [k for k, (_, n) in enumerate(nums) if n in (0, 1)][:15] or list(range(min(3, len(nums))))
+        for k0 in starts:
+            hits, nxt = [], nums[k0][1]
+            for i, n in nums[k0:]:
                 if n == nxt:
                     hits.append((i, nxt)); nxt += 1
-            if best is None or len(hits) > len(best[1]):
-                best = (pat, hits)
+            key = (_alt_score(lines, hits), len(hits))
+            if best_key is None or key > best_key:
+                best, best_key = (pat, hits), key
     return best
 
 

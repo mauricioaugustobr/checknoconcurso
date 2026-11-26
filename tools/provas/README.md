@@ -16,3 +16,13 @@ o download, a extração e a validação; a IA só entra na conferência por amo
 Orquestração: `run_batch.py [ids...]` (sem ids = todos os concursos ativos).
 Requisitos: Python 3.12 com PyMuPDF, `pdftotext` (Poppler), Node 20+.
 Os dados de trabalho (PDFs, jobs, relatórios) ficam fora do repositório.
+
+## Acervo da PCI (outras bancas) — rodada de 26/11/2026
+
+| Etapa | Script | O que faz |
+|---|---|---|
+| Links | navegador | A página de download da PCI libera os links do caderno e do gabarito depois da verificação do navegador; os caminhos ficam em `pci-urls/*.json` e `alt-urls/*.txt`. |
+| Download | `pci_download.py` | Baixa os PDFs liberados para `pci/<slug>/`. |
+| Gabarito | `gabarito2.py` | Separa as seções por cargo/versão e escolhe a do caderno. **Só aceita se a leitura por layout e a leitura pela ordem do arquivo derem o mesmo gabarito.** |
+| Montagem | `pci_jobs.py` (`--alts` para provas alternativas do mesmo órgão) | Recusa gabarito preliminar, prova de outro órgão, questão faltando ou sobrando. |
+| Publicação | `publish_ok.py` | Limpa o texto e publica só as provas aprovadas, sem tocar nas já publicadas. |
