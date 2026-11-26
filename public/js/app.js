@@ -1146,6 +1146,8 @@ function renderDetailModal() {
     <div class="kpi-cell"><span>Taxa de Inscrição</span><strong>${escapeHtml(taxaLabel)}</strong></div>
   `;
 
+  renderTrainNow(c);
+
   $$('.modal-tab').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.detailTab === activeDetailTab);
   });
@@ -1360,6 +1362,41 @@ function renderDetailModal() {
       });
     });
   }
+}
+
+// Botão "Quero treinar pra esse concurso agora": só para assinantes do Check Completo (mensal ou anual).
+function renderTrainNow(c) {
+  const bar = $('#detailTrainNow');
+  if (!bar) return;
+  if (!hasCompleto()) {
+    bar.hidden = true;
+    bar.innerHTML = '';
+    return;
+  }
+  const prova = PROVAS[c.id];
+  const label = 'Quero treinar pra esse concurso agora';
+  let detalhe;
+  if (prova) {
+    detalhe = `Prova de ${escapeHtml(prova.ano)} · ${escapeHtml(prova.total)} questões · ${escapeHtml(prova.banca)}. Cada resposta vem com a explicação em 3 parágrafos.`;
+  } else if (semProvaAnterior(c.id)) {
+    detalhe = 'Este concurso não tem prova anterior. Veja os detalhes na aba de treino.';
+  } else {
+    detalhe = 'A prova anterior deste concurso está em preparação.';
+  }
+  bar.innerHTML = `
+    <div class="train-now-text">
+      <strong>Treinar com questões de provas anteriores</strong>
+      <span>${detalhe}</span>
+    </div>
+    ${prova
+      ? `<a class="train-now-btn" href="/prova.html?c=${encodeURIComponent(c.id)}">${label}</a>`
+      : `<button type="button" class="train-now-btn" id="trainNowTabBtn">${label}</button>`}
+  `;
+  bar.hidden = false;
+  $('#trainNowTabBtn')?.addEventListener('click', () => {
+    activeDetailTab = 'provas';
+    renderDetailModal();
+  });
 }
 
 function renderPaywallGate(title, desc, blurredPreviewHtml, targetPlan = 'essencial') {
