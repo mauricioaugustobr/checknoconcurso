@@ -47,6 +47,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid #0C4F83; outline-
 .ad-nowrap { white-space: nowrap; }
 .ad-pill { display: inline-block; font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #FFF6D6; color: #734B00; }
 .ad-pill.is-ok { background: #E3F4EA; color: #145C36; }
+.ad-pill.is-danger { background: #FDECEC; color: #A01B1B; }
 .ad-row-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .ad-row-between h1, .ad-row-between h2 { margin: 0; }
 .ad-dialog { width: min(720px, 100% - 24px); border: 0; border-radius: 18px; padding: 0; box-shadow: 0 24px 64px rgba(11, 37, 64, .25); }

@@ -63,7 +63,7 @@ async function run() {
   const blog = await renderBlogIndex(req('/blog'));
   assert.equal(blog.status, 200);
   const sm = await (await renderSitemap(req('/sitemap.xml'))).text();
-  assert.equal((sm.match(/<url>/g) || []).length, 3 + 27 + CONCURSOS.length, 'sitemap: home, blog, privacidade, 27 estados e todos os concursos');
+  assert.equal((sm.match(/<url>/g) || []).length, 4 + 27 + CONCURSOS.length, 'sitemap: home, blog, privacidade, cancelamento, 27 estados e todos os concursos');
   assert.ok((await renderNotFound(req('/x')).text()).includes('noindex'));
 
   // 4. Texto do blog é seguro

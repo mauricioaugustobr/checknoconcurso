@@ -3,7 +3,16 @@ import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from '../l
 import { authJson as json } from '../lib/auth.js';
 
 import { handlePix } from '../lib/pix.js';
-const ACOES = { pix: handlePix, checkout: handleCheckout, confirm: handleConfirm, portal: handlePortal, webhook: handleWebhook };
+import { handleCancel, handleCancelRequest } from '../lib/cancel.js';
+const ACOES = {
+  pix: handlePix,
+  checkout: handleCheckout,
+  confirm: handleConfirm,
+  portal: handlePortal,
+  webhook: handleWebhook,
+  cancel: handleCancel,
+  request: handleCancelRequest
+};
 
 export async function POST(request) {
   const handler = ACOES[new URL(request.url).searchParams.get('acao')];

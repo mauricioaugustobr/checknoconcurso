@@ -31,7 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/tokens.css?v=10" />
   <link rel="stylesheet" href="/css/styles.css?v=10" />
-  <link rel="stylesheet" href="/css/auth-cta.css?v=11" />
+  <link rel="stylesheet" href="/css/auth-cta.css?v=12" />
   <link rel="stylesheet" href="/css/brand.css?v=1" />
   <link rel="stylesheet" href="/css/fonts.css?v=1" />
   <link rel="stylesheet" href="/css/pages-footer.css?v=1" />
@@ -120,6 +120,7 @@
             </div>
             <button type="button" role="menuitem" class="account-menu-item" data-view="salvos">Meus salvos e alertas</button>
             <button type="button" role="menuitem" class="account-menu-item" data-view="plano">Minha assinatura</button>
+            <a role="menuitem" class="account-menu-item" id="accountCancelLink" href="/cancelamento.html">Cancelar assinatura</a>
             <button type="button" role="menuitem" class="account-menu-item is-danger" id="logoutBtn">Sair da conta</button>
           </div>
         </div>
@@ -439,7 +440,7 @@
         <div class="pricing-hero">
           <span class="badge-gold">Check no Concurso · Planos Transparentes</span>
           <h2>Escolha o plano ideal para sua aprovação</h2>
-          <p>Acompanhe todos os concursos abertos e encerrados com datas de prova atualizadas por R$ 6,99/mês, ou escolha o Plano Completo para liberar as 5 provas anteriores (em breve) com desconto no anual.</p>
+          <p>Acompanhe todos os concursos abertos e encerrados com datas de prova atualizadas por R$ 6,99/mês, ou escolha o Plano Completo para liberar as 5 provas anteriores em resolução de questões, com a explicação da questão logo abaixo (em breve), com desconto no anual.</p>
 
           <div class="billing-toggle" role="group" aria-label="Ciclo de pagamento do Plano Completo">
             <button type="button" class="bill-btn active" id="billMonthlyBtn" data-billing="mensal">Mensal (R$ 17,99/mês)</button>
@@ -457,7 +458,7 @@
             <p id="activePlanDetails">Acesso liberado no site, em qualquer aparelho.</p>
           </div>
           <div class="active-plan-actions">
-            <button type="button" class="btn-outline-sm" id="cancelSubBtn">Simular Cancelamento</button>
+            <a class="btn-outline-sm" id="cancelSubBtn" href="/cancelamento.html">Cancelar assinatura</a>
           </div>
         </div>
 
@@ -500,7 +501,7 @@
             <div class="plan-ribbon">Acesso a Tudo · + 5 Provas Anteriores</div>
             <div class="plan-top">
               <h3>Check Completo</h3>
-              <p class="muted-sm">Tudo do Essencial + banco com 5 provas anteriores</p>
+              <p class="muted-sm">Tudo do Essencial + 5 provas anteriores em resolução de questões, com explicação</p>
               <div class="plan-price" id="completoPlanPrice">
                 <strong>R$ 17,99</strong><span>/mês</span>
               </div>
@@ -508,7 +509,8 @@
             </div>
             <ul class="plan-list">
               <li class="ok"><strong>Tudo do Plano Essencial</strong> (concursos, editais e cursos)</li>
-              <li class="ok"><strong>5 provas anteriores de todos os concursos abertos</strong> <span class="soon-inline">Em breve</span></li>
+              <li class="ok"><strong>5 provas anteriores de cada concurso</strong> no modelo de resolução de questões <span class="soon-inline">Em breve</span></li>
+              <li class="ok"><strong>Questão sempre explicada abaixo</strong>, logo depois que você responde <span class="soon-inline">Em breve</span></li>
               <li class="ok"><strong>Gabaritos oficiais definitivos</strong> organizados por ano e banca</li>
               <li class="ok"><strong>Prioridade no acesso antecipado</strong> às provas já digitalizadas</li>
               <li class="ok"><strong>Cupons exclusivos</strong> + alertas de retificação de prova</li>
@@ -531,7 +533,7 @@
             <h4>Perguntas frequentes</h4>
             <details open>
               <summary>Qual a diferença entre o plano de R$ 6,99/mês e o de R$ 17,99/mês?</summary>
-              <p>O plano <strong>Essencial (R$ 6,99/mês)</strong> libera todos os concursos ativos e encerrados, datas de prova atualizadas, editais completos com raio-x e comparador de cursos com cupons. O plano <strong>Completo (R$ 17,99/mês ou R$ 199,90/ano)</strong> inclui tudo isso mais o acesso ao banco com as <strong>5 provas anteriores e gabaritos</strong> de cada concurso aberto (em lançamento).</p>
+              <p>O plano <strong>Essencial (R$ 6,99/mês)</strong> libera todos os concursos ativos e encerrados, datas de prova atualizadas, editais completos com raio-x e comparador de cursos com cupons. O plano <strong>Completo (R$ 17,99/mês ou R$ 199,90/ano)</strong> inclui tudo isso mais as <strong>5 provas anteriores de cada concurso aberto em modelo de resolução de questões</strong>, com gabarito e a <strong>explicação da questão logo abaixo</strong>, depois que você responde (em lançamento).</p>
             </details>
             <details>
               <summary>Como funciona a opção anual mais barata de R$ 199,90?</summary>
@@ -587,7 +589,7 @@
       </div>
     </div>
     <nav class="container footer-seo" aria-label="Concursos por estado">
-      <p class="footer-seo-title"><strong>Concursos por estado</strong> · <a href="/blog">Blog</a> · <a href="/privacidade.html">Política de Privacidade</a></p>
+      <p class="footer-seo-title"><strong>Concursos por estado</strong> · <a href="/blog">Blog</a> · <a href="/privacidade.html">Política de Privacidade</a> · <a href="/cancelamento.html">Cancelar assinatura</a></p>
       <p class="footer-seo-links">
           <a href="/concursos/ac">Concursos Acre</a>
           <a href="/concursos/al">Concursos Alagoas</a>
@@ -898,7 +900,7 @@
   <!-- Toast feedback -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script type="module" src="/js/app.js?v=22"></script>
+  <script type="module" src="/js/app.js?v=23"></script>
   <script type="module" src="/js/google-auth.js?v=3"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 // Uma só função para todo o painel de admin (limite de funções do plano Hobby da Vercel).
 // /api/admin/:acao → /api/admin?acao=:acao (vercel.json)
-import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts } from '../lib/admin-api.js';
+import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts, handleCancelamentos } from '../lib/admin-api.js';
 import { authJson as json } from '../lib/auth.js';
 
 const ACOES = {
@@ -8,7 +8,8 @@ const ACOES = {
   users: handleUsers,
   audit: handleAudit,
   concursos: handleAdminConcursos,
-  posts: handleAdminPosts
+  posts: handleAdminPosts,
+  cancelamentos: handleCancelamentos
 };
 
 function route(request) {

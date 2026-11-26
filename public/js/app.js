@@ -1877,16 +1877,7 @@ function bindEvents() {
 
   $('#stripSubscribeBtn').addEventListener('click', () => switchView('plano'));
 
-  $('#cancelSubBtn').addEventListener('click', () => {
-    // Assinatura real: cancelar/gerenciar no portal da Stripe
-    if (state.paidGranted && state.subMethod === 'Pix') { showToast('Seu acesso por Pix termina ao final do per?odo pago.'); return; }
-    if (stripeOn() && state.paidGranted) { openStripePortal(); return; }
-    state.tier = 'guest';
-    state.subMethod = null;
-    saveState();
-    renderAll();
-    showToast('Assinatura cancelada na simulação. Você voltou ao modo Visitante.');
-  });
+  // O cancelamento tem página própria (/cancelamento.html), aberta pelo link do banner de plano.
 
   $('#closeDetailBtn').addEventListener('click', closeDetailModal);
   $('#detailModal').addEventListener('click', (e) => {
@@ -2057,10 +2048,15 @@ function openFromLink() {
   const concursoId = params.get('concurso');
   if (concursoId && catalog.some((c) => c.id === concursoId)) openContestDetail(concursoId);
   if (params.has('entrar') && !state.user) openAuthModal('login');
-  // Veio do painel: depois de entrar, volta para o /admin
-  if (params.get('voltar') === '/admin') {
-    if (state.user && state.user.role === 'admin') window.location.href = '/admin';
-    window.addEventListener('cnc:auth-login', () => setTimeout(() => { window.location.href = '/admin'; }, 600), { once: true });
+  // Volta para a página de origem depois do login (só caminhos conhecidos deste site)
+  const voltar = params.get('voltar');
+  if (voltar && ['/admin', '/cancelamento.html'].includes(voltar)) {
+    const destino = voltar;
+    if (state.user) {
+      if (destino !== '/admin' || state.user.role === 'admin') window.location.href = destino;
+    } else {
+      window.addEventListener('cnc:auth-login', () => setTimeout(() => { window.location.href = destino; }, 600), { once: true });
+    }
   }
 }
 

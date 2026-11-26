@@ -155,6 +155,7 @@
   font-weight: 600;
   color: var(--ink);
   cursor: pointer;
+  text-decoration: none;
 }
 .account-menu-item:hover, .account-menu-item:focus-visible { background: var(--surface-alt); outline: none; }
 .account-menu-item.is-danger { color: var(--status-danger-fg, #B91C1C); }

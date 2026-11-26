@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Cancelar assinatura — Check no Concurso</title>
+  <meta name="description" content="Cancele ou pare a renovação da sua assinatura do Check no Concurso em poucos cliques, sem ligação e sem espera." />
+  <meta name="theme-color" content="#0C4F83" />
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/css/tokens.css?v=10" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg-canvas, #F4F8FB);
+      color: var(--text-primary, #0F2236);
+      font: 16px/1.6 var(--font-body, 'Inter', system-ui, -apple-system, "Segoe UI", sans-serif);
+      -webkit-text-size-adjust: 100%;
+    }
+    header {
+      background: var(--bg-inverse, #0B2540);
+      color: #fff;
+      padding: 18px max(20px, env(safe-area-inset-left));
+    }
+    header .wrap { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    header a { color: #fff; text-decoration: none; font-weight: 700; }
+    header .help { font-size: 14px; font-weight: 500; color: var(--text-on-inverse-muted, #C5D5E4); }
+    header .help a { text-decoration: underline; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
+    h1 { font-size: clamp(1.6rem, 4.4vw, 2.2rem); line-height: 1.15; margin: 0 0 10px; letter-spacing: -0.02em; }
+    .lead { color: var(--text-secondary, #2E465E); margin: 0 0 24px; font-size: 1.02rem; }
+    .card {
+      background: var(--bg-surface, #fff);
+      border: 1px solid var(--border-subtle, #DFE8F0);
+      border-radius: 18px;
+      padding: clamp(20px, 4vw, 32px);
+      margin: 0 0 18px;
+      box-shadow: 0 1px 2px rgba(15, 34, 54, .04);
+    }
+    h2 { font-size: 1.2rem; margin: 0 0 8px; color: var(--text-primary, #0F2236); }
+    h3 { font-size: 1rem; margin: 20px 0 6px; }
+    p { margin: 0 0 12px; }
+    ul { margin: 0 0 12px; padding-left: 20px; }
+    li { margin: 4px 0; }
+    .muted { color: var(--text-muted, #4D657C); font-size: .94rem; }
+    .tag {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--brand-soft, #E6F1FA);
+      color: var(--brand-primary, #0C4F83);
+      margin-bottom: 10px;
+    }
+    .tag.is-pix { background: var(--accent-soft, #FEF9DC); color: var(--accent-text, #734B00); }
+    .tag.is-off { background: var(--bg-surface-alt, #E9F0F6); color: var(--text-muted, #4D657C); }
+    dl.facts { display: grid; gap: 10px; margin: 16px 0 22px; }
+    dl.facts div { display: flex; justify-content: space-between; gap: 14px; border-bottom: 1px dashed var(--border-subtle, #DFE8F0); padding-bottom: 8px; }
+    dl.facts dt { color: var(--text-muted, #4D657C); font-size: .94rem; }
+    dl.facts dd { margin: 0; font-weight: 600; text-align: right; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      background: var(--brand-primary, #0C4F83);
+      color: #fff;
+    }
+    .btn:hover { background: var(--brand-hover, #083A61); }
+    .btn:focus-visible { outline: 3px solid var(--focus-ring, #0C4F83); outline-offset: 2px; }
+    .btn[disabled] { opacity: .6; cursor: progress; }
+    .btn-danger { background: var(--status-danger-fg, #B91C1C); }
+    .btn-danger:hover { background: #991B1B; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary, #0F2236);
+      border-color: var(--border-default, #C5D5E4);
+    }
+    .btn-ghost:hover { background: var(--bg-surface-alt, #E9F0F6); }
+    .btn + .btn { margin-top: 10px; }
+    .note {
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: .95rem;
+      margin: 14px 0;
+      background: var(--bg-surface-alt, #E9F0F6);
+      color: var(--text-secondary, #2E465E);
+    }
+    .note.is-ok { background: var(--status-open-bg, #E6F7EE); color: var(--status-open-fg, #0C6B3B); }
+    .note.is-alert { background: var(--status-planned-bg, #FEF9DC); color: var(--accent-text, #734B00); }
+    .note.is-error { background: #FEF2F2; color: #B91C1C; }
+    .hidden { display: none !important; }
+    fieldset { border: 0; padding: 0; margin: 0; }
+    label { display: block; font-weight: 600; font-size: .93rem; margin: 14px 0 6px; }
+    input, textarea {
+      width: 100%;
+      font: inherit;
+      padding: 11px 12px;
+      border: 1px solid var(--border-default, #C5D5E4);
+      border-radius: 10px;
+      background: #fff;
+      color: inherit;
+    }
+    input:focus, textarea:focus { outline: 3px solid rgba(12, 79, 131, .25); border-color: var(--brand-primary, #0C4F83); }
+    textarea { min-height: 84px; resize: vertical; }
+    details { border-top: 1px solid var(--border-subtle, #DFE8F0); margin-top: 18px; padding-top: 16px; }
+    summary { cursor: pointer; font-weight: 600; color: var(--brand-primary, #0C4F83); }
+    details[open] summary { margin-bottom: 8px; }
+    .steps { display: grid; gap: 10px; padding-left: 0; list-style: none; margin: 0; }
+    .steps li { display: flex; gap: 10px; align-items: flex-start; }
+    .steps span {
+      flex: 0 0 24px; height: 24px; border-radius: 999px;
+      background: var(--brand-soft, #E6F1FA); color: var(--brand-primary, #0C4F83);
+      font-size: .8rem; font-weight: 700; display: grid; place-items: center;
+    }
+    footer { max-width: 760px; margin: 0 auto; padding: 0 20px 48px; color: var(--text-muted, #4D657C); font-size: .9rem; }
+    footer a { color: var(--brand-primary, #0C4F83); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    @media (min-width: 620px) {
+      .btn { width: auto; min-width: 240px; }
+      .btn + .btn { margin-top: 0; margin-left: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a href="/">← Check no Concurso</a>
+      <span class="help">Dúvidas? <a href="#pedido">Fale com a gente</a></span>
+    </div>
+  </header>
+
+  <main>
+    <h1>Cancelar assinatura</h1>
+    <p class="lead">Sem ligação, sem espera e sem letras miúdas. Seu acesso continua até o fim do período já pago e não há nova cobrança.</p>
+
+    <section class="card" id="carregando" aria-live="polite">
+      <p class="muted">Carregando sua conta…</p>
+    </section>
+
+    <!-- Não entrou -->
+    <section class="card hidden" id="deslogado">
+      <h2>Entre para cancelar em 1 clique</h2>
+      <p>Use a mesma conta Google que você usou na compra. Assim o cancelamento é imediato e fica registrado na sua conta.</p>
+      <a class="btn" href="/?entrar=1&amp;voltar=/cancelamento.html">Entrar com o Google</a>
+      <p class="muted" style="margin-top:14px">Se você comprou com outro e-mail, ou não consegue entrar, role até <a href="#pedido">“Não consigo entrar na conta”</a>.</p>
+    </section>
+
+    <!-- Logado, com plano -->
+    <section class="card hidden" id="logado">
+      <span class="tag" id="planoTag">Assinatura ativa</span>
+      <h2 id="planoNome">Sua assinatura</h2>
+      <dl class="facts">
+        <div><dt>Conta</dt><dd id="contaEmail">—</dd></div>
+        <div><dt>Forma de pagamento</dt><dd id="formaPagamento">—</dd></div>
+        <div><dt id="rotuloData">Próxima cobrança</dt><dd id="dataFim">—</dd></div>
+      </dl>
+
+      <div id="avisoJaCancelada" class="note hidden">Esta assinatura já está cancelada: nenhuma cobrança nova será feita. Você mantém o acesso até a data acima.</div>
+
+      <div id="acaoCancelar">
+        <button type="button" class="btn btn-danger" id="btnCancelar">Cancelar assinatura</button>
+        <p class="muted" style="margin-top:10px" id="explicacaoAcao"></p>
+      </div>
+
+      <p class="muted hidden" id="acaoReembolso">Comprou nos últimos 7 dias e quer desistir da compra? <a href="#pedido">Peça o reembolso aqui</a>.</p>
+
+      <!-- Etapa de confirmação -->
+      <div id="confirmacao" class="hidden">
+        <div class="note is-alert">
+          <strong>Confirmar cancelamento?</strong>
+          <p style="margin:8px 0 0" id="textoConfirmacao">Seu acesso será mantido até o fim do período pago e depois voltará ao plano gratuito. Nenhuma cobrança nova será feita.</p>
+        </div>
+        <button type="button" class="btn btn-danger" id="btnConfirmar">Sim, cancelar</button>
+        <button type="button" class="btn btn-ghost" id="btnVoltar">Não, manter minha assinatura</button>
+      </div>
+
+      <div id="resultado" class="hidden" role="status" aria-live="polite"></div>
+
+      <details id="detalhesCartao" class="hidden">
+        <summary>Preciso trocar o cartão, ver recibos ou contratar de novo</summary>
+        <p class="muted">A operadora do cartão (Stripe) abre uma página segura para você atualizar a forma de pagamento e baixar recibos.</p>
+        <button type="button" class="btn btn-ghost" id="btnPortal">Abrir página segura da Stripe</button>
+      </details>
+    </section>
+
+    <!-- Logado, sem plano -->
+    <section class="card hidden" id="semPlano">
+      <h2>Nenhuma assinatura ativa nesta conta</h2>
+      <p>O e-mail <strong id="semPlanoEmail">—</strong> não tem cobrança em andamento. Se você pagou com outro e-mail, use o formulário abaixo.</p>
+      <a class="btn btn-ghost" href="/#planos">Ver planos</a>
+    </section>
+
+    <section class="card" id="pedido">
+      <h2>Não consigo entrar na conta</h2>
+      <p>Se você pagou com outro e-mail ou não consegue acessar a conta, registre o pedido aqui. Ele chega direto para a nossa equipe com um número de protocolo.</p>
+      <form id="formPedido" novalidate>
+        <label for="pedidoEmail">E-mail usado na compra</label>
+        <input id="pedidoEmail" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="voce@email.com" maxlength="254" />
+        <label for="pedidoNome">Nome completo (opcional)</label>
+        <input id="pedidoNome" name="name" type="text" autocomplete="name" maxlength="150" placeholder="Como está na compra" />
+        <label for="pedidoObs">Alguma observação? (opcional)</label>
+        <textarea id="pedidoObs" name="note" maxlength="500" placeholder="Ex.: paguei no Pix de outra pessoa, quero parar a renovação do cartão…"></textarea>
+        <p class="muted" style="margin-top:10px">Usamos esses dados apenas para localizar sua compra e concluir o cancelamento.</p>
+        <button type="submit" class="btn" id="btnPedido">Registrar pedido de cancelamento</button>
+      </form>
+      <div id="pedidoResultado" class="hidden" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="card">
+      <h2>Como funciona</h2>
+      <ul class="steps">
+        <li><span>1</span><div><strong>Cartão:</strong> a assinatura para de renovar e você mantém o acesso até o fim do mês ou ano já pago. Nada é cobrado depois disso.</div></li>
+        <li><span>2</span><div><strong>Pix:</strong> a compra é única e não renova sozinha. Não existe cobrança futura; o acesso simplesmente termina na data indicada.</div></li>
+        <li><span>3</span><div><strong>Arrependimento:</strong> em compras feitas pela internet você pode desistir em até 7 dias corridos da compra e receber o valor de volta (art. 49 do Código de Defesa do Consumidor). Basta registrar o pedido acima.</div></li>
+      </ul>
+      <h3>Ao cancelar, perco o que já paguei?</h3>
+      <p>Não. O cancelamento interrompe apenas as próximas cobranças. Até a data final do período pago, concursos salvos, alertas e todos os recursos do seu plano continuam funcionando.</p>
+      <h3>Meus dados continuam guardados?</h3>
+      <p>Os dados da compra são mantidos pelo prazo fiscal e legal. Você pode pedir a exclusão dos demais dados a qualquer momento, como explica a <a href="/privacidade.html">Política de Privacidade</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Check no Concurso</strong> · <a href="/">Concursos</a> · <a href="/privacidade.html">Política de Privacidade</a></p>
+  </footer>
+
+  <script type="module" src="/js/cancelamento.js?v=1"></script>
+</body>
+</html>

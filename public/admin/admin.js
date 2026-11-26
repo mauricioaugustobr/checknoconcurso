@@ -53,7 +53,7 @@ async function boot() {
 }
 
 /* ---------------- Abas ---------------- */
-const loaders = { geral: loadOverview, concursos: loadConcursos, blog: loadPosts, usuarios: loadUsers, registro: loadAudit };
+const loaders = { geral: loadOverview, concursos: loadConcursos, blog: loadPosts, usuarios: loadUsers, cancelamentos: loadCancelamentos, registro: loadAudit };
 
 function openTab(name) {
   if (!loaders[name]) name = 'geral';
@@ -272,6 +272,25 @@ async function loadUsers() {
       <td>${esc(u.name || '—')}</td><td>${esc(u.email)}</td><td>${num(u.logins)}</td>
       <td>${quando(u.first_login_at)}</td><td>${quando(u.last_login_at)}</td></tr>`).join('')
     || '<tr><td colspan="5" class="ad-muted">Ninguém entrou com o Google ainda.</td></tr>';
+}
+
+/* ---------------- Cancelamentos ---------------- */
+const SITUACAO_CANCEL = {
+  pendente: 'Pendente',
+  cancelado: 'Cancelado no site',
+  nao_renova: 'Pix sem renovação'
+};
+
+async function loadCancelamentos() {
+  const { items } = await api('/api/admin/cancelamentos');
+  $('#adCancelRows').innerHTML = items.map((c) => `<tr>
+      <td class="ad-nowrap">${quando(c.requested_at)}</td>
+      <td>${esc(c.email)}${c.name ? `<br><span class="ad-muted">${esc(c.name)}</span>` : ''}</td>
+      <td>${esc(c.method || '—')}</td>
+      <td><span class="ad-pill ${c.status === 'pendente' ? 'is-danger' : 'is-ok'}">${esc(SITUACAO_CANCEL[c.status] || c.status)}</span></td>
+      <td class="ad-nowrap">${quando(c.access_until)}</td>
+      <td>${esc(c.note || '—')}</td></tr>`).join('')
+    || '<tr><td colspan="6" class="ad-muted">Nenhum pedido de cancelamento ainda.</td></tr>';
 }
 
 const ACOES = {

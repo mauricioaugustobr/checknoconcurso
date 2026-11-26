@@ -12,11 +12,20 @@ import {
 import { handleAuthConfig, handleGoogleLogin, handleSession, handleLogout } from './lib/auth.js';
 import { getLiveCatalog } from './lib/catalog-overrides.js';
 import { renderConcursoPage, renderEstadoPage, renderBlogIndex, renderBlogPost, renderSitemap } from './lib/pages.js';
-import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts } from './lib/admin-api.js';
+import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts, handleCancelamentos } from './lib/admin-api.js';
 import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from './lib/stripe.js';
 
 import { handlePix } from './lib/pix.js';
-const STRIPE_ROUTES = { pix: handlePix, checkout: handleCheckout, confirm: handleConfirm, portal: handlePortal, webhook: handleWebhook };
+import { handleCancel, handleCancelRequest } from './lib/cancel.js';
+const STRIPE_ROUTES = {
+  pix: handlePix,
+  checkout: handleCheckout,
+  confirm: handleConfirm,
+  portal: handlePortal,
+  webhook: handleWebhook,
+  cancel: handleCancel,
+  request: handleCancelRequest
+};
 
 // Mesmas rotas das funções e "rewrites" da Vercel (vercel.json), para testar localmente
 const DYNAMIC_ROUTES = [
@@ -25,6 +34,7 @@ const DYNAMIC_ROUTES = [
   [/^\/api\/admin\/audit$/, (r) => handleAudit(r)],
   [/^\/api\/admin\/concursos$/, (r) => handleAdminConcursos(r)],
   [/^\/api\/admin\/posts$/, (r) => handleAdminPosts(r)],
+  [/^\/api\/admin\/cancelamentos$/, (r) => handleCancelamentos(r)],
   [/^\/concurso\/([^/]+)\/?$/, (r, m) => renderConcursoPage(r, decodeURIComponent(m[1]))],
   [/^\/concursos\/([a-zA-Z]{2})\/?$/, (r, m) => renderEstadoPage(r, m[1])],
   [/^\/blog\/?$/, (r) => renderBlogIndex(r)],

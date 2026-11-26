@@ -4,73 +4,166 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Política de Privacidade — Check no Concurso</title>
-  <meta name="description" content="Como o Check no Concurso coleta, usa e protege seus dados pessoais, conforme a LGPD." />
+  <meta name="description" content="Como o Check no Concurso coleta, usa, compartilha e protege seus dados pessoais, conforme a LGPD." />
   <meta name="theme-color" content="#0C4F83" />
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/css/tokens.css" />
+  <link rel="stylesheet" href="/css/tokens.css?v=10" />
   <style>
-    body { margin: 0; background: var(--canvas, #F4F8FB); color: var(--text, #0F2236); font: 16px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
-    header { background: var(--inverse, #0B2540); color: #fff; padding: 20px max(20px, env(safe-area-inset-left)); }
+    body { margin: 0; background: var(--bg-canvas, #F4F8FB); color: var(--text-primary, #0F2236); font: 16px/1.7 var(--font-body, 'Inter', system-ui, -apple-system, "Segoe UI", sans-serif); }
+    header { background: var(--bg-inverse, #0B2540); color: #fff; padding: 18px max(20px, env(safe-area-inset-left)); }
+    header .wrap { max-width: 800px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
     header a { color: #fff; text-decoration: none; font-weight: 700; }
-    main { max-width: 760px; margin: 0 auto; padding: 40px 20px 72px; }
-    .card { background: #fff; border: 1px solid #E2EAF1; border-radius: 16px; padding: 32px clamp(20px, 4vw, 40px); }
-    h1 { font-size: clamp(1.6rem, 4vw, 2.1rem); line-height: 1.2; margin: 0 0 8px; color: #0B2540; }
-    h2 { font-size: 1.15rem; margin: 32px 0 8px; color: #0C4F83; }
-    .meta { color: #4A5B6D; font-size: .92rem; margin: 0 0 24px; }
-    ul { padding-left: 1.2rem; }
-    a { color: #0C4F83; }
+    header .links { font-size: 14px; color: var(--text-on-inverse-muted, #C5D5E4); }
+    header .links a { text-decoration: underline; font-weight: 500; }
+    main { max-width: 800px; margin: 0 auto; padding: 36px 20px 72px; }
+    .card { background: #fff; border: 1px solid var(--border-subtle, #DFE8F0); border-radius: 18px; padding: clamp(22px, 4vw, 40px); }
+    h1 { font-size: clamp(1.6rem, 4.2vw, 2.1rem); line-height: 1.2; margin: 0 0 8px; color: var(--text-primary, #0F2236); }
+    h2 { font-size: 1.16rem; margin: 34px 0 8px; color: var(--brand-primary, #0C4F83); scroll-margin-top: 20px; }
+    h3 { font-size: 1rem; margin: 20px 0 4px; }
+    p { margin: 0 0 12px; }
+    ul { padding-left: 20px; margin: 0 0 12px; }
+    li { margin: 5px 0; }
+    .meta { color: var(--text-muted, #4D657C); font-size: .92rem; margin: 0 0 24px; }
+    a { color: var(--brand-primary, #0C4F83); }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-size: .95rem; }
+    th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle, #DFE8F0); }
+    th { background: var(--bg-surface-alt, #E9F0F6); font-size: .88rem; text-transform: uppercase; letter-spacing: .03em; color: var(--text-secondary, #2E465E); }
+    .box { background: var(--brand-soft, #E6F1FA); border-radius: 12px; padding: 16px 18px; margin: 16px 0; font-size: .96rem; }
     .back { display: inline-block; margin-top: 32px; font-weight: 600; }
+    footer { max-width: 800px; margin: 0 auto; padding: 0 20px 48px; color: var(--text-muted, #4D657C); font-size: .9rem; }
+    nav.sumario { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .92rem; margin: 0 0 8px; }
+    @media (max-width: 560px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      tr { border: 1px solid var(--border-subtle, #DFE8F0); border-radius: 10px; margin-bottom: 10px; padding: 6px 0; }
+      td { border: 0; padding: 6px 12px; }
+      td::before { content: attr(data-label) ": "; font-weight: 700; color: var(--text-secondary, #2E465E); }
+    }
   </style>
 </head>
 <body>
-  <header><a href="/">← Check no Concurso</a></header>
+  <header>
+    <div class="wrap">
+      <a href="/">← Check no Concurso</a>
+      <span class="links"><a href="/cancelamento.html">Cancelar assinatura</a></span>
+    </div>
+  </header>
   <main>
     <article class="card">
       <h1>Política de Privacidade</h1>
       <p class="meta">Última atualização: 25 de novembro de 2026</p>
 
-      <p>O <strong>Check no Concurso</strong> (checknoconcurso.com.br) ajuda você a acompanhar concursos públicos, datas de prova e editais. Esta política explica quais dados pessoais coletamos, para que usamos e quais são os seus direitos, de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).</p>
+      <p>Esta política explica como o <strong>Check no Concurso</strong> (site e aplicativo em <a href="https://checknoconcurso.com.br">checknoconcurso.com.br</a>) trata os seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD) e com o Código de Defesa do Consumidor.</p>
 
-      <h2>1. Dados que coletamos</h2>
+      <nav class="sumario" aria-label="Atalhos">
+        <a href="#controlador">Controlador</a>
+        <a href="#dados">Dados coletados</a>
+        <a href="#finalidades">Finalidades</a>
+        <a href="#pagamentos">Pagamentos</a>
+        <a href="#compartilhamento">Compartilhamento</a>
+        <a href="#cookies">Cookies</a>
+        <a href="#retencao">Retenção</a>
+        <a href="#direitos">Seus direitos</a>
+        <a href="#seguranca">Segurança</a>
+      </nav>
+
+      <h2 id="controlador">1. Quem é o controlador dos dados</h2>
+      <p>O controlador dos dados pessoais tratados no Check no Concurso é a <strong>Preâmbulo</strong>, inscrita no CNPJ sob o nº <strong>59.147.417/0001-24</strong>, responsável pelo site, pelo aplicativo e pela cobrança dos planos.</p>
+      <p>Pedidos sobre dados pessoais podem ser feitos pelo formulário da página <a href="/cancelamento.html#pedido">Cancelar assinatura</a>, que registra o pedido com número de protocolo, ou respondendo ao e-mail da sua compra. O prazo de resposta é de até 15 dias.</p>
+
+      <h2 id="dados">2. Quais dados coletamos</h2>
+      <table>
+        <thead><tr><th>Situação</th><th>Dados</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Situação">Entrar com o Google</td><td data-label="Dados">Nome, e-mail, foto do perfil e o identificador da conta Google. <strong>Não recebemos sua senha do Google.</strong></td></tr>
+          <tr><td data-label="Situação">Conta criada no formulário do site</td><td data-label="Dados">Nome, e-mail e senha digitados ficam apenas no armazenamento do seu navegador; a senha não é enviada nem guardada nos nossos servidores.</td></tr>
+          <tr><td data-label="Situação">Compra com Pix</td><td data-label="Dados">Nome completo, CPF, e-mail e WhatsApp informados no checkout, além do plano, valor, data e identificador da transação. O CPF e o nome são necessários para emitir a nota fiscal.</td></tr>
+          <tr><td data-label="Situação">Compra com cartão</td><td data-label="Dados">E-mail, nome e CPF informados, plano, status da assinatura e datas de cobrança. O cartão é digitado na página da operadora (Stripe): <strong>não armazenamos o número do cartão nem o código de segurança</strong>.</td></tr>
+          <tr><td data-label="Situação">Uso do site e do app</td><td data-label="Dados">Concursos salvos, alertas ativados, filtros e preferências, guardados no seu navegador. Registramos também dados técnicos de acesso, como data, hora e endereço IP, para segurança e cumprimento legal.</td></tr>
+          <tr><td data-label="Situação">Atendimento</td><td data-label="Dados">Mensagens e observações que você envia pelos nossos canais, incluindo pedidos de cancelamento.</td></tr>
+        </tbody>
+      </table>
+      <p>Não coletamos dados sensíveis (como saúde, religião ou biometria) e não pedimos dados de crianças e adolescentes. O serviço é destinado a maiores de 18 anos.</p>
+
+      <h2 id="finalidades">3. Para que usamos e com qual base legal</h2>
       <ul>
-        <li><strong>Ao entrar com o Google:</strong> nome, endereço de e-mail, foto do perfil e o identificador da sua conta Google. Não recebemos sua senha do Google.</li>
-        <li><strong>Ao criar conta com e-mail:</strong> nome e e-mail informados por você.</li>
-        <li><strong>Uso do site:</strong> concursos salvos, alertas e preferências de filtro, guardados no seu navegador.</li>
-        <li><strong>Assinaturas:</strong> quando os pagamentos forem ativados, os dados de pagamento serão tratados pela empresa processadora (gateway). Não armazenamos números de cartão.</li>
+        <li><strong>Identificar você e manter a sessão:</strong> executar o contrato (art. 7º, V, da LGPD).</li>
+        <li><strong>Guardar concursos salvos, filtros e enviar alertas que você ativou:</strong> executar o contrato e o seu consentimento (art. 7º, I).</li>
+        <li><strong>Liberar o plano contratado e controlar o acesso:</strong> executar o contrato.</li>
+        <li><strong>Processar pagamentos, confirmar o Pix e emitir nota fiscal:</strong> executar o contrato e cumprir obrigação legal e fiscal (art. 7º, II).</li>
+        <li><strong>Prevenir fraudes, abusos e incidentes de segurança:</strong> legítimo interesse (art. 7º, IX) e obrigação legal.</li>
+        <li><strong>Responder pedidos de suporte, cancelamento e direitos do titular:</strong> cumprir obrigação legal e executar o contrato.</li>
       </ul>
+      <p><strong>Não vendemos, alugamos e nem cedemos seus dados para publicidade de terceiros.</strong> Não usamos seus dados para decisões automatizadas que afetem seus direitos.</p>
 
-      <h2>2. Para que usamos seus dados</h2>
+      <h2 id="pagamentos">4. Pagamentos e cancelamento</h2>
+      <p>O Check no Concurso oferece dois caminhos de pagamento:</p>
       <ul>
-        <li>Identificar você e manter sua sessão ativa com segurança.</li>
-        <li>Guardar seus concursos salvos e enviar alertas que você ativar (por exemplo, mudança de data da prova).</li>
-        <li>Liberar os recursos do plano que você assinar.</li>
-        <li>Cumprir obrigações legais e prevenir fraudes.</li>
+        <li><strong>Pix (Banco Inter):</strong> pagamento único, sem renovação automática. O acesso vale pelo período contratado (mensal ou anual) e termina sozinho na data indicada.</li>
+        <li><strong>Cartão de crédito (Stripe):</strong> assinatura recorrente, mensal ou anual, cobrada pela operadora até você cancelar.</li>
       </ul>
-      <p>Não vendemos nem alugamos seus dados pessoais.</p>
+      <p>Para cancelar, use a página <a href="/cancelamento.html">Cancelar assinatura</a>: com a sua conta conectada, o cancelamento é feito em um clique. No cartão, a assinatura para de renovar e você mantém o acesso até o fim do período já pago. No Pix, basta não haver nova compra.</p>
+      <p>Em compras feitas pela internet, você pode desistir em até 7 dias corridos da compra e receber o valor de volta, conforme o art. 49 do Código de Defesa do Consumidor.</p>
+      <div class="box">Dados de pagamento são tratados pelo Banco Inter (Pix) e pela Stripe (cartão), que têm as próprias políticas de privacidade e são responsáveis pela segurança das informações financeiras que recebem diretamente de você.</div>
 
-      <h2>3. Base legal</h2>
-      <p>Tratamos seus dados para executar o serviço que você pediu (art. 7º, V, da LGPD), com o seu consentimento quando aplicável (art. 7º, I) e para cumprir obrigações legais (art. 7º, II).</p>
+      <h2 id="compartilhamento">5. Com quem compartilhamos</h2>
+      <p>Só compartilhamos o necessário para o serviço funcionar, com fornecedores que atuam como operadores:</p>
+      <ul>
+        <li><strong>Vercel</strong> — hospedagem do site e das funções do servidor.</li>
+        <li><strong>Neon</strong> — banco de dados onde ficam contas, planos e pedidos.</li>
+        <li><strong>Google</strong> — autenticação de quem entra com a conta Google.</li>
+        <li><strong>Banco Inter</strong> — geração e conferência das cobranças Pix.</li>
+        <li><strong>Stripe</strong> — processamento de cartão, recibos e gestão da assinatura.</li>
+        <li><strong>Prestador de contabilidade</strong> — quando aplicável, para emitir a nota fiscal da sua compra.</li>
+      </ul>
+      <p>Também podemos compartilhar dados por ordem judicial ou de autoridade administrativa competente, ou para exercer direitos em processo, sempre no limite do que for exigido.</p>
+      <p>Alguns desses fornecedores estão fora do Brasil (por exemplo, Estados Unidos), o que caracteriza transferência internacional de dados. Nesses casos, exigimos cláusulas contratuais e medidas de segurança compatíveis com a LGPD.</p>
 
-      <h2>4. Compartilhamento</h2>
-      <p>Compartilhamos dados apenas com fornecedores necessários para o funcionamento do serviço, como hospedagem (Vercel), autenticação (Google) e, futuramente, processamento de pagamentos — sempre no limite do necessário.</p>
+      <h2 id="cookies">6. Cookies e armazenamento local</h2>
+      <ul>
+        <li><strong>Cookie de sessão:</strong> um cookie próprio, seguro (HttpOnly, SameSite) e assinado digitalmente, que mantém você conectado por até 30 dias.</li>
+        <li><strong>Armazenamento local do navegador:</strong> concursos salvos, alertas, filtros e preferências de exibição.</li>
+        <li><strong>Funcionamento offline:</strong> o aplicativo guarda uma cópia das páginas visitadas para abrir sem internet.</li>
+      </ul>
+      <p>Não usamos cookies de publicidade nem rastreadores de terceiros para perfilamento. Você pode apagar cookies e dados locais nas configurações do navegador; ao fazer isso, será necessário entrar de novo.</p>
 
-      <h2>5. Cookies e armazenamento</h2>
-      <p>Usamos um cookie de sessão seguro (HttpOnly) para manter você conectado por até 30 dias, e o armazenamento local do navegador para seus concursos salvos e preferências. Você pode apagar esses dados nas configurações do navegador a qualquer momento.</p>
+      <h2 id="retencao">7. Por quanto tempo guardamos</h2>
+      <ul>
+        <li><strong>Conta e preferências:</strong> enquanto a conta estiver ativa. Depois, pelo prazo necessário para atender obrigações legais e exercer direitos.</li>
+        <li><strong>Compras, notas fiscais e registros financeiros:</strong> pelos prazos fiscais e legais aplicáveis, em regra 5 anos.</li>
+        <li><strong>Registros de acesso (IP, data e hora):</strong> pelo prazo legal de guarda de registros de aplicações, de 6 meses.</li>
+        <li><strong>Pedidos de cancelamento e atendimento:</strong> pelo tempo necessário para comprovar o atendimento e cumprir obrigações legais.</li>
+      </ul>
+      <p>Encerrados os prazos, os dados são eliminados ou anonimizados de forma segura.</p>
 
-      <h2>6. Segurança e retenção</h2>
-      <p>Usamos conexão criptografada (HTTPS) e sessões assinadas digitalmente. Mantemos os dados enquanto sua conta estiver ativa ou pelo tempo exigido por lei.</p>
+      <h2 id="direitos">8. Seus direitos</h2>
+      <p>Você pode, a qualquer momento, pedir:</p>
+      <ul>
+        <li>confirmação de que tratamos seus dados e acesso a eles;</li>
+        <li>correção de dados incompletos, inexatos ou desatualizados;</li>
+        <li>anonimização, bloqueio ou eliminação de dados desnecessários ou excessivos;</li>
+        <li>portabilidade dos dados a outro fornecedor, quando aplicável;</li>
+        <li>eliminação dos dados tratados com base no seu consentimento;</li>
+        <li>informação sobre com quem compartilhamos seus dados;</li>
+        <li>revogação do consentimento e oposição a tratamentos específicos.</li>
+      </ul>
+      <p>Para exercer esses direitos, use o formulário em <a href="/cancelamento.html#pedido">Cancelar assinatura</a> ou responda ao e-mail da sua compra. Podemos pedir uma confirmação de identidade para evitar que outra pessoa acesse ou apague seus dados.</p>
+      <p>Você também pode remover o acesso do Check no Concurso à sua conta Google em <a href="https://myaccount.google.com/permissions" rel="noopener" target="_blank">myaccount.google.com/permissions</a> e reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</p>
 
-      <h2>7. Seus direitos</h2>
-      <p>Você pode pedir confirmação, acesso, correção, portabilidade ou exclusão dos seus dados, e revogar o consentimento a qualquer momento. Você também pode remover o acesso do Check no Concurso à sua conta Google em <a href="https://myaccount.google.com/permissions" rel="noopener" target="_blank">myaccount.google.com/permissions</a>.</p>
+      <h2 id="seguranca">9. Segurança</h2>
+      <p>Usamos conexão criptografada (HTTPS), sessões assinadas digitalmente, senhas e chaves de serviço apenas no servidor (nunca no navegador) e acesso restrito ao banco de dados. Nenhum sistema é totalmente imune a falhas; se ocorrer um incidente relevante, comunicaremos os titulares afetados e a ANPD conforme a LGPD.</p>
 
-      <h2>8. Contato</h2>
-      <p>Para dúvidas ou pedidos sobre seus dados, fale com a equipe do Check no Concurso pelo e-mail de suporte exibido na tela de login do Google ou pelos canais oficiais divulgados em checknoconcurso.com.br.</p>
+      <h2>10. Alterações desta política</h2>
+      <p>Podemos atualizar esta política para refletir mudanças no serviço ou na lei. A data da última atualização fica sempre no topo da página e, em mudanças importantes, avisaremos no site.</p>
 
-      <h2>9. Alterações</h2>
-      <p>Podemos atualizar esta política. A data da última atualização fica sempre no topo desta página.</p>
+      <h2>11. Contato</h2>
+      <p>Dúvidas sobre privacidade ou pedidos sobre seus dados: <a href="/cancelamento.html#pedido">formulário de atendimento</a> (com protocolo) ou o e-mail informado na sua compra.</p>
 
       <a class="back" href="/">← Voltar para o Check no Concurso</a>
     </article>
   </main>
+  <footer>
+    <p><strong>Check no Concurso</strong> · <a href="/">Concursos</a> · <a href="/cancelamento.html">Cancelar assinatura</a></p>
+  </footer>
 </body>
 </html>
