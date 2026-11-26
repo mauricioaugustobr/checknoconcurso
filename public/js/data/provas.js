@@ -965,7 +965,7 @@ export const PROVAS = {
     "page": 11,
     "subject": "Matemática",
     "support": "",
-    "stem": "A tabela a seguir mostra exemplos de 4 famílias, relacionando os ganhos mensais e os gastos mensais de cada uma com alimentação. Tabela de ganhos e gastos com alimentação - mensal Família Ganhos (R$) Gastos (R$) A 1.800,00 480,00 B 2.600,00 520,00 C 4.500,00 740,00 D 8.100,00 1.120,00 Seja R a média aritmética simples dos ganhos mensais dessas quatro famílias e seja T a média aritmética simples dos gastos com alimentação. Em comparação com R, o valor de T equivale a uma porcentagem mais próxima de",
+    "stem": "A tabela a seguir mostra exemplos de 4 famílias, relacionando os ganhos mensais e os gastos mensais de cada uma com alimentação. Tabela de ganhos e gastos com alimentação-mensal Família Ganhos (R$) Gastos (R$) A 1.800,00 480,00 B 2.600,00 520,00 C 4.500,00 740,00 D 8.100,00 1.120,00 Seja R a média aritmética simples dos ganhos mensais dessas quatro famílias e seja T a média aritmética simples dos gastos com alimentação. Em comparação com R, o valor de T equivale a uma porcentagem mais próxima de",
     "alternatives": [
      {
       "letter": "A",
@@ -1874,7 +1874,7 @@ export const PROVAS = {
     "page": 18,
     "subject": "Noções Básicas de Informática",
     "support": "",
-    "stem": "O soldado precisa imprimir a página de um mapa on-line com rotas de deslocamento e quer checar o layout antes de gastar papel e tinta. Ele acessa o site institucional (via URL https://…) no navegador Google Chrome (Versão 141.0.7390.108 - 64 bits) em um computador com sistema operacional Windows, em configuração padrão. Nos navegadores modernos, existe um atalho de teclado que abre diretamente a interface de impressão com visualização prévia automática do documento, permitindo verificar como o conteúdo será impresso no papel e ajustar configurações como Orientação e Margens antes de enviar para a impressora física. Nesse contexto, qual atalho de teclado o soldado deve utilizar para acessar diretamente a interface padrão de impressão com visualização prévia no Google Chrome?",
+    "stem": "O soldado precisa imprimir a página de um mapa on-line com rotas de deslocamento e quer checar o layout antes de gastar papel e tinta. Ele acessa o site institucional (via URL https://…) no navegador Google Chrome (Versão 141.0.7390.108-64 bits) em um computador com sistema operacional Windows, em configuração padrão. Nos navegadores modernos, existe um atalho de teclado que abre diretamente a interface de impressão com visualização prévia automática do documento, permitindo verificar como o conteúdo será impresso no papel e ajustar configurações como Orientação e Margens antes de enviar para a impressora física. Nesse contexto, qual atalho de teclado o soldado deve utilizar para acessar diretamente a interface padrão de impressão com visualização prévia no Google Chrome?",
     "alternatives": [
      {
       "letter": "A",
