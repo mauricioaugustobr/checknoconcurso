@@ -530,7 +530,7 @@ export const PROVAS = {
     "number": 16,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado)",
     "stem": "De acordo com as informações texto, é correto afirmar que foi um fator determinante para o aumento dos casos de dependência de jogos de azar no Brasil, nos últimos anos,",
     "alternatives": [
      {
@@ -564,7 +564,7 @@ export const PROVAS = {
     "number": 17,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado)",
     "stem": "Assinale a alternativa que está de acordo com a opinião expressa no texto pelo psiquiatra Rodrigo Machado.",
     "alternatives": [
      {
@@ -598,7 +598,7 @@ export const PROVAS = {
     "number": 18,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado)",
     "stem": "De acordo com os dados apresentados no texto, é correto afirmar que",
     "alternatives": [
      {
@@ -632,7 +632,7 @@ export const PROVAS = {
     "number": 19,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado)",
     "stem": "Considere as frases: • Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no (4o Brasil, especialmente desde 2018. parágrafo) • “Já nas plataformas de apostas, é possível fazer as chamadas apostas ‘in-play’, o jogo está enquanto acontecendo.” (5o parágrafo) É correto afirmar, a respeito das palavras destacadas, que",
     "alternatives": [
      {
@@ -2131,12 +2131,12 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "aprova a intenção da China de formar um bloco com Coreia do Norte e Rússia, após coalizão des- tes p­aíses."
+      "text": "aprova a intenção da China de formar um bloco com Coreia do Norte e Rússia, após coalizão destes p­aíses."
      }
     ],
     "answer": "B",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimi- dade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois paí- ses e das juras de Kim por um “relacionamento inquebrantá- vel de companheiros de armas”, a profundidade dessa par- ceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abun- dância são granadas e mísseis a granel para municiar a guer- ra de atrito da Rússia na Ucrânia. Moscou expandiu as expor- tações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanis- mos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. 3 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dis- sensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
+    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimidade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois países e das juras de Kim por um “relacionamento inquebrantável de companheiros de armas”, a profundidade dessa parceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abundância são granadas e mísseis a granel para municiar a guerra de atrito da Rússia na Ucrânia. Moscou expandiu as exportações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanismos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dissensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": true
@@ -2157,7 +2157,7 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "o isolamento imposto à Rússia seja estendido à C­oreia do Norte e à China, para evitar novas dissen- sões entre países e guerras indesejadas."
+      "text": "o isolamento imposto à Rússia seja estendido à C­oreia do Norte e à China, para evitar novas dissensões entre países e guerras indesejadas."
      },
      {
       "letter": "D",
@@ -2170,7 +2170,7 @@ export const PROVAS = {
     ],
     "answer": "D",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimi- dade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois paí- ses e das juras de Kim por um “relacionamento inquebrantá- vel de companheiros de armas”, a profundidade dessa par- ceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abun- dância são granadas e mísseis a granel para municiar a guer- ra de atrito da Rússia na Ucrânia. Moscou expandiu as expor- tações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanis- mos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. 3 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dis- sensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
+    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimidade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois países e das juras de Kim por um “relacionamento inquebrantável de companheiros de armas”, a profundidade dessa parceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abundância são granadas e mísseis a granel para municiar a guerra de atrito da Rússia na Ucrânia. Moscou expandiu as exportações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanismos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dissensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2179,15 +2179,15 @@ export const PROVAS = {
     "number": 4,
     "page": 4,
     "subject": "Língua Portuguesa",
-    "stem": "Considere as passagens do texto. • \u0007… um arremedo de legitimidade para o tirano mais iso- lado do mundo. (1o parágrafo) • \u0007Mas tudo isso os torna mais, não menos perigosos. (4o parágrafo) As passagens permitem, correta e respectivamente, as seguintes interpretações:",
+    "stem": "Considere as passagens do texto. • \u0007… um arremedo de legitimidade para o tirano mais isolado do mundo. (1o parágrafo) • \u0007Mas tudo isso os torna mais, não menos perigosos. (4o parágrafo) As passagens permitem, correta e respectivamente, as seguintes interpretações:",
     "alternatives": [
      {
       "letter": "A",
-      "text": "o governo norte-coreano é legitimo por ser tirano; Kim Jong-un e Vladimir Putin representam incerte- zas para o mundo, sobretudo porque estão desespe- rados, isolados e acuados."
+      "text": "o governo norte-coreano é legitimo por ser tirano; Kim Jong-un e Vladimir Putin representam incertezas para o mundo, sobretudo porque estão desesperados, isolados e acuados."
      },
      {
       "letter": "B",
-      "text": "a legitimidade do governo norte-coreano é atem- poral; Kim Jong-un e Vladimir Putin representam ­mudanças obscuras no mundo, fruto da temerária tensão nuclear."
+      "text": "a legitimidade do governo norte-coreano é atemporal; Kim Jong-un e Vladimir Putin representam ­mudanças obscuras no mundo, fruto da temerária tensão nuclear."
      },
      {
       "letter": "C",
@@ -2204,7 +2204,7 @@ export const PROVAS = {
     ],
     "answer": "C",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimi- dade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois paí- ses e das juras de Kim por um “relacionamento inquebrantá- vel de companheiros de armas”, a profundidade dessa par- ceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abun- dância são granadas e mísseis a granel para municiar a guer- ra de atrito da Rússia na Ucrânia. Moscou expandiu as expor- tações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanis- mos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. 3 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dis- sensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
+    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimidade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois países e das juras de Kim por um “relacionamento inquebrantável de companheiros de armas”, a profundidade dessa parceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abundância são granadas e mísseis a granel para municiar a guerra de atrito da Rússia na Ucrânia. Moscou expandiu as exportações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanismos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dissensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": true
@@ -2233,12 +2233,12 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "minimizar o impacto do acordo. 4 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "minimizar o impacto do acordo."
      }
     ],
     "answer": "A",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimi- dade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois paí- ses e das juras de Kim por um “relacionamento inquebrantá- vel de companheiros de armas”, a profundidade dessa par- ceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abun- dância são granadas e mísseis a granel para municiar a guer- ra de atrito da Rússia na Ucrânia. Moscou expandiu as expor- tações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanis- mos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. 3 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dis- sensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
+    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimidade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois países e das juras de Kim por um “relacionamento inquebrantável de companheiros de armas”, a profundidade dessa parceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abundância são granadas e mísseis a granel para municiar a guerra de atrito da Rússia na Ucrânia. Moscou expandiu as exportações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanismos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dissensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2247,7 +2247,7 @@ export const PROVAS = {
     "number": 6,
     "page": 4,
     "subject": "Língua Portuguesa",
-    "stem": "No editorial, afirma-se que a parceria estratégica entre Coreia do Norte e Rússia contém detalhes desconheci- dos. Essa ideia é ratificada pela seguinte informação do texto:",
+    "stem": "No editorial, afirma-se que a parceria estratégica entre Coreia do Norte e Rússia contém detalhes desconhecidos. Essa ideia é ratificada pela seguinte informação do texto:",
     "alternatives": [
      {
       "letter": "A",
@@ -2272,7 +2272,7 @@ export const PROVAS = {
     ],
     "answer": "D",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimi- dade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois paí- ses e das juras de Kim por um “relacionamento inquebrantá- vel de companheiros de armas”, a profundidade dessa par- ceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abun- dância são granadas e mísseis a granel para municiar a guer- ra de atrito da Rússia na Ucrânia. Moscou expandiu as expor- tações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanis- mos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. 3 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dis- sensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
+    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimidade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois países e das juras de Kim por um “relacionamento inquebrantável de companheiros de armas”, a profundidade dessa parceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abundância são granadas e mísseis a granel para municiar a guerra de atrito da Rússia na Ucrânia. Moscou expandiu as exportações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanismos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dissensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": true
@@ -2306,7 +2306,7 @@ export const PROVAS = {
     ],
     "answer": "E",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimi- dade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois paí- ses e das juras de Kim por um “relacionamento inquebrantá- vel de companheiros de armas”, a profundidade dessa par- ceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abun- dância são granadas e mísseis a granel para municiar a guer- ra de atrito da Rússia na Ucrânia. Moscou expandiu as expor- tações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanis- mos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. 3 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dis- sensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
+    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimidade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois países e das juras de Kim por um “relacionamento inquebrantável de companheiros de armas”, a profundidade dessa parceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abundância são granadas e mísseis a granel para municiar a guerra de atrito da Rússia na Ucrânia. Moscou expandiu as exportações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanismos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dissensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2315,7 +2315,7 @@ export const PROVAS = {
     "number": 8,
     "page": 4,
     "subject": "Língua Portuguesa",
-    "stem": "A coesão e o sentido das frases – Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são ­desconhecidos. (1o parágrafo) – e – … que ademais ­serve a Putin como laboratório… (2o parágrafo) – man- têm-se, correta e respectivamente, com as reescritas:",
+    "stem": "A coesão e o sentido das frases – Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são ­desconhecidos. (1o parágrafo) – e – … que ademais ­serve a Putin como laboratório… (2o parágrafo) – mantêm-se, correta e respectivamente, com as reescritas:",
     "alternatives": [
      {
       "letter": "A",
@@ -2340,7 +2340,7 @@ export const PROVAS = {
     ],
     "answer": "C",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimi- dade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois paí- ses e das juras de Kim por um “relacionamento inquebrantá- vel de companheiros de armas”, a profundidade dessa par- ceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abun- dância são granadas e mísseis a granel para municiar a guer- ra de atrito da Rússia na Ucrânia. Moscou expandiu as expor- tações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanis- mos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. 3 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dis- sensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
+    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimidade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois países e das juras de Kim por um “relacionamento inquebrantável de companheiros de armas”, a profundidade dessa parceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abundância são granadas e mísseis a granel para municiar a guerra de atrito da Rússia na Ucrânia. Moscou expandiu as exportações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanismos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dissensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2374,7 +2374,7 @@ export const PROVAS = {
     ],
     "answer": "B",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimi- dade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois paí- ses e das juras de Kim por um “relacionamento inquebrantá- vel de companheiros de armas”, a profundidade dessa par- ceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abun- dância são granadas e mísseis a granel para municiar a guer- ra de atrito da Rússia na Ucrânia. Moscou expandiu as expor- tações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanis- mos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. 3 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dis- sensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
+    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimidade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois países e das juras de Kim por um “relacionamento inquebrantável de companheiros de armas”, a profundidade dessa parceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abundância são granadas e mísseis a granel para municiar a guerra de atrito da Rússia na Ucrânia. Moscou expandiu as exportações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanismos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dissensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2383,15 +2383,15 @@ export const PROVAS = {
     "number": 10,
     "page": 5,
     "subject": "Língua Portuguesa",
-    "stem": "Considere as passagens do texto. • \u0007… a profundidade dessa parceria tem limites… (1o parágrafo) • \u0007À China interessa o prolongamento da guerra na E­uropa […]; interessa a sustentação do regime de Kim… (3o parágrafo) • \u0007…mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. (3o parágrafo) Em conformidade com a norma-padrão de concordân- cia verbal, as passagens permitem, respectivamente, as r­eescritas:",
+    "stem": "Considere as passagens do texto. • \u0007… a profundidade dessa parceria tem limites… (1o parágrafo) • \u0007À China interessa o prolongamento da guerra na E­uropa […]; interessa a sustentação do regime de Kim… (3o parágrafo) • \u0007…mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. (3o parágrafo) Em conformidade com a norma-padrão de concordância verbal, as passagens permitem, respectivamente, as r­eescritas:",
     "alternatives": [
      {
       "letter": "A",
-      "text": "Devem haver limites para a profundidade dessa par- ceria. / Interessam à China o prolongamento da guer- ra na Europa e a sustentação do regime de Kim. / Mas não a percepção de que Rússia, Coreia do N­orte e ela compõe um “bloco” ou “eixo”."
+      "text": "Devem haver limites para a profundidade dessa parceria. / Interessam à China o prolongamento da guerra na Europa e a sustentação do regime de Kim. / Mas não a percepção de que Rússia, Coreia do N­orte e ela compõe um “bloco” ou “eixo”."
      },
      {
       "letter": "B",
-      "text": "Deve existir limites para a profundidade dessa par- ceria. / O prolongamento da guerra na Europa e a sustentação do regime de Kim interessam à China. / Mas não a percepção de que compõem um “bloco” ou “eixo” Rússia, Coreia do Norte e ela."
+      "text": "Deve existir limites para a profundidade dessa parceria. / O prolongamento da guerra na Europa e a sustentação do regime de Kim interessam à China. / Mas não a percepção de que compõem um “bloco” ou “eixo” Rússia, Coreia do Norte e ela."
      },
      {
       "letter": "C",
@@ -2399,16 +2399,16 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "Há limites para a profundidade dessa parceria. / O prolongamento da guerra na Europa e a sustentação do regime de Kim interessa à China. / Mas não a per- cepção de que compõe um “bloco” ou “eixo” Rússia, Coreia do Norte e ela."
+      "text": "Há limites para a profundidade dessa parceria. / O prolongamento da guerra na Europa e a sustentação do regime de Kim interessa à China. / Mas não a percepção de que compõe um “bloco” ou “eixo” Rússia, Coreia do Norte e ela."
      },
      {
       "letter": "E",
-      "text": "Hão de haver limites para a profundidade dessa par- ceria. / Interessam à China o prolongamento da guer- ra na Europa e a sustentação do regime de Kim. / Mas não a percepção de que Rússia, Coreia do N­orte e ela compõe um “bloco” ou “eixo”. 5 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "Hão de haver limites para a profundidade dessa parceria. / Interessam à China o prolongamento da guerra na Europa e a sustentação do regime de Kim. / Mas não a percepção de que Rússia, Coreia do N­orte e ela compõe um “bloco” ou “eixo”."
      }
     ],
     "answer": "C",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimi- dade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois paí- ses e das juras de Kim por um “relacionamento inquebrantá- vel de companheiros de armas”, a profundidade dessa par- ceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abun- dância são granadas e mísseis a granel para municiar a guer- ra de atrito da Rússia na Ucrânia. Moscou expandiu as expor- tações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanis- mos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. 3 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dis- sensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
+    "support": "Leia o texto para responder às questões de números 02 a 10. Aliança de delinquentes Após a visita do ditador Kim Jong-un à Rússia em 2023, Vladimir Putin retribuiu a gentileza e viajou, pela primeira vez em 24 anos, à Coreia do Norte. Os frutos imediatos são mais munição para Moscou em troca de um arremedo de legitimidade para o tirano mais isolado do mundo. Há mais coisas no escambo. Os dois anunciaram uma “parceria estratégica ampla”, cujos detalhes são desconhecidos. Mas, apesar das d­eclarações de Putin sobre os laços históricos dos dois países e das juras de Kim por um “relacionamento inquebrantável de companheiros de armas”, a profundidade dessa parceria tem limites, e China e Coreia do Sul não deixarão de enfatizá-los. Uma das poucas coisas que Pyongyang* tem em abundância são granadas e mísseis a granel para municiar a guerra de atrito da Rússia na Ucrânia. Moscou expandiu as exportações de combustíveis e alimentos à Coreia do Norte, que ademais serve a Putin como laboratório para testar mecanismos para burlar sanções e sabotar instituições multilaterais. O risco maior e mais opaco é a transferência de tecnologias militares russas ligadas a satélites, submarinos, foguetes h­ipersônicos e, sobretudo, arsenais nucleares. À China interessa o prolongamento da guerra na Europa, mas não sua escalada; interessa a sustentação do regime de Kim, mas não seu empoderamento; interessa o confronto com o Ocidente, mas não a percepção de que ela compõe um “bloco” ou “eixo” com Rússia e Coreia do Norte. Nem por isso o Ocidente pode negligenciar a necessi­ dade de fortalecer parcerias no Pacífico e explorar as dissensões entre os “amigos” autocratas. Os dois parecem cada vez mais desesperados, isolados e acuados. Mas tudo isso os torna mais, não menos perigosos. (Opinião. https://www.estadao.com.br/opiniao, 20.06.2024. Adaptado) * Capital da Coreia do Norte",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": true
@@ -2421,7 +2421,7 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "extrema tensão existencial, provocada pelos sofri- mentos da vida difícil que levava."
+      "text": "extrema tensão existencial, provocada pelos sofrimentos da vida difícil que levava."
      },
      {
       "letter": "B",
@@ -2433,16 +2433,16 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "incontrolável tristeza e desesperança, fruto da sau- dade dos caminhos já trilhados."
+      "text": "incontrolável tristeza e desesperança, fruto da saudade dos caminhos já trilhados."
      },
      {
       "letter": "E",
-      "text": "pleno equilíbrio emocional, com ponderações coe- rentes sobre a maternidade."
+      "text": "pleno equilíbrio emocional, com ponderações coerentes sobre a maternidade."
      }
     ],
     "answer": "A",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o cor- po todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistí- vel, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recor- dações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente inde- finidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho pratea- do. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
+    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o corpo todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistível, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recordações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente indefinidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho prateado. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2476,7 +2476,7 @@ export const PROVAS = {
     ],
     "answer": "D",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o cor- po todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistí- vel, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recor- dações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente inde- finidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho pratea- do. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
+    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o corpo todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistível, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recordações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente indefinidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho prateado. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2485,7 +2485,7 @@ export const PROVAS = {
     "number": 13,
     "page": 6,
     "subject": "Língua Portuguesa",
-    "stem": "O parágrafo final do texto permite concluir que a perso- nagem optou por",
+    "stem": "O parágrafo final do texto permite concluir que a personagem optou por",
     "alternatives": [
      {
       "letter": "A",
@@ -2510,7 +2510,7 @@ export const PROVAS = {
     ],
     "answer": "E",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o cor- po todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistí- vel, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recor- dações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente inde- finidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho pratea- do. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
+    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o corpo todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistível, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recordações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente indefinidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho prateado. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": true
@@ -2544,7 +2544,7 @@ export const PROVAS = {
     ],
     "answer": "B",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o cor- po todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistí- vel, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recor- dações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente inde- finidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho pratea- do. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
+    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o corpo todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistível, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recordações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente indefinidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho prateado. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2557,15 +2557,15 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "Ela lembrou que tinha a lata, que preferia mais man- ter bem areada que nutrir a raiva, em certos momen­ tos. Na verdade, ficava ansiosa para ver aquele o­bjeto luzindo."
+      "text": "Ela lembrou que tinha a lata, que preferia mais manter bem areada que nutrir a raiva, em certos momen­ tos. Na verdade, ficava ansiosa para ver aquele o­bjeto luzindo."
      },
      {
       "letter": "B",
-      "text": "Ela lembrou de que tinha a lata, que preferia manter bem areada do que nutrir a raiva, em certos momen- tos. Na verdade, ficava ansiosa em ver aquele objeto luzindo."
+      "text": "Ela lembrou de que tinha a lata, que preferia manter bem areada do que nutrir a raiva, em certos momentos. Na verdade, ficava ansiosa em ver aquele objeto luzindo."
      },
      {
       "letter": "C",
-      "text": "Ela lembrou-se de que tinha a lata, que preferia man- ter bem areada a nutrir a raiva, em certos momentos. Na verdade, ficava ansiosa por ver aquele objeto l­uzindo."
+      "text": "Ela lembrou-se de que tinha a lata, que preferia manter bem areada a nutrir a raiva, em certos momentos. Na verdade, ficava ansiosa por ver aquele objeto l­uzindo."
      },
      {
       "letter": "D",
@@ -2573,12 +2573,12 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "Ela lembrou-se de que tinha a lata, que preferia manter bem areada do que nutrir a raiva, em certos momentos. Na verdade, ficava ansiosa a ver aquele objeto luzindo. 6 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "Ela lembrou-se de que tinha a lata, que preferia manter bem areada do que nutrir a raiva, em certos momentos. Na verdade, ficava ansiosa a ver aquele objeto luzindo."
      }
     ],
     "answer": "C",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o cor- po todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistí- vel, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recor- dações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente inde- finidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho pratea- do. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
+    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o corpo todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistível, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recordações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente indefinidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho prateado. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2587,7 +2587,7 @@ export const PROVAS = {
     "number": 16,
     "page": 6,
     "subject": "Língua Portuguesa",
-    "stem": "Considere as passagens: • \u0007Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! (6o parágrafo) • \u0007Tratava bem a lata. (10o parágrafo) Quanto ao emprego de pronomes e à colocação pro­ nominal, as reescritas das passagens atendem à nor- ma-padrão em:",
+    "stem": "Considere as passagens: • \u0007Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! (6o parágrafo) • \u0007Tratava bem a lata. (10o parágrafo) Quanto ao emprego de pronomes e à colocação pro­ nominal, as reescritas das passagens atendem à norma-padrão em:",
     "alternatives": [
      {
       "letter": "A",
@@ -2612,7 +2612,7 @@ export const PROVAS = {
     ],
     "answer": "A",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o cor- po todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistí- vel, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recor- dações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente inde- finidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho pratea- do. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
+    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o corpo todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistível, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recordações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente indefinidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho prateado. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2625,11 +2625,11 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "Gostava de sua lata de carregar água. (10o parágra- fo) / Como ela os amava, Nossenhor! (12o parágrafo)"
+      "text": "Gostava de sua lata de carregar água. (10o parágrafo) / Como ela os amava, Nossenhor! (12o parágrafo)"
      },
      {
       "letter": "B",
-      "text": "… que lhe caía irremediavelmente em cima. (1o pará- grafo) / Correu deixando o barranco e o sonho de liber- dade para trás. (14o parágrafo)"
+      "text": "… que lhe caía irremediavelmente em cima. (1o parágrafo) / Correu deixando o barranco e o sonho de liberdade para trás. (14o parágrafo)"
      },
      {
       "letter": "C",
@@ -2641,12 +2641,12 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "Apressou-se a ir ao encontro deles. (13o parágrafo) / O barranco olhava-a, boca aberta, num sorriso irre- sistível… (8o parágrafo)"
+      "text": "Apressou-se a ir ao encontro deles. (13o parágrafo) / O barranco olhava-a, boca aberta, num sorriso irresistível… (8o parágrafo)"
      }
     ],
     "answer": "A",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o cor- po todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistí- vel, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recor- dações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente inde- finidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho pratea- do. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
+    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o corpo todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistível, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recordações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente indefinidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho prateado. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2655,7 +2655,7 @@ export const PROVAS = {
     "number": 18,
     "page": 7,
     "subject": "Língua Portuguesa",
-    "stem": "Considere as reescritas de informações do texto. • \u0007Esperava que qualquer hora o coração lhe ­perfurasse o peito, lhe rasgasse a blusa. • \u0007O coração corresponderia mesmo forma bonita dos postais coloridos? • \u0007Pensou em jogar lata de água ao chão, esparra- mar-se no líquido, fazer-se lama. • \u0007O barranco dirigia ela um sorriso irresistível, convidando-a para o encontro final. De acordo com a norma-padrão, as lacunas devem ser preenchidas, respectivamente, com:",
+    "stem": "Considere as reescritas de informações do texto. • \u0007Esperava que qualquer hora o coração lhe ­perfurasse o peito, lhe rasgasse a blusa. • \u0007O coração corresponderia mesmo forma bonita dos postais coloridos? • \u0007Pensou em jogar lata de água ao chão, esparramar-se no líquido, fazer-se lama. • \u0007O barranco dirigia ela um sorriso irresistível, convidando-a para o encontro final. De acordo com a norma-padrão, as lacunas devem ser preenchidas, respectivamente, com:",
     "alternatives": [
      {
       "letter": "A",
@@ -2680,7 +2680,7 @@ export const PROVAS = {
     ],
     "answer": "D",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o cor- po todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistí- vel, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recor- dações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente inde- finidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho pratea- do. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
+    "support": "Leia o texto para responder às questões de números 11 a 18. Liberdade adiada Sentia-se cansada. A barriga, as pernas, a cabeça, o corpo todo era um enorme peso que lhe caía irremediavelmente em cima. Esperava que a qualquer momento o coração lhe perfurasse o peito, lhe rasgasse a blusa. Como seria o coração? Teria mesmo aquela forma bonita dos postais coloridos? … Será que as dores deformam os corações? Pensou em atirar a lata de água ao chão, esparramar-se no líquido, encharcar-se, fazer-se lama, confundir-se com aqueles caminhos que durante anos e mais anos lhe comiam as solas dos pés, lhe queimavam as veias, lhe roubavam as forças. Imaginou os filhos que aguardavam e já deviam estar acordados. Os filhos que ela odiava! Não. Não voltaria para casa. O barranco olhava-a, boca aberta, num sorriso irresistível, convidando-a para o encontro final. Conhecia aquele tipo de sorriso e não tinha boas recordações dos tempos que vinham depois. Mas um dia havia de o eternizar. E se fosse agora, no instante que madrugava? A lata e ela, para sempre, juntas no sorriso do barranco. Gostava de sua lata de carregar água. Tratava bem a lata. Às vezes, em momentos de raiva ou simplesmente indefinidos, areava uma, dez, mil vezes, até que sua lata ficava a luzir e a cólera, ou a indefinição se perdiam no brilho prateado. Com o fundo de madeira que tivera que mandar colocar, ficou mais pesada, mas não eram daí os seus tormentos. À borda do barranco, com a lata de água à cabeça e a saia batida pelo vento, pensou nos filhos e levou as mãos ao peito. O que tinha a ver os filhos com o coração? Os filhos… Como ela os amava, Nossenhor! Apressou-se a ir ao encontro deles. O mais novito devia estar a chamar por ela. Correu deixando o barranco e o sonho de liberdade para trás. (Dina Salústio. Mornas eram as noites. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": true
@@ -2693,15 +2693,15 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "as transformações por que passava a Europa inspi- raram os navegadores portugueses a explorar outros lugares, do que resultou a chegada ao Japão, país com o qual iniciaram as relações comerciais."
+      "text": "as transformações por que passava a Europa inspiraram os navegadores portugueses a explorar outros lugares, do que resultou a chegada ao Japão, país com o qual iniciaram as relações comerciais."
      },
      {
       "letter": "B",
-      "text": "os navegadores portugueses, cansados de guer- ras religiosas, empreenderam um novo modelo de d­esenvolvimento comercial, baseado nas relações amigáveis com países asiáticos, sobretudo a China e o Japão."
+      "text": "os navegadores portugueses, cansados de guerras religiosas, empreenderam um novo modelo de d­esenvolvimento comercial, baseado nas relações amigáveis com países asiáticos, sobretudo a China e o Japão."
      },
      {
       "letter": "C",
-      "text": "as mudanças religiosa e política na Europa corres- ponderam a uma forma de contra-atacar o Grande Império da China que, junto com o rico Japão, consti- tuíam uma ameaça ao poder econômico da Espanha e de Portugal."
+      "text": "as mudanças religiosa e política na Europa corresponderam a uma forma de contra-atacar o Grande Império da China que, junto com o rico Japão, constituíam uma ameaça ao poder econômico da Espanha e de Portugal."
      },
      {
       "letter": "D",
@@ -2714,7 +2714,7 @@ export const PROVAS = {
     ],
     "answer": "A",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizon- te atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, locali- zado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos con- tinentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espa- da e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portu- gueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado) 7 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação.",
+    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizonte atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, localizado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos continentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espada e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portugueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2723,7 +2723,7 @@ export const PROVAS = {
     "number": 20,
     "page": 7,
     "subject": "Língua Portuguesa",
-    "stem": "Nas passagens– Vemos uma Europa, que então era o mundo… (1o parágrafo) – e – Pagaram para ver, com risco de suas próprias vidas. (2o parágrafo) –, as expres- sões grifadas significam, contextual e respectivamente:",
+    "stem": "Nas passagens– Vemos uma Europa, que então era o mundo… (1o parágrafo) – e – Pagaram para ver, com risco de suas próprias vidas. (2o parágrafo) –, as expressões grifadas significam, contextual e respectivamente:",
     "alternatives": [
      {
       "letter": "A",
@@ -2748,7 +2748,7 @@ export const PROVAS = {
     ],
     "answer": "E",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizon- te atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, locali- zado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos con- tinentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espa- da e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portu- gueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado) 7 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação.",
+    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizonte atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, localizado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos continentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espada e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portugueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2782,7 +2782,7 @@ export const PROVAS = {
     ],
     "answer": "B",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizon- te atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, locali- zado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos con- tinentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espa- da e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portu- gueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado) 7 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação.",
+    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizonte atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, localizado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos continentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espada e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portugueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2791,7 +2791,7 @@ export const PROVAS = {
     "number": 22,
     "page": 8,
     "subject": "Língua Portuguesa",
-    "stem": "No texto, identifica-se uma relação de coesão e de sen- tido entre as seguintes expressões:",
+    "stem": "No texto, identifica-se uma relação de coesão e de sentido entre as seguintes expressões:",
     "alternatives": [
      {
       "letter": "A",
@@ -2816,7 +2816,7 @@ export const PROVAS = {
     ],
     "answer": "D",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizon- te atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, locali- zado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos con- tinentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espa- da e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portu- gueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado) 7 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação.",
+    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizonte atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, localizado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos continentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espada e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portugueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": true
@@ -2829,7 +2829,7 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "Os portugueses tinham bastantes interesses comer- ciais com os japoneses, parceiros desde 1546."
+      "text": "Os portugueses tinham bastantes interesses comerciais com os japoneses, parceiros desde 1546."
      },
      {
       "letter": "B",
@@ -2850,7 +2850,7 @@ export const PROVAS = {
     ],
     "answer": "A",
     "annulled": false,
-    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizon- te atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, locali- zado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos con- tinentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espa- da e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portu- gueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado) 7 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação.",
+    "support": "Leia o texto para responder às questões de números 19 a 23. Recuemos cinco séculos no tempo. Vemos uma Europa, que então era o mundo, saída da Idade Média, possuída pela febre tão inquietante quanto bela e fértil do Renascimento, e paradoxalmente, envolta em guerras religiosas e conquistas. Na Península Ibérica, a inquietação criadora tomou o­utra forma. Povos de navegadores não mais se conformavam em olhar e apenas imaginar o que haveria além do horizonte atlântico. Pagaram para ver, com risco de suas próprias vidas. Tomando o rumo oeste em pequenas embarcações, Colombo (1492) e Cabral (1500) descobriram o Novo Mundo. Havia, no entanto, muito a descobrir. Desde o fim do s­éculo XIII, os europeus sabiam da existência do Grande I­mpério da China, através da narrativa de Marco Polo que lá vivera cerca de 20 anos. Em seu livro, ele fazia referência ao Japão como um país fantasticamente rico, inatingido, localizado ao lado da costa chinesa. Todavia, dois séculos e meio transcorreriam antes que um europeu pisasse em território dos japoneses. Com a chegada a Tanegashima, praticamente os por­ tugueses completaram seus postulados, desenhos dos continentes e mares, que constituíam os primeiros mapas de navegação. No primeiro encontro em Tanegashima, os japoneses conheceram a espingarda, que iria alterar profundamente o comportamento bélico de um povo exímio no uso da espada e do arco e flecha. Em 1546, três anos após o primeiro encontro, três naus portuguesas chegaram a Kyushu, dando início ao intercâmbio comercial com o Japão. Durante quatro décadas, até 1587 (quando chegam os espanhóis), os portugueses foram os únicos parceiros europeus no intercâmbio com o Japão. (Aliança Cultural Brasil-Japão. Cultura Japonesa: São Paulo, Rio de Janeiro, Curitiba. Adaptado)",
     "supportImage": "",
     "supportImageKind": "",
     "needsSource": false
@@ -2859,7 +2859,7 @@ export const PROVAS = {
     "number": 24,
     "page": 8,
     "subject": "Língua Portuguesa",
-    "stem": "Considere as frases. • \u0007A relação cultural não é similar estabelecida entre Portugal e Brasil. • \u0007Atualmente, o comércio está bem aquecido, pois o país asiático tornou-se o primeiro a comprar mais de US$ 100 bilhões em produtos brasilei- ros em um ano (US$ 104,3 bilhões). De acordo com a norma-padrão, as lacunas das frases devem ser preenchidas, respectivamente, com:",
+    "stem": "Considere as frases. • \u0007A relação cultural não é similar estabelecida entre Portugal e Brasil. • \u0007Atualmente, o comércio está bem aquecido, pois o país asiático tornou-se o primeiro a comprar mais de US$ 100 bilhões em produtos brasileiros em um ano (US$ 104,3 bilhões). De acordo com a norma-padrão, as lacunas das frases devem ser preenchidas, respectivamente, com:",
     "alternatives": [
      {
       "letter": "A",
@@ -2879,7 +2879,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "japonesa-portuguesa … ante à … chinês-brasileiro 8 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. Conhecimentos em Direito Direito Penal"
+      "text": "japonesa-portuguesa … ante à … chinês-brasileiro Conhecimentos em Direito Direito Penal"
      }
     ],
     "answer": "C",
@@ -2893,7 +2893,7 @@ export const PROVAS = {
     "number": 25,
     "page": 8,
     "subject": "Direito Penal",
-    "stem": "A respeito do crime de petrechos de falsificação, pre­ visto no artigo 294 do Código Penal, assinale a alterna- tiva c­orreta.",
+    "stem": "A respeito do crime de petrechos de falsificação, pre­ visto no artigo 294 do Código Penal, assinale a alternativa c­orreta.",
     "alternatives": [
      {
       "letter": "A",
@@ -2905,7 +2905,7 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "Tem por objeto material o objeto (instrumento) desti- nado à falsificação de papéis públicos e particulares."
+      "text": "Tem por objeto material o objeto (instrumento) destinado à falsificação de papéis públicos e particulares."
      },
      {
       "letter": "D",
@@ -2927,7 +2927,7 @@ export const PROVAS = {
     "number": 26,
     "page": 8,
     "subject": "Direito Penal",
-    "stem": "Tício, a fim de se habilitar a uma vaga de emprego, fabri- cou diploma de instituição de Ensino Superior privada e o utilizou, apresentando-o como requisito para participar da seleção. Diante da situação hipotética, é correto dizer que Tício, em tese, praticou o crime de",
+    "stem": "Tício, a fim de se habilitar a uma vaga de emprego, fabricou diploma de instituição de Ensino Superior privada e o utilizou, apresentando-o como requisito para participar da seleção. Diante da situação hipotética, é correto dizer que Tício, em tese, praticou o crime de",
     "alternatives": [
      {
       "letter": "A",
@@ -2961,7 +2961,7 @@ export const PROVAS = {
     "number": 27,
     "page": 8,
     "subject": "Direito Penal",
-    "stem": "Mévia, advogada, cedeu a Tícia, sua irmã gêmea, a car- teira profissional da OAB, para ela ingressar no presídio, passando-se por advogada, a fim de visitar, quando qui- sesse, o namorado que se encontrava preso. Tícia, de fato, usou o documento profissional de Mévia, por várias vezes, sendo descoberta na última vez. Diante da situação hipotética, assinale a alternativa correta.",
+    "stem": "Mévia, advogada, cedeu a Tícia, sua irmã gêmea, a carteira profissional da OAB, para ela ingressar no presídio, passando-se por advogada, a fim de visitar, quando quisesse, o namorado que se encontrava preso. Tícia, de fato, usou o documento profissional de Mévia, por várias vezes, sendo descoberta na última vez. Diante da situação hipotética, assinale a alternativa correta.",
     "alternatives": [
      {
       "letter": "A",
@@ -2995,11 +2995,11 @@ export const PROVAS = {
     "number": 28,
     "page": 9,
     "subject": "Direito Penal",
-    "stem": "Tendo em conta o crime de fraudes em certames de inte- resse público, é correto afirmar:",
+    "stem": "Tendo em conta o crime de fraudes em certames de interesse público, é correto afirmar:",
     "alternatives": [
      {
       "letter": "A",
-      "text": "é crime próprio de funcionário público ou de pes­soas que tenham por função atuar na elaboração e na aplicação de concursos, processos seletivos, avalia- ções e exames."
+      "text": "é crime próprio de funcionário público ou de pes­soas que tenham por função atuar na elaboração e na aplicação de concursos, processos seletivos, avaliações e exames."
      },
      {
       "letter": "B",
@@ -3007,7 +3007,7 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "tem por objeto material conteúdo sigiloso de concur- so público; de processo seletivo para ingresso no Ensino Superior, pouco importando se em instituição pública ou privada; de avaliação ou exame públicos e de exame ou processo seletivo previstos em lei."
+      "text": "tem por objeto material conteúdo sigiloso de concurso público; de processo seletivo para ingresso no Ensino Superior, pouco importando se em instituição pública ou privada; de avaliação ou exame públicos e de exame ou processo seletivo previstos em lei."
      },
      {
       "letter": "D",
@@ -3015,7 +3015,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "só se caracteriza se resultar comprometimento à cre- dibilidade do certame."
+      "text": "só se caracteriza se resultar comprometimento à credibilidade do certame."
      }
     ],
     "answer": "C",
@@ -3033,7 +3033,7 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "Extingue a punibilidade, no peculato culposo, quan- do feita antes da sentença irrecorrível. Se feita pos- teriormente, implica diminuição da pena, da metade."
+      "text": "Extingue a punibilidade, no peculato culposo, quando feita antes da sentença irrecorrível. Se feita posteriormente, implica diminuição da pena, da metade."
      },
      {
       "letter": "B",
@@ -3049,7 +3049,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "Extingue a punibilidade, no crime de peculato median­ te erro de outrem, desde que feita antes da denúncia. Se feita posteriormente, implica diminuição da pena, da metade. 9 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "Extingue a punibilidade, no crime de peculato median­ te erro de outrem, desde que feita antes da denúncia. Se feita posteriormente, implica diminuição da pena, da metade."
      }
     ],
     "answer": "A",
@@ -3071,15 +3071,15 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "Mévio, ao praticar o crime de exercício arbitrário das próprias razões, empregando violência, somente será processado mediante ação penal pública con- dicionada à representação da vítima."
+      "text": "Mévio, ao praticar o crime de exercício arbitrário das próprias razões, empregando violência, somente será processado mediante ação penal pública condicionada à representação da vítima."
      },
      {
       "letter": "C",
-      "text": "Caio, por pagar Tício para prestar falso testemu- nho, e Tício, por aceitar e efetivamente prestar falso t­estemunho, incorrem, em tese, no crime de falso testemunho."
+      "text": "Caio, por pagar Tício para prestar falso testemunho, e Tício, por aceitar e efetivamente prestar falso t­estemunho, incorrem, em tese, no crime de falso testemunho."
      },
      {
       "letter": "D",
-      "text": "Tício, ao afirmar falsamente à autoridade policial, a fim de isentar o filho, ser o responsável pelo jogo de bicho (contravenção penal), em tese, incorre no cri- me de autoacusação falsa."
+      "text": "Tício, ao afirmar falsamente à autoridade policial, a fim de isentar o filho, ser o responsável pelo jogo de bicho (contravenção penal), em tese, incorre no crime de autoacusação falsa."
      },
      {
       "letter": "E",
@@ -3105,7 +3105,7 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "Caio, por expressa previsão legal, deverá se decla- rar suspeito para exercer jurisdição nos processos em que o sogro atua como perito judicial, inexistindo, contudo, impedimento nos feitos em que a atuação já se encerrou."
+      "text": "Caio, por expressa previsão legal, deverá se declarar suspeito para exercer jurisdição nos processos em que o sogro atua como perito judicial, inexistindo, contudo, impedimento nos feitos em que a atuação já se encerrou."
      },
      {
       "letter": "C",
@@ -3117,7 +3117,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "Caio, por expressa previsão legal, deverá se decla- rar suspeito para exercer jurisdição nos processos em que o sogro atuou como perito judicial."
+      "text": "Caio, por expressa previsão legal, deverá se declarar suspeito para exercer jurisdição nos processos em que o sogro atuou como perito judicial."
      }
     ],
     "answer": "D",
@@ -3135,23 +3135,23 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "Citado por hora certa ou por Edital, não comparecen- do o réu nem constituindo advogado, suspendem-se o processo e o prazo prescricional."
+      "text": "Citado por hora certa ou por Edital, não comparecendo o réu nem constituindo advogado, suspendem-se o processo e o prazo prescricional."
      },
      {
       "letter": "B",
-      "text": "Determinada a citação por carta rogatória, o proces- so e o prazo prescricional serão suspensos, até o cumprimento. Já a citação por carta precatória impli- cará suspensão do processo e prazo prescricional, se o cumprimento ultrapassar 30 dias."
+      "text": "Determinada a citação por carta rogatória, o processo e o prazo prescricional serão suspensos, até o cumprimento. Já a citação por carta precatória implicará suspensão do processo e prazo prescricional, se o cumprimento ultrapassar 30 dias."
      },
      {
       "letter": "C",
-      "text": "A citação por mandado é a regra, mas, por expres- sa previsão legal, o acusado militar será citado por i­ntermédio do chefe do respectivo serviço."
+      "text": "A citação por mandado é a regra, mas, por expressa previsão legal, o acusado militar será citado por i­ntermédio do chefe do respectivo serviço."
      },
      {
       "letter": "D",
-      "text": "A citação, ato pelo qual o réu toma ciência da acu- sação, pode ser real ou ficta. A real é feita por oficial de justiça, pessoalmente ou por hora certa; a ficta, por Edital."
+      "text": "A citação, ato pelo qual o réu toma ciência da acusação, pode ser real ou ficta. A real é feita por oficial de justiça, pessoalmente ou por hora certa; a ficta, por Edital."
      },
      {
       "letter": "E",
-      "text": "O réu que deixar de atender a ato judicial do qual foi devidamente intimado será declarado revel, pros- seguindo-se o feito sem sua presença e intimação para demais atos, inclusive a sentença."
+      "text": "O réu que deixar de atender a ato judicial do qual foi devidamente intimado será declarado revel, prosseguindo-se o feito sem sua presença e intimação para demais atos, inclusive a sentença."
      }
     ],
     "answer": "C",
@@ -3169,7 +3169,7 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "a resposta à acusação é prevista para ambos os ­ritos, ordinário e sumário, mas os prazos são distin- tos, sendo 10 dias para o primeiro e 5 dias para o segundo."
+      "text": "a resposta à acusação é prevista para ambos os ­ritos, ordinário e sumário, mas os prazos são distintos, sendo 10 dias para o primeiro e 5 dias para o segundo."
      },
      {
       "letter": "B",
@@ -3177,15 +3177,15 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "encerrada a instrução, tanto no rito ordinário quanto no sumário, há previsão expressa quanto à possibi- lidade de memorais, por escrito, e diligências com- plementares."
+      "text": "encerrada a instrução, tanto no rito ordinário quanto no sumário, há previsão expressa quanto à possibilidade de memorais, por escrito, e diligências complementares."
      },
      {
       "letter": "D",
-      "text": "no rito sumário, não localizado o acusado, para cita- ção pessoal, o rito será convertido para o ordinário, a fim de se proceder a citação por Edital."
+      "text": "no rito sumário, não localizado o acusado, para citação pessoal, o rito será convertido para o ordinário, a fim de se proceder a citação por Edital."
      },
      {
       "letter": "E",
-      "text": "a absolvição sumária, após a apresentação de res- posta à acusação, aplica-se tanto no rito ordinário quanto no sumário. 10 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "a absolvição sumária, após a apresentação de resposta à acusação, aplica-se tanto no rito ordinário quanto no sumário."
      }
     ],
     "answer": "E",
@@ -3199,11 +3199,11 @@ export const PROVAS = {
     "number": 34,
     "page": 10,
     "subject": "Direito Processual Penal",
-    "stem": "A respeito da composição do Tribunal do Júri e da for- mação do conselho de sentença, assinale a alternativa correta.",
+    "stem": "A respeito da composição do Tribunal do Júri e da formação do conselho de sentença, assinale a alternativa correta.",
     "alternatives": [
      {
       "letter": "A",
-      "text": "São impedidos de servir no mesmo conselho marido e mulher, descendente e ascendente, irmãos e ami- gos íntimos."
+      "text": "São impedidos de servir no mesmo conselho marido e mulher, descendente e ascendente, irmãos e amigos íntimos."
      },
      {
       "letter": "B",
@@ -3215,7 +3215,7 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "Os jurados excluídos por impedimento em razão de parentesco não serão considerados para a constitui- ção do número legal exigível para a realização da sessão."
+      "text": "Os jurados excluídos por impedimento em razão de parentesco não serão considerados para a constituição do número legal exigível para a realização da sessão."
      },
      {
       "letter": "E",
@@ -3241,11 +3241,11 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "Mévio, tendo a homologação do acordo de não per- secução penal recusada, poderá interpor recurso de apelação."
+      "text": "Mévio, tendo a homologação do acordo de não persecução penal recusada, poderá interpor recurso de apelação."
      },
      {
       "letter": "C",
-      "text": "Caio, representante do órgão de acusação, caso queira recorrer da decisão que reconheceu a pres- crição, extinguindo a punibilidade do réu, deverá i­nterpor recurso em sentido estrito."
+      "text": "Caio, representante do órgão de acusação, caso queira recorrer da decisão que reconheceu a prescrição, extinguindo a punibilidade do réu, deverá i­nterpor recurso em sentido estrito."
      },
      {
       "letter": "D",
@@ -3275,11 +3275,11 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "A concessão de habeas corpus implicará condena- ção da autoridade que tiver determinado a coação à indenização civil, se decorrente de negligência."
+      "text": "A concessão de habeas corpus implicará condenação da autoridade que tiver determinado a coação à indenização civil, se decorrente de negligência."
      },
      {
       "letter": "C",
-      "text": "No caso de petição de habeas corpus, não será con- cedida a ordem antes de prestadas as informações pela autoridade apontada como coautora."
+      "text": "No caso de petição de habeas corpus, não será concedida a ordem antes de prestadas as informações pela autoridade apontada como coautora."
      },
      {
       "letter": "D",
@@ -3301,7 +3301,7 @@ export const PROVAS = {
     "number": 37,
     "page": 11,
     "subject": "Direito Processual Penal",
-    "stem": "Caio, na condução de um veículo, causou lesão corpo- ral culposa (crime processável por ação penal pública condicionada à representação) em Mévio. Lavrado Ter- mo Circunstanciado e encaminhados os autos para o J­uizado Especial Criminal, foi designada audiência pre- liminar. Na audiência, Caio propôs pagar a Mévio o valor de R$ 10.000,00 (dez mil reais), a título de composição de dano. Mévio aceitou a proposta, tendo o acordo por eles entabulado sido reduzido a termo e homologado pelo juiz. Caio, no entanto, pagou apenas metade do v­alor acordado. Com base na situação hipotética, assinale a alternativa correta.",
+    "stem": "Caio, na condução de um veículo, causou lesão corporal culposa (crime processável por ação penal pública condicionada à representação) em Mévio. Lavrado Termo Circunstanciado e encaminhados os autos para o J­uizado Especial Criminal, foi designada audiência preliminar. Na audiência, Caio propôs pagar a Mévio o valor de R$ 10.000,00 (dez mil reais), a título de composição de dano. Mévio aceitou a proposta, tendo o acordo por eles entabulado sido reduzido a termo e homologado pelo juiz. Caio, no entanto, pagou apenas metade do v­alor acordado. Com base na situação hipotética, assinale a alternativa correta.",
     "alternatives": [
      {
       "letter": "A",
@@ -3317,11 +3317,11 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "A composição de dano, homologada pelo juiz, não impede que Mévio represente criminalmente con- tra Caio, mas, caso haja a representação, vincula o Ministério Público a propor a aplicação imediata de pena restritiva de direito, pouco importando a inadimplência."
+      "text": "A composição de dano, homologada pelo juiz, não impede que Mévio represente criminalmente contra Caio, mas, caso haja a representação, vincula o Ministério Público a propor a aplicação imediata de pena restritiva de direito, pouco importando a inadimplência."
      },
      {
       "letter": "E",
-      "text": "A composição de dano, homologada pelo juiz, impli­ cou renúncia ao direito de representação, pouco importando a inadimplência de Caio. Mévio poderá executar a decisão homologatória, que tem força de título executivo, no próprio juízo criminal. 11 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. Direito Processual Civil"
+      "text": "A composição de dano, homologada pelo juiz, impli­ cou renúncia ao direito de representação, pouco importando a inadimplência de Caio. Mévio poderá executar a decisão homologatória, que tem força de título executivo, no próprio juízo criminal. Direito Processual Civil"
      }
     ],
     "answer": "B",
@@ -3335,7 +3335,7 @@ export const PROVAS = {
     "number": 38,
     "page": 11,
     "subject": "Direito Processual Civil",
-    "stem": "Douglas, chefe de secretaria de uma das varas da Fazenda Pública da Capital, é responsável pela organização e pelo funcionamento da secretaria, supervisionando o trabalho dos servidores e zelando pela eficiência dos serviços pres- tados. Em um dia de grande movimento na vara, Douglas, pressionado pelo acúmulo de tarefas e pela n­ecessidade de atender a diversas demandas simultâ­neas, comete um grave erro ao enviar uma intimação para o endereço ­errado da parte ré em um processo de execução fiscal. A intimação, que informa sobre a penhora de um veículo do réu, é enviada para um endereço antigo, onde o réu já não reside há mais de 2 anos. Devido ao erro no envio da intimação, o réu não toma conhecimento da penhora de seu veículo e não tem a oportunidade de apresentar defe- sa, razão pela qual seu carro é penho­rado, causando-lhe grande prejuízo financeiro e moral. Diante da situação hipotética, considerando o previsto no Código de Processo Civil, é correto afirmar que Douglas",
+    "stem": "Douglas, chefe de secretaria de uma das varas da Fazenda Pública da Capital, é responsável pela organização e pelo funcionamento da secretaria, supervisionando o trabalho dos servidores e zelando pela eficiência dos serviços prestados. Em um dia de grande movimento na vara, Douglas, pressionado pelo acúmulo de tarefas e pela n­ecessidade de atender a diversas demandas simultâ­neas, comete um grave erro ao enviar uma intimação para o endereço ­errado da parte ré em um processo de execução fiscal. A intimação, que informa sobre a penhora de um veículo do réu, é enviada para um endereço antigo, onde o réu já não reside há mais de 2 anos. Devido ao erro no envio da intimação, o réu não toma conhecimento da penhora de seu veículo e não tem a oportunidade de apresentar defesa, razão pela qual seu carro é penho­rado, causando-lhe grande prejuízo financeiro e moral. Diante da situação hipotética, considerando o previsto no Código de Processo Civil, é correto afirmar que Douglas",
     "alternatives": [
      {
       "letter": "A",
@@ -3369,7 +3369,7 @@ export const PROVAS = {
     "number": 39,
     "page": 11,
     "subject": "Direito Processual Civil",
-    "stem": "Acerca das intimações no Código de Processo Civil, assi- nale a alternativa correta.",
+    "stem": "Acerca das intimações no Código de Processo Civil, assinale a alternativa correta.",
     "alternatives": [
      {
       "letter": "A",
@@ -3385,11 +3385,11 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "A retirada dos autos do cartório ou da secretaria em carga pelo advogado, por pessoa credenciada a p­edido do advogado ou da sociedade de advogados, pela Advocacia Pública, pela Defensoria Pública ou pelo Ministério Público implicará intimação de qual- quer decisão contida no processo retirado, desde que já publicada em órgão oficial."
+      "text": "A retirada dos autos do cartório ou da secretaria em carga pelo advogado, por pessoa credenciada a p­edido do advogado ou da sociedade de advogados, pela Advocacia Pública, pela Defensoria Pública ou pelo Ministério Público implicará intimação de qualquer decisão contida no processo retirado, desde que já publicada em órgão oficial."
      },
      {
       "letter": "E",
-      "text": "A retirada de autos por meio de preposto indepen- de de credenciamento por parte do advogado e da s­ociedade de advogados."
+      "text": "A retirada de autos por meio de preposto independe de credenciamento por parte do advogado e da s­ociedade de advogados."
      }
     ],
     "answer": "A",
@@ -3403,7 +3403,7 @@ export const PROVAS = {
     "number": 40,
     "page": 12,
     "subject": "Direito Processual Civil",
-    "stem": "Carmem, uma profissional autônoma que trabalha de casa, depende da internet para realizar suas atividades profissionais. Em determinado dia, a empresa de tele- comunicações X corta o serviço de internet de Carmem sem prévio aviso, alegando inadimplência. Carmem bus- ca atendimento com X afirmando que o débito cobrado pela empresa é indevido e que o pagamento da fatura já havia sido realizado, mas, mesmo assim, o serviço de internet não é religado. Inconformada, Carmem propõe uma ação judicial contra a empresa X, solicitando a tutela antecipada antecedente para determinar a imediata res- tauração do serviço de internet e demonstrando o perigo de dano na demora. O juiz concede a tutela antecipada, e a empresa X não apresenta recurso. Diante da situação hipotética, é correto afirmar:",
+    "stem": "Carmem, uma profissional autônoma que trabalha de casa, depende da internet para realizar suas atividades profissionais. Em determinado dia, a empresa de telecomunicações X corta o serviço de internet de Carmem sem prévio aviso, alegando inadimplência. Carmem busca atendimento com X afirmando que o débito cobrado pela empresa é indevido e que o pagamento da fatura já havia sido realizado, mas, mesmo assim, o serviço de internet não é religado. Inconformada, Carmem propõe uma ação judicial contra a empresa X, solicitando a tutela antecipada antecedente para determinar a imediata restauração do serviço de internet e demonstrando o perigo de dano na demora. O juiz concede a tutela antecipada, e a empresa X não apresenta recurso. Diante da situação hipotética, é correto afirmar:",
     "alternatives": [
      {
       "letter": "A",
@@ -3411,19 +3411,19 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "considerando a não interposição do recurso por par- te da empresa X, apenas Carmem poderá requerer o desarquivamento dos autos em que foi concedida a tutela antecipada antecedente, para instruir eventual petição inicial."
+      "text": "considerando a não interposição do recurso por parte da empresa X, apenas Carmem poderá requerer o desarquivamento dos autos em que foi concedida a tutela antecipada antecedente, para instruir eventual petição inicial."
      },
      {
       "letter": "C",
-      "text": "o direito de rever, reformar ou invalidar a tutela ante- cipada extingue-se após 2 (dois) anos, contados da data em que a decisão que extinguiu o processo foi proferida."
+      "text": "o direito de rever, reformar ou invalidar a tutela antecipada extingue-se após 2 (dois) anos, contados da data em que a decisão que extinguiu o processo foi proferida."
      },
      {
       "letter": "D",
-      "text": "a decisão que concede a tutela não fará coisa jul- gada, mas a estabilidade dos respectivos efeitos só será afastada após o trânsito em julgado de decisão que a revir, reformar ou invalidar."
+      "text": "a decisão que concede a tutela não fará coisa julgada, mas a estabilidade dos respectivos efeitos só será afastada após o trânsito em julgado de decisão que a revir, reformar ou invalidar."
      },
      {
       "letter": "E",
-      "text": "a tutela antecipada conservará seus efeitos enquan- to não revista, reformada ou invalidada por decisão de mérito proferida na ação proposta por qualquer das partes que tenha por intuito rever, reformar ou invalidar a tutela antecipada estabilizada. 12 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "a tutela antecipada conservará seus efeitos enquanto não revista, reformada ou invalidada por decisão de mérito proferida na ação proposta por qualquer das partes que tenha por intuito rever, reformar ou invalidar a tutela antecipada estabilizada."
      }
     ],
     "answer": "E",
@@ -3437,7 +3437,7 @@ export const PROVAS = {
     "number": 41,
     "page": 12,
     "subject": "Direito Processual Civil",
-    "stem": "Mariana e Romeu mantinham um relacionamento amo- roso há cerca de 6 meses quando Mariana engravidou. Apesar da gravidez, o casal não estava em um relacio- namento sério, e Romeu não demonstrava interesse em assumir a paternidade, alegando que não tinha certeza de que a criança era dele e que não estava pronto para ser pai. Diante da recusa espontânea, ainda durante a gravidez, Mariana propôs ação de reconhecimento de paternidade em face de Romeu, manifestando, expressa- mente, desinteresse na composição consensual. Romeu, devidamente citado, manifestou interesse na realização da audiência de conciliação e mediação entre as partes. Diante da situação hipotética, é correto afirmar que a a­udiência de conciliação e mediação",
+    "stem": "Mariana e Romeu mantinham um relacionamento amoroso há cerca de 6 meses quando Mariana engravidou. Apesar da gravidez, o casal não estava em um relacionamento sério, e Romeu não demonstrava interesse em assumir a paternidade, alegando que não tinha certeza de que a criança era dele e que não estava pronto para ser pai. Diante da recusa espontânea, ainda durante a gravidez, Mariana propôs ação de reconhecimento de paternidade em face de Romeu, manifestando, expressamente, desinteresse na composição consensual. Romeu, devidamente citado, manifestou interesse na realização da audiência de conciliação e mediação entre as partes. Diante da situação hipotética, é correto afirmar que a a­udiência de conciliação e mediação",
     "alternatives": [
      {
       "letter": "A",
@@ -3449,11 +3449,11 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "deverá ser realizada, sendo certo que o não compa- recimento injustificado de Mariana é considerado ato atentatório à dignidade da justiça e será sancionado com multa que será convertida em favor de Romeu."
+      "text": "deverá ser realizada, sendo certo que o não comparecimento injustificado de Mariana é considerado ato atentatório à dignidade da justiça e será sancionado com multa que será convertida em favor de Romeu."
      },
      {
       "letter": "D",
-      "text": "deverá ser designada pelo juiz com antecedência míni- ma de 30 (trinta) dias, devendo Romeu ser citado com pelo menos 15 (quinze) dias de antecedência."
+      "text": "deverá ser designada pelo juiz com antecedência mínima de 30 (trinta) dias, devendo Romeu ser citado com pelo menos 15 (quinze) dias de antecedência."
      },
      {
       "letter": "E",
@@ -3471,7 +3471,7 @@ export const PROVAS = {
     "number": 42,
     "page": 12,
     "subject": "Direito Processual Civil",
-    "stem": "João, portador de doença crônica, é beneficiário de um plano de saúde há mais de 10 anos. Em 2024, o plano negou a cobertura de um procedimento cirúrgico consi- derado essencial para o tratamento da doença de João, alegando que o procedimento não estava previsto no rol de procedimentos da Agência Nacional de Saúde. Incon- formado, João procurou um advogado e ingressou com uma ação judicial contra o plano de saúde, solicitando a tutela provisória de urgência para obrigá-lo a cobrir o procedimento cirúrgico. O juiz deferiu a tutela provisória de urgência e determinou que o plano de saúde cobrisse o procedimento cirúrgico de João no prazo de 5 dias, sob pena de multa diária. Após a análise do mérito da ação, o juiz proferiu a sentença que confirmou a tutela provisória de urgência. O plano de saúde interpõe apelação. Diante do caso hipotético, é correto afirmar que",
+    "stem": "João, portador de doença crônica, é beneficiário de um plano de saúde há mais de 10 anos. Em 2024, o plano negou a cobertura de um procedimento cirúrgico considerado essencial para o tratamento da doença de João, alegando que o procedimento não estava previsto no rol de procedimentos da Agência Nacional de Saúde. Inconformado, João procurou um advogado e ingressou com uma ação judicial contra o plano de saúde, solicitando a tutela provisória de urgência para obrigá-lo a cobrir o procedimento cirúrgico. O juiz deferiu a tutela provisória de urgência e determinou que o plano de saúde cobrisse o procedimento cirúrgico de João no prazo de 5 dias, sob pena de multa diária. Após a análise do mérito da ação, o juiz proferiu a sentença que confirmou a tutela provisória de urgência. O plano de saúde interpõe apelação. Diante do caso hipotético, é correto afirmar que",
     "alternatives": [
      {
       "letter": "A",
@@ -3487,7 +3487,7 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "o pedido de concessão de efeito suspensivo poderá ser formulado por requerimento dirigido ao relator, no período compreendido entre a interposição da ape- lação e sua distribuição, ficando o relator designado para seu exame prevento para julgá-la."
+      "text": "o pedido de concessão de efeito suspensivo poderá ser formulado por requerimento dirigido ao relator, no período compreendido entre a interposição da apelação e sua distribuição, ficando o relator designado para seu exame prevento para julgá-la."
      },
      {
       "letter": "E",
@@ -3509,15 +3509,15 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "Renata estava dirigindo seu veículo quando coli- diu com o carro de Regina. Regina propôs ação de i­ndenização em face de Renata no valor de cinquenta salários mínimos. A audiência de conciliação restou frutífera, e Regina deverá renunciar parte do valor para que seja de competência do juizado especial."
+      "text": "Renata estava dirigindo seu veículo quando colidiu com o carro de Regina. Regina propôs ação de i­ndenização em face de Renata no valor de cinquenta salários mínimos. A audiência de conciliação restou frutífera, e Regina deverá renunciar parte do valor para que seja de competência do juizado especial."
      },
      {
       "letter": "B",
-      "text": "Pedro, menor de idade, representado por sua mãe, Carolina, propõe ação de alimentos em face de seu pai, Lucas, requerendo o pagamento de trinta salá- rios mínimos."
+      "text": "Pedro, menor de idade, representado por sua mãe, Carolina, propõe ação de alimentos em face de seu pai, Lucas, requerendo o pagamento de trinta salários mínimos."
      },
      {
       "letter": "C",
-      "text": "Matheus comprou uma fazenda em uma cidade do interior do Estado de São Paulo. Dois meses depois de iniciar uma reforma na casa sede, foi surpreendido ao encontrar Marcos residindo na fazenda e alegan- do ser o legítimo inquilino do imóvel. Matheus propôs então uma ação de reintegração de posse em face de Marcos no valor de quarenta salários mínimos."
+      "text": "Matheus comprou uma fazenda em uma cidade do interior do Estado de São Paulo. Dois meses depois de iniciar uma reforma na casa sede, foi surpreendido ao encontrar Marcos residindo na fazenda e alegando ser o legítimo inquilino do imóvel. Matheus propôs então uma ação de reintegração de posse em face de Marcos no valor de quarenta salários mínimos."
      },
      {
       "letter": "D",
@@ -3525,7 +3525,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "Mariana prestou serviços para a empresa ABC no valor de dez salários mínimos. A empresa ABC não pagou a dívida e atualmente se encontra em proces- so de falência. Mariana tentou cobrar a dívida ami- gavelmente, mas a empresa ABC não pagou, razão pela qual Mariana propôs ação de cobrança em face da massa falida da empresa ABC."
+      "text": "Mariana prestou serviços para a empresa ABC no valor de dez salários mínimos. A empresa ABC não pagou a dívida e atualmente se encontra em processo de falência. Mariana tentou cobrar a dívida amigavelmente, mas a empresa ABC não pagou, razão pela qual Mariana propôs ação de cobrança em face da massa falida da empresa ABC."
      }
     ],
     "answer": "C",
@@ -3543,23 +3543,23 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "Os representantes judiciais dos réus presentes à audiência poderão conciliar, transigir ou desistir nos processos da competência dos Juizados Especiais, nos termos e nas hipóteses previstas na lei do res- pectivo ente da Federação."
+      "text": "Os representantes judiciais dos réus presentes à audiência poderão conciliar, transigir ou desistir nos processos da competência dos Juizados Especiais, nos termos e nas hipóteses previstas na lei do respectivo ente da Federação."
      },
      {
       "letter": "B",
-      "text": "Por ter o Juizado Especial da Fazenda Pública com- petência para conciliação, processo e julgamento das causas de menor complexidade, não é possível a realização de exame técnico."
+      "text": "Por ter o Juizado Especial da Fazenda Pública competência para conciliação, processo e julgamento das causas de menor complexidade, não é possível a realização de exame técnico."
      },
      {
       "letter": "C",
-      "text": "Haverá reexame necessário nas causas em que a condenação ou o proveito econômico obtido na cau- sa for de valor certo e líquido superior a 40 (quaren- ta) salários mínimos, quanto aos Estados e ao Distri- to Federal, e 30 (trinta) salários mínimos, quanto aos Municípios."
+      "text": "Haverá reexame necessário nas causas em que a condenação ou o proveito econômico obtido na causa for de valor certo e líquido superior a 40 (quarenta) salários mínimos, quanto aos Estados e ao Distrito Federal, e 30 (trinta) salários mínimos, quanto aos Municípios."
      },
      {
       "letter": "D",
-      "text": "Não haverá prazo diferenciado para a prática de qual- quer ato processual pelas pessoas jurídicas de direi- to público, exceto para a interposição de recursos, d­evendo a citação para a audiência de conciliação ser efetuada com antecedência mínima de trinta dias."
+      "text": "Não haverá prazo diferenciado para a prática de qualquer ato processual pelas pessoas jurídicas de direito público, exceto para a interposição de recursos, d­evendo a citação para a audiência de conciliação ser efetuada com antecedência mínima de trinta dias."
      },
      {
       "letter": "E",
-      "text": "A entidade ré deverá fornecer ao Juizado a documen­ tação de que disponha para o esclarecimento da causa, apresentando-a no prazo de até dez dias a­ntes da instalação da audiência de conciliação. 13 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. Direito Constitucional"
+      "text": "A entidade ré deverá fornecer ao Juizado a documen­ tação de que disponha para o esclarecimento da causa, apresentando-a no prazo de até dez dias a­ntes da instalação da audiência de conciliação. Direito Constitucional"
      }
     ],
     "answer": "A",
@@ -3581,7 +3581,7 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "criação de associações, independentemente de auto­ rização, as quais somente poderão ter suas ativida- des suspensas por intermédio de decisão judicial, com trânsito em julgado."
+      "text": "criação de associações, independentemente de auto­ rização, as quais somente poderão ter suas atividades suspensas por intermédio de decisão judicial, com trânsito em julgado."
      },
      {
       "letter": "C",
@@ -3593,7 +3593,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "livre manifestação do pensamento, com o devido anonimato, bem como o direito de resposta, pro- porcional ao agravo, além de indenização por dano m­aterial, moral ou à imagem."
+      "text": "livre manifestação do pensamento, com o devido anonimato, bem como o direito de resposta, proporcional ao agravo, além de indenização por dano m­aterial, moral ou à imagem."
      }
     ],
     "answer": "D",
@@ -3611,7 +3611,7 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "A Constituição Federal prevê o princípio da irredu- tibilidade do salário, que pode sofrer ressalva pelo disposto em convenção ou acordo coletivo."
+      "text": "A Constituição Federal prevê o princípio da irredutibilidade do salário, que pode sofrer ressalva pelo disposto em convenção ou acordo coletivo."
      },
      {
       "letter": "B",
@@ -3619,7 +3619,7 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "Toda pessoa com deficiência tem direito a uma renda básica familiar, garantida pelo poder público em pro- grama permanente de transferência de renda."
+      "text": "Toda pessoa com deficiência tem direito a uma renda básica familiar, garantida pelo poder público em programa permanente de transferência de renda."
      },
      {
       "letter": "D",
@@ -3627,7 +3627,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "A Carta Federal estabelece a jornada de seis horas para o trabalho realizado em turnos ininterruptos de revezamento, que não pode ser alterada por nego- ciação coletiva."
+      "text": "A Carta Federal estabelece a jornada de seis horas para o trabalho realizado em turnos ininterruptos de revezamento, que não pode ser alterada por negociação coletiva."
      }
     ],
     "answer": "A",
@@ -3641,27 +3641,27 @@ export const PROVAS = {
     "number": 47,
     "page": 14,
     "subject": "Direito Constitucional",
-    "stem": "Brigite é cidadã portuguesa, e Joaquim é francês. Ambos têm comprovada idoneidade moral, residem no Brasil, pretendem adquirir a nacionalidade brasileira e, oportu- namente, assumir cargos públicos. Segundo as regras dispostas na Constituição da Repú- blica Federativa do Brasil, é correto afirmar que Brigite poderá obter a nacionalidade brasileira por naturalização",
+    "stem": "Brigite é cidadã portuguesa, e Joaquim é francês. Ambos têm comprovada idoneidade moral, residem no Brasil, pretendem adquirir a nacionalidade brasileira e, oportunamente, assumir cargos públicos. Segundo as regras dispostas na Constituição da República Federativa do Brasil, é correto afirmar que Brigite poderá obter a nacionalidade brasileira por naturalização",
     "alternatives": [
      {
       "letter": "A",
-      "text": "se residir no Brasil por um ano ininterrupto, podendo assumir, entre outros, o cargo da carreira diplomá- tica, e Joaquim poderá requerer a naturalização se residir no Brasil há mais de quinze anos ininterruptos e sem condenação penal, e poderá assumir, entre outros, o cargo de prefeito municipal."
+      "text": "se residir no Brasil por um ano ininterrupto, podendo assumir, entre outros, o cargo da carreira diplomática, e Joaquim poderá requerer a naturalização se residir no Brasil há mais de quinze anos ininterruptos e sem condenação penal, e poderá assumir, entre outros, o cargo de prefeito municipal."
      },
      {
       "letter": "B",
-      "text": "se residir no Brasil por um ano ininterrupto, podendo assumir, entre outros, o cargo de senador, e Joaquim poderá requerer a naturalização se residir no Brasil há mais de quinze anos ininterruptos e sem conde- nação penal, e não poderá assumir, entre o­utros, o cargo de oficial das forças armadas."
+      "text": "se residir no Brasil por um ano ininterrupto, podendo assumir, entre outros, o cargo de senador, e Joaquim poderá requerer a naturalização se residir no Brasil há mais de quinze anos ininterruptos e sem condenação penal, e não poderá assumir, entre o­utros, o cargo de oficial das forças armadas."
      },
      {
       "letter": "C",
-      "text": "por simples requerimento, comprovando que reside no Brasil há pelo menos seis meses, mas não pode- rá assumir, entre outros, o cargo de ministro do STF, e Joaquim deverá comprovar um ano ininterrupto de residência no país, podendo assumir, entre outros, o cargo de deputado ou senador."
+      "text": "por simples requerimento, comprovando que reside no Brasil há pelo menos seis meses, mas não poderá assumir, entre outros, o cargo de ministro do STF, e Joaquim deverá comprovar um ano ininterrupto de residência no país, podendo assumir, entre outros, o cargo de deputado ou senador."
      },
      {
       "letter": "D",
-      "text": "se residir no Brasil há mais de quinze anos ininter- ruptos e sem condenação penal, e poderá assumir, entre outros, o cargo de governador, e Joaquim, também, deve atender ao mesmo requisito, com a diferença de que não poderá assumir, entre outros, o cargo de presidente da República."
+      "text": "se residir no Brasil há mais de quinze anos ininterruptos e sem condenação penal, e poderá assumir, entre outros, o cargo de governador, e Joaquim, também, deve atender ao mesmo requisito, com a diferença de que não poderá assumir, entre outros, o cargo de presidente da República."
      },
      {
       "letter": "E",
-      "text": "se residir no Brasil por um ano ininterrupto, podendo assumir, entre outros, o cargo de senador, e Joaquim poderá requerer a naturalização se residir no Brasil há mais de quinze anos ininterruptos e sem conde- nação penal, e não poderá assumir, entre o­utros, o cargo de governador. 14 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "se residir no Brasil por um ano ininterrupto, podendo assumir, entre outros, o cargo de senador, e Joaquim poderá requerer a naturalização se residir no Brasil há mais de quinze anos ininterruptos e sem condenação penal, e não poderá assumir, entre o­utros, o cargo de governador."
      }
     ],
     "answer": "B",
@@ -3675,7 +3675,7 @@ export const PROVAS = {
     "number": 48,
     "page": 14,
     "subject": "Direito Constitucional",
-    "stem": "Tito e Tércio são empregados sindicalizados. O primeiro se aposentou, mas pretende se candidatar a um cargo de ­direção no sindicato de sua categoria, enquanto o segun- do, ainda na ativa, foi eleito para o cargo de representa- ção sindical, apenas como suplente, no sindicato ao qual é filiado. Considerando tão somente essas informações, bem como o disposto na Constituição Federal sobre a matéria, é correto afirmar que",
+    "stem": "Tito e Tércio são empregados sindicalizados. O primeiro se aposentou, mas pretende se candidatar a um cargo de ­direção no sindicato de sua categoria, enquanto o segundo, ainda na ativa, foi eleito para o cargo de representação sindical, apenas como suplente, no sindicato ao qual é filiado. Considerando tão somente essas informações, bem como o disposto na Constituição Federal sobre a matéria, é correto afirmar que",
     "alternatives": [
      {
       "letter": "A",
@@ -3687,7 +3687,7 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "Tito poderá se candidatar apenas a cargo de suplen- te, uma vez que o exercício da direção do sindicato exige a eleição de empregado na ativa."
+      "text": "Tito poderá se candidatar apenas a cargo de suplente, uma vez que o exercício da direção do sindicato exige a eleição de empregado na ativa."
      },
      {
       "letter": "D",
@@ -3709,11 +3709,11 @@ export const PROVAS = {
     "number": 49,
     "page": 14,
     "subject": "Direito Constitucional",
-    "stem": "Herculano exerce um emprego de técnico em uma socie- dade controlada pelo poder público e pretende assumir cargo na Administração Pública, que teria compatibili­ dade de horário com o emprego que ocupa. Segundo o que dispõe a Constituição Federal a respeito da acumulação remunerada de cargos públicos, é correto afirmar que Herculano poderá assumir o cargo pretendi- do, apenas se",
+    "stem": "Herculano exerce um emprego de técnico em uma sociedade controlada pelo poder público e pretende assumir cargo na Administração Pública, que teria compatibili­ dade de horário com o emprego que ocupa. Segundo o que dispõe a Constituição Federal a respeito da acumulação remunerada de cargos públicos, é correto afirmar que Herculano poderá assumir o cargo pretendido, apenas se",
     "alternatives": [
      {
       "letter": "A",
-      "text": "este for privativo de profissional da saúde, com pro- fissão regulamentada."
+      "text": "este for privativo de profissional da saúde, com profissão regulamentada."
      },
      {
       "letter": "B",
@@ -3751,7 +3751,7 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "que exija o afastamento para o exercício do manda- to, seu tempo de serviço será contado para todos os efeitos legais, salvo para promoção por antiguidade."
+      "text": "que exija o afastamento para o exercício do mandato, seu tempo de serviço será contado para todos os efeitos legais, salvo para promoção por antiguidade."
      },
      {
       "letter": "C",
@@ -3777,11 +3777,11 @@ export const PROVAS = {
     "number": 51,
     "page": 15,
     "subject": "Direito Constitucional",
-    "stem": "Nos termos da Constituição Federal, a respeito da apo- sentadoria por incapacidade permanente para o trabalho do servidor abrangido por regime próprio de previdência social, na forma da lei do respectivo ente federativo, é correto afirmar que",
+    "stem": "Nos termos da Constituição Federal, a respeito da aposentadoria por incapacidade permanente para o trabalho do servidor abrangido por regime próprio de previdência social, na forma da lei do respectivo ente federativo, é correto afirmar que",
     "alternatives": [
      {
       "letter": "A",
-      "text": "acarretará a perda de vínculo de segurado do servi- dor, que ficará desobrigado do recolhimento das con- tribuições da previdência social do respectivo ente federativo."
+      "text": "acarretará a perda de vínculo de segurado do servidor, que ficará desobrigado do recolhimento das contribuições da previdência social do respectivo ente federativo."
      },
      {
       "letter": "B",
@@ -3797,7 +3797,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "não poderá, uma vez concedida, submeter o servidor beneficiário a novas avaliações sobre as condições que ensejaram a sua concessão. 15 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. Direito Administrativo"
+      "text": "não poderá, uma vez concedida, submeter o servidor beneficiário a novas avaliações sobre as condições que ensejaram a sua concessão. Direito Administrativo"
      }
     ],
     "answer": "D",
@@ -3811,7 +3811,7 @@ export const PROVAS = {
     "number": 52,
     "page": 15,
     "subject": "Direito Administrativo",
-    "stem": "Policarpo é funcionário público estadual e, com a finali- dade de arrecadar fundos para o tratamento médico de uma criança da sua família que está gravemente enfer- ma, teve a iniciativa de promover uma lista de donativos dentro da repartição em que trabalha. Adelaide foi uma das colegas que subscreveu a referida lista. Nessa situa­ ção hipotética, segundo o disposto na Lei no 10.261/68 (Estatuto dos Funcionários Públicos do Estado de São Paulo), é correto afirmar que Policarpo",
+    "stem": "Policarpo é funcionário público estadual e, com a finalidade de arrecadar fundos para o tratamento médico de uma criança da sua família que está gravemente enferma, teve a iniciativa de promover uma lista de donativos dentro da repartição em que trabalha. Adelaide foi uma das colegas que subscreveu a referida lista. Nessa situa­ ção hipotética, segundo o disposto na Lei no 10.261/68 (Estatuto dos Funcionários Públicos do Estado de São Paulo), é correto afirmar que Policarpo",
     "alternatives": [
      {
       "letter": "A",
@@ -3819,7 +3819,7 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "e Adelaide violaram o Estatuto, pois ambos pratica- ram conduta proibida pela Lei."
+      "text": "e Adelaide violaram o Estatuto, pois ambos praticaram conduta proibida pela Lei."
      },
      {
       "letter": "C",
@@ -3827,7 +3827,7 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "cometeu uma infração ao promover a lista de dona- tivos, conduta proibida pelo Estatuto, mas Adelaide não cometeu qualquer infração."
+      "text": "cometeu uma infração ao promover a lista de donativos, conduta proibida pelo Estatuto, mas Adelaide não cometeu qualquer infração."
      },
      {
       "letter": "E",
@@ -3845,7 +3845,7 @@ export const PROVAS = {
     "number": 53,
     "page": 15,
     "subject": "Direito Administrativo",
-    "stem": "Aquiles, funcionário público estadual, está respondendo processo administrativo em razão de infração adminis- trativa cuja pena aplicável é a de demissão. Contudo, paralelamente, a mesma conduta de Aquiles está sendo apurada em processo judicial criminal. Nessa situação h­ipotética, considerando o que dispõe a Lei no 10.261/68, é correto afirmar que Aquiles",
+    "stem": "Aquiles, funcionário público estadual, está respondendo processo administrativo em razão de infração administrativa cuja pena aplicável é a de demissão. Contudo, paralelamente, a mesma conduta de Aquiles está sendo apurada em processo judicial criminal. Nessa situação h­ipotética, considerando o que dispõe a Lei no 10.261/68, é correto afirmar que Aquiles",
     "alternatives": [
      {
       "letter": "A",
@@ -3853,7 +3853,7 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "terá o processo administrativo extinto, devendo aguar- dar e se submeter à oportuna decisão do processo judicial, que tem prevalência sobre o administrativo."
+      "text": "terá o processo administrativo extinto, devendo aguardar e se submeter à oportuna decisão do processo judicial, que tem prevalência sobre o administrativo."
      },
      {
       "letter": "C",
@@ -3861,7 +3861,7 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "poderá ser responsabilizado tanto na esfera adminis- trativa quanto na esfera judicial, não podendo esta interferir naquela, pois ambas são independentes."
+      "text": "poderá ser responsabilizado tanto na esfera administrativa quanto na esfera judicial, não podendo esta interferir naquela, pois ambas são independentes."
      },
      {
       "letter": "E",
@@ -3899,7 +3899,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "Será aplicada a pena de cassação de aposentado- ria ou disponibilidade se ficar provado que o inati- vo ­praticou qualquer conduta proibida pelo Estatuto quando em exercício no serviço público."
+      "text": "Será aplicada a pena de cassação de aposentadoria ou disponibilidade se ficar provado que o inativo ­praticou qualquer conduta proibida pelo Estatuto quando em exercício no serviço público."
      }
     ],
     "answer": "C",
@@ -3933,7 +3933,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "tem amparo legal, e poderia, ainda, ter sido determi- nado o afastamento preventivo do servidor, para a devida apuração do fato. 16 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "tem amparo legal, e poderia, ainda, ter sido determinado o afastamento preventivo do servidor, para a devida apuração do fato."
      }
     ],
     "answer": "E",
@@ -3947,19 +3947,19 @@ export const PROVAS = {
     "number": 56,
     "page": 16,
     "subject": "Direito Administrativo",
-    "stem": "Segundo a Lei no 10.261/68 (Estatuto dos Funcionários Públicos do Estado de São Paulo), na apuração de irre- gularidade, com a instauração de sindicância ou proces- so administrativo, o Procurador do Estado responsável por sua condução, ou a autoridade competente, poderá propor práticas autocompositivas, a celebração de ter- mo de ajustamento de conduta e a suspensão condicio- nal da sindicância. A respeito dessas medidas, é correto afirmar que",
+    "stem": "Segundo a Lei no 10.261/68 (Estatuto dos Funcionários Públicos do Estado de São Paulo), na apuração de irregularidade, com a instauração de sindicância ou processo administrativo, o Procurador do Estado responsável por sua condução, ou a autoridade competente, poderá propor práticas autocompositivas, a celebração de termo de ajustamento de conduta e a suspensão condicional da sindicância. A respeito dessas medidas, é correto afirmar que",
     "alternatives": [
      {
       "letter": "A",
-      "text": "o Termo de Ajustamento de Conduta, para ser h­omologado, deverá contar com prévia manifesta- ção da Consultoria Jurídica da Procuradoria Geral do Estado."
+      "text": "o Termo de Ajustamento de Conduta, para ser h­omologado, deverá contar com prévia manifestação da Consultoria Jurídica da Procuradoria Geral do Estado."
      },
      {
       "letter": "B",
-      "text": "as sessões serão conduzidas e realizadas de forma a prevalecer a publicidade e transparências das ma- nifestações do funcionário acusado."
+      "text": "as sessões serão conduzidas e realizadas de forma a prevalecer a publicidade e transparências das manifestações do funcionário acusado."
      },
      {
       "letter": "C",
-      "text": "a participação do funcionário interessado será volun- tária, mas a eventual recusa será considerada em seu desfavor."
+      "text": "a participação do funcionário interessado será voluntária, mas a eventual recusa será considerada em seu desfavor."
      },
      {
       "letter": "D",
@@ -3981,15 +3981,15 @@ export const PROVAS = {
     "number": 57,
     "page": 16,
     "subject": "Direito Administrativo",
-    "stem": "Narciso, autoridade competente em sua repartição públi- ca, veio a tomar conhecimento de indício de ato cometido por Cícero que configura improbidade administrativa que causou dano ao erário. Consequentemente, nessa hipó- tese, segundo o que reza a Lei de Improbidade Adminis- trativa (Lei no 8.429/92), Narciso deverá representar ao",
+    "stem": "Narciso, autoridade competente em sua repartição pública, veio a tomar conhecimento de indício de ato cometido por Cícero que configura improbidade administrativa que causou dano ao erário. Consequentemente, nessa hipótese, segundo o que reza a Lei de Improbidade Administrativa (Lei no 8.429/92), Narciso deverá representar ao",
     "alternatives": [
      {
       "letter": "A",
-      "text": "Juízo competente, para as providências necessá- rias, e se Cícero vier a falecer, seus herdeiros ou sucessores ficarão sujeitos à obrigação de reparar o dano até o limite do valor da herança ou do patrimô- nio transferido."
+      "text": "Juízo competente, para as providências necessárias, e se Cícero vier a falecer, seus herdeiros ou sucessores ficarão sujeitos à obrigação de reparar o dano até o limite do valor da herança ou do patrimônio transferido."
      },
      {
       "letter": "B",
-      "text": "Ministério Público competente, para as providências necessárias, e se Cícero vier a falecer, seus herdei- ros ou sucessores ficarão sujeitos à obrigação de ­reparar o dano até o limite do valor da herança ou do patrimônio transferido."
+      "text": "Ministério Público competente, para as providências necessárias, e se Cícero vier a falecer, seus herdeiros ou sucessores ficarão sujeitos à obrigação de ­reparar o dano até o limite do valor da herança ou do patrimônio transferido."
      },
      {
       "letter": "C",
@@ -3997,11 +3997,11 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "Ministério Público competente, para as providências necessárias, e se Cícero vier a falecer, seus her- deiros ou sucessores ficarão sujeitos à obrigação de reparar o dano até o limite do valor do prejuízo causado."
+      "text": "Ministério Público competente, para as providências necessárias, e se Cícero vier a falecer, seus herdeiros ou sucessores ficarão sujeitos à obrigação de reparar o dano até o limite do valor do prejuízo causado."
      },
      {
       "letter": "E",
-      "text": "Juízo competente, para as providências necessárias e se Cícero vier a falecer, seus herdeiros ou suces- sores ficarão sujeitos à obrigação de reparar o dano até o limite do valor do prejuízo causado."
+      "text": "Juízo competente, para as providências necessárias e se Cícero vier a falecer, seus herdeiros ou sucessores ficarão sujeitos à obrigação de reparar o dano até o limite do valor do prejuízo causado."
      }
     ],
     "answer": "B",
@@ -4015,7 +4015,7 @@ export const PROVAS = {
     "number": 58,
     "page": 17,
     "subject": "Direito Administrativo",
-    "stem": "No caso de aplicação de multa, com base na Lei de I­mprobidade Administrativa (Lei no 8.429/92), é correto afirmar que se o juiz considerar que, em virtude da situa- ção econômica do réu, ela seria ineficaz para reprovação e prevenção do ato de improbidade, essa sanção",
+    "stem": "No caso de aplicação de multa, com base na Lei de I­mprobidade Administrativa (Lei no 8.429/92), é correto afirmar que se o juiz considerar que, em virtude da situação econômica do réu, ela seria ineficaz para reprovação e prevenção do ato de improbidade, essa sanção",
     "alternatives": [
      {
       "letter": "A",
@@ -4069,7 +4069,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "A comissão processante dará conhecimento à Auto- ridade Policial e ao Tribunal de Contas da existência de procedimento administrativo para apurar a prática de ato de improbidade. 17 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. Normas da Corregedoria Geral da Justiça"
+      "text": "A comissão processante dará conhecimento à Autoridade Policial e ao Tribunal de Contas da existência de procedimento administrativo para apurar a prática de ato de improbidade. Normas da Corregedoria Geral da Justiça"
      }
     ],
     "answer": "B",
@@ -4083,7 +4083,7 @@ export const PROVAS = {
     "number": 60,
     "page": 17,
     "subject": "Direito Administrativo",
-    "stem": "Considerando o que estabelecem as Normas da Cor­re­ gedoria Geral de Justiça a respeito da Corregedoria Per- manente e das Correições Ordinárias, Extraordinárias e Visitas Correcionais, é correto afirmar que",
+    "stem": "Considerando o que estabelecem as Normas da Cor­re­ gedoria Geral de Justiça a respeito da Corregedoria Permanente e das Correições Ordinárias, Extraordinárias e Visitas Correcionais, é correto afirmar que",
     "alternatives": [
      {
       "letter": "A",
@@ -4091,7 +4091,7 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "o Corregedor Geral da Justiça, após consulta ao Pre- sidente do Tribunal de Justiça, visando o princípio da eficiência e o interesse da administração, poderá alterar a designação do Corregedor Permanente."
+      "text": "o Corregedor Geral da Justiça, após consulta ao Presidente do Tribunal de Justiça, visando o princípio da eficiência e o interesse da administração, poderá alterar a designação do Corregedor Permanente."
      },
      {
       "letter": "C",
@@ -4117,7 +4117,7 @@ export const PROVAS = {
     "number": 61,
     "page": 17,
     "subject": "Direito Administrativo",
-    "stem": "No tocante aos procedimentos administrativos previstos nas Normas Judiciais da Corregedoria Geral de Justiça, na hipótese de ser constatada uma falta disciplinar, quan- do, por sua natureza, possa determinar a pena de sus- pensão, mas não definida a sua autoria, é correto afirmar que deve ser instaurada",
+    "stem": "No tocante aos procedimentos administrativos previstos nas Normas Judiciais da Corregedoria Geral de Justiça, na hipótese de ser constatada uma falta disciplinar, quando, por sua natureza, possa determinar a pena de suspensão, mas não definida a sua autoria, é correto afirmar que deve ser instaurada",
     "alternatives": [
      {
       "letter": "A",
@@ -4151,11 +4151,11 @@ export const PROVAS = {
     "number": 62,
     "page": 17,
     "subject": "Direito Administrativo",
-    "stem": "As Normas Judiciais da Corregedoria Geral da Justiça e­stabelecem que a qualificação das partes será lançada no sistema informatizado oficial da forma mais completa pos- sível. Nesse sentido, na hipótese de uma testemunha em processo criminal pedir que, por receio de coação ou grave ameaça, os seus dados de qualificação e seu e­ndereço não sejam lançados no sistema oficial, é cor­reto afirmar que",
+    "stem": "As Normas Judiciais da Corregedoria Geral da Justiça e­stabelecem que a qualificação das partes será lançada no sistema informatizado oficial da forma mais completa possível. Nesse sentido, na hipótese de uma testemunha em processo criminal pedir que, por receio de coação ou grave ameaça, os seus dados de qualificação e seu e­ndereço não sejam lançados no sistema oficial, é cor­reto afirmar que",
     "alternatives": [
      {
       "letter": "A",
-      "text": "é possível atender ao pedido da testemunha de for- ma parcial, sendo permitido omitir apenas os dados de sua qualificação."
+      "text": "é possível atender ao pedido da testemunha de forma parcial, sendo permitido omitir apenas os dados de sua qualificação."
      },
      {
       "letter": "B",
@@ -4171,7 +4171,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "o pedido da testemunha pode ser atendido integral- mente, desde que deferido pelo juiz."
+      "text": "o pedido da testemunha pode ser atendido integralmente, desde que deferido pelo juiz."
      }
     ],
     "answer": "E",
@@ -4185,15 +4185,15 @@ export const PROVAS = {
     "number": 63,
     "page": 18,
     "subject": "Direito Administrativo",
-    "stem": "A respeito das certidões, as Normas Judiciais da Correge- doria Geral da Justiça estabelecem que",
+    "stem": "A respeito das certidões, as Normas Judiciais da Corregedoria Geral da Justiça estabelecem que",
     "alternatives": [
      {
       "letter": "A",
-      "text": "as certidões serão expedidas com base nos autos judiciais físicos, subscritas pelo Escrivão, e, nos pro- cessos eletrônicos, com base no sistema informati- zado, sendo, nesse caso, dispensada a fé pública."
+      "text": "as certidões serão expedidas com base nos autos judiciais físicos, subscritas pelo Escrivão, e, nos processos eletrônicos, com base no sistema informatizado, sendo, nesse caso, dispensada a fé pública."
      },
      {
       "letter": "B",
-      "text": "a expedição de certidão de processos que correm em segredo de justiça dependerá de despacho do juiz competente, após parecer favorável do Ministé- rio Público."
+      "text": "a expedição de certidão de processos que correm em segredo de justiça dependerá de despacho do juiz competente, após parecer favorável do Ministério Público."
      },
      {
       "letter": "C",
@@ -4201,11 +4201,11 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "as certidões serão expedidas no prazo de 5 (cinco) dias, contados da data do recebimento do pedido pelo ofício de justiça, fornecido ao interessado pro- tocolo de requerimento."
+      "text": "as certidões serão expedidas no prazo de 5 (cinco) dias, contados da data do recebimento do pedido pelo ofício de justiça, fornecido ao interessado protocolo de requerimento."
      },
      {
       "letter": "E",
-      "text": "não serão admitidos pedidos de certidões de objeto e pé formulados pelo correio eletrônico (e-mail) insti- tucional de um ofício de justiça para outro."
+      "text": "não serão admitidos pedidos de certidões de objeto e pé formulados pelo correio eletrônico (e-mail) institucional de um ofício de justiça para outro."
      }
     ],
     "answer": "D",
@@ -4219,7 +4219,7 @@ export const PROVAS = {
     "number": 64,
     "page": 18,
     "subject": "Direito Administrativo",
-    "stem": "As Normas Judiciais da Corregedoria Geral da Justiça dispõem a respeito do peticionamento do processo ele- trônico que",
+    "stem": "As Normas Judiciais da Corregedoria Geral da Justiça dispõem a respeito do peticionamento do processo eletrônico que",
     "alternatives": [
      {
       "letter": "A",
@@ -4239,7 +4239,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "os termos eletrônicos de oitivas e interrogatórios da fase policial serão assinados digitalmente pela autori- dade policial e os termos físicos assinados por todos deverão ser encaminhados ao respectivo cartório no prazo de até 48 horas do peticionamento eletrônico. 18 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. Conhecimentos Gerais Atualidades"
+      "text": "os termos eletrônicos de oitivas e interrogatórios da fase policial serão assinados digitalmente pela autoridade policial e os termos físicos assinados por todos deverão ser encaminhados ao respectivo cartório no prazo de até 48 horas do peticionamento eletrônico. Conhecimentos Gerais Atualidades"
      }
     ],
     "answer": null,
@@ -4253,11 +4253,11 @@ export const PROVAS = {
     "number": 65,
     "page": 18,
     "subject": "Direito Administrativo",
-    "stem": "Donald Trump se tornou, em 30 de maio de 2024, o pri- meiro ex-presidente dos Estados Unidos a ser condena- do por um crime. Candidato novamente à Casa Branca neste ano, Trump foi condenado por fraude contábil ao ocultar um pagamento de US$ 130 mil para comprar o silêncio de uma atriz pornô na eleição de 2016, quando derrotou Hillary Clinton, do Partido Democrata. (G1. Disponível em https://shre.ink/DP4W. Acesso em 01.06.2024. Adaptado) A condenação",
+    "stem": "Donald Trump se tornou, em 30 de maio de 2024, o primeiro ex-presidente dos Estados Unidos a ser condenado por um crime. Candidato novamente à Casa Branca neste ano, Trump foi condenado por fraude contábil ao ocultar um pagamento de US$ 130 mil para comprar o silêncio de uma atriz pornô na eleição de 2016, quando derrotou Hillary Clinton, do Partido Democrata. (G1. Disponível em https://shre.ink/DP4W. Acesso em 01.06.2024. Adaptado) A condenação",
     "alternatives": [
      {
       "letter": "A",
-      "text": "pode impedir Trump de votar porque seu registro de eleitor é da Flórida, estado em que os condena- dos não podem votar até que cumpram totalmente sua pena."
+      "text": "pode impedir Trump de votar porque seu registro de eleitor é da Flórida, estado em que os condenados não podem votar até que cumpram totalmente sua pena."
      },
      {
       "letter": "B",
@@ -4287,15 +4287,15 @@ export const PROVAS = {
     "number": 66,
     "page": 18,
     "subject": "Direito Administrativo",
-    "stem": "O mandato do presidente Volodymyr Zelensky como pre- sidente da Ucrânia, de acordo com a Constituição, termi- nou no dia 20 de maio deste ano (2024), mas ele conti- nua no cargo porque (G1. Disponível em: https://shre.ink/DP4T. Acesso em 01.06.2024. Adaptado)",
+    "stem": "O mandato do presidente Volodymyr Zelensky como presidente da Ucrânia, de acordo com a Constituição, terminou no dia 20 de maio deste ano (2024), mas ele continua no cargo porque (G1. Disponível em: https://shre.ink/DP4T. Acesso em 01.06.2024. Adaptado)",
     "alternatives": [
      {
       "letter": "A",
-      "text": "o país está sob Lei Marcial, o que inviabiliza a reali- zação de eleições no país."
+      "text": "o país está sob Lei Marcial, o que inviabiliza a realização de eleições no país."
      },
      {
       "letter": "B",
-      "text": "houve um golpe de estado em novembro do ano pas- sado (2023) que conferiu ao presidente mais 5 anos de mandato."
+      "text": "houve um golpe de estado em novembro do ano passado (2023) que conferiu ao presidente mais 5 anos de mandato."
      },
      {
       "letter": "C",
@@ -4321,11 +4321,11 @@ export const PROVAS = {
     "number": 67,
     "page": 19,
     "subject": "Direito Administrativo",
-    "stem": "O presidente da República sancionou, com vetos, a lei aprovada pelo Congresso para restringir a chamada “saidinha” dos presos em regime semiaberto, que têm o direito de cinco saídas anuais, incluindo para visita a familiares. (ebc. Disponível em https://shre.ink/DP4Q. Acesso em 01.06.2024. Adaptado) A situação que está em desacordo com a lei sancio- nada é:",
+    "stem": "O presidente da República sancionou, com vetos, a lei aprovada pelo Congresso para restringir a chamada “saidinha” dos presos em regime semiaberto, que têm o direito de cinco saídas anuais, incluindo para visita a familiares. (ebc. Disponível em https://shre.ink/DP4Q. Acesso em 01.06.2024. Adaptado) A situação que está em desacordo com a lei sancionada é:",
     "alternatives": [
      {
       "letter": "A",
-      "text": "entre os critérios a serem observados estão os se- guintes: comportamento adequado na prisão; cum- primento mínimo de 1/6 da pena, se for primário, e 1/4, se reincidente."
+      "text": "entre os critérios a serem observados estão os seguintes: comportamento adequado na prisão; cumprimento mínimo de 1/6 da pena, se for primário, e 1/4, se reincidente."
      },
      {
       "letter": "B",
@@ -4333,7 +4333,7 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "passa a ser obrigatória a realização de exame crimi- nológico para que o preso possa progredir do regime fechado para o semiaberto, e assim ter acesso ao direito às saidinhas."
+      "text": "passa a ser obrigatória a realização de exame criminológico para que o preso possa progredir do regime fechado para o semiaberto, e assim ter acesso ao direito às saidinhas."
      },
      {
       "letter": "D",
@@ -4355,7 +4355,7 @@ export const PROVAS = {
     "number": 68,
     "page": 19,
     "subject": "Direito Administrativo",
-    "stem": "A Petrobras confirmou, no dia 29 de maio de 2024, a venda de Gás Natural Liquefeito (GNL) para o gover- no argentino. A Energia Argentina Sociedad Anonima (­Enarsa), estatal que explora o petróleo e o gás natural, recorreu à compra emergencial da petrolífera brasileira para contornar uma crise no abastecimento. (ebc. Disponível em https://shre.ink/DP4a. Acesso em 01.06.2024. Adaptado) A falta de GNL no mercado argentino foi causada por",
+    "stem": "A Petrobras confirmou, no dia 29 de maio de 2024, a venda de Gás Natural Liquefeito (GNL) para o governo argentino. A Energia Argentina Sociedad Anonima (­Enarsa), estatal que explora o petróleo e o gás natural, recorreu à compra emergencial da petrolífera brasileira para contornar uma crise no abastecimento. (ebc. Disponível em https://shre.ink/DP4a. Acesso em 01.06.2024. Adaptado) A falta de GNL no mercado argentino foi causada por",
     "alternatives": [
      {
       "letter": "A",
@@ -4363,11 +4363,11 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "aumento do consumo por causa da queda de tempe- ratura no mês de maio."
+      "text": "aumento do consumo por causa da queda de temperatura no mês de maio."
      },
      {
       "letter": "C",
-      "text": "problemas financeiros que impedem a manutenção dos equipamentos de extração de óleo e gás da pe- troleira portenha."
+      "text": "problemas financeiros que impedem a manutenção dos equipamentos de extração de óleo e gás da petroleira portenha."
      },
      {
       "letter": "D",
@@ -4375,7 +4375,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "greve dos trabalhadores da empresa estatal que ex- plora a produção de petróleo e gás. 19 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "greve dos trabalhadores da empresa estatal que explora a produção de petróleo e gás."
      }
     ],
     "answer": "B",
@@ -4405,7 +4405,7 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "Será instituído o berloque no formato clássico de fita em azul e amarelo como símbolo nacional de identi- ficação de pessoas com deficiências ocultas."
+      "text": "Será instituído o berloque no formato clássico de fita em azul e amarelo como símbolo nacional de identificação de pessoas com deficiências ocultas."
      },
      {
       "letter": "E",
@@ -4423,27 +4423,27 @@ export const PROVAS = {
     "number": 70,
     "page": 19,
     "subject": "Direito Administrativo",
-    "stem": "No tocante ao direito ao trabalho das pessoas com defi- ciência, a Lei no 13.146/2015 (Estatuto da Pessoa com Deficiência) estabelece que",
+    "stem": "No tocante ao direito ao trabalho das pessoas com deficiência, a Lei no 13.146/2015 (Estatuto da Pessoa com Deficiência) estabelece que",
     "alternatives": [
      {
       "letter": "A",
-      "text": "a pessoa com deficiência tem direito ao trabalho de sua livre escolha e aceitação, em ambiente acessí- vel e inclusivo, de forma prioritária e preferencial em relação às demais pessoas."
+      "text": "a pessoa com deficiência tem direito ao trabalho de sua livre escolha e aceitação, em ambiente acessível e inclusivo, de forma prioritária e preferencial em relação às demais pessoas."
      },
      {
       "letter": "B",
-      "text": "os serviços de habilitação profissional, de reabilita- ção profissional e de educação profissional deverão ser oferecidos em ambientes de trabalho comuns às pessoas com deficiência e aos demais trabalhadores."
+      "text": "os serviços de habilitação profissional, de reabilitação profissional e de educação profissional deverão ser oferecidos em ambientes de trabalho comuns às pessoas com deficiência e aos demais trabalhadores."
      },
      {
       "letter": "C",
-      "text": "é vedada restrição ao trabalho da pessoa com defi­ ciência e qualquer discriminação em razão de sua condição, inclusive quanto ao salário, podendo, no entanto, ser exigida a aptidão plena quando das eta- pas de recrutamento e seleção ao emprego."
+      "text": "é vedada restrição ao trabalho da pessoa com defi­ ciência e qualquer discriminação em razão de sua condição, inclusive quanto ao salário, podendo, no entanto, ser exigida a aptidão plena quando das etapas de recrutamento e seleção ao emprego."
      },
      {
       "letter": "D",
-      "text": "as pessoas jurídicas de direito público ou priva- do são obrigadas a garantir ambientes de trabalho acessíveis e inclusivos, com espaços de descanso e lazer destinados especificamente às pessoas com deficiência."
+      "text": "as pessoas jurídicas de direito público ou privado são obrigadas a garantir ambientes de trabalho acessíveis e inclusivos, com espaços de descanso e lazer destinados especificamente às pessoas com deficiência."
      },
      {
       "letter": "E",
-      "text": "a pessoa com deficiência tem direito à participação e ao acesso a cursos, treinamentos, educação con- tinuada, planos de carreira, entre outros, oferecidos pelo empregador, em igualdade de oportunidades com os demais empregados. R A S C U N H O Matemática"
+      "text": "a pessoa com deficiência tem direito à participação e ao acesso a cursos, treinamentos, educação continuada, planos de carreira, entre outros, oferecidos pelo empregador, em igualdade de oportunidades com os demais empregados. R A S C U N H O Matemática"
      }
     ],
     "answer": "E",
@@ -4457,7 +4457,7 @@ export const PROVAS = {
     "number": 71,
     "page": 20,
     "subject": "Matemática",
-    "stem": "De um terreno, em formato de um quadrado, de medida x metros de lado, foi separado um setor retangular com medidas de (x – 60) metros de largura e (x – 20) metros de comprimento, configurando uma área de 3 200 m2, destinado à construção de um depósito. Restou, do ter- reno original, para outras finalidades, uma área igual a",
+    "stem": "De um terreno, em formato de um quadrado, de medida x metros de lado, foi separado um setor retangular com medidas de (x – 60) metros de largura e (x – 20) metros de comprimento, configurando uma área de 3 200 m2, destinado à construção de um depósito. Restou, do terreno original, para outras finalidades, uma área igual a",
     "alternatives": [
      {
       "letter": "A",
@@ -4491,7 +4491,7 @@ export const PROVAS = {
     "number": 72,
     "page": 20,
     "subject": "Matemática",
-    "stem": "Em uma escola de ensino médio, a razão entre o núme­ ro de alunos do 2o ano e o número de alunos do 1o ano é 4/7. Já a razão entre o número de alunos do 3o ano e o número de alunos do 2o ano é 5/8. Sabendo que a d­iferença entre o número de alunos do 2o ano e o n­úmero de alunos do 3o ano é 27, é correto afirmar que o número de alunos do 1o ano supera a soma do núme- ro de alunos do 2o e 3o anos em",
+    "stem": "Em uma escola de ensino médio, a razão entre o núme­ ro de alunos do 2o ano e o número de alunos do 1o ano é 4/7. Já a razão entre o número de alunos do 3o ano e o número de alunos do 2o ano é 5/8. Sabendo que a d­iferença entre o número de alunos do 2o ano e o n­úmero de alunos do 3o ano é 27, é correto afirmar que o número de alunos do 1o ano supera a soma do número de alunos do 2o e 3o anos em",
     "alternatives": [
      {
       "letter": "A",
@@ -4525,7 +4525,7 @@ export const PROVAS = {
     "number": 73,
     "page": 20,
     "subject": "Matemática",
-    "stem": "Um lojista oferece desconto de 15% no produto A, e esse desconto equivale a uma redução de R$ 18,00 do preço desse produto A. O lojista oferece também o produto B com desconto de 20%, e esse desconto equivale a uma redução de R$ 30,00 do preço do produto B. Conside­ rando os preços desses dois produtos, antes da inci- dência dos descontos, o aumento que deve ser aplicado s­obre o produto de menor preço, de modo que esse pas- se a custar o mesmo que o produto de maior preço, é de",
+    "stem": "Um lojista oferece desconto de 15% no produto A, e esse desconto equivale a uma redução de R$ 18,00 do preço desse produto A. O lojista oferece também o produto B com desconto de 20%, e esse desconto equivale a uma redução de R$ 30,00 do preço do produto B. Conside­ rando os preços desses dois produtos, antes da incidência dos descontos, o aumento que deve ser aplicado s­obre o produto de menor preço, de modo que esse passe a custar o mesmo que o produto de maior preço, é de",
     "alternatives": [
      {
       "letter": "A",
@@ -4545,7 +4545,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "5% 20 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. R A S C U N H O"
+      "text": "5% R A S C U N H O"
      }
     ],
     "answer": "D",
@@ -4559,7 +4559,7 @@ export const PROVAS = {
     "number": 74,
     "page": 21,
     "subject": "Matemática",
-    "stem": "Uma brincadeira de montagem de quebra-cabeças foi executada por seis pessoas. A tabela mostra o tempo gasto pelas primeiras quatro pessoas que montaram o quebra-cabeças. Tempo de montagem do quebra-cabeças Participantes Tempo individual (minutos: segundos) Marcos 1:32 Léo 3:44 Mônica 1:58 Luciana 2:56 Sabendo que o tempo somado dos seis participan- tes para a montagem do quebra-cabeças foi de exatos 14 minutos e 1 segundo, e que o tempo gasto pela M­arcela foi a metade do tempo gasto pelo Lucas, é cor- reto afirmar que o tempo gasto por Lucas, para montar o quebra-cabeça, foi de",
+    "stem": "Uma brincadeira de montagem de quebra-cabeças foi executada por seis pessoas. A tabela mostra o tempo gasto pelas primeiras quatro pessoas que montaram o quebra-cabeças. Tempo de montagem do quebra-cabeças Participantes Tempo individual (minutos: segundos) Marcos 1:32 Léo 3:44 Mônica 1:58 Luciana 2:56 Sabendo que o tempo somado dos seis participantes para a montagem do quebra-cabeças foi de exatos 14 minutos e 1 segundo, e que o tempo gasto pela M­arcela foi a metade do tempo gasto pelo Lucas, é correto afirmar que o tempo gasto por Lucas, para montar o quebra-cabeça, foi de",
     "alternatives": [
      {
       "letter": "A",
@@ -4627,7 +4627,7 @@ export const PROVAS = {
     "number": 76,
     "page": 21,
     "subject": "Matemática",
-    "stem": "O elenco de um time de futebol é composto por 25 joga- dores. Há 3 anos, a média aritmética simples da idade dos jogadores desse elenco, em anos, era igual a 25,6. Naquela ocasião, a idade dos três jogadores mais velhos do elenco era 30 anos. Hoje, a direção do time dispensa- rá esses três jogadores mais velhos e contratará outros três jogadores, respectivamente, com 18, 20 e 21 anos. Desse modo, hoje, após as dispensas e as contratações, a média aritmética simples da idade dos jogadores do elenco, em anos, é igual a",
+    "stem": "O elenco de um time de futebol é composto por 25 jogadores. Há 3 anos, a média aritmética simples da idade dos jogadores desse elenco, em anos, era igual a 25,6. Naquela ocasião, a idade dos três jogadores mais velhos do elenco era 30 anos. Hoje, a direção do time dispensará esses três jogadores mais velhos e contratará outros três jogadores, respectivamente, com 18, 20 e 21 anos. Desse modo, hoje, após as dispensas e as contratações, a média aritmética simples da idade dos jogadores do elenco, em anos, é igual a",
     "alternatives": [
      {
       "letter": "A",
@@ -4647,7 +4647,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "28,14. 21 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. Informática"
+      "text": "28,14. Informática"
      }
     ],
     "answer": "C",
@@ -4665,7 +4665,7 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "Uma novidade do Windows 11 é a cópia de textos e imagens da Área de Transferência de um computa- dor para outro, transferidos por meio de e-mails."
+      "text": "Uma novidade do Windows 11 é a cópia de textos e imagens da Área de Transferência de um computador para outro, transferidos por meio de e-mails."
      },
      {
       "letter": "B",
@@ -4673,7 +4673,7 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "Diferentemente da versão presente no Windows 10, no Windows 11 foram criadas duas Áreas de Trans- ferência: uma para textos (ATText) e outra para ima- gens (ATFig)."
+      "text": "Diferentemente da versão presente no Windows 10, no Windows 11 foram criadas duas Áreas de Transferência: uma para textos (ATText) e outra para imagens (ATFig)."
      },
      {
       "letter": "D",
@@ -4729,11 +4729,11 @@ export const PROVAS = {
     "number": 79,
     "page": 22,
     "subject": "Informática",
-    "stem": "No MS-Word, presente no Microsoft 365, em português e em sua configuração padrão (tendo como base a ver- são 2016), um usuário deseja proteger um documento contendo informações sigilosas, colocando senha nesse documento, para que somente pessoas de posse dessa senha consigam abrir o arquivo e visualizar as informa- ções nele presentes. Uma forma de se inserir senha em um arquivo desse apli- cativo é, na guia Arquivo, selecionar o item",
+    "stem": "No MS-Word, presente no Microsoft 365, em português e em sua configuração padrão (tendo como base a versão 2016), um usuário deseja proteger um documento contendo informações sigilosas, colocando senha nesse documento, para que somente pessoas de posse dessa senha consigam abrir o arquivo e visualizar as informações nele presentes. Uma forma de se inserir senha em um arquivo desse aplicativo é, na guia Arquivo, selecionar o item",
     "alternatives": [
      {
       "letter": "A",
-      "text": "Opções, e indicar na janela que se abre o item Segu- rança, em seguida, a opção Senha e, posteriormente, inserir a senha desejada."
+      "text": "Opções, e indicar na janela que se abre o item Segurança, em seguida, a opção Senha e, posteriormente, inserir a senha desejada."
      },
      {
       "letter": "B",
@@ -4745,11 +4745,11 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "Salvar como, e indicar na janela que se abre a pasta e o nome do arquivo desejados; em seguida, selecio- nar na janela o botão Ferramentas e, posteriormente, o item Opções Gerais, para inserir a senha desejada."
+      "text": "Salvar como, e indicar na janela que se abre a pasta e o nome do arquivo desejados; em seguida, selecionar na janela o botão Ferramentas e, posteriormente, o item Opções Gerais, para inserir a senha desejada."
      },
      {
       "letter": "E",
-      "text": "Exportar, e indicar na janela que se abre a pasta e o nome do arquivo desejados; em seguida, selecionar nessa janela a opção Senha e, posteriormente, inse- rir a senha desejada. 22 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "Exportar, e indicar na janela que se abre a pasta e o nome do arquivo desejados; em seguida, selecionar nessa janela a opção Senha e, posteriormente, inserir a senha desejada."
      }
     ],
     "answer": "D",
@@ -4763,7 +4763,7 @@ export const PROVAS = {
     "number": 80,
     "page": 22,
     "subject": "Informática",
-    "stem": "Um usuário do MS-Word do Microsoft 365, em português e em sua configuração padrão (tendo como base a ver- são 2016), inseriu, na sequência, os seguintes objetos do tipo forma, todos com preenchimento: retângulo, elipse, triângulo e losango. Cada um desses objetos sobrepõe parcialmente o anteriormente inserido, conforme figura. Caso o botão Avançar seja pressionado, estando sele­ cionado(a)",
+    "stem": "Um usuário do MS-Word do Microsoft 365, em português e em sua configuração padrão (tendo como base a versão 2016), inseriu, na sequência, os seguintes objetos do tipo forma, todos com preenchimento: retângulo, elipse, triângulo e losango. Cada um desses objetos sobrepõe parcialmente o anteriormente inserido, conforme figura. Caso o botão Avançar seja pressionado, estando sele­ cionado(a)",
     "alternatives": [
      {
       "letter": "A",
@@ -4831,7 +4831,7 @@ export const PROVAS = {
     "number": 82,
     "page": 23,
     "subject": "Informática",
-    "stem": "No MS-Excel, presente no Microsoft-365 (tendo como referência a versão 2016), em português e em sua con- figuração, uma planilha possui as células A1, A2 e A3, respectivamente, com os seguintes conteúdos, sem as aspas: A1: “casa” A2: “de” A3: “barro” Na célula B1, está presente a seguinte fórmula: =CONCATENAR(A1;A2;A3) Assinale a alternativa que apresenta o resultado produ- zido em B1.",
+    "stem": "No MS-Excel, presente no Microsoft-365 (tendo como referência a versão 2016), em português e em sua configuração, uma planilha possui as células A1, A2 e A3, respectivamente, com os seguintes conteúdos, sem as aspas: A1: “casa” A2: “de” A3: “barro” Na célula B1, está presente a seguinte fórmula: =CONCATENAR(A1;A2;A3) Assinale a alternativa que apresenta o resultado produzido em B1.",
     "alternatives": [
      {
       "letter": "A",
@@ -4865,15 +4865,15 @@ export const PROVAS = {
     "number": 83,
     "page": 23,
     "subject": "Informática",
-    "stem": "Um usuário de correio eletrônico recebeu um e-mail em sua conta do Gmail, uma aplicação web típica de correio eletrônico. Esse e-mail apresenta o seguinte aviso: “Aviso de anexo criptografado – Cuidado com este anexo. Esta mensagem tem 1 anexo criptografado e não é possível verificar a presença de conteúdo malicioso. Não faça o download desse arquivo se você não conhe- cer o remetente ou não tiver certeza de que este e-mail foi enviado por essa pessoa.” Na prática, isso significa que",
+    "stem": "Um usuário de correio eletrônico recebeu um e-mail em sua conta do Gmail, uma aplicação web típica de correio eletrônico. Esse e-mail apresenta o seguinte aviso: “Aviso de anexo criptografado – Cuidado com este anexo. Esta mensagem tem 1 anexo criptografado e não é possível verificar a presença de conteúdo malicioso. Não faça o download desse arquivo se você não conhecer o remetente ou não tiver certeza de que este e-mail foi enviado por essa pessoa.” Na prática, isso significa que",
     "alternatives": [
      {
       "letter": "A",
-      "text": "o usuário precisa utilizar um aplicativo descompacta- dor para conseguir abrir o arquivo anexo."
+      "text": "o usuário precisa utilizar um aplicativo descompactador para conseguir abrir o arquivo anexo."
      },
      {
       "letter": "B",
-      "text": "o arquivo anexo contém algum tipo de malware, mas seu tipo exato não pôde ser identificado pelo siste- ma de segurança do Gmail, devendo-se utilizar um s­oftware antivírus para removê-lo."
+      "text": "o arquivo anexo contém algum tipo de malware, mas seu tipo exato não pôde ser identificado pelo sistema de segurança do Gmail, devendo-se utilizar um s­oftware antivírus para removê-lo."
      },
      {
       "letter": "C",
@@ -4885,7 +4885,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "para que o download do arquivo anexo possa ser r­ealizado, o remetente da mensagem deve prover sua liberação por meio do fornecimento de um c­ódigo enviado por SMS ao destinatário, fazendo com que o remetente seja consultado antes do download. Por isso, o remetente deve ser previamente conhecido pelo destinatário. 23 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "para que o download do arquivo anexo possa ser r­ealizado, o remetente da mensagem deve prover sua liberação por meio do fornecimento de um c­ódigo enviado por SMS ao destinatário, fazendo com que o remetente seja consultado antes do download. Por isso, o remetente deve ser previamente conhecido pelo destinatário."
      }
     ],
     "answer": "D",
@@ -4899,7 +4899,7 @@ export const PROVAS = {
     "number": 84,
     "page": 23,
     "subject": "Informática",
-    "stem": "Um e-mail recebido por um usuário de uma empresa pos- sui o seguinte assunto: “Fwd: Enc: Re: **Cancelamento de contrato processado**” De acordo com padrões de preenchimento de aplicativos típicos de correio eletrônico, trata-se de uma mensagem",
+    "stem": "Um e-mail recebido por um usuário de uma empresa possui o seguinte assunto: “Fwd: Enc: Re: **Cancelamento de contrato processado**” De acordo com padrões de preenchimento de aplicativos típicos de correio eletrônico, trata-se de uma mensagem",
     "alternatives": [
      {
       "letter": "A",
@@ -4911,7 +4911,7 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "que resultou de dois encaminhamentos de uma res- posta a um e-mail original."
+      "text": "que resultou de dois encaminhamentos de uma resposta a um e-mail original."
      },
      {
       "letter": "D",
@@ -4945,7 +4945,7 @@ export const PROVAS = {
      },
      {
       "letter": "C",
-      "text": "protocolos como o HTTP e o FTP podem ser utiliza- dos no URL. Já o Telnet e Mailto não são aceitos."
+      "text": "protocolos como o HTTP e o FTP podem ser utilizados no URL. Já o Telnet e Mailto não são aceitos."
      },
      {
       "letter": "D",
@@ -4967,7 +4967,7 @@ export const PROVAS = {
     "number": 86,
     "page": 23,
     "subject": "Informática",
-    "stem": "Um Técnico Judiciário deseja realizar uma busca na I­nternet, utilizando o Google, com as seguintes caracte- rísticas: 1. Buscar informações sobre o Estado de São Paulo. 2. Eliminar da busca informações relativas a clubes. 3. \u0007Incluir na busca informações sobre processos diver- sos (administrativos, judiciários, etc.). Uma busca que atende ao desejado pelo técnico é:",
+    "stem": "Um Técnico Judiciário deseja realizar uma busca na I­nternet, utilizando o Google, com as seguintes características: 1. Buscar informações sobre o Estado de São Paulo. 2. Eliminar da busca informações relativas a clubes. 3. \u0007Incluir na busca informações sobre processos diversos (administrativos, judiciários, etc.). Uma busca que atende ao desejado pelo técnico é:",
     "alternatives": [
      {
       "letter": "A",
@@ -5001,7 +5001,7 @@ export const PROVAS = {
     "number": 87,
     "page": 24,
     "subject": "Informática",
-    "stem": "Assinale a alternativa que apresenta um recurso existen- te para canais privados na ferramenta Microsoft Teams.",
+    "stem": "Assinale a alternativa que apresenta um recurso existente para canais privados na ferramenta Microsoft Teams.",
     "alternatives": [
      {
       "letter": "A",
@@ -5035,7 +5035,7 @@ export const PROVAS = {
     "number": 88,
     "page": 24,
     "subject": "Informática",
-    "stem": "Verificando o Microsoft Teams, é possível personalizar o visual exibido para chamadas de vídeo, bem como para os chats. Dessa forma, considerando a opção Aparência e acessibilidade, disponibilizada por meio das Configura- ções desse aplicativo, é correto afirmar que",
+    "stem": "Verificando o Microsoft Teams, é possível personalizar o visual exibido para chamadas de vídeo, bem como para os chats. Dessa forma, considerando a opção Aparência e acessibilidade, disponibilizada por meio das Configurações desse aplicativo, é correto afirmar que",
     "alternatives": [
      {
       "letter": "A",
@@ -5103,7 +5103,7 @@ export const PROVAS = {
     "number": 90,
     "page": 24,
     "subject": "Informática",
-    "stem": "Considerando a pasta denominada Cofre Pessoal, dis- ponibilizada por meio do OneDrive, é correto afirmar que",
+    "stem": "Considerando a pasta denominada Cofre Pessoal, disponibilizada por meio do OneDrive, é correto afirmar que",
     "alternatives": [
      {
       "letter": "A",
@@ -5111,7 +5111,7 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "ela não permite o compartilhamento direto de arqui- vos nela inseridos."
+      "text": "ela não permite o compartilhamento direto de arquivos nela inseridos."
      },
      {
       "letter": "C",
@@ -5123,7 +5123,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "uma vez bloqueada, ela é desbloqueada automati­ camente após um intervalo de 2 horas. 24 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. Raciocínio Lógico"
+      "text": "uma vez bloqueada, ela é desbloqueada automati­ camente após um intervalo de 2 horas. Raciocínio Lógico"
      }
     ],
     "answer": "B",
@@ -5171,7 +5171,7 @@ export const PROVAS = {
     "number": 92,
     "page": 24,
     "subject": "Raciocínio Lógico",
-    "stem": "Considere o diagrama lógico a seguir, no qual há elemen- tos em todos os seus subconjuntos. A partir das informações obtidas no diagrama, é logica- mente correto afirmar que",
+    "stem": "Considere o diagrama lógico a seguir, no qual há elementos em todos os seus subconjuntos. A partir das informações obtidas no diagrama, é logicamente correto afirmar que",
     "alternatives": [
      {
       "letter": "A",
@@ -5247,11 +5247,11 @@ export const PROVAS = {
      },
      {
       "letter": "B",
-      "text": "Se desistir é a escolha, então o esforço não é recom- pensado."
+      "text": "Se desistir é a escolha, então o esforço não é recompensado."
      },
      {
       "letter": "C",
-      "text": "Se desistir não é a escolha, então o esforço é recom- pensado."
+      "text": "Se desistir não é a escolha, então o esforço é recompensado."
      },
      {
       "letter": "D",
@@ -5273,7 +5273,7 @@ export const PROVAS = {
     "number": 95,
     "page": 25,
     "subject": "Raciocínio Lógico",
-    "stem": "Em relação a estar ou não estar APTO para exercer d­eterminada função, seguem algumas afirmações: I. Maria está ou Nelson está. II. Se Paulo está, então Nelson está. III. Rute está ou Paulo está. IV. Se Osvaldo está, então Solange está. V. Nelson está se, e somente se, Solange está. VI. Solange não está. Com essas informações, é logicamente verdadeiro afir- mar que a diferença entre o número daqueles que não estão aptos e o número dos que estão é",
+    "stem": "Em relação a estar ou não estar APTO para exercer d­eterminada função, seguem algumas afirmações: I. Maria está ou Nelson está. II. Se Paulo está, então Nelson está. III. Rute está ou Paulo está. IV. Se Osvaldo está, então Solange está. V. Nelson está se, e somente se, Solange está. VI. Solange não está. Com essas informações, é logicamente verdadeiro afirmar que a diferença entre o número daqueles que não estão aptos e o número dos que estão é",
     "alternatives": [
      {
       "letter": "A",
@@ -5327,7 +5327,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "Não corro todos os dias e, se não jogo bola, então tenho disposição. 25 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. r a s c u n h o"
+      "text": "Não corro todos os dias e, se não jogo bola, então tenho disposição. r a s c u n h o"
      }
     ],
     "answer": "A",
@@ -5395,7 +5395,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "Denise não é coordenadora e Amanda não é pro­ fessora. 26 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação. r a s c u n h o"
+      "text": "Denise não é coordenadora e Amanda não é pro­ fessora. r a s c u n h o"
      }
     ],
     "answer": null,
@@ -5443,7 +5443,7 @@ export const PROVAS = {
     "number": 100,
     "page": 27,
     "subject": "Raciocínio Lógico",
-    "stem": "Fernanda, Luana e Rafaela são três professoras que se apresentam para o primeiro dia de trabalho. Elas lecionam, não necessariamente nesta ordem: espanhol, francês e inglês. Cada uma mora em um bairro diferente da outra e que são, não necessariamente nesta ordem: Perdizes, Moema e Tatuapé. Sabendo que Luana mora em Perdizes, que a professora de francês mora no T­atuapé e que Fernanda é professora de inglês, é logi- camente verdadeiro afirmar:",
+    "stem": "Fernanda, Luana e Rafaela são três professoras que se apresentam para o primeiro dia de trabalho. Elas lecionam, não necessariamente nesta ordem: espanhol, francês e inglês. Cada uma mora em um bairro diferente da outra e que são, não necessariamente nesta ordem: Perdizes, Moema e Tatuapé. Sabendo que Luana mora em Perdizes, que a professora de francês mora no T­atuapé e que Fernanda é professora de inglês, é logicamente verdadeiro afirmar:",
     "alternatives": [
      {
       "letter": "A",
@@ -5463,7 +5463,7 @@ export const PROVAS = {
      },
      {
       "letter": "E",
-      "text": "Se Rafaela é professora de francês, então Luana não mora em Perdizes. 27 TJSP2401/001-EscreventeTécJudiciário Confidencial até o momento da aplicação."
+      "text": "Se Rafaela é professora de francês, então Luana não mora em Perdizes."
      }
     ],
     "answer": "A",
