@@ -1,12 +1,19 @@
-import { CONCURSOS, PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/concursos.js';
-// Índice leve das provas resolvíveis (o conteúdo de cada prova fica em /provas/<id>.json).
+import { PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/site-info.js';
+// Não há plano grátis: o catálogo e o índice de provas chegam pela API, só para quem tem plano
+// (o servidor confere a assinatura). Nada disso fica em arquivo público.
 const PROVAS = {};
-const provasReady = fetch('/provas/index.json', { cache: 'no-cache' })
-  .then((r) => (r.ok ? r.json() : {}))
-  .then((d) => Object.assign(PROVAS, d))
-  .catch(() => {})
-  .finally(() => { provasCarregadas = true; });
 let provasCarregadas = false;
+let provasPedido = null;
+function carregarProvas() {
+  if (!provasPedido) {
+    provasPedido = fetch('/api/provas', { credentials: 'same-origin', cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((d) => { if (d && !d.error && !d.offline) Object.assign(PROVAS, d); })
+      .catch(() => {})
+      .finally(() => { provasCarregadas = true; });
+  }
+  return provasPedido;
+}
 import { SEM_PROVA_ANTERIOR } from './data/sem-prova.js?v=1';
 // Concurso sem prova anterior: está na lista e ainda não tem prova publicada no site.
 const semProvaAnterior = (id) => SEM_PROVA_ANTERIOR.has(id) && !PROVAS[id];
@@ -59,7 +66,10 @@ function loadState() {
 }
 
 let state = loadState();
-let catalog = [...CONCURSOS];
+let catalog = [];
+let catalogoCarregado = false;
+let statsPublicas = null; // totais do topo para quem ainda não assinou
+let concursoPendente = null; // link /?concurso=... aberto antes do catálogo chegar
 let activeView = 'concursos';
 let activeDetailId = null;
 let activeDetailTab = 'geral';
@@ -198,15 +208,60 @@ function platformColor(platformId) {
    ====================================================== */
 async function hydrateFromApi() {
   try {
-    const res = await fetch('/api/concursos');
+    const res = await fetch('/api/concursos', { credentials: 'same-origin', cache: 'no-store' });
+    if (res.status === 401 || res.status === 403) {
+      // O servidor não reconheceu um plano ativo: volta para a escolha de plano
+      catalog = [];
+      catalogoCarregado = false;
+      if (state.tier !== 'guest' && !state.adminGranted) {
+        state.tier = 'guest';
+        saveState();
+      }
+      return false;
+    }
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data.items) && data.items.length > 0) {
         catalog = data.items;
+        catalogoCarregado = true;
       }
     }
   } catch {
-    // Fallback to static ES module catalog
+    // Sem internet: mantém o que já estiver na tela
+  }
+  return catalogoCarregado;
+}
+
+async function carregarStatsPublicas() {
+  try {
+    const res = await fetch('/api/stats', { cache: 'no-cache' });
+    if (res.ok) statsPublicas = await res.json();
+  } catch { /* sem internet */ }
+}
+
+// Carrega (ou limpa) o catálogo conforme o plano e redesenha a tela
+async function sincronizarAcesso() {
+  if (hasEssencial()) {
+    if (!catalogoCarregado) {
+      await hydrateFromApi();
+      if (catalogoCarregado) {
+        carregarProvas().then(() => {
+          renderHeroStats();
+          renderConcursosGrid();
+          if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
+        });
+      }
+    }
+  } else if (catalogoCarregado) {
+    catalog = [];
+    catalogoCarregado = false;
+  }
+  if (!statsPublicas && !catalogoCarregado) await carregarStatsPublicas();
+  if (catalogoCarregado) populateSelects();
+  renderAll();
+  if (concursoPendente && catalog.some((c) => c.id === concursoPendente)) {
+    openContestDetail(concursoPendente);
+    concursoPendente = null;
   }
 }
 
@@ -271,6 +326,14 @@ function populateSelects() {
    RENDERING — HERO, AUTH, BILLING & CONCURSOS
    ====================================================== */
 function renderHeroStats() {
+  if (!catalog.length) {
+    const st = statsPublicas;
+    $('#statVagas').textContent = st ? Number(st.totalVagasAbertas || 0).toLocaleString('pt-BR') : '—';
+    $('#statConcursos').textContent = st ? `${st.concursosAtivos} + ${st.concursosEncerrados}` : '—';
+    $('#statMaiorSalario').textContent = st && st.maiorSalario ? formatBRL(st.maiorSalario).replace(',00', '') : '—';
+    $('#statProvas').textContent = st ? `${Number(st.provasParaTreinar || 0).toLocaleString('pt-BR')} provas` : '—';
+    return;
+  }
   const ativos = catalog.filter((c) => c.status !== 'Encerrado');
   const encerrados = catalog.filter((c) => c.status === 'Encerrado');
   const totalVagas = ativos.reduce((sum, c) => sum + c.vagas, 0);
@@ -365,9 +428,19 @@ function renderAuthUI() {
 
   $('#navSavedCount').textContent = String(state.savedIds.length);
   $('#mobileSavedDot').hidden = state.savedIds.length === 0;
-  const freeBox = $('#freeAccessBox');
-  if (freeBox) freeBox.hidden = hasEssencial();
+  renderPlanGate();
   renderAccountUI();
+}
+
+// Sem plano, o site mostra só a apresentação e os planos
+function renderPlanGate() {
+  const semPlano = !hasEssencial();
+  document.body.classList.toggle('sem-plano', semPlano);
+  const gate = $('#planGate');
+  if (gate) gate.hidden = !semPlano;
+  const login = $('#planGateLogin');
+  if (login) login.hidden = Boolean(state.user);
+  if (semPlano && (activeView === 'cursos' || activeView === 'salvos')) switchView('plano');
 }
 
 /* ======================================================
@@ -402,7 +475,7 @@ function applyServerRole(u) {
       state.paidGranted = true;
       state.subMethod = u.planMethod;
       state.planInfo = { status: u.planStatus, renovaEm: u.planRenewsAt, cancelaNoFim: u.planCancelAtPeriodEnd };
-    } else if (state.paidGranted || (u && u.email)) {
+    } else {
       state.tier = 'guest';
       state.paidGranted = false;
       state.planInfo = null;
@@ -511,7 +584,7 @@ function setAuthMode(mode) {
     tab.classList.toggle('active', on);
     tab.setAttribute('aria-selected', String(on));
   });
-  $('#authTitle').textContent = isSignup ? 'Crie sua conta grátis' : 'Que bom te ver de novo';
+  $('#authTitle').textContent = isSignup ? 'Crie sua conta' : 'Que bom te ver de novo';
   $('#authSub').textContent = isSignup
     ? 'Leva 30 segundos. Salve concursos e receba alertas de mudança de data.'
     : 'Entre para ver seus concursos salvos e alertas.';
@@ -523,7 +596,7 @@ function setAuthMode(mode) {
   $('#authSubmitBtn').textContent = isSignup ? 'Criar minha conta' : 'Entrar';
   $('#authSwitchText').innerHTML = isSignup
     ? 'Já tem conta? <button type="button" class="auth-link" data-auth-mode="login">Entrar</button>'
-    : 'Ainda não tem conta? <button type="button" class="auth-link" data-auth-mode="signup">Criar conta grátis</button>';
+    : 'Ainda não tem conta? <button type="button" class="auth-link" data-auth-mode="signup">Criar conta</button>';
   clearAuthErrors();
 }
 
@@ -644,13 +717,18 @@ function bindAuthEvents() {
       }
       applyServerRole(u);
       saveState();
-      renderAll();
+      sincronizarAcesso();
     } else if (state.user && state.user.provider === 'google') {
       // A sessão do Google expirou no servidor: encerra também no navegador
       state.user = null;
       applyServerRole(null);
       saveState();
-      renderAll();
+      sincronizarAcesso();
+    } else if (stripeOn()) {
+      // Ninguém conectado: sem plano
+      applyServerRole(null);
+      saveState();
+      sincronizarAcesso();
     }
   });
   window.addEventListener('cnc:auth-error', (e) => showToast(e.detail || 'Não foi possível entrar com o Google.'));
@@ -1548,7 +1626,7 @@ function openCheckoutModal(initialPlan = 'essencial') {
   if (!state.user) {
     pendingCheckoutPlan = initialPlan;
     openAuthModal('signup');
-    showToast('Crie sua conta grátis ou entre para continuar com o plano.');
+    showToast('Crie sua conta ou entre para continuar com o plano.');
     return;
   }
   // ADMIN já tem todos os planos liberados, sem pagar
@@ -1591,6 +1669,10 @@ function activateSubscription(method) {
    NAVIGATION, FILTERS & EVENTS
    ====================================================== */
 function switchView(viewName) {
+  if (!hasEssencial() && (viewName === 'cursos' || viewName === 'salvos')) {
+    viewName = 'plano';
+    showToast('Escolha um plano para usar o Check no Concurso.');
+  }
   activeView = viewName;
   $$('[data-view-panel]').forEach((panel) => {
     const match = panel.dataset.viewPanel === viewName;
@@ -2150,12 +2232,14 @@ async function init() {
   showTeamDemoBar();
   detectAppMode();
   registerServiceWorker();
-  await hydrateFromApi();
+  if (hasEssencial()) await hydrateFromApi();
+  if (!catalogoCarregado) await carregarStatsPublicas();
   populateSelects();
   bindEvents();
+  $('#planGateLoginBtn')?.addEventListener('click', () => openAuthModal('login'));
   renderAll();
   // O índice de provas chega depois: atualiza selos, contador e a aba aberta
-  provasReady.then(() => {
+  if (catalogoCarregado) carregarProvas().then(() => {
     renderHeroStats();
     renderConcursosGrid();
     if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
@@ -2172,6 +2256,9 @@ function openFromLink() {
   handleStripeReturn(params);
   const concursoId = params.get('concurso');
   if (concursoId && catalog.some((c) => c.id === concursoId)) openContestDetail(concursoId);
+  else if (concursoId) concursoPendente = concursoId;
+  // Links "/#planos" das páginas públicas abrem a escolha de plano
+  if (window.location.hash === '#planos') switchView('plano');
   if (params.has('entrar') && !state.user) openAuthModal('login');
   // Volta para a página de origem depois do login (só caminhos conhecidos deste site)
   const voltar = params.get('voltar');

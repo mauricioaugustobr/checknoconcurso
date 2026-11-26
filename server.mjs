@@ -18,6 +18,9 @@ import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from './li
 import { handlePix } from './lib/pix.js';
 import { handleCancel, handleCancelRequest } from './lib/cancel.js';
 import { handleExplicacao } from './lib/explicacao.js';
+import { GET as concursosApi } from './api/concursos.js';
+import { GET as statsApi } from './api/stats.js';
+import { ehPrivado } from './tools/build-public.mjs';
 const STRIPE_ROUTES = {
   pix: handlePix,
   checkout: handleCheckout,
@@ -120,15 +123,19 @@ export function createServer() {
       }
 
       if (pathname === '/api/stats') {
-        return sendJson(res, 200, computeStats());
+        return sendWebResponse(res, await statsApi());
       }
 
       if (pathname === '/api/estados') {
         return sendJson(res, 200, getEstadosPayload());
       }
 
-      if (pathname === '/api/concursos') {
-        return sendJson(res, 200, getConcursosPayload(url.searchParams, await getLiveCatalog()));
+      // Catálogo e provas: só com plano (mesma função da Vercel, api/concursos.js)
+      if (pathname === '/api/concursos' || pathname === '/api/provas' || pathname.startsWith('/api/prova/')) {
+        const apiUrl = new URL(url);
+        if (pathname === '/api/provas') apiUrl.searchParams.set('tipo', 'provas');
+        if (pathname.startsWith('/api/prova/')) { apiUrl.searchParams.set('tipo', 'prova'); apiUrl.searchParams.set('c', pathname.slice('/api/prova/'.length)); }
+        return sendWebResponse(res, await concursosApi(await toWebRequest(req, apiUrl)));
       }
 
       for (const [pattern, handler] of DYNAMIC_ROUTES) {
@@ -141,6 +148,11 @@ export function createServer() {
       }
 
       const safeRelPath = pathname === '/' ? '/index.html' : (pathname === '/admin' ? '/admin/index.html' : pathname);
+      // Igual à Vercel (tools/build-public.mjs): catálogo e provas não são arquivos públicos
+      if (ehPrivado(safeRelPath.replace(/^\/+/, ''))) {
+        res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+        return res.end('Arquivo não encontrado');
+      }
       const resolvedPath = path.normalize(path.join(PUBLIC_DIR, safeRelPath));
       if (!resolvedPath.startsWith(PUBLIC_DIR)) {
         res.writeHead(403);

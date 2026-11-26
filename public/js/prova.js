@@ -1,13 +1,15 @@
-import { PROVAS, getProva } from "./data/provas.js";
-
-const examKey = new URLSearchParams(location.search).get("c") || Object.keys(PROVAS)[0];
-// Provas novas ficam em /provas/<concurso>.json e só são baixadas quando a página abre.
+// As provas são do plano Check Completo: o servidor confere a assinatura antes de enviar.
+const examKey = new URLSearchParams(location.search).get("c") || "pm-sp-soldado-2026";
+let semAcesso = null; // "login" | "completo" | "plano"
 async function loadExam(key) {
-  const local = getProva(key);
-  if (local) return local;
   if (!/^[a-z0-9-]+$/i.test(key)) return null;
   try {
-    const res = await fetch(`/provas/${encodeURIComponent(key)}.json`, { cache: "no-cache" });
+    const res = await fetch(`/api/prova/${encodeURIComponent(key)}`, { credentials: "same-origin", cache: "no-store" });
+    if (res.status === 401 || res.status === 403) {
+      const erro = await res.json().catch(() => ({}));
+      semAcesso = erro.codigo || "plano";
+      return null;
+    }
     return res.ok ? await res.json() : null;
   } catch {
     return null;
@@ -65,6 +67,20 @@ function correctCount() {
 if (!exam) {
   intro.hidden = true;
   runner.hidden = true;
+  if (semAcesso) {
+    // Sem o plano Completo: explica e leva para a escolha do plano
+    const textos = {
+      login: "Entre com sua conta e escolha o plano Check Completo para treinar com esta prova.",
+      completo: "O treino com questões de provas anteriores é do plano Check Completo (R$ 17,99/mês ou R$ 199,90/ano).",
+      plano: "Escolha um plano para usar o Check no Concurso. O treino com provas anteriores é do plano Check Completo."
+    };
+    empty.textContent = "";
+    empty.append(textos[semAcesso] || textos.plano, " ");
+    const link = document.createElement("a");
+    link.href = semAcesso === "login" ? "/?entrar=1#planos" : "/#planos";
+    link.textContent = semAcesso === "login" ? "Entrar e ver os planos" : "Ver os planos";
+    empty.append(link);
+  }
   empty.hidden = false;
 } else {
   initExam();

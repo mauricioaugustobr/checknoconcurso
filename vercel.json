@@ -1,10 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "outputDirectory": "public",
+  "outputDirectory": "dist",
   "functions": {
     "api/explicacao.js": {
-      "maxDuration": 60
+      "maxDuration": 60,
+      "includeFiles": "public/provas/**"
+    },
+    "api/concursos.js": {
+      "includeFiles": "public/provas/**"
+    },
+    "api/stats.js": {
+      "includeFiles": "public/provas/index.json"
     }
   },
   "headers": [
@@ -104,6 +111,14 @@
   ],
   "rewrites": [
     {
+      "source": "/api/provas",
+      "destination": "/api/concursos?tipo=provas"
+    },
+    {
+      "source": "/api/prova/:id",
+      "destination": "/api/concursos?tipo=prova&c=:id"
+    },
+    {
       "source": "/llms.txt",
       "destination": "/api/page?tipo=llms"
     },
@@ -143,5 +158,6 @@
       "source": "/admin",
       "destination": "/admin/index.html"
     }
-  ]
+  ],
+  "buildCommand": "node tools/build-public.mjs"
 }

@@ -2,12 +2,14 @@ const plan = new URLSearchParams(location.search).get("plan");
 const PLANS = {
   essencial: {
     name: "Check Essencial",
-    desc: "Editais, datas de prova e comparador de cursos",
+    desc: "Tudo do básico e do essencial: concursos, datas de prova, editais e cursos",
     price: "R$ 6,99",
     cadence: "/mês",
     note: "Assinatura mensal no cartão, com renovação automática. No Pix, o acesso não se renova.",
     features: [
       "Todos os concursos ativos e encerrados do Brasil",
+      "Busca e filtros por estado, área, escolaridade e salário",
+      "Salários, vagas e taxas de cada concurso",
       "Datas de prova atualizadas e alertas de retificação",
       "Editais oficiais e Raio-X das matérias",
       "Comparador de cursos com cupons de desconto",

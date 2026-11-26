@@ -92,7 +92,8 @@ async function runTests() {
 
     const html = await (await fetch(`${baseUrl}/`)).text();
     assert.ok(html.includes('Check no Concurso'), 'HTML deve conter marca Check no Concurso');
-    assert.ok(html.includes('PM-SP, TJ-SP e TRT-4'), 'HTML deve listar os novos destaques reais');
+    // Sem plano grátis (pedido de 26/11/2026): só Essencial e Completo, com a tela de escolha de plano
+    assert.ok(html.includes('id="planGate"') && html.includes('Check Essencial') && html.includes('Check Completo'), 'HTML deve mostrar os 2 planos e a escolha de plano');
 
     // 5. Validate Vercel Functions API handlers directly
     const vHealth = await (await healthGET()).json();

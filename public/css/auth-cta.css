@@ -581,3 +581,30 @@
     border-radius: 12px;
   }
 }
+
+/* Sem plano gratuito: quem não assina vê a apresentação e a escolha de plano */
+.plan-gate {
+  margin-top: 22px;
+  padding: 20px 22px;
+  border: 1px solid var(--brand-border, #BCD3E6);
+  border-radius: 16px;
+  background: var(--bg-surface, #fff);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(11, 37, 64, .06));
+}
+.plan-gate[hidden] { display: none; }
+.plan-gate-title { margin: 0 0 6px; font-size: 18px; font-weight: 700; color: var(--text-primary, #0F2236); }
+.plan-gate-text { margin: 0 0 16px; font-size: 14.5px; line-height: 1.55; color: var(--text-secondary, #2E465E); }
+.plan-gate-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.plan-gate-actions .btn-cta-subscribe { min-height: 46px; }
+.plan-gate-actions .btn-outline-sm { min-height: 46px; display: inline-flex; align-items: center; }
+.plan-gate-login { margin: 12px 0 0; font-size: 14px; color: var(--text-muted, #5A7089); }
+.plan-gate-login[hidden] { display: none; }
+body.sem-plano .catalog-section,
+body.sem-plano .hero-search-wrap,
+body.sem-plano #quickChips,
+body.sem-plano #upgradeStrip { display: none !important; }
+.plans-grid.two-plans { max-width: 920px; margin-left: auto; margin-right: auto; }
+@media (max-width: 560px) {
+  .plan-gate { padding: 18px 16px; }
+  .plan-gate-actions > * { width: 100%; justify-content: center; text-align: center; }
+}

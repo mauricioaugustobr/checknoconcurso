@@ -1,4 +1,4 @@
-const CACHE_NAME = 'check-no-concurso-v29';
+const CACHE_NAME = 'check-no-concurso-v30';
 const ASSETS = [
   '/',
   '/index.html',
@@ -8,14 +8,9 @@ const ASSETS = [
   '/js/app.js',
   '/js/search.js',
   '/js/google-auth.js',
-  '/js/data/concursos.js',
+  '/js/data/site-info.js',
   '/js/data/estado-builder.js',
-  '/js/data/estados-norte.js',
-  '/js/data/estados-nordeste.js',
-  '/js/data/estados-centro-oeste.js',
-  '/js/data/estados-sudeste.js',
-  '/js/data/estados-sul.js',
-  '/js/data/estados-ativos-2026-11.js',
+  '/js/data/sem-prova.js',
   '/manifest.webmanifest',
   '/icons/icon.svg',
   '/icons/icon-192.png',

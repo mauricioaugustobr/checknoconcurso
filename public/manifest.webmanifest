@@ -1,7 +1,7 @@
 {
     "name":  "Check no Concurso",
     "short_name":  "Check Concurso",
-    "description":  "Todos os concursos abertos e encerrados do Brasil com datas de prova sempre atualizadas, editais, cursos parceiros e 5 provas anteriores.",
+    "description":  "Todos os concursos abertos e encerrados do Brasil com datas de prova sempre atualizadas, editais, cursos parceiros e treino com questões de provas anteriores.",
     "start_url":  "/?app=1",
     "display":  "standalone",
     "background_color":  "#F4F8FB",

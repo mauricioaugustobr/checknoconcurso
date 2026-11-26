@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0C4F83" />
-  <meta name="description" content="Check no Concurso (checknoconcurso.com.br) — Todos os concursos abertos e encerrados do Brasil, datas de prova atualizadas, editais, comparador de cursos e 5 provas anteriores." />
+  <meta name="description" content="Check no Concurso (checknoconcurso.com.br) — Todos os concursos abertos e encerrados do Brasil, datas de prova atualizadas, editais, comparador de cursos e treino com questões de provas anteriores." />
   <title>Check no Concurso — Todos os Concursos Abertos do Brasil, Datas de Prova e Editais</title>
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="/icons/icon.svg?v=2" />
@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="/css/styles.css?v=19" />
   <link rel="stylesheet" href="/css/treinar.css?v=1" />
   <link rel="stylesheet" href="/css/detalhe-responsivo.css?v=1" />
-  <link rel="stylesheet" href="/css/auth-cta.css?v=14" />
+  <link rel="stylesheet" href="/css/auth-cta.css?v=15" />
   <link rel="stylesheet" href="/css/brand.css?v=1" />
   <link rel="stylesheet" href="/css/fonts.css?v=1" />
   <link rel="stylesheet" href="/css/pages-footer.css?v=1" />
@@ -152,6 +152,17 @@
               Acompanhe editais abertos, prazos, cursos parceiros e provas anteriores em um só lugar.
             </p>
 
+            <!-- Sem plano: para usar o site é preciso escolher um plano -->
+            <div class="plan-gate" id="planGate" hidden>
+              <p class="plan-gate-title">Escolha um plano para começar</p>
+              <p class="plan-gate-text">O Check no Concurso é só para assinantes. Com o <strong>Essencial (R$ 6,99/mês)</strong> você vê todos os concursos, datas de prova, editais e cursos. O <strong>Completo (R$ 17,99/mês)</strong> inclui o treino com questões de provas anteriores.</p>
+              <div class="plan-gate-actions">
+                <button type="button" class="btn-cta-subscribe" data-pick-plan="essencial">Assinar Essencial · R$ 6,99/mês</button>
+                <button type="button" class="btn-outline-sm" data-view-jump="plano">Comparar os planos</button>
+              </div>
+              <p class="plan-gate-login" id="planGateLogin">Já assina? <button type="button" class="auth-link" data-auth-mode="login" id="planGateLoginBtn">Entrar</button></p>
+            </div>
+
             <div class="hero-search-wrap">
               <form class="search-box" id="searchForm" role="search" action="#concursos" autocomplete="off">
                 <svg class="search-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -171,38 +182,6 @@
               <button type="button" class="chip" data-quick="encerrados">Encerrados</button>
             </div>
 
-            <!-- O que dá para usar sem assinar (só aparece para visitantes) -->
-            <section class="free-access" id="freeAccessBox" aria-labelledby="freeAccessTitle">
-              <div class="free-access-head">
-                <span class="free-access-tag">Grátis, sem assinar</span>
-                <h2 id="freeAccessTitle">Não quer assinar agora? Você ainda pode usar parte do site.</h2>
-              </div>
-              <div class="free-access-cols">
-                <div class="free-access-col">
-                  <h3>Liberado para todos</h3>
-                  <ul class="free-list is-free">
-                    <li>Todos os concursos do Brasil</li>
-                    <li>Data da prova, salário e vagas</li>
-                    <li>Edital completo destes 3:
-                      <span class="free-samples">
-                        <button type="button" class="free-sample" data-open-id="pm-sp-soldado-2026">PM-SP</button>
-                        <button type="button" class="free-sample" data-open-id="tj-sp-2026">TJ-SP</button>
-                        <button type="button" class="free-sample" data-open-id="trt-4-rs-2026">TRT-4</button>
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="free-access-col">
-                  <h3>Só para assinantes</h3>
-                  <ul class="free-list is-locked">
-                    <li>Edital e Raio-X dos outros concursos</li>
-                    <li>Comparador de cursos com cupons</li>
-                    <li>Treinar com questões de provas anteriores <em>(Completo)</em></li>
-                  </ul>
-                </div>
-              </div>
-              <button type="button" class="free-access-link" data-view-jump="plano">Comparar o grátis com os planos →</button>
-            </section>
           </div>
 
           <aside class="hero-card" aria-label="Resumo Check no Concurso">
@@ -441,8 +420,8 @@
       <div class="container page-pad">
         <div class="pricing-hero">
           <span class="badge-gold">Check no Concurso · Planos Transparentes</span>
-          <h2>Escolha o plano ideal para sua aprovação</h2>
-          <p>Acompanhe todos os concursos abertos e encerrados com datas de prova atualizadas por R$ 6,99/mês, ou escolha o Plano Completo para <strong>treinar com questões de provas anteriores</strong>: toda questão respondida mostra a resposta certa e, logo abaixo, uma explicação em 3 parágrafos. Com desconto no anual.</p>
+          <h2>Escolha seu plano para usar o Check no Concurso</h2>
+          <p>São 2 planos. Acompanhe todos os concursos abertos e encerrados com datas de prova atualizadas por R$ 6,99/mês, ou escolha o Plano Completo para <strong>treinar com questões de provas anteriores</strong>: toda questão respondida mostra a resposta certa e, logo abaixo, uma explicação em 3 parágrafos. Com desconto no anual.</p>
 
           <div class="billing-toggle" role="group" aria-label="Ciclo de pagamento do Plano Completo">
             <button type="button" class="bill-btn active" id="billMonthlyBtn" data-billing="mensal">Mensal (R$ 17,99/mês)</button>
@@ -464,33 +443,18 @@
           </div>
         </div>
 
-        <div class="plans-grid three-cols">
-          <article class="plan-card">
-            <div class="plan-top">
-              <h3>Visitante Grátis</h3>
-              <p class="muted-sm">Para conhecer a plataforma e testar os 3 destaques</p>
-              <div class="plan-price"><strong>R$ 0</strong><span>/mês</span></div>
-            </div>
-            <ul class="plan-list">
-              <li class="ok">Ver lista de concursos abertos e encerrados</li>
-              <li class="ok">Consultar datas de prova atualizadas no calendário</li>
-              <li class="ok">Degustação completa em 3 concursos reais (PM-SP, TJ-SP e TRT-4)</li>
-              <li class="no">Editais completos e Raio-X de todos os concursos</li>
-              <li class="no">Comparador de cursos com cupons de desconto</li>
-              <li class="no">Treinar com questões de provas anteriores</li>
-            </ul>
-            <button type="button" class="btn-primary-full" id="freeSignupBtn">Criar conta grátis</button>
-            <button type="button" class="btn-outline-full" data-view-jump="concursos">Continuar explorando</button>
-          </article>
-
+        <div class="plans-grid two-plans">
           <article class="plan-card">
             <div class="plan-top">
               <h3>Check Essencial</h3>
-              <p class="muted-sm">Editais, datas de prova e cursos por menos de um café</p>
+              <p class="muted-sm">Tudo do básico e do essencial para acompanhar seus concursos</p>
               <div class="plan-price"><strong>R$ 6,99</strong><span>/mês</span></div>
             </div>
             <ul class="plan-list">
               <li class="ok"><strong>100% dos concursos ativos e encerrados</strong> do Brasil</li>
+              <li class="ok"><strong>Busca e filtros</strong> por estado, área, escolaridade e salário</li>
+              <li class="ok"><strong>Salários, vagas e taxas</strong> de cada concurso</li>
+              <li class="ok"><strong>Salvar concursos</strong> e receber alertas</li>
               <li class="ok"><strong>Datas de prova atualizadas</strong> + alertas de retificação</li>
               <li class="ok"><strong>Editais oficiais + Raio-X</strong> das matérias e pesos</li>
               <li class="ok"><strong>Comparador de cursos</strong> em plataformas parceiras + cupons</li>
@@ -538,6 +502,10 @@
               <p>O plano <strong>Essencial (R$ 6,99/mês)</strong> libera todos os concursos ativos e encerrados, datas de prova atualizadas, editais completos com raio-x e comparador de cursos com cupons. O plano <strong>Completo (R$ 17,99/mês ou R$ 199,90/ano)</strong> inclui tudo isso mais <strong>Treinar com questões de provas anteriores</strong>: toda questão respondida mostra a resposta certa e, logo abaixo, uma explicação em 3 parágrafos. O treino é para concursos que já tiveram edições anteriores; quando o concurso é o primeiro do órgão, não há prova anterior para treinar.</p>
             </details>
             <details>
+              <summary>Tem plano grátis?</summary>
+              <p>Não. Para usar o Check no Concurso é preciso escolher um dos 2 planos: o <strong>Essencial (R$ 6,99/mês)</strong>, com todos os concursos, datas de prova, editais e cursos, ou o <strong>Completo (R$ 17,99/mês ou R$ 199,90/ano)</strong>, que inclui também o treino com questões de provas anteriores. Você cancela quando quiser.</p>
+            </details>
+            <details>
               <summary>Como funciona a opção anual mais barata de R$ 199,90?</summary>
               <p>No plano anual você paga R$ 199,90 uma única vez pelos 12 meses de acesso total (equivalente a R$ 16,66/mês), economizando R$ 15,98 em relação à assinatura mensal de R$ 17,99.</p>
             </details>
@@ -582,7 +550,7 @@
     <div class="container footer-inner">
       <div>
         <strong>Check no Concurso</strong> · <span class="muted-sm">checknoconcurso.com.br</span>
-        <p>Concursos abertos e encerrados em todo o Brasil, datas de prova atualizadas, editais, comparador de cursos e 5 provas anteriores.</p>
+        <p>Concursos abertos e encerrados em todo o Brasil, datas de prova atualizadas, editais, comparador de cursos e treino com questões de provas anteriores.</p>
       </div>
       <div class="footer-meta">
         <span>Essencial R$ 6,99/mês</span>
@@ -682,7 +650,7 @@
 
         <div class="auth-tabs" role="tablist" aria-label="Acesso à conta">
           <button type="button" role="tab" class="auth-tab active" id="authTabLogin" data-auth-mode="login" aria-selected="true">Entrar</button>
-          <button type="button" role="tab" class="auth-tab" id="authTabSignup" data-auth-mode="signup" aria-selected="false">Criar conta grátis</button>
+          <button type="button" role="tab" class="auth-tab" id="authTabSignup" data-auth-mode="signup" aria-selected="false">Criar conta</button>
         </div>
 
         <h2 id="authTitle" class="auth-title">Que bom te ver de novo</h2>
@@ -730,7 +698,7 @@
         </form>
 
         <p class="auth-switch" id="authSwitchText">
-          Ainda não tem conta? <button type="button" class="auth-link" data-auth-mode="signup">Criar conta grátis</button>
+          Ainda não tem conta? <button type="button" class="auth-link" data-auth-mode="signup">Criar conta</button>
         </p>
         <p class="auth-legal" id="authLegal" hidden>Ao criar a conta você concorda com os Termos de Uso e a <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
       </div>
@@ -904,7 +872,7 @@
   <!-- Toast feedback -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script type="module" src="/js/app.js?v=35"></script>
+  <script type="module" src="/js/app.js?v=36"></script>
   <script type="module" src="/js/google-auth.js?v=3"></script>
 </body>
 </html>
