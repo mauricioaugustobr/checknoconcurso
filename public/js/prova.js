@@ -1,7 +1,19 @@
 import { PROVAS, getProva } from "./data/provas.js";
 
 const examKey = new URLSearchParams(location.search).get("c") || Object.keys(PROVAS)[0];
-const exam = getProva(examKey);
+// Provas novas ficam em /provas/<concurso>.json e só são baixadas quando a página abre.
+async function loadExam(key) {
+  const local = getProva(key);
+  if (local) return local;
+  if (!/^[a-z0-9-]+$/i.test(key)) return null;
+  try {
+    const res = await fetch(`/provas/${encodeURIComponent(key)}.json`, { cache: "no-cache" });
+    return res.ok ? await res.json() : null;
+  } catch {
+    return null;
+  }
+}
+const exam = await loadExam(examKey);
 
 const el = (id) => document.getElementById(id);
 const STORE_KEY = `check-prova:${exam ? exam.id : examKey}`;
@@ -62,7 +74,9 @@ function initExam() {
   intro.hidden = false;
   document.title = `${exam.titulo} | Check no Concurso`;
   el("examTitle").textContent = exam.titulo;
-  el("examSub").textContent = `${exam.banca} · ${exam.orgao} · prova aplicada em ${formatDate(exam.dataProva)}.`;
+  el("examSub").textContent = exam.dataProva
+    ? `${exam.banca} · ${exam.orgao} · prova aplicada em ${formatDate(exam.dataProva)}.`
+    : `${exam.banca} · ${exam.orgao} · prova de ${exam.ano}.`;
   el("examRunnerLabel").textContent = exam.titulo;
 
   const facts = [
@@ -127,17 +141,23 @@ function initExam() {
     if (runner.hidden) return;
     if (event.target.matches("input, textarea, select")) return;
     const key = Number(event.key);
-    if (key >= 1 && key <= 5) {
-      const input = document.querySelector(`input[name="choice"][value="${LETTERS[key - 1]}"]`);
+    const letters = (questionAt(current)?.alternatives || []).map((a) => a.letter);
+    if (key >= 1 && key <= letters.length) {
+      const input = document.querySelector(`input[name="choice"][value="${letters[key - 1]}"]`);
       if (input) {
         input.checked = true;
-        paintSelection(LETTERS[key - 1]);
+        paintSelection(letters[key - 1]);
       }
     } else if (event.key === "Enter" && !el("feedback").hidden) {
       event.preventDefault();
       goTo(current + 1);
     }
   });
+}
+
+function answerLabel(q) {
+  if (exam.formato === "certo-errado") return q.answer === "C" ? "Certo" : "Errado";
+  return q.answer;
 }
 
 function formatDate(iso) {
@@ -237,7 +257,7 @@ function renderQuestion() {
   if (q.supportImage && q.supportImageKind === "figura") {
     figure.hidden = false;
     el("questionFigureImg").src = q.supportImage;
-    el("questionFigureCaption").textContent = `Imagem do caderno oficial da Vunesp (página ${q.page}).`;
+    el("questionFigureCaption").textContent = `Imagem do caderno oficial da ${exam.banca} (página ${q.page}).`;
   } else {
     figure.hidden = true;
     el("questionFigureImg").removeAttribute("src");
@@ -360,11 +380,11 @@ function paintAnswer(q, chosen) {
 
   if (chosen === "—") {
     feedback.className = "exam-feedback";
-    feedback.innerHTML = `<h3>Questão pulada</h3><p>Gabarito oficial: <strong>${q.answer}</strong>.</p>`;
+    feedback.innerHTML = `<h3>Questão pulada</h3><p>Gabarito oficial: <strong>${answerLabel(q)}</strong>.</p>`;
   } else if (correct) {
-    feedback.innerHTML = `<h3>Você acertou</h3><p>Gabarito oficial: <strong>${q.answer}</strong>.</p>`;
+    feedback.innerHTML = `<h3>Você acertou</h3><p>Gabarito oficial: <strong>${answerLabel(q)}</strong>.</p>`;
   } else {
-    feedback.innerHTML = `<h3>Não foi desta vez</h3><p>Sua resposta: <strong>${escapeHtml(chosen)}</strong>. Gabarito oficial: <strong>${q.answer}</strong>.</p>`;
+    feedback.innerHTML = `<h3>Não foi desta vez</h3><p>Sua resposta: <strong>${escapeHtml(exam.formato === "certo-errado" ? (chosen === "C" ? "Certo" : "Errado") : chosen)}</strong>. Gabarito oficial: <strong>${answerLabel(q)}</strong>.</p>`;
   }
 
   el("explanation").hidden = false;

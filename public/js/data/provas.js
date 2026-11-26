@@ -128,23 +128,23 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "tem se mostrado mais forte nos países nórdicos, em que a taxa de natalidade segue estável como no passado."
+      "text": "Há, estes dias em que pressentimos, na casa"
      },
      {
       "letter": "B",
-      "text": "fica afetada quando nascem menos crianças, fazendo com que os países devam criar estratégias de cuidado com os idosos."
+      "text": "apenas são, dias em que, de repente sabemos"
      },
      {
       "letter": "C",
-      "text": "depende de decisões individuais e familiares, motivo pelo qual os países têm dificuldade em promovê-la."
+      "text": "em que tomar o ônibus é, no entanto, perdê-lo"
      },
      {
       "letter": "D",
-      "text": "é particularmente preocupante em países como o Brasil e os Estados Unidos, lugares em que o número de idosos é baixo."
+      "text": "e chegar a tempo, é já chegar demasiado tarde"
      },
      {
       "letter": "E",
-      "text": "está baseada, tradicionalmente, na criação de filhos autônomos que possam trabalhar para sustentar a si próprios."
+      "text": "que a madeira, é apenas o que vem logo antes"
      }
     ],
     "answer": "C",
@@ -671,26 +671,26 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "à – a – à – a"
+      "text": "à … a … à"
      },
      {
       "letter": "B",
-      "text": "a – à – a – à"
+      "text": "à … à … a"
      },
      {
       "letter": "C",
-      "text": "a – à – às – a"
+      "text": "a … às … a"
      },
      {
       "letter": "D",
-      "text": "à – à – à – à"
+      "text": "à … à … à"
      },
      {
       "letter": "E",
-      "text": "a – à – as – à"
+      "text": "a … as … à"
      }
     ],
-    "answer": "B",
+    "answer": "A",
     "needsArt": false,
     "missing": [],
     "needsSource": false,
@@ -1384,23 +1384,23 @@ export const PROVAS = {
     "alternatives": [
      {
       "letter": "A",
-      "text": "à Organização do Tratado de Segurança Coletiva."
+      "text": "na derrota da emenda das Diretas Já no Congresso e na eleição indireta de Tancredo Neves como o primeiro presidente civil depois de 21 anos de regime militar."
      },
      {
       "letter": "B",
-      "text": "à Organização Mundial do Comércio."
+      "text": "na eleição direta de Tancredo à presidência, ainda que a esquerda tivesse alguma desconfiança em relação ao candidato, considerado muito conservador."
      },
      {
       "letter": "C",
-      "text": "à Organização do Tratado do Atlântico Norte."
+      "text": "no fracasso das negociações entre Tancredo e os militares, o que empurrou o político mineiro para uma base social de esquerda em busca de voto e apoio."
      },
      {
       "letter": "D",
-      "text": "à Organização das Nações Unidas."
+      "text": "na perseguição dos militares a Tancredo, na medida em que ele se tornou o principal líder da oposição ao regime militar, o que resultou na cassação de seus direitos políticos."
      },
      {
       "letter": "E",
-      "text": "ao Pacto de Varsóvia."
+      "text": "na ampliação das lutas sociais que fortaleceram o apoio à candidatura de Tancredo Neves, transformando-o no primeiro presidente civil a cumprir o mandato desde o início do regime militar."
      }
     ],
     "answer": "A",
