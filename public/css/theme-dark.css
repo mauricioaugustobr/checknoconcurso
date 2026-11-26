@@ -1,0 +1,255 @@
+/* ======================================================
+   Check no Concurso — Modo noturno (Família Check)
+   Fundo: o azul-escuro oficial da paleta (#0B2540).
+   Liga com html[data-theme="dark"] (feito por /js/theme.js).
+   Carregar por último em cada página.
+   ====================================================== */
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Superfícies: o azul-escuro oficial é o fundo da página */
+  --bg-canvas: #0B2540;
+  --bg-surface: #102F4E;
+  --bg-surface-alt: #163A5E;
+  --bg-elevated: #133658;
+  --bg-inverse: #061829;
+
+  /* Bordas e foco */
+  --border-subtle: #1F4569;
+  --border-default: #2C577F;
+  --border-strong: #5A82A8;
+  --focus-ring: #F4D632;
+
+  /* Textos */
+  --text-primary: #F4F8FB;
+  --text-secondary: #C9D8E6;
+  --text-muted: #A3B9CE;
+  --text-on-brand: #0B2239;
+  --text-on-accent: #0B2239;
+  --text-on-inverse: #F4F8FB;
+  --text-on-inverse-muted: #C5D5E4;
+
+  /* Marca: azul mais claro para ler bem no fundo escuro */
+  --brand-primary: #7AB9EA;
+  --brand-hover: #9CCBF0;
+  --brand-soft: #173F66;
+  --brand-border: #33699A;
+
+  /* Selo ouro (Check Completo) continua igual, sempre com texto navy */
+  --accent-premium: #F4D632;
+  --accent-hover: #FFE45A;
+  --accent-soft: #2E2C17;
+  --accent-border: #8F7A1F;
+  --accent-text: #F4D632;
+
+  /* Status */
+  --status-open-fg: #7EE2AE;
+  --status-open-bg: #0F3A36;
+  --status-open-border: #23705A;
+  --status-edital-fg: #9DCBF2;
+  --status-edital-bg: #173F66;
+  --status-edital-border: #33699A;
+  --status-scheduled-fg: #CDBEFF;
+  --status-scheduled-bg: #2A2654;
+  --status-scheduled-border: #5D4FA3;
+  --status-upcoming-fg: #7DE6F5;
+  --status-upcoming-bg: #0E3A4B;
+  --status-upcoming-border: #22677F;
+  --status-closed-fg: #BCCAD8;
+  --status-closed-bg: #1B3756;
+  --status-closed-border: #3B5A7B;
+  --status-warning-fg: #FCD34D;
+  --status-warning-bg: #3A3014;
+  --status-warning-border: #8C6A1A;
+  --status-danger-fg: #FDA4A4;
+  --status-danger-bg: #3D1B27;
+  --status-danger-border: #8C2D3E;
+
+  --shadow-sm: 0 1px 2px rgba(2, 10, 20, 0.40);
+  --shadow-md: 0 12px 28px rgba(2, 10, 20, 0.45);
+  --shadow-lg: 0 24px 56px rgba(2, 10, 20, 0.60);
+  --backdrop-scrim: rgba(3, 12, 22, 0.74);
+  --pwa-theme-color: #0B2540;
+  --pwa-background-color: #0B2540;
+}
+
+/* ======================================================
+   Cores fixas que não usam as variáveis da paleta
+   ====================================================== */
+
+/* Logotipo em texto: "Check" fica branco no escuro */
+html[data-theme="dark"] .brand-wordmark,
+html[data-theme="dark"] #detailModal .info-block h4 { color: var(--text-primary); }
+
+/* Topo da página inicial */
+html[data-theme="dark"] .site-header .nav-link:hover { background: rgba(255, 255, 255, 0.06); }
+html[data-theme="dark"] .site-header .nav-link-blog::after { box-shadow: 0 0 0 2px var(--bg-surface); }
+html[data-theme="dark"] .plan-gate-bloqueado { background: var(--status-danger-bg); color: var(--status-danger-fg); }
+html[data-theme="dark"] .auth-field input::placeholder { color: var(--text-muted); }
+html[data-theme="dark"] .btn-cta-subscribe:active { background: #E2C21A; }
+html[data-theme="dark"] #detailModal .kpi-cell.kpi-primary span { color: var(--text-on-brand); opacity: .8; }
+
+/* Tela "Escolha seu plano" */
+html[data-theme="dark"] .cnc-gate {
+  --g-ink: var(--text-primary);
+  --g-alt: var(--bg-surface-alt);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-md);
+}
+html[data-theme="dark"] .cnc-plan,
+html[data-theme="dark"] .cnc-ciclo span { background: transparent; }
+html[data-theme="dark"] .cnc-plan:hover { border-color: var(--border-strong); }
+html[data-theme="dark"] .cnc-plan.is-on { background: var(--bg-surface-alt); box-shadow: 0 0 0 3px rgba(122, 185, 234, .18); }
+html[data-theme="dark"] .cnc-radio { background: transparent; border-color: var(--border-strong); }
+html[data-theme="dark"] .cnc-ciclo em { color: var(--status-open-fg); }
+
+/* Atalhos do blog na página inicial */
+html[data-theme="dark"] .hero-blog-link { background: var(--bg-surface); border-color: var(--border-subtle); color: var(--text-primary); }
+html[data-theme="dark"] .hero-blog-link:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+html[data-theme="dark"] .hero-blog-tag { background: var(--brand-primary); color: var(--text-on-brand); }
+html[data-theme="dark"] .blog-strip-kicker,
+html[data-theme="dark"] .blog-strip-excerpt,
+html[data-theme="dark"] .blog-strip-card time { color: var(--text-muted); }
+html[data-theme="dark"] .blog-strip-title,
+html[data-theme="dark"] .blog-strip-card strong { color: var(--text-primary); }
+html[data-theme="dark"] .blog-strip-card a { background: var(--bg-surface); border-color: var(--border-subtle); color: var(--text-primary); }
+html[data-theme="dark"] .blog-strip-card a:hover { border-color: var(--brand-primary); box-shadow: var(--shadow-md); }
+html[data-theme="dark"] .blog-strip-label,
+html[data-theme="dark"] .footer-blog-link { color: var(--brand-primary); }
+html[data-theme="dark"] .blog-strip-uf { background: var(--bg-surface-alt); color: var(--brand-primary); }
+
+/* Blog, páginas de concurso e de estado */
+html[data-theme="dark"] .pg-header,
+html[data-theme="dark"] .pg-footer,
+html[data-theme="dark"] .pg-article,
+html[data-theme="dark"] .pg-card a,
+html[data-theme="dark"] .pg-post-card a,
+html[data-theme="dark"] .pg-chips a,
+html[data-theme="dark"] .pg-chip.is-soft { background: var(--bg-surface); }
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] .pg-post-card strong,
+html[data-theme="dark"] .pg-toc a,
+html[data-theme="dark"] .pg-prose > p:first-child,
+html[data-theme="dark"] .pg-chips a,
+html[data-theme="dark"] .pg-share-btn,
+html[data-theme="dark"] .pg-faq h3,
+html[data-theme="dark"] .pg-faq-post h3,
+html[data-theme="dark"] .pg-cta-inline .pg-cta-inline-title { color: var(--text-primary); }
+html[data-theme="dark"] .pg-box,
+html[data-theme="dark"] .pg-toc,
+html[data-theme="dark"] .pg-faq-post { background: var(--bg-surface-alt); }
+html[data-theme="dark"] .pg-cta-inline { background: var(--bg-surface-alt); border-left-color: var(--brand-primary); }
+html[data-theme="dark"] .pg-toc { border-left-color: var(--brand-primary); }
+html[data-theme="dark"] .pg-kicker,
+html[data-theme="dark"] .pg-toc p,
+html[data-theme="dark"] .pg-post-kicker,
+html[data-theme="dark"] .pg-table th { color: var(--brand-primary); }
+html[data-theme="dark"] .pg-table th,
+html[data-theme="dark"] .pg-badge,
+html[data-theme="dark"] .pg-chip,
+html[data-theme="dark"] .pg-chips a span,
+html[data-theme="dark"] .pg-uf-jump a { background: var(--bg-surface-alt); color: var(--brand-primary); }
+html[data-theme="dark"] a.pg-chip:hover { background: var(--brand-soft); }
+html[data-theme="dark"] .pg-chip.is-soft { color: var(--text-secondary); }
+html[data-theme="dark"] .pg-uf-jump a:hover,
+html[data-theme="dark"] .pg-uf-jump a:focus-visible { background: var(--brand-primary); color: var(--text-on-brand); }
+html[data-theme="dark"] .pg-badge.is-open { background: var(--status-open-bg); color: var(--status-open-fg); }
+html[data-theme="dark"] .pg-badge.is-closed { background: var(--status-closed-bg); color: var(--status-closed-fg); }
+html[data-theme="dark"] .pg-badge.is-planned { background: var(--accent-soft); color: var(--accent-text); }
+html[data-theme="dark"] .pg-uf { background: var(--bg-inverse); color: var(--text-primary); }
+html[data-theme="dark"] .pg-post-card.is-guide .pg-post-kicker { color: var(--accent-text); }
+html[data-theme="dark"] .pg-btn { background: var(--brand-primary); color: var(--text-on-brand); }
+html[data-theme="dark"] .pg-btn:hover { background: var(--brand-hover); }
+html[data-theme="dark"] .pg-btn.is-accent { background: var(--accent-premium); color: var(--text-on-accent); }
+html[data-theme="dark"] .pg-btn.is-accent:hover { background: var(--accent-hover); }
+html[data-theme="dark"] .pg-btn.is-ghost { background: transparent; color: #fff; }
+html[data-theme="dark"] .pg-btn.is-ghost:hover { background: rgba(255, 255, 255, .08); }
+html[data-theme="dark"] .pg-cta-box { background: var(--bg-inverse); border: 1px solid var(--border-subtle); }
+html[data-theme="dark"] .pg-card a:hover,
+html[data-theme="dark"] .pg-post-card a:hover { border-color: var(--border-strong); box-shadow: var(--shadow-md); }
+html[data-theme="dark"] .pg-chips a:hover,
+html[data-theme="dark"] .pg-share-btn:hover { border-color: var(--brand-primary); }
+html[data-theme="dark"] .pg-share-btn.is-wa { background: var(--status-open-bg); border-color: var(--status-open-border); color: var(--status-open-fg); }
+html[data-theme="dark"] .pg-prose blockquote { background: var(--accent-soft); }
+html[data-theme="dark"] .pg-live { border-color: var(--border-default); }
+html[data-theme="dark"] .pg-nav a[aria-current="page"] { box-shadow: inset 0 -2px 0 var(--brand-primary); }
+
+/* Página de pagamento */
+html[data-theme="dark"] .field input:focus,
+html[data-theme="dark"] .field textarea:focus { background: var(--bg-surface); box-shadow: 0 0 0 3px rgba(122, 185, 234, .22); }
+html[data-theme="dark"] .btn-primary { color: var(--text-on-brand); }
+html[data-theme="dark"] .summary { border: 1px solid var(--border-subtle); }
+
+/* Treino com provas anteriores */
+html[data-theme="dark"] .exam-support { background: var(--bg-surface-alt); }
+html[data-theme="dark"] .exam-option:hover { background: var(--bg-surface-alt); }
+html[data-theme="dark"] .exam-option.is-selected .option-letter,
+html[data-theme="dark"] .exam-option.is-correct .option-letter { color: var(--text-on-brand); }
+html[data-theme="dark"] .exam-option.is-wrong,
+html[data-theme="dark"] .exam-feedback.is-wrong,
+html[data-theme="dark"] .nav-q.is-wrong { background: var(--status-danger-bg); border-color: var(--status-danger-border); color: var(--status-danger-fg); }
+html[data-theme="dark"] .exam-option.is-wrong .option-letter { background: var(--status-danger-fg); color: #3D1B27; }
+html[data-theme="dark"] .exam-feedback.is-wrong h3 { color: var(--status-danger-fg); }
+html[data-theme="dark"] .nav-q.is-annulled { background: var(--bg-surface-alt); }
+/* figuras escaneadas e QR do Pix continuam em fundo branco para ler e escanear */
+
+/* Cancelar assinatura e Privacidade */
+html[data-theme="dark"] .card { background: var(--bg-surface); }
+html[data-theme="dark"] .btn:not([class*="btn-"]) { color: var(--text-on-brand); }
+html[data-theme="dark"] .btn-ghost { color: var(--text-primary); }
+html[data-theme="dark"] .btn-danger { background: var(--status-danger-fg); color: #3D1B27; }
+html[data-theme="dark"] .note.is-error { background: var(--status-danger-bg); color: var(--status-danger-fg); }
+html[data-theme="dark"] input:not([type="radio"]):not([type="checkbox"]),
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select { background: var(--bg-surface-alt); color: var(--text-primary); }
+
+/* ---------- Botão do modo noturno (todas as páginas) ---------- */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--border-subtle, #DFE8F0);
+  border-radius: 999px;
+  background: var(--bg-surface, #fff);
+  color: var(--text-secondary, #2E465E);
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.theme-toggle:hover { color: var(--brand-primary, #0C4F83); border-color: var(--border-default, #C5D5E4); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .tt-sun { display: none; }
+html[data-theme="dark"] .theme-toggle .tt-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .tt-moon { display: none; }
+.theme-toggle-floating {
+  position: fixed;
+  right: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 60;
+  box-shadow: var(--shadow-md);
+}
+/* Celular: o botão ocupa espaço no topo, então o nome da marca vai em duas linhas */
+@media (max-width: 480px) {
+  .theme-toggle { width: 36px; height: 36px; }
+  .site-header .brand { min-width: 0; }
+  .site-header .brand-wordmark {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    line-height: 1.05;
+    white-space: nowrap;
+  }
+  .site-header .brand-wordmark span { font-size: 12.5px; }
+}
+@media (max-width: 340px) {
+  .site-header .theme-toggle { width: 32px; height: 32px; border: 0; background: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle { transition: none; }
+}
