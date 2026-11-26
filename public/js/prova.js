@@ -220,8 +220,41 @@ function renderQuestion() {
   el("questionCounter").textContent = `Questão ${q.number} de ${exam.total}`;
   el("questionStem").textContent = q.stem;
 
+  const support = el("questionSupport");
+  if (q.support) {
+    support.hidden = false;
+    support.innerHTML = "";
+    const p = document.createElement("p");
+    p.textContent = q.support;
+    support.append(p);
+  } else {
+    support.hidden = true;
+    support.innerHTML = "";
+  }
+
+  const figure = el("questionFigure");
+  if (q.supportImage && q.supportImageKind === "figura") {
+    figure.hidden = false;
+    el("questionFigureImg").src = q.supportImage;
+    el("questionFigureCaption").textContent = `Imagem do caderno oficial da Vunesp (página ${q.page}).`;
+  } else {
+    figure.hidden = true;
+    el("questionFigureImg").removeAttribute("src");
+  }
+
+  const pageArt = el("questionPageArt");
+  if (q.supportImage && q.supportImageKind === "pagina") {
+    pageArt.hidden = false;
+    el("questionPageArtImg").src = q.supportImage;
+    el("questionPageArtImg").alt = `Página ${q.page} do caderno oficial, com a figura da questão ${q.number}`;
+  } else {
+    pageArt.hidden = true;
+    pageArt.open = false;
+    el("questionPageArtImg").removeAttribute("src");
+  }
+
   const source = el("questionSource");
-  if (q.needsSource || q.needsArt) {
+  if ((q.needsSource || q.needsArt) && !q.support && !q.supportImage) {
     source.hidden = false;
     el("questionPage").textContent = String(q.page);
     el("questionSourceLink").href = `${exam.fonte.caderno}#page=${q.page}`;

@@ -48,7 +48,9 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": "/img/provas/pm-sp-2025/q01-02.png",
+    "supportImageKind": "figura"
    },
    {
     "number": 2,
@@ -81,13 +83,15 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": "/img/provas/pm-sp-2025/q01-02.png",
+    "supportImageKind": "figura"
    },
    {
     "number": 3,
     "page": 3,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Há estes dias em que pressentimos na casa a ruína da casa e no corpo a morte do corpo e no amor o fim do amor estes dias em que tomar o ônibus é no entanto perdê-lo e chegar a tempo é já chegar demasiado tarde não são coisas que se expliquem apenas são dias em que de repente sabemos o que sempre soubemos e todos sabem que a madeira é apenas o que vem logo antes da cinza e por mais vidas que tenha cada gato é o cadáver de um gato (Ana Martins Marques. O livro das semelhanças. São Paulo: Companhia das Letras, 2015)",
     "stem": "A partir da leitura do poema, é correto afirmar que o eu lírico expressa",
     "alternatives": [
      {
@@ -114,13 +118,14 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 4,
     "page": 4,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Há estes dias em que pressentimos na casa a ruína da casa e no corpo a morte do corpo e no amor o fim do amor estes dias em que tomar o ônibus é no entanto perdê-lo e chegar a tempo é já chegar demasiado tarde não são coisas que se expliquem apenas são dias em que de repente sabemos o que sempre soubemos e todos sabem que a madeira é apenas o que vem logo antes da cinza e por mais vidas que tenha cada gato é o cadáver de um gato (Ana Martins Marques. O livro das semelhanças. São Paulo: Companhia das Letras, 2015)",
     "stem": "Assinale a alternativa em que o acréscimo de vírgula(s) está em conformidade com a norma-padrão de emprego desse sinal de pontuação.",
     "alternatives": [
      {
@@ -147,13 +152,14 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 5,
     "page": 4,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado) Em relação à “cadeia de solidariedade intergeracional”",
     "stem": "Em relação à “cadeia de solidariedade intergeracional” (1º parágrafo), é correto afirmar, com base no texto, que esta",
     "alternatives": [
      {
@@ -179,13 +185,14 @@ export const PROVAS = {
     ],
     "answer": "B",
     "needsArt": false,
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 6,
     "page": 4,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado) Em relação à “cadeia de solidariedade intergeracional”",
     "stem": "Quanto à comparação feita no texto entre o Brasil e outros países, é correto afirmar:",
     "alternatives": [
      {
@@ -212,13 +219,14 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 7,
     "page": 4,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado) Em relação à “cadeia de solidariedade intergeracional”",
     "stem": "Considere os trechos: • Nos apartamentos exíguos da família nuclear, não há (2o espaço para os avós... parágrafo) • ... sobretudo no Brasil, os idosos enfrentam apoio (2o familiar declinante... parágrafo) No contexto em que foram empregadas, as palavras destacadas têm como sinônimos, respectivamente,",
     "alternatives": [
      {
@@ -245,13 +253,14 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 8,
     "page": 4,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado) Em relação à “cadeia de solidariedade intergeracional”",
     "stem": "Foi empregada em sentido figurado a palavra destacada em:",
     "alternatives": [
      {
@@ -278,13 +287,14 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 9,
     "page": 5,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Assassinato digital Ao contrário de tempos passados, quando sumir com alguém exigia certo grau de dificuldade e até risco criminal, hoje tornou-se facílimo dar fim a uma pessoa. Bastam um dedo e algumas teclas. É possível mudar completamente o círculo de amizades, sumir da turma, buscar novos ares, sem grandes enfrentamentos. Um amigo estava falando de sua ex: “Bloqueei”. Explicou que bloqueou em tudo: no WhatsApp, no Instagram, no Face. Em qualquer outra rede social, uma pessoa existe ou não existe. Se é bloqueada em todos os canais em que pode se comunicar com a outra, tecnicamente não existe mais. Simplesmente deixa de estar presente. Mesmo porque, na atualidade, a presença é mais digital que física em um número imenso de casos. Houve um tempo em que eu me admirava ao dar uma “limpa” no celular. Por que tanta gente, com quem nunca converso, tantos endereços que já não fazem parte do meu dia a dia? Para meu susto, recebi reclamações: “Por que você me deletou?”, “Me bloqueou?”. Na prática, respondia: “Porque a gente não se falava mais”. Descobri que estar na minha rede mesmo sem papo era um modo de afirmar a existência da pessoa em minha vida. Portanto, era ofensivo ser excluído. Parecia sem sentido. Mas entendi. Se a pessoa for deletada ou, pior, bloqueada, simplesmente deixa de existir. A comparação é forte, mas inevitável: morre. Eu ainda acredito nas relações de carne e osso, nos abraços, nos encontros longos e profundos. Mas descubro que os relacionamentos digitais tomaram um espaço impressionante. Deletar equivale a dizer adeus. E dizer adeus é sempre uma forma de luto. (Walcyr Carrasco. Disponível em: https://veja.abril.com.br/coluna/walcyrcarrasco/assassinato-digital/. Acesso em 28/09/2025. Adaptado)",
     "stem": "A respeito das transformações nas formas de relacionamento interpessoal com as tecnologias digitais, o autor do texto",
     "alternatives": [
      {
@@ -311,13 +321,14 @@ export const PROVAS = {
     "answer": "A",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 10,
     "page": 5,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Assassinato digital Ao contrário de tempos passados, quando sumir com alguém exigia certo grau de dificuldade e até risco criminal, hoje tornou-se facílimo dar fim a uma pessoa. Bastam um dedo e algumas teclas. É possível mudar completamente o círculo de amizades, sumir da turma, buscar novos ares, sem grandes enfrentamentos. Um amigo estava falando de sua ex: “Bloqueei”. Explicou que bloqueou em tudo: no WhatsApp, no Instagram, no Face. Em qualquer outra rede social, uma pessoa existe ou não existe. Se é bloqueada em todos os canais em que pode se comunicar com a outra, tecnicamente não existe mais. Simplesmente deixa de estar presente. Mesmo porque, na atualidade, a presença é mais digital que física em um número imenso de casos. Houve um tempo em que eu me admirava ao dar uma “limpa” no celular. Por que tanta gente, com quem nunca converso, tantos endereços que já não fazem parte do meu dia a dia? Para meu susto, recebi reclamações: “Por que você me deletou?”, “Me bloqueou?”. Na prática, respondia: “Porque a gente não se falava mais”. Descobri que estar na minha rede mesmo sem papo era um modo de afirmar a existência da pessoa em minha vida. Portanto, era ofensivo ser excluído. Parecia sem sentido. Mas entendi. Se a pessoa for deletada ou, pior, bloqueada, simplesmente deixa de existir. A comparação é forte, mas inevitável: morre. Eu ainda acredito nas relações de carne e osso, nos abraços, nos encontros longos e profundos. Mas descubro que os relacionamentos digitais tomaram um espaço impressionante. Deletar equivale a dizer adeus. E dizer adeus é sempre uma forma de luto. (Walcyr Carrasco. Disponível em: https://veja.abril.com.br/coluna/walcyrcarrasco/assassinato-digital/. Acesso em 28/09/2025. Adaptado)",
     "stem": "É correto afirmar que no trecho “Deletar equivale a dizer adeus. E dizer adeus é sempre uma forma de luto” (3o parágrafo), o autor procura",
     "alternatives": [
      {
@@ -344,13 +355,14 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 11,
     "page": 5,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Assassinato digital Ao contrário de tempos passados, quando sumir com alguém exigia certo grau de dificuldade e até risco criminal, hoje tornou-se facílimo dar fim a uma pessoa. Bastam um dedo e algumas teclas. É possível mudar completamente o círculo de amizades, sumir da turma, buscar novos ares, sem grandes enfrentamentos. Um amigo estava falando de sua ex: “Bloqueei”. Explicou que bloqueou em tudo: no WhatsApp, no Instagram, no Face. Em qualquer outra rede social, uma pessoa existe ou não existe. Se é bloqueada em todos os canais em que pode se comunicar com a outra, tecnicamente não existe mais. Simplesmente deixa de estar presente. Mesmo porque, na atualidade, a presença é mais digital que física em um número imenso de casos. Houve um tempo em que eu me admirava ao dar uma “limpa” no celular. Por que tanta gente, com quem nunca converso, tantos endereços que já não fazem parte do meu dia a dia? Para meu susto, recebi reclamações: “Por que você me deletou?”, “Me bloqueou?”. Na prática, respondia: “Porque a gente não se falava mais”. Descobri que estar na minha rede mesmo sem papo era um modo de afirmar a existência da pessoa em minha vida. Portanto, era ofensivo ser excluído. Parecia sem sentido. Mas entendi. Se a pessoa for deletada ou, pior, bloqueada, simplesmente deixa de existir. A comparação é forte, mas inevitável: morre. Eu ainda acredito nas relações de carne e osso, nos abraços, nos encontros longos e profundos. Mas descubro que os relacionamentos digitais tomaram um espaço impressionante. Deletar equivale a dizer adeus. E dizer adeus é sempre uma forma de luto. (Walcyr Carrasco. Disponível em: https://veja.abril.com.br/coluna/walcyrcarrasco/assassinato-digital/. Acesso em 28/09/2025. Adaptado)",
     "stem": "Considere os trechos do parágrafo: • ... estar na minha rede mesmo sem papo era um modo de afirmar a existência da pessoa em minha vida. Portanto, era ofensivo ser excluído. • Se a pessoa for deletada ou, pior, bloqueada, simplesmente deixa de existir. É correto afirmar que os termos destacados estabelecem, respectivamente, relações de sentido de",
     "alternatives": [
      {
@@ -377,13 +389,14 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 12,
     "page": 5,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Assassinato digital Ao contrário de tempos passados, quando sumir com alguém exigia certo grau de dificuldade e até risco criminal, hoje tornou-se facílimo dar fim a uma pessoa. Bastam um dedo e algumas teclas. É possível mudar completamente o círculo de amizades, sumir da turma, buscar novos ares, sem grandes enfrentamentos. Um amigo estava falando de sua ex: “Bloqueei”. Explicou que bloqueou em tudo: no WhatsApp, no Instagram, no Face. Em qualquer outra rede social, uma pessoa existe ou não existe. Se é bloqueada em todos os canais em que pode se comunicar com a outra, tecnicamente não existe mais. Simplesmente deixa de estar presente. Mesmo porque, na atualidade, a presença é mais digital que física em um número imenso de casos. Houve um tempo em que eu me admirava ao dar uma “limpa” no celular. Por que tanta gente, com quem nunca converso, tantos endereços que já não fazem parte do meu dia a dia? Para meu susto, recebi reclamações: “Por que você me deletou?”, “Me bloqueou?”. Na prática, respondia: “Porque a gente não se falava mais”. Descobri que estar na minha rede mesmo sem papo era um modo de afirmar a existência da pessoa em minha vida. Portanto, era ofensivo ser excluído. Parecia sem sentido. Mas entendi. Se a pessoa for deletada ou, pior, bloqueada, simplesmente deixa de existir. A comparação é forte, mas inevitável: morre. Eu ainda acredito nas relações de carne e osso, nos abraços, nos encontros longos e profundos. Mas descubro que os relacionamentos digitais tomaram um espaço impressionante. Deletar equivale a dizer adeus. E dizer adeus é sempre uma forma de luto. (Walcyr Carrasco. Disponível em: https://veja.abril.com.br/coluna/walcyrcarrasco/assassinato-digital/. Acesso em 28/09/2025. Adaptado)",
     "stem": "Considere o trecho: • Houve um tempo em que eu me admirava ao dar uma “limpa” no celular. Por que tanta gente, com quem nunca converso, tantos endereços que já não fazem parte do meu dia a dia? As expressões destacadas podem ser substituídas, respectivamente e em conformidade com a norma-padrão de emprego dos pronomes, por:",
     "alternatives": [
      {
@@ -410,7 +423,8 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 13,
@@ -443,7 +457,9 @@ export const PROVAS = {
     "answer": "A",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": "/img/provas/pm-sp-2025/q13-15.png",
+    "supportImageKind": "figura"
    },
    {
     "number": 14,
@@ -476,7 +492,9 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": "/img/provas/pm-sp-2025/q13-15.png",
+    "supportImageKind": "figura"
    },
    {
     "number": 15,
@@ -509,13 +527,15 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": "/img/provas/pm-sp-2025/q13-15.png",
+    "supportImageKind": "figura"
    },
    {
     "number": 16,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
     "stem": "De acordo com as informações texto, é correto afirmar que foi um fator determinante para o aumento dos casos de dependência de jogos de azar no Brasil, nos últimos anos,",
     "alternatives": [
      {
@@ -542,13 +562,14 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 17,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
     "stem": "Assinale a alternativa que está de acordo com a opinião expressa no texto pelo psiquiatra Rodrigo Machado.",
     "alternatives": [
      {
@@ -575,13 +596,14 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 18,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
     "stem": "De acordo com os dados apresentados no texto, é correto afirmar que",
     "alternatives": [
      {
@@ -608,13 +630,14 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 19,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
     "stem": "Considere as frases: • Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no (4o Brasil, especialmente desde 2018. parágrafo) • “Já nas plataformas de apostas, é possível fazer as chamadas apostas ‘in-play’, o jogo está enquanto acontecendo.” (5o parágrafo) É correto afirmar, a respeito das palavras destacadas, que",
     "alternatives": [
      {
@@ -641,7 +664,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 20,
@@ -674,7 +698,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 21,
@@ -706,7 +731,8 @@ export const PROVAS = {
     ],
     "answer": "B",
     "needsArt": false,
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 22,
@@ -739,7 +765,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 23,
@@ -772,7 +799,8 @@ export const PROVAS = {
     "answer": "A",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 24,
@@ -805,7 +833,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 25,
@@ -838,7 +867,8 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 26,
@@ -871,7 +901,8 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 27,
@@ -904,7 +935,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 28,
@@ -937,7 +969,9 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": "/img/provas/pm-sp-2025/q28.png",
+    "supportImageKind": "pagina"
    },
    {
     "number": 29,
@@ -970,7 +1004,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 30,
@@ -1003,7 +1038,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 31,
@@ -1036,7 +1072,9 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": "/img/provas/pm-sp-2025/q31.png",
+    "supportImageKind": "pagina"
    },
    {
     "number": 32,
@@ -1069,7 +1107,9 @@ export const PROVAS = {
     "answer": "A",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": "/img/provas/pm-sp-2025/q32-33.png",
+    "supportImageKind": "pagina"
    },
    {
     "number": 33,
@@ -1102,7 +1142,9 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": "/img/provas/pm-sp-2025/q32-33.png",
+    "supportImageKind": "pagina"
    },
    {
     "number": 34,
@@ -1135,7 +1177,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 35,
@@ -1168,7 +1211,8 @@ export const PROVAS = {
     "answer": "A",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 36,
@@ -1201,7 +1245,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 37,
@@ -1234,7 +1279,8 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 38,
@@ -1267,7 +1313,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 39,
@@ -1300,7 +1347,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 40,
@@ -1333,7 +1381,8 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 41,
@@ -1366,7 +1415,8 @@ export const PROVAS = {
     "answer": "A",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 42,
@@ -1398,7 +1448,8 @@ export const PROVAS = {
     ],
     "answer": "C",
     "needsArt": false,
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 43,
@@ -1431,7 +1482,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 44,
@@ -1464,7 +1516,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 45,
@@ -1497,7 +1550,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 46,
@@ -1530,7 +1584,8 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 47,
@@ -1563,7 +1618,8 @@ export const PROVAS = {
     "answer": "A",
     "needsArt": false,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 48,
@@ -1596,7 +1652,8 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 49,
@@ -1629,7 +1686,9 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": "/img/provas/pm-sp-2025/q49.png",
+    "supportImageKind": "pagina"
    },
    {
     "number": 50,
@@ -1662,7 +1721,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 51,
@@ -1695,7 +1755,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 52,
@@ -1728,7 +1789,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 53,
@@ -1761,7 +1823,8 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 54,
@@ -1794,7 +1857,8 @@ export const PROVAS = {
     "answer": "A",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 55,
@@ -1827,7 +1891,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 56,
@@ -1860,7 +1925,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 57,
@@ -1893,7 +1959,8 @@ export const PROVAS = {
     "answer": "E",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 58,
@@ -1926,7 +1993,8 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": true,
     "missing": [],
-    "needsSource": true
+    "needsSource": true,
+    "supportImage": ""
    },
    {
     "number": 59,
@@ -1959,7 +2027,8 @@ export const PROVAS = {
     "answer": "D",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    },
    {
     "number": 60,
@@ -1992,7 +2061,8 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "missing": [],
-    "needsSource": false
+    "needsSource": false,
+    "supportImage": ""
    }
   ]
  }
