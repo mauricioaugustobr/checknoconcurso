@@ -119,7 +119,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 4,
@@ -153,13 +154,14 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 5,
     "page": 4,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado) Em relação à “cadeia de solidariedade intergeracional”",
+    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado)",
     "stem": "Em relação à “cadeia de solidariedade intergeracional” (1º parágrafo), é correto afirmar, com base no texto, que esta",
     "alternatives": [
      {
@@ -186,13 +188,14 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 6,
     "page": 4,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado) Em relação à “cadeia de solidariedade intergeracional”",
+    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado)",
     "stem": "Quanto à comparação feita no texto entre o Brasil e outros países, é correto afirmar:",
     "alternatives": [
      {
@@ -220,13 +223,14 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 7,
     "page": 4,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado) Em relação à “cadeia de solidariedade intergeracional”",
+    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado)",
     "stem": "Considere os trechos: • Nos apartamentos exíguos da família nuclear, não há (2o espaço para os avós... parágrafo) • ... sobretudo no Brasil, os idosos enfrentam apoio (2o familiar declinante... parágrafo) No contexto em que foram empregadas, as palavras destacadas têm como sinônimos, respectivamente,",
     "alternatives": [
      {
@@ -254,13 +258,14 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 8,
     "page": 4,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado) Em relação à “cadeia de solidariedade intergeracional”",
+    "support": "Nos últimos tempos, rompeu-se o elo colaborativo entre gerações. Nas famílias tradicionais, por milhares de anos, ter filhos significava que, quando os pais envelhecessem e não pudessem mais trabalhar, os filhos adultos cuidariam deles. Assim, garantia-se um equilíbrio entre a idade adulta produtiva e os dependentes (crianças e idosos) em uma cadeia de solidariedade intergeracional. Mas o que acontece quando a maioria dos adultos não tem filhos, como vem acontecendo? Nos países nórdicos, políticas públicas garantem lares dignos para idosos e saúde gratuita para a população envelhecida. O que antes era responsabilidade das famílias, agora é assegurado em escala coletiva. Nos apartamentos exíguos da família nuclear, não há espaço para os avós, mas ao menos há apoio público. Já em países como EUA, e sobretudo no Brasil, os idosos enfrentam apoio familiar declinante e políticas sociais precárias. Os asilos privados? Caríssimos e mal administrados – quando não criminosamente negligenciados. Sistemas que só visam lucro máximo não são opção de gestão adequada – pra dizer o mínimo. E a ansiedade acerca de nosso futuro quando idosos já é sentida quando estamos na meia idade. (Ladislau Dowbor. Disponível em: https://outraspalavras.net/crise-civilizatoria/ dowbor-pra-nos-tirar-da-solidao/. Acesso em 28/09/2025. Adaptado)",
     "stem": "Foi empregada em sentido figurado a palavra destacada em:",
     "alternatives": [
      {
@@ -288,7 +293,8 @@ export const PROVAS = {
     "needsArt": true,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 9,
@@ -322,7 +328,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 10,
@@ -356,7 +363,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 11,
@@ -390,7 +398,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 12,
@@ -424,7 +433,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 13,
@@ -535,7 +545,7 @@ export const PROVAS = {
     "number": 16,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado)",
     "stem": "De acordo com as informações texto, é correto afirmar que foi um fator determinante para o aumento dos casos de dependência de jogos de azar no Brasil, nos últimos anos,",
     "alternatives": [
      {
@@ -563,13 +573,14 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 17,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado)",
     "stem": "Assinale a alternativa que está de acordo com a opinião expressa no texto pelo psiquiatra Rodrigo Machado.",
     "alternatives": [
      {
@@ -597,13 +608,14 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 18,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado)",
     "stem": "De acordo com os dados apresentados no texto, é correto afirmar que",
     "alternatives": [
      {
@@ -631,13 +643,14 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 19,
     "page": 7,
     "subject": "Língua Portuguesa e Interpretação de Texto",
-    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado) Confidencial até o momento da aplicação.",
+    "support": "Quando apostar vira um problema Em 2023, cerca de 28 milhões de brasileiros de 14 anos ou mais (ou 17,6% da população nesta faixa de idade) diziam ter apostado no ano anterior, segundo estudo publicado pela Universidade Federal de São Paulo (Unifesp), em parceria com o Ministério da Justiça e Segurança Pública, em abril deste ano. Entre os apostadores, 10,9 milhões apresentavam características de jogo de risco ou problemático — número equivalente a 38,6% do total de apostadores e 7,3% da população em geral. Dentro desse grupo dos apostadores problemáticos, 1,4 milhão de brasileiros apresentava um padrão de apostas compatível com o diagnóstico de transtorno do jogo, enfermidade caracterizada pelo desejo incontrolável de apostar mesmo diante de prejuízos — contingente equivalente a 5% dos jogadores e 0,8% da população total acima de 14 anos. “Há mais de 30 anos, a ciência entendeu que o cérebro não fica só dependente de substâncias químicas, mas também de comportamentos muito ativadores das áreas que processam prazer no cérebro”, diz Rodrigo Machado, psiquiatra do Programa de Transtornos do Impulso do Instituto de Psiquiatria (IPq) do Hospital das Clínicas da Universidade de São Paulo (FMUSP). Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no Brasil, especialmente desde 2018. “Com a tecnologia e a extrema difusão dos cassinos online, passamos a ter cassinos no bolso 24 horas. Qualquer pessoa consegue acessar as plataformas de apostas, bets esportivas etc., quando antes você precisava se deslocar fisicamente até um determinado lugar”, afirma o especialista em jogo compulsivo. Outra mudança, diz ele, foi na própria dinâmica do jogo de azar através das plataformas digitais. Por exemplo, apostas em jogos de futebol sempre existiram, mas antes só se apostava no resultado final. Já nas plataformas de apostas, é possível fazer as chamadas “apostas in-play”, enquanto o jogo está acontecendo. “Quando você promove um ciclo ultrarrápido de apostas, você encurta a distância entre o ato de apostar e o resultado final, fazendo com que as pessoas entrem num loop de compulsividade e, consequentemente, de hiperestimulação dos centros que processam o prazer no cérebro”, afirma Machado. (Thais Carrança. Disponivel em: https://www.bbc.com/portuguese/ articles/ckgzk0g8317o. Acesso em: 01/10/2025. Adaptado)",
     "stem": "Considere as frases: • Mas houve uma mudança no perfil dos jogos de azar que levou à explosão dos casos de dependência no (4o Brasil, especialmente desde 2018. parágrafo) • “Já nas plataformas de apostas, é possível fazer as chamadas apostas ‘in-play’, o jogo está enquanto acontecendo.” (5o parágrafo) É correto afirmar, a respeito das palavras destacadas, que",
     "alternatives": [
      {
@@ -665,7 +678,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 20,
@@ -699,7 +713,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 21,
@@ -732,7 +747,8 @@ export const PROVAS = {
     "answer": "B",
     "needsArt": false,
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 22,
@@ -766,7 +782,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 23,
@@ -800,7 +817,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 24,
@@ -834,7 +852,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 25,
@@ -868,7 +887,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 26,
@@ -902,7 +922,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 27,
@@ -936,7 +957,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 28,
@@ -1005,7 +1027,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 30,
@@ -1039,7 +1062,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 31,
@@ -1178,7 +1202,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 35,
@@ -1212,7 +1237,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 36,
@@ -1246,7 +1272,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 37,
@@ -1280,7 +1307,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 38,
@@ -1314,7 +1342,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 39,
@@ -1348,7 +1377,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 40,
@@ -1382,7 +1412,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 41,
@@ -1416,7 +1447,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 42,
@@ -1449,7 +1481,8 @@ export const PROVAS = {
     "answer": "C",
     "needsArt": false,
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 43,
@@ -1483,7 +1516,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 44,
@@ -1517,7 +1551,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 45,
@@ -1551,7 +1586,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 46,
@@ -1585,7 +1621,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 47,
@@ -1619,7 +1656,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 48,
@@ -1653,7 +1691,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 49,
@@ -1722,7 +1761,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 51,
@@ -1756,7 +1796,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 52,
@@ -1790,7 +1831,8 @@ export const PROVAS = {
     "needsArt": true,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 53,
@@ -1824,7 +1866,8 @@ export const PROVAS = {
     "needsArt": true,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 54,
@@ -1858,7 +1901,8 @@ export const PROVAS = {
     "needsArt": true,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 55,
@@ -1892,7 +1936,8 @@ export const PROVAS = {
     "needsArt": true,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 56,
@@ -1926,7 +1971,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 57,
@@ -1960,7 +2006,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 58,
@@ -1994,7 +2041,8 @@ export const PROVAS = {
     "needsArt": true,
     "missing": [],
     "needsSource": true,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 59,
@@ -2028,7 +2076,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    },
    {
     "number": 60,
@@ -2062,7 +2111,8 @@ export const PROVAS = {
     "needsArt": false,
     "missing": [],
     "needsSource": false,
-    "supportImage": ""
+    "supportImage": "",
+    "supportImageKind": ""
    }
   ]
  }
