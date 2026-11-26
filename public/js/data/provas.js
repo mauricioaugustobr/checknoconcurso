@@ -38,7 +38,7 @@ export const PROVAS = {
      },
      {
       "letter": "D",
-      "text": "A senhora que chamou o pai de Mafalda de “pé- -rapado” não tem como conhecer a real situação financeira dele."
+      "text": "A senhora que chamou o pai de Mafalda de “pé-rapado” não tem como conhecer a real situação financeira dele."
      },
      {
       "letter": "E",
@@ -1315,7 +1315,7 @@ export const PROVAS = {
     "page": 15,
     "subject": "Conhecimentos Gerais",
     "support": "",
-    "stem": "Leia o texto a seguir: Getúlio Vargas mandou realizar a cerimônia da queima das bandeiras estaduais, que teve lugar no Rio de Janeiro. Nessa cerimônia, foram hasteadas vinte e uma bandeiras nacionais em substituição às vinte e uma bandeiras estaduais que foram incineradas numa grande pira erguida no meio da praça, ao som do Hino Nacional tocado por várias bandas e cantado por milhares de colegiais, sob a regência do maestro Heitor Villa-Lobos. (Luís Nassif, “A cremação das bandeiras estaduais...”, Jornal GGN. Disponível em: https://jornalggn.com.br/historia/a-cremacao-das- -bandeiras-estaduais-no-estado-novo/. Adaptado) A cerimônia a que o texto faz referência",
+    "stem": "Leia o texto a seguir: Getúlio Vargas mandou realizar a cerimônia da queima das bandeiras estaduais, que teve lugar no Rio de Janeiro. Nessa cerimônia, foram hasteadas vinte e uma bandeiras nacionais em substituição às vinte e uma bandeiras estaduais que foram incineradas numa grande pira erguida no meio da praça, ao som do Hino Nacional tocado por várias bandas e cantado por milhares de colegiais, sob a regência do maestro Heitor Villa-Lobos. (Luís Nassif, “A cremação das bandeiras estaduais...”, Jornal GGN. Disponível em: https://jornalggn.com.br/historia/a-cremacao-das-bandeiras-estaduais-no-estado-novo/. Adaptado) A cerimônia a que o texto faz referência",
     "alternatives": [
      {
       "letter": "A",
