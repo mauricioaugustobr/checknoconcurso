@@ -608,3 +608,6 @@ body.sem-plano #upgradeStrip { display: none !important; }
   .plan-gate { padding: 18px 16px; }
   .plan-gate-actions > * { width: 100%; justify-content: center; text-align: center; }
 }
+
+/* Sem plano: sem o contador de "Meus Salvos" */
+body.sem-plano #navSavedCount, body.sem-plano #mobileSavedDot { display: none !important; }

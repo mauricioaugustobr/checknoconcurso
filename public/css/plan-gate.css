@@ -1,0 +1,82 @@
+/* Tela "Escolha seu plano" (Designer UI/UX) — paleta Família Check, Newsreader + Inter */
+.cnc-gate {
+  --g-brand: var(--brand-primary, #0C4F83);
+  --g-ink: #0B2540;
+  --g-text: var(--text-primary, #0F2236);
+  --g-text-2: var(--text-secondary, #2E465E);
+  --g-muted: var(--text-muted, #4D657C);
+  --g-line: var(--border-subtle, #DFE8F0);
+  --g-alt: #E9F0F6;
+  margin: 22px 0 8px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid var(--g-line);
+  border-radius: 20px;
+  box-shadow: 0 18px 40px -24px rgba(11, 37, 64, .35);
+  max-width: 620px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.cnc-gate[hidden] { display: none !important; }
+.cnc-gate, .cnc-gate *, .cnc-gate *::before, .cnc-gate *::after { box-sizing: border-box; }
+.cnc-plans, .cnc-plan { min-width: 0; }
+.cnc-gate-kicker { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--g-brand); }
+.cnc-gate-title { margin: 6px 0 6px; font-family: Newsreader, Georgia, serif; font-weight: 600; font-size: 26px; line-height: 1.15; color: var(--g-ink); }
+.cnc-gate-sub { margin: 0 0 16px; font-size: 14.5px; line-height: 1.55; color: var(--g-text-2); }
+
+.cnc-plans { display: grid; gap: 10px; }
+.cnc-plan { position: relative; border: 1.5px solid var(--g-line); border-radius: 14px; background: #fff; transition: border-color .15s, box-shadow .15s, background-color .15s; }
+.cnc-plan:hover { border-color: #9DB7CF; }
+.cnc-plan.is-on { border-color: var(--g-brand); background: #F7FAFD; box-shadow: 0 0 0 3px rgba(12, 79, 131, .12); }
+.cnc-plan-main { display: grid; grid-template-columns: 22px 1fr; column-gap: 12px; padding: 14px 16px; cursor: pointer; }
+.cnc-plan-main input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.cnc-radio { grid-row: 1; width: 20px; height: 20px; margin-top: 3px; border-radius: 50%; border: 2px solid #9DB7CF; background: #fff; display: grid; place-items: center; }
+.cnc-plan.is-on .cnc-radio { border-color: var(--g-brand); }
+.cnc-plan.is-on .cnc-radio::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--g-brand); }
+.cnc-plan-main input:focus-visible ~ .cnc-radio { outline: 3px solid rgba(12, 79, 131, .35); outline-offset: 2px; }
+.cnc-plan-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.cnc-plan-name { font-size: 17px; font-weight: 700; color: var(--g-ink); display: inline-flex; align-items: center; gap: 8px; }
+.cnc-tag { font-size: 11px; font-weight: 700; letter-spacing: .03em; padding: 3px 8px; border-radius: 999px; background: #F4D632; color: #0B2239; }
+.cnc-plan-price { display: inline-flex; align-items: baseline; gap: 2px; font-variant-numeric: tabular-nums; color: var(--g-ink); }
+.cnc-plan-price strong { font-size: 20px; font-weight: 700; }
+.cnc-plan-price small { font-size: 13px; color: var(--g-muted); }
+.cnc-equiv { margin-left: 8px; font-size: 12.5px; color: var(--g-muted); }
+.cnc-plan-list { grid-column: 2; list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 5px; }
+.cnc-plan-list li { display: grid; grid-template-columns: 16px 1fr; gap: 8px; align-items: start; font-size: 14px; line-height: 1.45; color: var(--g-text-2); }
+.cnc-plan-list svg { margin-top: 2px; color: var(--g-brand); }
+.cnc-plan-list strong { color: var(--g-text); }
+
+/* Mensal ou anual (só no Completo) */
+.cnc-ciclo { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0 16px 14px 50px; border: 0; }
+.cnc-ciclo label { position: relative; cursor: pointer; }
+.cnc-ciclo input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.cnc-ciclo span { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--g-line); background: #fff; font-size: 13px; font-weight: 600; color: var(--g-text-2); font-variant-numeric: tabular-nums; }
+.cnc-ciclo em { font-style: normal; font-weight: 700; color: #145C36; }
+.cnc-plan.is-on .cnc-ciclo input:checked + span { border-color: var(--g-brand); background: var(--g-alt); color: var(--g-brand); }
+.cnc-ciclo input:focus-visible + span { outline: 3px solid rgba(12, 79, 131, .35); outline-offset: 2px; }
+.cnc-plan:not(.is-on) .cnc-ciclo { opacity: .75; }
+
+.cnc-gate-cta { margin-top: 16px; width: 100%; min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 14px; background: #F4D632; color: #0B2239; font: 700 16px/1.2 Inter, system-ui, sans-serif; cursor: pointer; font-variant-numeric: tabular-nums; box-shadow: 0 6px 16px -8px rgba(115, 75, 0, .45); transition: background-color .15s, transform .1s; }
+.cnc-gate-cta:hover { background: #E8C81F; }
+.cnc-gate-cta:active { transform: translateY(1px); }
+.cnc-gate-cta:focus-visible { outline: 3px solid var(--g-brand); outline-offset: 3px; }
+.cnc-gate-safe { margin: 10px 0 0; text-align: center; font-size: 13px; color: var(--g-muted); }
+.cnc-gate-account { margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--g-line); text-align: center; font-size: 14px; color: var(--g-text-2); }
+.cnc-link { border: 0; background: none; padding: 4px 2px; font: inherit; font-weight: 700; color: var(--g-brand); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.cnc-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 600px) {
+  .cnc-gate { margin: 18px 0 4px; padding: 18px 14px; border-radius: 18px; }
+  .cnc-gate-title { font-size: 23px; }
+  .cnc-plan-main { padding: 13px 12px; column-gap: 10px; }
+  .cnc-ciclo { padding: 0 12px 13px 12px; }
+  .cnc-ciclo label, .cnc-ciclo span { width: 100%; }
+  .cnc-ciclo span { justify-content: space-between; flex-wrap: wrap; row-gap: 2px; border-radius: 12px; }
+}
+@media (max-width: 420px) {
+  .cnc-gate-cta { padding: 8px 14px; }
+  .cnc-cta-label { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+  .cnc-cta-preco { font-size: 13.5px; font-weight: 600; opacity: .85; }
+  .cnc-cta-preco > span { display: none; }
+  .cnc-gate-cta { justify-content: space-between; min-height: 58px; }
+}
+@media (prefers-reduced-motion: reduce) { .cnc-plan, .cnc-gate-cta { transition: none; } }

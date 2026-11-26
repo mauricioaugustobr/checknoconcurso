@@ -12,6 +12,9 @@
     },
     "api/stats.js": {
       "includeFiles": "public/provas/index.json"
+    },
+    "api/page.js": {
+      "includeFiles": "content/blog/**"
     }
   },
   "headers": [

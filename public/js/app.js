@@ -1,4 +1,5 @@
 import { PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/site-info.js';
+import { montarTelaPlano } from './plan-gate.js?v=1';
 // Não há plano grátis: o catálogo e o índice de provas chegam pela API, só para quem tem plano
 // (o servidor confere a assinatura). Nada disso fica em arquivo público.
 const PROVAS = {};
@@ -438,6 +439,15 @@ function renderPlanGate() {
   document.body.classList.toggle('sem-plano', semPlano);
   const gate = $('#planGate');
   if (gate) gate.hidden = !semPlano;
+  if (semPlano) {
+    // Tela "Escolha seu plano" (Designer): 2 cartões, Completo mensal ou anual, Entrar/Sair
+    montarTelaPlano({
+      user: state.user,
+      onChoose: (plano) => openCheckoutModal(plano),
+      onLogin: () => openAuthModal('login'),
+      onLogout: () => $('#logoutBtn')?.click()
+    });
+  }
   const login = $('#planGateLogin');
   if (login) login.hidden = Boolean(state.user);
   if (semPlano && (activeView === 'cursos' || activeView === 'salvos')) switchView('plano');
