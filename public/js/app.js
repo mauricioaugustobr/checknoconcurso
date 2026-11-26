@@ -1129,10 +1129,12 @@ function renderDetailModal() {
     <span class="badge-neutral">${escapeHtml(c.esfera)} · ${escapeHtml(c.uf)}</span>
     <span class="badge-neutral">Banca ${escapeHtml(c.banca)}</span>
     ${c.destaqueGratuito && !hasEssencial() ? '<span class="badge-gold">Amostra Grátis Liberada</span>' : ''}
-    ${hasCompleto() ? '<span class="badge-emerald">Check Completo Ativo</span>' : (hasEssencial() ? '<span class="badge-emerald">Check Essencial Ativo</span>' : '')}
   `;
   $('#detailTitle').textContent = `${c.orgao} (${c.sigla})`;
-  $('#detailSubtitle').textContent = `${c.titulo} · Fonte: ${c.fonteOficial}`;
+  $('#detailSubtitle').innerHTML = `
+    <p class="modal-subtitle">${escapeHtml(c.titulo)}</p>
+    ${c.fonteOficial ? `<p class="modal-source">Fonte: ${escapeHtml(c.fonteOficial)}</p>` : ''}
+  `;
 
   $('#detailSaveBtn').classList.toggle('saved', saved);
 
@@ -1140,10 +1142,10 @@ function renderDetailModal() {
   const provaLabel = c.dataProva ? formatDateBR(c.dataProva) : (c.status === 'Previsto / Autorizado' ? 'A definir' : 'Sem prova escrita');
 
   $('#detailKpis').innerHTML = `
-    <div class="kpi-cell"><span>Data da Prova</span><strong>${escapeHtml(provaLabel)}</strong></div>
-    <div class="kpi-cell"><span>Remuneração</span><strong>Até ${formatBRL(c.salarioMax)}</strong></div>
+    <div class="kpi-cell"><span>Data da prova</span><strong>${escapeHtml(provaLabel)}</strong></div>
+    <div class="kpi-cell"><span>Salário</span><strong>Até ${formatBRL(c.salarioMax)}</strong></div>
     <div class="kpi-cell"><span>Vagas</span><strong>${escapeHtml(formatVagasLabel(c))}</strong></div>
-    <div class="kpi-cell"><span>Taxa de Inscrição</span><strong>${escapeHtml(taxaLabel)}</strong></div>
+    <div class="kpi-cell"><span>Taxa de inscrição</span><strong>${escapeHtml(taxaLabel)}</strong></div>
   `;
 
   $$('.modal-tab').forEach((btn) => {
@@ -1152,47 +1154,73 @@ function renderDetailModal() {
 
   const body = $('#detailBody');
   if (activeDetailTab === 'geral') {
+    const steps = [
+      { label: 'Edital publicado', date: c.edital.publicadoEm, text: formatDateBR(c.edital.publicadoEm) },
+      { label: 'Inscrições abrem', date: c.inscricaoInicio, text: formatDateBR(c.inscricaoInicio) },
+      { label: 'Inscrições fecham', date: c.inscricaoFim, text: formatDateBR(c.inscricaoFim) },
+      { label: c.status === 'Encerrado' ? 'Prova realizada' : 'Prova', date: c.dataProva, text: provaLabel, exam: true },
+    ];
+    const isPast = (iso) => { const d = daysUntil(iso); return d !== null && d < 0; };
+    const cargos = c.edital.cargos || [];
+    const etapas = c.edital.etapas || [];
+
     body.innerHTML = `
-      <div class="info-block">
-        <h4>Cronograma Oficial (verificado em ${formatDateBR(c.dataProvaAtualizadaEm)})</h4>
-        <div class="timeline-grid">
-          <div class="timeline-step"><span>Publicação / Status</span><strong>${formatDateBR(c.edital.publicadoEm)}</strong></div>
-          <div class="timeline-step"><span>Início Inscrições</span><strong>${formatDateBR(c.inscricaoInicio)}</strong></div>
-          <div class="timeline-step"><span>Fim Inscrições</span><strong>${formatDateBR(c.inscricaoFim)}</strong></div>
-          <div class="timeline-step highlight-exam"><span>${c.status === 'Encerrado' ? 'Prova Realizada' : 'Data da Prova'}</span><strong>${escapeHtml(provaLabel)}</strong></div>
+      <section class="info-block">
+        <div class="section-head">
+          <h4>Cronograma oficial</h4>
+          ${c.dataProvaAtualizadaEm ? `<span class="section-meta">Verificado em ${formatDateBR(c.dataProvaAtualizadaEm)}</span>` : ''}
         </div>
-      </div>
+        <ol class="timeline-steps">
+          ${steps.map((s, i) => {
+            const next = steps[i + 1];
+            const cls = [
+              isPast(s.date) ? 'is-past' : '',
+              next && isPast(next.date) ? 'line-done' : '',
+              s.exam ? 'is-exam' : '',
+            ].filter(Boolean).join(' ');
+            return `<li class="${cls}"><span class="timeline-dot" aria-hidden="true"></span><span class="timeline-label">${escapeHtml(s.label)}</span><strong>${escapeHtml(s.text)}</strong></li>`;
+          }).join('')}
+        </ol>
+      </section>
 
-      <div class="info-block">
-        <h4>Cargos, Vagas e Salários</h4>
-        <table class="cargos-table">
-          <thead>
-            <tr><th>Cargo</th><th>Escolaridade</th><th>Vagas</th><th>Inicial</th></tr>
-          </thead>
-          <tbody>
-            ${c.edital.cargos.map((cargo) => `
-              <tr>
-                <td><strong>${escapeHtml(cargo.nome)}</strong></td>
-                <td>${escapeHtml(cargo.escolaridade)}</td>
-                <td class="tabular">${cargo.vagas === 0 ? 'CR' : cargo.vagas.toLocaleString('pt-BR')}</td>
-                <td class="tabular"><strong>${formatBRL(cargo.salario)}</strong></td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      </div>
+      <section class="info-block">
+        <div class="section-head">
+          <h4>Cargos, vagas e salários</h4>
+          <span class="section-meta">${cargos.length} ${cargos.length === 1 ? 'cargo' : 'cargos'}</span>
+        </div>
+        <div class="table-card">
+          <table class="cargos-table">
+            <thead>
+              <tr><th>Cargo</th><th class="col-escolaridade">Escolaridade</th><th class="num">Vagas</th><th class="num">Salário inicial</th></tr>
+            </thead>
+            <tbody>
+              ${cargos.map((cargo) => `
+                <tr>
+                  <td><strong>${escapeHtml(cargo.nome)}</strong><span class="cargo-sub">${escapeHtml(cargo.escolaridade)}</span></td>
+                  <td class="col-escolaridade">${escapeHtml(cargo.escolaridade)}</td>
+                  <td class="num" data-label="Vagas">${cargo.vagas === 0 ? 'CR' : cargo.vagas.toLocaleString('pt-BR')}</td>
+                  <td class="num" data-label="Salário inicial"><strong>${formatBRL(cargo.salario)}</strong></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-      <div class="info-block">
-        <h4>Benefícios e Etapas do Concurso</h4>
-        <p class="muted-sm" style="margin-bottom:8px;"><strong>Resumo:</strong> ${escapeHtml(c.beneficiosResumo)}</p>
-        <ul class="bullet-list">
-          ${c.edital.etapas.map((etapa) => `<li>${escapeHtml(etapa)}</li>`).join('')}
-        </ul>
-      </div>
+      <section class="info-block">
+        <div class="section-head"><h4>Benefícios e etapas</h4></div>
+        ${c.beneficiosResumo ? `<p class="benefits-summary">${escapeHtml(c.beneficiosResumo)}</p>` : ''}
+        ${etapas.length ? `
+          <p class="sub-label">Etapas do concurso</p>
+          <ol class="etapas-list">
+            ${etapas.map((etapa, i) => `<li><span class="etapa-num">${i + 1}</span><span>${escapeHtml(etapa)}</span></li>`).join('')}
+          </ol>
+        ` : ''}
+      </section>
 
-      <div class="edital-actions">
-        <button type="button" class="btn-primary-sm" data-switch-tab="edital">Abrir Edital &amp; Raio-X</button>
-        <button type="button" class="btn-outline-sm" data-switch-tab="cursos">Comparar ${c.cursos.length} Cursos</button>
+      <div class="detail-cta">
+        <button type="button" class="btn-primary-sm" data-switch-tab="edital">Abrir edital e Raio-X</button>
+        <button type="button" class="btn-outline-sm" data-switch-tab="cursos">Comparar ${c.cursos.length} cursos</button>
         <button type="button" class="btn-outline-sm" data-switch-tab="provas">Treinar com questões de provas anteriores</button>
       </div>
     `;
@@ -1224,7 +1252,7 @@ function renderDetailModal() {
       </div>
 
       <div class="info-block">
-        <h4>Raio-X das Disciplinas e Peso na Prova</h4>
+        <h4>Raio-X das disciplinas e peso na prova</h4>
         ${c.edital.disciplinas.map((d) => `
           <div class="disc-bar-item">
             <div class="disc-bar-top">
@@ -1239,7 +1267,7 @@ function renderDetailModal() {
       </div>
 
       <div class="info-block">
-        <h4>Pontos-Chave Verificados no Edital</h4>
+        <h4>Pontos-chave verificados no edital</h4>
         <ul class="bullet-list">
           ${c.edital.requisitosChave.map((req) => `<li>${escapeHtml(req)}</li>`).join('')}
         </ul>
