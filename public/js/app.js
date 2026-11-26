@@ -4,7 +4,9 @@ const PROVAS = {};
 const provasReady = fetch('/provas/index.json', { cache: 'no-cache' })
   .then((r) => (r.ok ? r.json() : {}))
   .then((d) => Object.assign(PROVAS, d))
-  .catch(() => {});
+  .catch(() => {})
+  .finally(() => { provasCarregadas = true; });
+let provasCarregadas = false;
 import { SEM_PROVA_ANTERIOR } from './data/sem-prova.js?v=1';
 // Concurso sem prova anterior: está na lista e ainda não tem prova publicada no site.
 const semProvaAnterior = (id) => SEM_PROVA_ANTERIOR.has(id) && !PROVAS[id];
@@ -1376,7 +1378,9 @@ function renderTrainNow(c) {
   const prova = PROVAS[c.id];
   const label = 'Quero treinar pra esse concurso agora';
   let detalhe;
-  if (prova) {
+  if (!prova && !provasCarregadas) {
+    detalhe = 'Carregando a prova deste concurso…';
+  } else if (prova) {
     detalhe = `Prova de ${escapeHtml(prova.ano)} · ${escapeHtml(prova.total)} questões · ${escapeHtml(prova.banca)}. Cada resposta vem com a explicação em 3 parágrafos.`;
   } else if (semProvaAnterior(c.id)) {
     detalhe = 'Este concurso não tem prova anterior. Veja os detalhes na aba de treino.';
