@@ -19,8 +19,8 @@ Protótipo oficial do **Check no Concurso** (`checknoconcurso.com.br`): platafor
 | Plano | Valor | O que libera |
 |---|---|---|
 | **Visitante** | Grátis | Lista de concursos abertos e encerrados, datas de prova e 3 destaques completos (BB, PF e INSS) |
-| **Check Essencial** | **R$ 6,99/mês** | 100% dos concursos ativos e encerrados, datas de prova atualizadas, editais completos + Raio-X, comparador de cursos com cupons e alertas no App |
-| **Check Completo** | **R$ 17,99/mês** ou **R$ 199,90/ano** (mais barato: R$ 16,66/mês) | Tudo do Essencial **+ banco com as 5 provas anteriores e gabaritos oficiais** de todos os concursos abertos *(em breve — com prévia interativa no protótipo)* |
+| **Check Essencial** | **R$ 9,99/mês** | 100% dos concursos ativos e encerrados, datas de prova atualizadas, editais completos + Raio-X, comparador de cursos com cupons e alertas no App |
+| **Check Completo** | **R$ 23,99/mês** ou **R$ 199,90/ano** (mais barato: R$ 16,66/mês) | Tudo do Essencial **+ banco com as 5 provas anteriores e gabaritos oficiais** de todos os concursos abertos *(em breve — com prévia interativa no protótipo)* |
 
 ## Funcionalidades já testáveis
 
@@ -33,5 +33,5 @@ Protótipo oficial do **Check no Concurso** (`checknoconcurso.com.br`): platafor
   2. **Edital & Raio-X**: distribuição das disciplinas por peso + botão funcional **Baixar Raio-X do Edital**.
   3. **Cursos Parceiros**: comparação lado a lado (Estratégia, Gran, Direção, QConcursos, AlfaCon, Nova) com cópia de cupom.
   4. **5 Provas Anteriores (Em breve)**: listagem das 5 últimas edições por concurso com gabarito e download de prévia para assinantes do Plano Completo.
-- **Checkout Multi-Plano (Pix + Cartão)** e **Barra de Simulação** para testar instantaneamente os 3 níveis (Visitante, Essencial R$ 6,99 e Completo R$ 17,99 / R$ 199,90).
+- **Checkout Multi-Plano (Pix + Cartão)** e **Barra de Simulação** para testar instantaneamente os 3 níveis (Visitante, Essencial R$ 9,99 e Completo R$ 23,99 / R$ 199,90).
 - **Site + App Mobile (PWA)**: botão **Prévia do App Mobile** no topo com simulador de smartphone + disparo de notificações push de alteração de data de prova e encerramento.

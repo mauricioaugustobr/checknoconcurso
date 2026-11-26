@@ -10,8 +10,8 @@ async function runTests() {
   // 1. Validate branding and pricing tiers
   assert.equal(MARCA.nome, 'Check no Concurso');
   assert.equal(MARCA.dominio, 'checknoconcurso.com.br');
-  assert.equal(PLANOS.essencial.preco, 6.99);
-  assert.equal(PLANOS.completoMensal.preco, 17.99);
+  assert.equal(PLANOS.essencial.preco, 9.99);
+  assert.equal(PLANOS.completoMensal.preco, 23.99);
   assert.equal(PLANOS.completoAnual.preco, 199.90);
 
   // 2. Validate real dataset integrity (active + scheduled + authorized + closed + 5 past exams each)

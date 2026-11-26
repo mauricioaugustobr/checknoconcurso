@@ -64,7 +64,7 @@ assert.doesNotMatch(prova, /data\/provas\.js/);
 const html = fs.readFileSync(new URL('../public/index.html', import.meta.url), 'utf8');
 assert.doesNotMatch(html, /Visitante Grátis|freeAccessBox|Criar conta grátis/);
 assert.match(html, /id="planGate"/);
-assert.equal(PLANOS.essencial.preco, 6.99);
+assert.equal(PLANOS.essencial.preco, 9.99);
 assert.deepEqual(Object.keys(PLANOS), ['essencial', 'completoMensal', 'completoAnual']);
 
 delete process.env.CNC_ACESSO_LIVRE;

@@ -1,5 +1,5 @@
 import { PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/site-info.js';
-import { montarTelaPlano } from './plan-gate.js?v=1';
+import { montarTelaPlano } from './plan-gate.js?v=2';
 // Não há plano grátis: o catálogo e o índice de provas chegam pela API, só para quem tem plano
 // (o servidor confere a assinatura). Nada disso fica em arquivo público.
 const PROVAS = {};
@@ -355,17 +355,17 @@ function renderBillingCycleUI() {
 
   if (isAnual) {
     $('#completoPlanPrice').innerHTML = `<strong>R$ 199,90</strong><span>/ano</span>`;
-    $('#completoPlanSubnote').innerHTML = `Equivale a <strong>R$ 16,66/mês</strong> — economize <strong>R$ 15,98</strong> por ano vs. mensal`;
+    $('#completoPlanSubnote').innerHTML = `Equivale a <strong>R$ 16,66/mês</strong> — economize <strong>R$ 87,98</strong> por ano vs. mensal`;
     $('#subCompletoBtn').dataset.pickPlan = 'completo-anual';
     if (!hasCompleto()) {
       $('#subCompletoBtn').textContent = 'Assinar Completo Anual · R$ 199,90/ano';
     }
   } else {
-    $('#completoPlanPrice').innerHTML = `<strong>R$ 17,99</strong><span>/mês</span>`;
-    $('#completoPlanSubnote').innerHTML = `Ou <strong>R$ 199,90/ano</strong> (equivale a R$ 16,66/mês — economize R$ 15,98)`;
+    $('#completoPlanPrice').innerHTML = `<strong>R$ 23,99</strong><span>/mês</span>`;
+    $('#completoPlanSubnote').innerHTML = `Ou <strong>R$ 199,90/ano</strong> (equivale a R$ 16,66/mês — economize R$ 87,98)`;
     $('#subCompletoBtn').dataset.pickPlan = 'completo-mensal';
     if (!hasCompleto()) {
-      $('#subCompletoBtn').textContent = 'Assinar Completo · R$ 17,99/mês';
+      $('#subCompletoBtn').textContent = 'Assinar Completo · R$ 23,99/mês';
     }
   }
 }
@@ -384,7 +384,7 @@ function renderAuthUI() {
   const subCompletoBtn = $('#subCompletoBtn');
 
   if (hasCompleto()) {
-    const planLabel = state.tier === 'completo-anual' ? 'Check Completo Anual (R$ 199,90/ano)' : 'Check Completo (R$ 17,99/mês)';
+    const planLabel = state.tier === 'completo-anual' ? 'Check Completo Anual (R$ 199,90/ano)' : 'Check Completo (R$ 23,99/mês)';
     headerCta.innerHTML = '<span class="cta-label"><span class="cta-label-extra cta-pro-prefix">Check </span>Completo ✓</span>';
     headerCta.classList.add('is-pro');
     heroPricePill.textContent = 'Plano Completo Ativo ✓';
@@ -402,26 +402,26 @@ function renderAuthUI() {
   } else if (state.tier === 'essencial') {
     headerCta.innerHTML = `<span class="cta-label">Liberar provas</span>${CTA_ARROW_SVG}`;
     headerCta.classList.remove('is-pro');
-    heroPricePill.textContent = 'Essencial (R$ 6,99) Ativo';
-    heroBtn.textContent = 'Treinar com questões de provas (R$ 17,99)';
+    heroPricePill.textContent = 'Essencial (R$ 9,99) Ativo';
+    heroBtn.textContent = 'Treinar com questões de provas (R$ 23,99)';
     upgradeStrip.hidden = false;
     activePlanBanner.hidden = false;
-    $('#activePlanHeading').textContent = 'Assinatura ativa: Check Essencial (R$ 6,99/mês)';
+    $('#activePlanHeading').textContent = 'Assinatura ativa: Check Essencial (R$ 9,99/mês)';
     const methodLabel = state.subMethod ? ` via ${state.subMethod}` : '';
     const dateLabel = state.subSince ? ` desde ${formatDateBR(state.subSince)}` : '';
     $('#activePlanDetails').textContent = `Editais, datas de prova e cursos liberados${methodLabel}${dateLabel}. Faça upgrade para o Completo para treinar com questões de provas anteriores.`;
-    subEssencialBtn.textContent = 'Seu Plano Atual ✓ (R$ 6,99/mês)';
+    subEssencialBtn.textContent = 'Seu Plano Atual ✓ (R$ 9,99/mês)';
     subEssencialBtn.disabled = true;
     subCompletoBtn.disabled = false;
     renderBillingCycleUI();
   } else {
     headerCta.innerHTML = `<span class="cta-label">Assinar<span class="cta-label-extra"> agora</span></span>${CTA_ARROW_SVG}`;
     headerCta.classList.remove('is-pro');
-    heroPricePill.textContent = 'A partir de R$ 6,99/mês';
-    heroBtn.textContent = 'Assinar agora · a partir de R$ 6,99';
+    heroPricePill.textContent = 'A partir de R$ 9,99/mês';
+    heroBtn.textContent = 'Assinar agora · a partir de R$ 9,99';
     upgradeStrip.hidden = false;
     activePlanBanner.hidden = true;
-    subEssencialBtn.textContent = 'Assinar Essencial · R$ 6,99/mês';
+    subEssencialBtn.textContent = 'Assinar Essencial · R$ 9,99/mês';
     subEssencialBtn.disabled = false;
     subCompletoBtn.disabled = false;
     renderBillingCycleUI();
@@ -1125,7 +1125,7 @@ function renderCoursesCatalog() {
               <button type="button" class="coupon-btn" data-copy-coupon="${escapeHtml(course.cupom)}">Cupom: ${escapeHtml(course.cupom)}</button>
               <a class="btn-primary-sm" href="${escapeHtml(course.url)}" target="_blank" rel="noopener noreferrer">Acessar Plataforma ↗</a>
             ` : `
-              <button type="button" class="btn-outline-sm" data-trigger-checkout="essencial">Desbloquear Link &amp; Cupom (R$ 6,99)</button>
+              <button type="button" class="btn-outline-sm" data-trigger-checkout="essencial">Desbloquear Link &amp; Cupom (R$ 9,99)</button>
             `}
           </div>
         </div>
@@ -1340,7 +1340,7 @@ function renderDetailModal() {
     if (!editalUnlocked) {
       body.innerHTML = renderPaywallGate(
         'Desbloqueie o Edital Oficial e o Raio-X Completo',
-        `Acesse o link oficial da banca ${c.banca}, resumo completo das matérias com pesos, download do Dossiê do Edital e todos os concursos reais do Brasil a partir de R$ 6,99/mês.`,
+        `Acesse o link oficial da banca ${c.banca}, resumo completo das matérias com pesos, download do Dossiê do Edital e todos os concursos reais do Brasil a partir de R$ 9,99/mês.`,
         `<div class="disc-bar-item"><div class="disc-bar-top"><span>${escapeHtml(c.edital.disciplinas[0].nome)}</span><strong>${c.edital.disciplinas[0].peso}%</strong></div><div class="disc-track"><div class="disc-fill" style="width:${c.edital.disciplinas[0].peso}%"></div></div></div>
          <div class="disc-bar-item"><div class="disc-bar-top"><span>${escapeHtml(c.edital.disciplinas[1]?.nome || 'Língua Portuguesa')}</span><strong>${c.edital.disciplinas[1]?.peso || 20}%</strong></div><div class="disc-track"><div class="disc-fill" style="width:${c.edital.disciplinas[1]?.peso || 20}%"></div></div></div>`,
         'essencial'
@@ -1391,7 +1391,7 @@ function renderDetailModal() {
     if (!editalUnlocked) {
       body.innerHTML = renderPaywallGate(
         `Compare ${c.cursos.length} Cursos para ${c.sigla} com Links Diretos`,
-        `Veja opções nas principais plataformas preparatórias (Estratégia, Gran Cursos, Direção, QConcursos, AlfaCon e Nova) a partir de R$ 6,99/mês.`,
+        `Veja opções nas principais plataformas preparatórias (Estratégia, Gran Cursos, Direção, QConcursos, AlfaCon e Nova) a partir de R$ 9,99/mês.`,
         `<div class="course-card"><h4>${escapeHtml(c.cursos[0].titulo)}</h4><div class="course-meta"><span>★ ${c.cursos[0].nota}</span><span>${escapeHtml(c.cursos[0].cargaHoraria)}</span><span>${escapeHtml(c.cursos[0].parcelas)}</span></div></div>`,
         'essencial'
       );
@@ -1451,7 +1451,7 @@ function renderDetailModal() {
 
       body.innerHTML = renderPaywallGate(
         `Treinar com questões de provas anteriores · ${c.sigla}`,
-        `Exclusivo do Plano Check Completo (R$ 17,99/mês ou R$ 199,90/ano — economize R$ 15,98). Acesso a tudo na plataforma e às questões de provas anteriores: toda questão respondida mostra a resposta certa e, logo abaixo, uma explicação em 3 parágrafos.`,
+        `Exclusivo do Plano Check Completo (R$ 23,99/mês ou R$ 199,90/ano — economize R$ 87,98). Acesso a tudo na plataforma e às questões de provas anteriores: toda questão respondida mostra a resposta certa e, logo abaixo, uma explicação em 3 parágrafos.`,
         sampleRow,
         'completo-anual'
       );
@@ -1565,11 +1565,11 @@ function renderPaywallGate(title, desc, blurredPreviewHtml, targetPlan = 'essenc
             Assinar Anual · R$ 199,90/ano (Mais barato)
           </button>
           <button type="button" class="btn-outline-sm" style="padding:11px 16px;" data-trigger-checkout="completo-mensal">
-            Mensal · R$ 17,99/mês
+            Mensal · R$ 23,99/mês
           </button>
         ` : `
           <button type="button" class="btn-primary-sm" style="padding:11px 18px;" data-trigger-checkout="essencial">
-            Assinar Essencial · R$ 6,99/mês
+            Assinar Essencial · R$ 9,99/mês
           </button>
           <button type="button" class="btn-outline-sm" style="padding:11px 16px;" data-trigger-checkout="completo-anual">
             Ou Completo Anual (R$ 199,90)
@@ -1968,7 +1968,7 @@ function bindEvents() {
     saveState();
     renderAll();
     if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
-    showToast('Modo Check Essencial (R$ 6,99/mês): editais e cursos liberados!');
+    showToast('Modo Check Essencial (R$ 9,99/mês): editais e cursos liberados!');
   });
 
   $('#simCompletoBtn').addEventListener('click', () => {
@@ -1978,7 +1978,7 @@ function bindEvents() {
     saveState();
     renderAll();
     if (activeDetailId && !$('#detailModal').hidden) renderDetailModal();
-    showToast('Modo Check Completo (R$ 17,99/mês · R$ 199,90/ano): tudo + treino com questões de provas anteriores!');
+    showToast('Modo Check Completo (R$ 23,99/mês · R$ 199,90/ano): tudo + treino com questões de provas anteriores!');
   });
 
   $$('[data-billing]').forEach((btn) => {

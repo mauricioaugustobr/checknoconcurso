@@ -3,7 +3,7 @@ const PLANS = {
   essencial: {
     name: "Check Essencial",
     desc: "Tudo do básico e do essencial: concursos, datas de prova, editais e cursos",
-    price: "R$ 6,99",
+    price: "R$ 9,99",
     cadence: "/mês",
     note: "Assinatura mensal no cartão, com renovação automática. No Pix, o acesso não se renova.",
     features: [
@@ -18,7 +18,7 @@ const PLANS = {
   "completo-mensal": {
     name: "Check Completo",
     desc: "Tudo do Essencial + treinar com questões de provas anteriores",
-    price: "R$ 17,99",
+    price: "R$ 23,99",
     cadence: "/mês",
     note: "Assinatura mensal no cartão, com renovação automática. No Pix, o acesso não se renova.",
     features: [

@@ -15,17 +15,17 @@ export const PLANOS = {
   essencial: {
     id: 'essencial',
     nome: 'Check Essencial',
-    preco: 6.99,
+    preco: 9.99,
     periodicidade: 'mês',
-    rotuloPreco: 'R$ 6,99/mês',
+    rotuloPreco: 'R$ 9,99/mês',
     resumo: 'Acesso a todos os concursos abertos e encerrados do Brasil, datas de prova atualizadas, salários e vagas, editais completos com Raio-X e comparador de cursos.'
   },
   completoMensal: {
     id: 'completo-mensal',
     nome: 'Check Completo',
-    preco: 17.99,
+    preco: 23.99,
     periodicidade: 'mês',
-    rotuloPreco: 'R$ 17,99/mês',
+    rotuloPreco: 'R$ 23,99/mês',
     resumo: 'Tudo do Essencial + treinar com questões de provas anteriores, com resposta e explicação em 3 parágrafos abaixo de cada questão.'
   },
   completoAnual: {
@@ -33,7 +33,7 @@ export const PLANOS = {
     nome: 'Check Completo Anual',
     preco: 199.90,
     equivalenteMensal: 16.66,
-    economiaAnual: 15.98,
+    economiaAnual: 87.98,
     periodicidade: 'ano',
     rotuloPreco: 'R$ 199,90/ano',
     resumo: 'Acesso total por 12 meses com desconto especial (equivale a R$ 16,66/mês), incluindo o treino com questões de provas anteriores.'

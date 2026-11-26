@@ -71,7 +71,7 @@ if (!exam) {
     // Sem o plano Completo: explica e leva para a escolha do plano
     const textos = {
       login: "Entre com sua conta e escolha o plano Check Completo para treinar com esta prova.",
-      completo: "O treino com questões de provas anteriores é do plano Check Completo (R$ 17,99/mês ou R$ 199,90/ano).",
+      completo: "O treino com questões de provas anteriores é do plano Check Completo (R$ 23,99/mês ou R$ 199,90/ano).",
       plano: "Escolha um plano para usar o Check no Concurso. O treino com provas anteriores é do plano Check Completo."
     };
     empty.textContent = "";

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'check-no-concurso-v31';
+const CACHE_NAME = 'check-no-concurso-v32';
 const ASSETS = [
   '/',
   '/index.html',
