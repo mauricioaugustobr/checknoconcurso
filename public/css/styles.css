@@ -2695,3 +2695,85 @@ body.app-mode .toast { bottom: 78px; right: 12px; left: 12px; text-align: center
   .mobile-bottom-nav { padding-bottom: 4px; }
   .site-header .header-inner { padding-top: 4px; padding-bottom: 4px; }
 }
+
+/* ======================================================
+   DETALHE DO CONCURSO — CORES DE HIERARQUIA
+   1. Destaque máximo: data da prova (azul da marca, cheio)
+   2. Atenção: prazo de inscrição ainda aberto (laranja de aviso)
+   3. Informação-chave: salários (azul-escuro da marca)
+   4. Estrutura: títulos de seção (azul-noite com marcador)
+   5. Apoio: rótulos e metadados (cinza-azulado)
+   Zona do topo em azul-claro; conteúdo em branco.
+   ====================================================== */
+#detailModal .modal-sheet { background: var(--bg-canvas); }
+#detailModal .modal-tabs { background: var(--bg-canvas); border-bottom-color: var(--border-default); }
+#detailModal #detailBody { background: var(--bg-surface); }
+
+/* Números-chave */
+#detailModal .detail-kpis {
+  overflow: hidden;
+  border-color: var(--border-default);
+  box-shadow: var(--shadow-sm);
+}
+#detailModal .kpi-cell.kpi-primary { background: var(--brand-primary); }
+#detailModal .kpi-cell.kpi-primary span { color: var(--text-on-inverse-muted); }
+#detailModal .kpi-cell.kpi-primary strong { color: var(--text-on-brand); font-size: 17px; }
+#detailModal .kpi-cell.kpi-primary + .kpi-cell { border-left-color: transparent; }
+#detailModal .kpi-cell.kpi-money strong { color: var(--brand-hover); }
+
+/* Abas */
+#detailModal .modal-tab { color: var(--text-muted); }
+#detailModal .modal-tab:hover { color: var(--text-primary); }
+#detailModal .modal-tab.active { color: var(--brand-primary); border-bottom-color: var(--brand-primary); border-bottom-width: 3px; }
+
+/* Títulos de seção */
+#detailModal .info-block h4 {
+  color: var(--bg-inverse);
+  padding-left: 12px;
+  border-left: 3px solid var(--brand-primary);
+  line-height: 1.2;
+}
+#detailModal .info-block + .info-block { border-top-color: var(--border-subtle); }
+#detailModal .section-meta { color: var(--text-muted); }
+
+/* Linha do tempo: passado em azul, prazo aberto em laranja, prova em destaque */
+#detailModal .timeline-steps li.is-past strong { color: var(--text-secondary); font-weight: 600; }
+#detailModal .timeline-steps li.is-deadline .timeline-dot {
+  background: var(--status-warning-bg);
+  border-color: var(--status-warning-border);
+}
+#detailModal .timeline-steps li.is-deadline .timeline-label { color: var(--status-warning-fg); font-weight: 600; }
+#detailModal .timeline-steps li.is-deadline strong { color: var(--status-warning-fg); }
+#detailModal .timeline-steps li.is-exam .timeline-dot {
+  width: 16px;
+  height: 16px;
+  top: -1px;
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 4px var(--brand-soft);
+}
+#detailModal .timeline-steps li.is-exam .timeline-label { color: var(--brand-primary); font-weight: 600; }
+#detailModal .timeline-steps li.is-exam strong { color: var(--brand-primary); font-size: 17px; }
+
+/* Tabela de cargos */
+#detailModal .table-card { border-color: var(--border-default); }
+#detailModal .cargos-table th {
+  background: var(--brand-soft);
+  color: var(--brand-primary);
+  border-bottom-color: var(--brand-border);
+}
+#detailModal .cargos-table td strong { color: var(--text-primary); }
+#detailModal .cargos-table td[data-label="Salário inicial"] strong { color: var(--brand-hover); font-weight: 700; }
+#detailModal .cargos-table tbody tr:hover { background: var(--bg-canvas); }
+
+/* Etapas */
+#detailModal .etapa-num { background: var(--brand-soft); color: var(--brand-primary); border: 1px solid var(--brand-border); }
+#detailModal .sub-label { color: var(--text-muted); }
+
+@media (max-width: 640px) {
+  #detailModal .cargos-table tr { background: var(--bg-surface); }
+  #detailModal .cargos-table tbody tr:hover { background: var(--bg-surface); }
+}
+@media (max-width: 768px) {
+  #detailModal .kpi-cell.kpi-primary + .kpi-cell { border-left-color: var(--border); }
+}

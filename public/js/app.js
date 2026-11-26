@@ -1142,8 +1142,8 @@ function renderDetailModal() {
   const provaLabel = c.dataProva ? formatDateBR(c.dataProva) : (c.status === 'Previsto / Autorizado' ? 'A definir' : 'Sem prova escrita');
 
   $('#detailKpis').innerHTML = `
-    <div class="kpi-cell"><span>Data da prova</span><strong>${escapeHtml(provaLabel)}</strong></div>
-    <div class="kpi-cell"><span>Salário</span><strong>Até ${formatBRL(c.salarioMax)}</strong></div>
+    <div class="kpi-cell kpi-primary"><span>Data da prova</span><strong>${escapeHtml(provaLabel)}</strong></div>
+    <div class="kpi-cell kpi-money"><span>Salário</span><strong>Até ${formatBRL(c.salarioMax)}</strong></div>
     <div class="kpi-cell"><span>Vagas</span><strong>${escapeHtml(formatVagasLabel(c))}</strong></div>
     <div class="kpi-cell"><span>Taxa de inscrição</span><strong>${escapeHtml(taxaLabel)}</strong></div>
   `;
@@ -1157,7 +1157,7 @@ function renderDetailModal() {
     const steps = [
       { label: 'Edital publicado', date: c.edital.publicadoEm, text: formatDateBR(c.edital.publicadoEm) },
       { label: 'Inscrições abrem', date: c.inscricaoInicio, text: formatDateBR(c.inscricaoInicio) },
-      { label: 'Inscrições fecham', date: c.inscricaoFim, text: formatDateBR(c.inscricaoFim) },
+      { label: 'Inscrições fecham', date: c.inscricaoFim, text: formatDateBR(c.inscricaoFim), deadline: true },
       { label: c.status === 'Encerrado' ? 'Prova realizada' : 'Prova', date: c.dataProva, text: provaLabel, exam: true },
     ];
     const isPast = (iso) => { const d = daysUntil(iso); return d !== null && d < 0; };
@@ -1177,6 +1177,7 @@ function renderDetailModal() {
               isPast(s.date) ? 'is-past' : '',
               next && isPast(next.date) ? 'line-done' : '',
               s.exam ? 'is-exam' : '',
+              s.deadline && s.date && !isPast(s.date) && c.status !== 'Encerrado' ? 'is-deadline' : '',
             ].filter(Boolean).join(' ');
             return `<li class="${cls}"><span class="timeline-dot" aria-hidden="true"></span><span class="timeline-label">${escapeHtml(s.label)}</span><strong>${escapeHtml(s.text)}</strong></li>`;
           }).join('')}
