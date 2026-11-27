@@ -288,7 +288,7 @@ function renderQuestion() {
   const chosen = answers[q.number];
   const isRevealed = Boolean(revealed[q.number]) || Boolean(chosen && chosen !== "—");
 
-  el("questionSubject").textContent = q.subject;
+  el("questionSubject").textContent = q.materia || q.subject;
   el("questionCounter").textContent = `Questão ${q.number} de ${exam.total}`;
   el("questionStem").textContent = q.stem;
 
@@ -555,7 +555,7 @@ function showResult() {
 
   const bySubject = {};
   exam.questoes.forEach((q) => {
-    const s = (bySubject[q.subject] ||= { total: 0, correct: 0, answered: 0 });
+    const s = (bySubject[q.materia || q.subject] ||= { total: 0, correct: 0, answered: 0 });
     s.total += 1;
     if (answers[q.number] && answers[q.number] !== "—") {
       s.answered += 1;

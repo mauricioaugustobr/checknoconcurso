@@ -3,6 +3,7 @@ import { getLiveCatalog } from '../lib/catalog-overrides.js';
 import { exigirPlano, lerIndiceProvas, lerProvaArquivo, NIVEL } from '../lib/acesso.js';
 import { getProva } from '../public/js/data/provas.js';
 import { handleProgresso } from '../lib/progresso.js';
+import { aplicarPadroes, aplicarPadroesIndice } from '../lib/materias.js';
 
 // Conteúdo pago: nunca fica em cache compartilhado (cada resposta depende da sessão)
 const privado = (res) => {
@@ -31,13 +32,14 @@ export async function GET(request) {
       const id = url.searchParams.get('c') || '';
       const prova = getProva(id) || lerProvaArquivo(id);
       if (!prova || id === 'index') return privado(jsonResponse({ error: 'Prova não encontrada.' }, 404));
-      return privado(jsonResponse(prova));
+      // Banca e matéria com nome padronizado (o arquivo da prova continua como veio do caderno)
+      return privado(jsonResponse(aplicarPadroes(prova.id ? prova : { ...prova, id })));
     }
 
     const { response } = await exigirPlano(request, NIVEL.essencial);
     if (response) return response;
 
-    if (tipo === 'provas') return privado(jsonResponse(lerIndiceProvas()));
+    if (tipo === 'provas') return privado(jsonResponse(aplicarPadroesIndice(lerIndiceProvas())));
 
     // Catálogo com os ajustes feitos no painel de admin (sem os concursos ocultos)
     const items = await getLiveCatalog();
