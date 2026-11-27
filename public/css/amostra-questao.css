@@ -7,10 +7,19 @@
   box-shadow: var(--shadow-md, 0 10px 26px rgba(15, 34, 54, .09)); overflow: hidden; margin: 28px 0;
   font-family: var(--font-body, Inter, system-ui, sans-serif); font-variant-numeric: tabular-nums; text-align: left;
 }
+/* Modo noturno: caixa branca com texto verde (certa) ou vermelho (errada), para destacar bem no fundo escuro.
+   Contraste do texto sobre o branco: cerca de 6,5:1 nas duas cores. */
 html[data-theme="dark"] .qx {
-  --qx-ok-fg: #7EE2AE; --qx-ok-bg: #0F3B2A; --qx-ok-bd: #2E8A5C;
-  --qx-no-fg: #FCA5A5; --qx-no-bg: #3F1A1F; --qx-no-bd: #A3444C;
+  --qx-ok-fg: #0C6B3B; --qx-ok-bg: #FFFFFF; --qx-ok-bd: #2FA36B;
+  --qx-no-fg: #B91C1C; --qx-no-bg: #FFFFFF; --qx-no-bd: #E05252;
 }
+html[data-theme="dark"] .qx-alt.is-right .qx-txt, html[data-theme="dark"] .qx-verdict.ok h3, html[data-theme="dark"] .qx-verdict.ok p { color: #0C6B3B; }
+html[data-theme="dark"] .qx-alt.is-wrong .qx-txt, html[data-theme="dark"] .qx-verdict.no h3, html[data-theme="dark"] .qx-verdict.no p { color: #B91C1C; }
+html[data-theme="dark"] .qx-alt.is-right .qx-let, html[data-theme="dark"] .qx-alt.is-wrong .qx-let,
+html[data-theme="dark"] .qx-alt.is-right:has(input:checked) .qx-let, html[data-theme="dark"] .qx-alt.is-wrong:has(input:checked) .qx-let { color: #FFFFFF; }
+html[data-theme="dark"] .qx-alt.is-right, html[data-theme="dark"] .qx-alt.is-wrong { border-width: 2px; }
+/* O título do resultado segue a cor da caixa também no modo claro */
+.qx-verdict h3 { color: inherit; }
 .qx [hidden] { display: none !important; }
 .qx-in { padding: 24px; }
 .qx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
