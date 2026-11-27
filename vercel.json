@@ -118,6 +118,10 @@
       "destination": "/api/concursos?tipo=provas"
     },
     {
+      "source": "/api/ultimos-dias",
+      "destination": "/api/concursos?tipo=ultimos"
+    },
+    {
       "source": "/api/progresso",
       "destination": "/api/concursos?tipo=progresso"
     },

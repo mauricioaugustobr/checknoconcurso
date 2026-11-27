@@ -1,6 +1,7 @@
 import { PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/site-info.js';
 import { montarTelaPlano } from './plan-gate.js?v=2';
 import { botaoCompartilharHTML } from './compartilhar.js?v=1';
+import { seloHTML, seloPrazo } from './ultimos-dias.js?v=1';
 import { dadosBotao } from './compartilhar-dados.js?v=1';
 import { lerOrigem, limparOrigem, montarFaixaOrigem, buscarResumo, avisoAssinaturaHTML } from './plano-origem.js?v=2';
 
@@ -1285,6 +1286,7 @@ function renderDetailModal() {
 
   $('#detailBadges').innerHTML = `
     <span class="${statusBadgeClass(c.status)}">${escapeHtml(c.status)}</span>
+    ${seloHTML(seloPrazo(c))}
     <span class="badge-neutral">${escapeHtml(c.esfera)} · ${escapeHtml(c.uf)}</span>
     <span class="badge-neutral">Banca ${escapeHtml(c.banca)}</span>
     ${c.destaqueGratuito && !hasEssencial() ? '<span class="badge-gold">Amostra Grátis Liberada</span>' : ''}
@@ -2325,6 +2327,16 @@ async function init() {
   populateSelects();
   bindEvents();
   $('#planGateLoginBtn')?.addEventListener('click', () => openAuthModal('login'));
+  // Item 8: "Ver os 50" do bloco "Últimos dias" — assinante vê a lista com o filtro; quem não assina vai aos planos
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-ultimos-todos]');
+    if (!link) return;
+    e.preventDefault();
+    if (!hasEssencial()) { switchView('plano'); return; }
+    if (activeView !== 'concursos') switchView('concursos');
+    if (filters.quick !== 'urgente') applyQuickChip('urgente');
+    document.querySelector('.catalog-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
   // Item 6: ✕ do aviso "Assinatura ativa" (não volta a aparecer)
   document.addEventListener('click', (e) => {
     if (!e.target.closest('[data-aviso-fechar]')) return;

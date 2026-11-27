@@ -1,0 +1,137 @@
+/* ======================================================
+   Item 8 · "Últimos dias para se inscrever" + selos de prazo
+   Opção 1 da Designer UI/UX: faixa azul-escura (#0B2540) com abas por estado.
+   Amarelo só em fundo escuro (texto #0B2239). Vermelho #B91C1C e verde #0C6B3B;
+   no escuro e no modo noturno, caixa branca com texto e borda da cor.
+   ====================================================== */
+
+/* ---------- Selos (fundo claro) ---------- */
+.ud-selo {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  border-radius: 999px; border: 1px solid transparent; padding: 3px 10px;
+  font: 700 .78rem/1.3 'Inter', system-ui, sans-serif; font-variant-numeric: tabular-nums;
+}
+.ud-selo svg { flex-shrink: 0; }
+.ud-selo.is-hoje { background: #FDECEC; color: #B91C1C; border-color: #F5C2C2; }
+.ud-selo.is-tres { background: #0B2540; color: #FFFFFF; border-color: #0B2540; }
+.ud-selo.is-tres svg { color: #F4D632; }
+.ud-selo.is-ate { background: #E9F0F6; color: #2E465E; border-color: #C5D5E4; }
+.ud-selo.is-abriu { background: #E6F7EE; color: #0C6B3B; border-color: #88D8AF; }
+
+/* Selo ao lado da situação (cartões e páginas) */
+.pg-selos { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; align-self: flex-start; }
+.pg-todos-titulo { margin: 28px 0 12px; }
+
+/* ---------- Selos em fundo escuro (faixa e modo noturno) ---------- */
+.ud .ud-selo.is-hoje, html[data-theme="dark"] .ud-selo.is-hoje { background: #FFFFFF; color: #B91C1C; border-color: #B91C1C; }
+.ud .ud-selo.is-tres, html[data-theme="dark"] .ud-selo.is-tres { background: #F4D632; color: #0B2239; border-color: #F4D632; }
+.ud .ud-selo.is-tres svg, html[data-theme="dark"] .ud-selo.is-tres svg { color: #0B2239; }
+.ud .ud-selo.is-ate, html[data-theme="dark"] .ud-selo.is-ate { background: #163A5E; color: #DCE7F1; border-color: #33699A; }
+.ud .ud-selo.is-abriu, html[data-theme="dark"] .ud-selo.is-abriu { background: #FFFFFF; color: #0C6B3B; border-color: #0C6B3B; }
+
+/* ---------- Faixa ---------- */
+.ud {
+  background: #0B2540; color: #F4F8FB; border-radius: 20px;
+  padding: 24px 28px 18px; margin: 8px 0 28px; text-align: left;
+}
+.ud-wrap { margin-top: 8px; }
+.ud-wrap[hidden] { display: none !important; }
+.ud-cabeca { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 14px; }
+.ud-rotulo {
+  margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+  font: 700 .74rem/1.2 'Inter', sans-serif; letter-spacing: .07em; text-transform: uppercase; color: #A3B9CE;
+}
+.ud-ponto { width: 8px; height: 8px; border-radius: 50%; background: #F4D632; }
+.ud .ud-titulo { margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: clamp(1.45rem, 2.6vw, 1.95rem); line-height: 1.15; color: #F4F8FB; }
+.ud-sub { margin: 4px 0 0; color: #C9D8E6; font-size: .98rem; }
+.ud-todos { color: #9CC4E4; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.ud-todos:hover { color: #FFFFFF; }
+.ud-cabeca-link [hidden] { display: none !important; }
+.ud-todos-celular { display: none; margin: 14px 0 0; text-align: center; }
+
+/* Abas por estado */
+.ud-abas-wrap { position: relative; display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.ud-abas { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; scroll-behavior: smooth; padding: 2px; flex: 1; }
+.ud-abas::-webkit-scrollbar { display: none; }
+.ud-aba {
+  flex-shrink: 0; min-height: 44px; padding: 0 16px; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid #2C577F; background: transparent; color: #F4F8FB;
+  font: 700 .92rem 'Inter', sans-serif; font-variant-numeric: tabular-nums;
+}
+.ud-aba .ud-num { font-weight: 600; color: #A3B9CE; margin-left: 4px; }
+.ud-aba[aria-selected="true"] { background: #FFFFFF; color: #0B2540; border-color: #FFFFFF; }
+.ud-aba[aria-selected="true"] .ud-num { color: #0C4F83; }
+.ud-aba:hover { border-color: #9CC4E4; }
+.ud-mais {
+  flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+  border: 1.5px solid #2C577F; background: #0B2540; color: #F4F8FB; font: 700 1.2rem 'Inter', sans-serif;
+}
+.ud-mais[hidden] { display: none; }
+.ud-aba:focus-visible, .ud-mais:focus-visible, .ud-cartao:focus-visible, .ud-todos:focus-visible, .ud-atalho:focus-visible { outline: 3px solid #F4D632; outline-offset: 2px; }
+.ud-painel[hidden] { display: none; }
+
+/* Cartões */
+.ud-lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.ud-cartao {
+  position: relative; display: flex; flex-direction: column; height: 100%; box-sizing: border-box;
+  background: #102F4E; border: 1px solid #1F4569; border-radius: 16px; padding: 16px 18px 12px;
+  color: #F4F8FB; text-decoration: none;
+}
+.ud-cartao:hover { border-color: #5A82A8; }
+.ud-topo { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; min-height: 26px; }
+.ud-uf { font: 700 .72rem 'Inter', sans-serif; color: #A3B9CE; border: 1px solid #2C577F; border-radius: 6px; padding: 2px 6px; margin-left: auto; }
+.ud-sigla { font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: 1.35rem; line-height: 1.2; }
+.ud-cargo { margin-top: 4px; color: #C9D8E6; font-size: .9rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ud-meta { margin-top: 8px; font-weight: 700; font-size: .92rem; font-variant-numeric: tabular-nums; }
+.ud-meta-prazo { display: none; }
+.ud-rodape {
+  margin-top: auto; padding-top: 10px; border-top: 1px solid #1F4569; margin-top: 12px;
+  display: flex; justify-content: space-between; gap: 8px; font-size: .84rem; color: #A3B9CE; font-variant-numeric: tabular-nums;
+}
+.ud-ver { color: #9CC4E4; font-weight: 700; white-space: nowrap; }
+.ud-seta { display: none; }
+.ud-nota { margin: 14px 0 0; font-size: .8rem; color: #A3B9CE; }
+
+/* Estado sem prazo em 7 dias: faixa fina */
+.ud-vazio { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; }
+.ud-vazio-icone { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; background: #163A5E; color: #9CC4E4; display: grid; place-items: center; }
+.ud-vazio-texto { margin: 0; color: #DCE7F1; line-height: 1.5; }
+.ud-vazio-texto strong { color: #FFFFFF; }
+.ud-atalhos { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+.ud-atalho {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
+  border: 1.5px solid #2C577F; border-radius: 999px; color: #F4F8FB; font-weight: 600; text-decoration: none;
+}
+.ud-atalho:hover { border-color: #9CC4E4; }
+
+/* ---------- Celular: linhas compactas ---------- */
+@media (max-width: 960px) {
+  .ud-lista { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .ud { padding: 18px 14px 14px; border-radius: 18px; }
+  .ud-cabeca { display: block; }
+  .ud-cabeca-link { display: none; }
+  .ud-todos-celular { display: block; }
+  .ud-aba, .ud-mais { min-height: 48px; }
+  .ud-mais { width: 48px; height: 48px; }
+  .ud-lista { grid-template-columns: 1fr; gap: 10px; }
+  .ud-cartao { display: grid; grid-template-columns: auto 1fr auto; column-gap: 10px; row-gap: 4px; align-items: center; padding: 12px 14px; min-height: 64px; }
+  .ud-topo { grid-column: 1; grid-row: 1; margin: 0; min-height: 0; }
+  .ud-topo .ud-uf { display: none; }
+  .ud-sigla { grid-column: 2; grid-row: 1; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.02rem; }
+  .ud-cargo, .ud-rodape { display: none; }
+  .ud-meta { grid-column: 1 / 3; grid-row: 2; margin: 0; font-weight: 500; font-size: .86rem; color: #C9D8E6; }
+  .ud-meta-prazo { display: inline; }
+  .ud-seta { display: block; grid-column: 3; grid-row: 1 / 3; font-size: 1.5rem; color: #9CC4E4; }
+  .ud-vazio { padding: 14px; }
+  .ud-vazio-icone { display: none; }
+  .ud-atalhos { flex-direction: column; }
+  .ud-atalho { justify-content: center; min-height: 48px; }
+  .ud-so-pc { display: none; }
+}
+
+/* ---------- Modo noturno: a faixa ganha contorno para não sumir no fundo da página ---------- */
+html[data-theme="dark"] .ud { background: #061829; border: 1px solid #1F4569; }
+html[data-theme="dark"] .ud-mais { background: #061829; }
+@media (prefers-reduced-motion: reduce) { .ud-abas { scroll-behavior: auto; } }

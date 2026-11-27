@@ -5,6 +5,7 @@ import { getProva } from '../public/js/data/provas.js';
 import { handleProgresso } from '../lib/progresso.js';
 import { aplicarPadroes, aplicarPadroesIndice } from '../lib/materias.js';
 import { origemValida, resumoOrigem } from '../lib/plano-origem.js';
+import { handleUltimosDias } from '../lib/ultimos-dias.js';
 
 // Conteúdo pago: nunca fica em cache compartilhado (cada resposta depende da sessão)
 const privado = (res) => {
@@ -26,6 +27,9 @@ export async function GET(request) {
     const tipo = url.searchParams.get('tipo');
 
     if (tipo === 'progresso') return await handleProgresso(request);
+
+    // Item 8: concursos que fecham as inscrições em 7 dias (público, mesmos dados das páginas públicas)
+    if (tipo === 'ultimos') return await handleUltimosDias();
 
     // Resumo público do concurso de origem (tela de planos adaptada, item 6). Sem plano:
     // são os mesmos dados que a página pública /concurso/<id> já mostra.
