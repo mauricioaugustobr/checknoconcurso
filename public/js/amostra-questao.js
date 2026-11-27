@@ -53,7 +53,9 @@ function questaoHTML(chave, uid) {
  * modo: 'inicial' (com abas), 'concurso' (sem abas, área do concurso) ou 'estado' (com abas).
  * areaCatalogo: área do concurso no catálogo (Policial, Tribunais, Administrativa, Fiscal...).
  */
-export function amostraHTML({ modo = 'inicial', areaCatalogo = '', planosNaPagina = false } = {}) {
+export function amostraHTML({ modo = 'inicial', areaCatalogo = '', planosNaPagina = false, origem = '' } = {}) {
+  // Página de concurso: os botões levam o concurso junto para a tela de planos (item 6)
+  const comOrigem = /^[a-z0-9][a-z0-9-]{0,99}$/.test(origem) ? `&amp;origem=${origem}` : '';
   const uid = `qx-${modo}`;
   const comAbas = modo !== 'concurso';
   const atual = comAbas ? 'administrativa' : amostraDaArea(areaCatalogo);
@@ -68,8 +70,8 @@ export function amostraHTML({ modo = 'inicial', areaCatalogo = '', planosNaPagin
   const botoes = planosNaPagina
     ? `<button type="button" class="qx-btn qx-btn-gold" data-pick-plan="completo-mensal" data-amostra-cta="mensal">Assinar Completo · R$ 23,99/mês</button>
           <button type="button" class="qx-btn qx-btn-line" data-pick-plan="completo-anual" data-amostra-cta="anual">Assinar anual · R$ 199,90/ano</button>`
-    : `<a class="qx-btn qx-btn-gold" href="/?assinar=completo-mensal#planos" data-amostra-cta="mensal">Assinar Completo · R$ 23,99/mês</a>
-          <a class="qx-btn qx-btn-line" href="/?assinar=completo-anual#planos" data-amostra-cta="anual">Assinar anual · R$ 199,90/ano</a>`;
+    : `<a class="qx-btn qx-btn-gold" href="/?assinar=completo-mensal${comOrigem}#planos" data-amostra-cta="mensal">Assinar Completo · R$ 23,99/mês</a>
+          <a class="qx-btn qx-btn-line" href="/?assinar=completo-anual${comOrigem}#planos" data-amostra-cta="anual">Assinar anual · R$ 199,90/ano</a>`;
   return `
   <section class="qx" id="questao-exemplo" data-amostra="${esc(modo)}" aria-labelledby="${uid}-titulo">
     <div class="qx-in">

@@ -439,6 +439,8 @@
     <!-- VIEW 4: PLANOS & APP -->
     <section class="view-section" id="view-plano" data-view-panel="plano" hidden>
       <div class="container page-pad">
+        <!-- Item 6: faixa do concurso de origem (aparece só para quem veio de uma página de concurso) -->
+        <section class="plano-origem" id="planoOrigem" role="region" aria-label="Concurso que você está vendo" hidden></section>
         <div class="pricing-hero">
           <span class="badge-gold">Check no Concurso · Planos Transparentes</span>
           <h2>Escolha seu plano para usar o Check no Concurso</h2>
@@ -466,10 +468,12 @@
 
         <div class="plans-grid two-plans">
           <article class="plan-card">
+            <span class="plano-origem-selo" data-origem-selo hidden>Indicado para este concurso</span>
             <div class="plan-top">
               <h3>Check Essencial</h3>
               <p class="muted-sm">Tudo do básico e do essencial para acompanhar seus concursos</p>
               <div class="plan-price"><strong>R$ 9,99</strong><span>/mês</span></div>
+              <p class="plano-origem-linha" data-origem-linha="essencial" hidden></p>
             </div>
             <ul class="plan-list">
               <li class="ok"><strong>100% dos concursos ativos e encerrados</strong> do Brasil</li>
@@ -493,6 +497,7 @@
                 <strong>R$ 23,99</strong><span>/mês</span>
               </div>
               <p class="price-subnote" id="completoPlanSubnote">Ou <strong>R$ 199,90/ano</strong> (equivale a R$ 16,66/mês — economize R$ 87,98)</p>
+              <p class="plano-origem-linha" data-origem-linha="completo" hidden></p>
             </div>
             <ul class="plan-list">
               <li class="ok"><strong>Tudo do Plano Essencial</strong> (concursos, editais e cursos)</li>
@@ -637,6 +642,9 @@
           <button type="button" class="icon-btn close-btn" id="closeDetailBtn" aria-label="Fechar detalhes">&times;</button>
         </div>
       </div>
+
+      <!-- Item 6: aviso "Assinatura ativa" depois do pagamento feito a partir deste concurso -->
+      <div id="detailPaidNotice" hidden></div>
 
       <div class="detail-kpis" id="detailKpis"></div>
 
@@ -901,10 +909,10 @@
   <!-- Toast feedback -->
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script type="module" src="/js/app.js?v=41"></script>
+  <script type="module" src="/js/app.js?v=43"></script>
   <script type="module" src="/js/google-auth.js?v=4"></script>
   <script type="module" src="/js/blog-strip.js?v=1"></script>
 <script type="module" src="/js/progresso-migracao.js?v=1"></script>
-<script type="module" src="/js/amostra-questao.js?v=1"></script>
+<script type="module" src="/js/amostra-questao.js?v=2"></script>
 </body>
 </html>

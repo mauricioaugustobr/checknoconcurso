@@ -4,6 +4,7 @@ import { exigirPlano, lerIndiceProvas, lerProvaArquivo, NIVEL } from '../lib/ace
 import { getProva } from '../public/js/data/provas.js';
 import { handleProgresso } from '../lib/progresso.js';
 import { aplicarPadroes, aplicarPadroesIndice } from '../lib/materias.js';
+import { origemValida, resumoOrigem } from '../lib/plano-origem.js';
 
 // Conteúdo pago: nunca fica em cache compartilhado (cada resposta depende da sessão)
 const privado = (res) => {
@@ -25,6 +26,16 @@ export async function GET(request) {
     const tipo = url.searchParams.get('tipo');
 
     if (tipo === 'progresso') return await handleProgresso(request);
+
+    // Resumo público do concurso de origem (tela de planos adaptada, item 6). Sem plano:
+    // são os mesmos dados que a página pública /concurso/<id> já mostra.
+    if (tipo === 'resumo') {
+      const id = origemValida(url.searchParams.get('c'));
+      const resumo = id ? resumoOrigem(await getLiveCatalog(), lerIndiceProvas(), id) : null;
+      const res = jsonResponse(resumo || { error: 'Concurso não encontrado.' }, resumo ? 200 : 404);
+      res.headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=600');
+      return res;
+    }
 
     if (tipo === 'prova') {
       const { response } = await exigirPlano(request, NIVEL.completo);

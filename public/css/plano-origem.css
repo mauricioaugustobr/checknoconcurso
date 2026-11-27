@@ -1,0 +1,255 @@
+/* ======================================================
+   Item 6 · Tela de planos adaptada ao concurso de origem
+   Opção 1 da Designer UI/UX: faixa no topo + 1 linha em cada cartão.
+   Paleta Família Check (tokens.css); modo noturno pelo theme-dark.css.
+   Amarelo só em fundo escuro, sempre com texto #0B2239.
+   ====================================================== */
+
+/* ---------- Faixa "Você está vendo" (tela de planos) ---------- */
+.plano-origem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-left: 6px solid var(--brand-primary);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 18px auto 22px;
+  max-width: 980px;
+  position: relative;
+  text-align: left;
+}
+.plano-origem[hidden] { display: none !important; }
+.po-info { min-width: 0; }
+.po-eyebrow {
+  margin: 0;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.po-titulo {
+  margin: 2px 0 8px;
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+.po-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.po-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: .82rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid #BCC8D4;
+  background: #E6ECF2;
+  color: #3E4E5E;
+}
+.po-chip.is-open { border-color: #88D8AF; background: #E6F7EE; color: #0C6B3B; }
+.po-nota { margin: 10px 0 0; font-size: .88rem; color: var(--text-secondary); max-width: 640px; }
+.po-acoes { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.po-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1.5px solid var(--border-default);
+  border-radius: 12px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.po-voltar:hover { border-color: var(--brand-primary); }
+.po-x {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-default);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.po-x:hover { border-color: var(--brand-primary); }
+.po-voltar:focus-visible, .po-x:focus-visible, .po-aviso-x:focus-visible, .po-aviso-btn:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+  .plano-origem { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 14px; }
+  .po-titulo { font-size: 1.2rem; padding-right: 52px; }
+  .po-acoes { display: block; }
+  .po-voltar { width: 100%; justify-content: center; }
+  .po-x { position: absolute; top: 8px; right: 8px; }
+}
+
+/* ---------- Linha "No <SIGLA>: …" em cada cartão ---------- */
+.plano-origem-linha {
+  display: block;
+  position: relative;
+  margin: 10px 0 6px;
+  padding: 10px 12px 10px 42px;
+  background: #E6F1FA;
+  border: 1px solid #9CC4E4;
+  border-radius: 12px;
+  font-size: .9rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+  text-align: left;
+}
+.plano-origem-linha[hidden] { display: none !important; }
+.plano-origem-linha::before {
+  content: "✓";
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+/* Selo do Essencial quando o concurso não tem prova anterior */
+.plano-origem-selo {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--brand-primary);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin-bottom: 8px;
+}
+.plano-origem-selo[hidden] { display: none !important; }
+
+/* Sem prova anterior: o Essencial ganha o destaque e o Completo perde */
+.plans-grid.is-origem-sem-prova .plan-card:not(.featured) {
+  border: 2px solid var(--brand-primary);
+  box-shadow: var(--shadow-md, 0 10px 26px rgba(15, 34, 54, .09));
+}
+.plans-grid.is-origem-sem-prova .plan-card.featured {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  box-shadow: none;
+}
+
+/* ---------- Aviso depois do pagamento (ficha do concurso) ---------- */
+#detailPaidNotice[hidden] { display: none !important; }
+#detailPaidNotice { padding: 0 24px; }
+.po-aviso {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #E6F7EE;
+  border: 2px solid #88D8AF;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 6px 0 14px;
+  color: #0F2236;
+}
+.po-aviso-ck {
+  flex: 0 0 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #0C6B3B;
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+.po-aviso-txt { flex: 1; min-width: 0; }
+.po-aviso-titulo {
+  margin: 0;
+  font: 700 1.1rem/1.3 'Inter', system-ui, sans-serif;
+  color: #0C6B3B;
+}
+.po-aviso-titulo:focus, .po-aviso-titulo:focus-visible { outline: none; }
+/* A ficha usa cores próprias nos títulos (claro e noturno): o aviso mantém o verde aprovado */
+#detailPaidNotice .po-aviso-titulo, html[data-theme="dark"] #detailPaidNotice .po-aviso-titulo { color: #0C6B3B; font: 700 1.1rem/1.3 'Inter', system-ui, sans-serif; }
+#detailPaidNotice .po-aviso p, html[data-theme="dark"] #detailPaidNotice .po-aviso p { color: #2E465E; }
+.po-aviso p { margin: 4px 0 10px; color: #2E465E; font-size: .92rem; }
+.po-aviso-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: #0C6B3B;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.po-aviso-btn:hover { background: #09552F; }
+.po-aviso-x {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  margin: -8px -8px 0 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #2E465E;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+@media (max-width: 720px) {
+  #detailPaidNotice { padding: 0 16px; }
+  .po-aviso { padding: 14px; gap: 10px; }
+  .po-aviso-btn { width: 100%; justify-content: center; }
+}
+
+/* ---------- Página do concurso: botões "Assinar e acompanhar" ---------- */
+.pg-assinar-concurso { margin: 14px 0 8px; }
+.pg-assinar-acoes { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+.pg-assinar-acoes .pg-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; }
+.pg-btn.pg-btn-secundario {
+  background: transparent;
+  color: var(--brand-primary, #0C4F83);
+  box-shadow: inset 0 0 0 1.5px var(--brand-primary, #0C4F83);
+}
+.pg-btn.pg-btn-secundario:hover { background: rgba(12, 79, 131, .06); }
+.pg-assinar-curto { display: none; }
+.pg-assinar-curto small { display: block; font-weight: 500; font-size: .8rem; opacity: .92; }
+.pg-assinar-apoio { margin: 8px 0 0; font-size: .86rem; color: var(--text-muted, #4D657C); }
+@media (max-width: 640px) {
+  .pg-assinar-acoes { flex-direction: column; }
+  .pg-assinar-acoes .pg-btn { width: 100%; }
+  .pg-btn.pg-btn-assinar { min-height: 56px; flex-direction: column; line-height: 1.2; }
+  .pg-assinar-longo { display: none; }
+  .pg-assinar-curto { display: block; }
+  .pg-assinar-preco { display: none; }
+}
+
+/* ---------- Modo noturno ---------- */
+html[data-theme="dark"] .po-chip { border-color: #2C577F; background: #163A5E; color: #C9D8E6; }
+html[data-theme="dark"] .po-chip.is-open { border-color: #2E8A5C; background: #0F3B2A; color: #7EE2AE; }
+html[data-theme="dark"] .plano-origem { border-left-color: #7AB9EA; }
+html[data-theme="dark"] .plano-origem-linha { background: #173F66; border-color: #33699A; }
+html[data-theme="dark"] .plano-origem-linha::before { background: #7AB9EA; color: #0B2239; }
+html[data-theme="dark"] .plano-origem-selo { background: #7AB9EA; color: #0B2239; }
+html[data-theme="dark"] .plans-grid.is-origem-sem-prova .plan-card:not(.featured) { border-color: #7AB9EA; }
+html[data-theme="dark"] .plans-grid.is-origem-sem-prova .plan-card.featured { background: var(--bg-surface); }
+/* Padrão aprovado: no noturno, caixa branca com texto e borda verdes */
+html[data-theme="dark"] .po-aviso { background: #FFFFFF; border-color: #0C6B3B; color: #0F2236; }
+html[data-theme="dark"] .po-aviso p { color: #2E465E; }
+html[data-theme="dark"] .po-aviso-x { color: #2E465E; }
+html[data-theme="dark"] .pg-btn.pg-btn-secundario { background: transparent; color: #F4F8FB; box-shadow: inset 0 0 0 1.5px #5A82A8; }
+html[data-theme="dark"] .pg-btn.pg-btn-secundario:hover { background: rgba(255, 255, 255, .06); }

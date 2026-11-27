@@ -1,5 +1,9 @@
 import { PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/site-info.js';
 import { montarTelaPlano } from './plan-gate.js?v=2';
+import { lerOrigem, limparOrigem, montarFaixaOrigem, buscarResumo, avisoAssinaturaHTML } from './plano-origem.js?v=2';
+
+// Item 6: aviso "Assinatura ativa. Este é o seu concurso." na ficha do concurso de origem
+let avisoAssinatura = null; // { id, resumo }
 // Não há plano grátis: o catálogo e o índice de provas chegam pela API, só para quem tem plano
 // (o servidor confere a assinatura). Nada disso fica em arquivo público.
 const PROVAS = {};
@@ -543,13 +547,54 @@ async function openStripePortal() {
   }
 }
 
+// Item 6: depois do pagamento feito a partir de um concurso, abre a ficha dele com o aviso
+async function mostrarAvisoAssinatura(id) {
+  const resumo = await buscarResumo(id);
+  limparOrigem(); // a tela de planos volta a ser a geral
+  if (!resumo) return;
+  avisoAssinatura = { id, resumo };
+  if (activeView !== 'concursos') switchView('concursos');
+  if (catalog.some((c) => c.id === id)) {
+    openContestDetail(id);
+  } else {
+    concursoPendente = id;
+    await sincronizarAcesso(); // carrega o catálogo do assinante e abre a ficha
+  }
+}
+
+function renderAvisoAssinatura(c) {
+  const slot = $('#detailPaidNotice');
+  if (!slot) return;
+  const ativo = avisoAssinatura && avisoAssinatura.id === c.id && hasEssencial();
+  if (!ativo) { slot.hidden = true; slot.innerHTML = ''; return; }
+  const jaMostrado = slot.dataset.id === c.id && !slot.hidden;
+  slot.innerHTML = avisoAssinaturaHTML(avisoAssinatura.resumo, { completo: hasCompleto() });
+  slot.dataset.id = c.id;
+  slot.hidden = false;
+  // Foco no título do aviso só na primeira vez (o leitor de tela lê o aviso)
+  if (!jaMostrado) setTimeout(() => slot.querySelector('.po-aviso-titulo')?.focus({ preventScroll: true }), 80);
+}
+
 // Volta da Stripe: confirma a assinatura e libera o plano na hora
 async function handleStripeReturn(params) {
   const status = params.get('assinatura');
   if (!status) return;
-  const limpar = () => history.replaceState(null, '', window.location.pathname);
+  const limpar = () => history.replaceState(null, '', window.location.pathname + (window.location.hash === '#planos' ? '#planos' : ''));
+  const origem = lerOrigem(params);
   if (status === 'cancelada') { showToast('Pagamento não concluído. Você pode assinar quando quiser.'); limpar(); return; }
   if (status === 'gerenciada') { limpar(); return; }
+  // Pix pago na página de pagamento: confere o plano no servidor e abre a ficha do concurso de origem
+  if (status === 'ativa') {
+    limpar();
+    if (!origem) return;
+    const conferir = () => setTimeout(() => {
+      if (hasEssencial()) mostrarAvisoAssinatura(origem);
+      else showToast('Pagamento recebido. A liberação pode levar alguns segundos — atualize a página.');
+    }, 600);
+    if (window.__cncAuthLast) conferir();
+    else window.addEventListener('cnc:auth-session', conferir, { once: true });
+    return;
+  }
   if (status === 'sucesso' && params.get('session_id')) {
     try {
       showToast('Confirmando seu pagamento…');
@@ -565,6 +610,7 @@ async function handleStripeReturn(params) {
         saveState();
         renderAll();
         showToast(`Assinatura ativa: ${getPlanMeta(r.plan).nome}. Bons estudos!`);
+        if (origem) mostrarAvisoAssinatura(origem);
       } else {
         showToast('Pagamento recebido. A liberação pode levar alguns segundos — atualize a página.');
       }
@@ -1225,6 +1271,7 @@ function closeDetailModal() {
   $('#detailModal').hidden = true;
   document.body.style.overflow = '';
   activeDetailId = null;
+  avisoAssinatura = null; // o aviso de assinatura aparece uma vez só
 }
 
 function renderDetailModal() {
@@ -1259,6 +1306,7 @@ function renderDetailModal() {
   `;
 
   renderTrainNow(c);
+  renderAvisoAssinatura(c);
 
   $$('.modal-tab').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.detailTab === activeDetailTab);
@@ -1664,9 +1712,10 @@ function openCheckoutModal(initialPlan = 'essencial') {
     showToast('Você é admin: todos os planos já estão liberados para você.');
     return;
   }
-  // Pagamento real: página segura da Stripe
+  // Pagamento real: página segura da Stripe (leva junto o concurso de origem, se houver)
   if (stripeOn()) {
-    window.location.assign('/pagar.html?plan=' + encodeURIComponent(initialPlan));
+    const origem = lerOrigem();
+    window.location.assign('/pagar.html?plan=' + encodeURIComponent(initialPlan) + (origem ? '&origem=' + encodeURIComponent(origem) : ''));
     return;
   }
   selectCheckoutPlan(initialPlan);
@@ -1713,6 +1762,7 @@ function switchView(viewName) {
     btn.classList.toggle('active', btn.dataset.view === viewName);
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (viewName === 'plano') montarFaixaOrigem(); // item 6: faixa do concurso de origem
   if (viewName === 'cursos') renderCoursesCatalog();
   if (viewName === 'salvos') renderSavedView();
 }
@@ -2267,6 +2317,14 @@ async function init() {
   populateSelects();
   bindEvents();
   $('#planGateLoginBtn')?.addEventListener('click', () => openAuthModal('login'));
+  // Item 6: ✕ do aviso "Assinatura ativa" (não volta a aparecer)
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('[data-aviso-fechar]')) return;
+    avisoAssinatura = null;
+    const slot = $('#detailPaidNotice');
+    if (slot) { slot.hidden = true; slot.innerHTML = ''; }
+    $('#detailTitle')?.focus?.();
+  });
   renderAll();
   // O índice de provas chega depois: atualiza selos, contador e a aba aberta
   if (catalogoCarregado) carregarProvas().then(() => {

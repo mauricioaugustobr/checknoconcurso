@@ -1,4 +1,20 @@
 const plan = new URLSearchParams(location.search).get("plan");
+
+// Concurso de origem (item 6): veio de uma página de concurso? Depois de pagar, volta para a ficha dele.
+const ORIGEM_RE = /^[a-z0-9][a-z0-9-]{0,99}$/;
+const origem = (() => {
+  const daUrl = new URLSearchParams(location.search).get("origem");
+  if (daUrl && ORIGEM_RE.test(daUrl)) return daUrl;
+  try {
+    const salvo = JSON.parse(sessionStorage.getItem("cnc-origem") || "null");
+    if (salvo && ORIGEM_RE.test(salvo.id) && Date.now() - salvo.em < 6 * 3600e3) return salvo.id;
+  } catch { /* sem origem */ }
+  return null;
+})();
+if (origem) {
+  const trocar = document.querySelector(".summary-link");
+  if (trocar) trocar.href = "/?origem=" + origem + "#planos";
+}
 const PLANS = {
   essencial: {
     name: "Check Essencial",
@@ -128,6 +144,11 @@ async function display(order) {
         sessionStorage.removeItem("pixOrder");
         elem("payment").hidden = true;
         say("Pagamento confirmado! Seu plano está disponível.");
+        // Veio de um concurso: abre a ficha dele com o aviso "Assinatura ativa"
+        if (origem) {
+          say("Pagamento confirmado! Abrindo a ficha do seu concurso…");
+          setTimeout(() => location.assign("/?assinatura=ativa&origem=" + origem), 1200);
+        }
         return;
       }
       say("Aguardando a confirmação do banco. Não feche esta página.");
@@ -155,7 +176,7 @@ elem("buyer").onsubmit = async (event) => {
   try {
     const order = await post("pix", data);
     if (card) {
-      location.assign((await post("checkout", { plan })).url);
+      location.assign((await post("checkout", origem ? { plan, origem } : { plan })).url);
       return;
     }
     const saved = { ...order, plan, until: Date.now() + 1800000 };
