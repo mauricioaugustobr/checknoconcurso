@@ -104,7 +104,46 @@ async function init() {
     if (!cfg) cfg = window.__cncConfig = await (await fetch('/api/auth/config')).json();
     clientId = cfg.googleClientId;
     if (!clientId) return;
-    const google = await loadGsi();
+  } catch (err) {
+    console.warn('[google-auth]', err.message);
+    window.__cncGoogleUnavailable = true;
+    return;
+  }
+
+  // O botão do Google só é desenhado quando a janela "Entrar" abre. Antes, ele era
+  // desenhado em toda visita à página inicial, e o código do próprio Google gerava
+  // um erro no console ("reading 'P'"), além de baixar o script para quem nunca entra.
+  const modal = document.getElementById('authModal');
+  if (!modal) {
+    prepareGoogle().then(renderOfficialButton).catch(markUnavailable);
+    return;
+  }
+  const showWhenOpen = () => {
+    if (modal.hidden) return;
+    prepareGoogle()
+      .then((google) => requestAnimationFrame(() => renderOfficialButton(google)))
+      .catch(markUnavailable);
+  };
+  new MutationObserver(showWhenOpen).observe(modal, { attributes: true, attributeFilter: ['hidden'] });
+  showWhenOpen(); // a janela já pode estar aberta
+
+  // Adianta só o download do script quando a pessoa vai clicar em "Entrar".
+  const warm = () => { loadGsi().catch(() => {}); };
+  ['headerLoginBtn', 'mobileAccountTab', 'freeSignupBtn'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('pointerenter', warm, { once: true });
+    el.addEventListener('touchstart', warm, { once: true, passive: true });
+    el.addEventListener('focus', warm, { once: true });
+  });
+}
+
+let gsiInitialized = null;
+function prepareGoogle() {
+  if (gsiInitialized) return gsiInitialized;
+  window.__cncGoogleLoading = true;
+  window.__cncGoogleUnavailable = false;
+  gsiInitialized = loadGsi().then((google) => {
     google.accounts.id.initialize({
       client_id: clientId,
       callback: onCredential,
@@ -114,18 +153,18 @@ async function init() {
       itp_support: true,
       use_fedcm_for_button: true
     });
-    renderOfficialButton(google);
-    // Quando a janela de login abre, re-renderiza (largura correta da coluna)
-    const modal = document.getElementById('authModal');
-    if (modal) {
-      new MutationObserver(() => {
-        if (!modal.hidden) requestAnimationFrame(() => renderOfficialButton(google));
-      }).observe(modal, { attributes: true, attributeFilter: ['hidden'] });
-    }
-  } catch (err) {
-    console.warn('[google-auth]', err.message);
-    window.__cncGoogleUnavailable = true;
-  }
+    window.__cncGoogleLoading = false;
+    return google;
+  });
+  // Se falhar, permite tentar de novo na próxima vez que a janela abrir.
+  gsiInitialized.catch(() => { gsiInitialized = null; gsiReady = null; });
+  return gsiInitialized;
+}
+
+function markUnavailable(err) {
+  console.warn('[google-auth]', err && err.message);
+  window.__cncGoogleLoading = false;
+  window.__cncGoogleUnavailable = true;
 }
 
 window.addEventListener('cnc:auth-logout', async () => {

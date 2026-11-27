@@ -1,4 +1,4 @@
-const CACHE_NAME = 'check-no-concurso-v34';
+const CACHE_NAME = 'check-no-concurso-v35';
 const ASSETS = [
   '/',
   '/index.html',
@@ -20,7 +20,12 @@ const ASSETS = [
   '/css/detalhe-responsivo.css',
   '/css/theme-dark.css',
   '/js/theme.js',
-  '/js/consent.js'
+  '/js/consent.js',
+  '/css/header-nav.css',
+  '/css/blog-links.css',
+  '/css/pages-footer.css',
+  '/js/blog-strip.js',
+  '/js/plan-gate.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -58,6 +63,7 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       })
-      .catch(() => caches.match(event.request))
+      // Sem internet: tenta a cópia exata e, se não houver, a mesma página/arquivo sem o ?v=
+      .catch(() => caches.match(event.request).then((r) => r || caches.match(event.request, { ignoreSearch: true })))
   );
 });

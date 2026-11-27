@@ -722,6 +722,10 @@ function bindAuthEvents() {
   });
   // Botão reserva: só aparece se o botão oficial do Google não carregar (google-auth.js).
   $('#googleLoginBtn').addEventListener('click', () => {
+    if (window.__cncGoogleLoading && !window.__cncGoogleUnavailable) {
+      showToast('Carregando o login com Google, só um instante…');
+      return;
+    }
     showToast('O login com Google não carregou. Verifique a internet ou bloqueadores e tente de novo.');
   });
 
