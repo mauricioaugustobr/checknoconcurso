@@ -118,6 +118,10 @@
       "destination": "/api/concursos?tipo=provas"
     },
     {
+      "source": "/api/progresso",
+      "destination": "/api/concursos?tipo=progresso"
+    },
+    {
       "source": "/api/prova/:id",
       "destination": "/api/concursos?tipo=prova&c=:id"
     },

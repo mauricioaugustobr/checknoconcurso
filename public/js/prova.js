@@ -1,4 +1,6 @@
 // As provas são do plano Check Completo: o servidor confere a assinatura antes de enviar.
+import { criarProgresso } from "./progresso-sync.js?v=1";
+
 const examKey = new URLSearchParams(location.search).get("c") || "pm-sp-soldado-2026";
 let semAcesso = null; // "login" | "completo" | "plano"
 async function loadExam(key) {
@@ -27,6 +29,16 @@ const empty = el("examEmpty");
 let answers = {};
 let revealed = {};
 let current = 0;
+let savedAt = 0;
+
+// Progresso salvo também na conta (servidor), em lotes; o aparelho continua com a cópia local
+const progresso = exam
+  ? criarProgresso(exam.id, {
+      obter: () => ({ answers, revealed, current }),
+      salvar: () => saveState({ touch: false }),
+      aplicar: aplicarProgressoDaConta,
+    })
+  : null;
 
 function loadState() {
   try {
@@ -35,19 +47,37 @@ function loadState() {
       answers = saved.answers;
       revealed = saved.revealed || {};
       current = Math.min(Math.max(Number(saved.current) || 0, 0), exam.questoes.length - 1);
+      savedAt = Number(saved.at) || 0;
     }
+    progresso?.carregarMeta(saved);
   } catch {
     answers = {};
     revealed = {};
   }
 }
 
-function saveState() {
+function saveState({ touch = true } = {}) {
+  if (touch) savedAt = Date.now();
   try {
-    localStorage.setItem(STORE_KEY, JSON.stringify({ answers, revealed, current, at: Date.now() }));
+    localStorage.setItem(STORE_KEY, JSON.stringify({ answers, revealed, current, at: savedAt, ...(progresso ? progresso.meta() : {}) }));
   } catch {
     /* armazenamento indisponível: segue sem persistir */
   }
+}
+
+/** A conta respondeu: a tela passa a mostrar o progresso juntado (aparelho + conta). */
+function aplicarProgressoDaConta(final) {
+  answers = final.answers || {};
+  revealed = final.revealed || {};
+  current = Math.min(Math.max(Number(final.current) || 0, 0), exam.questoes.length - 1);
+  saveState();
+  const note = el("examSyncNote");
+  if (note) {
+    note.textContent = "Seu progresso fica salvo na sua conta e aparece em qualquer aparelho em que você entrar.";
+    note.hidden = false;
+  }
+  if (!runner.hidden) renderAll();
+  else if (answeredCount() > 0) el("startBtn").textContent = "Continuar de onde parei";
 }
 
 const LETTERS = ["A", "B", "C", "D", "E"];
@@ -123,6 +153,9 @@ function initExam() {
     el("startBtn").textContent = "Continuar de onde parei";
   }
 
+  // Busca o progresso da conta e envia o que só existe neste aparelho (histórico antigo incluído)
+  progresso?.sincronizarAoAbrir({ answers, revealed, current, at: savedAt });
+
   el("startBtn").addEventListener("click", () => {
     intro.hidden = true;
     runner.hidden = false;
@@ -142,6 +175,7 @@ function initExam() {
     const q = questionAt(current);
     if (!answers[q.number]) {
       answers[q.number] = "—";
+      progresso?.marcar(q.number);
       saveState();
       renderAll();
     }
@@ -192,6 +226,7 @@ function escapeHtml(value) {
 function goTo(index) {
   if (index < 0 || index >= exam.questoes.length) return;
   current = index;
+  progresso?.marcarPosicao();
   saveState();
   renderAll();
   el("questionCard").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -359,7 +394,8 @@ function paintSelection(letter) {
 function checkAnswer() {
   const q = questionAt(current);
   if (q.annulled) return;
-  if (revealed[q.number] || (answers[q.number] && answers[q.number] !== "-")) return;
+  // Questão pulada ("—") ainda pode ser respondida depois
+  if (revealed[q.number] || (answers[q.number] && answers[q.number] !== "—")) return;
   const input = document.querySelector('input[name="choice"]:checked');
   if (!input) {
     const feedback = el("feedback");
@@ -372,6 +408,7 @@ function checkAnswer() {
   const letter = input.value;
   answers[q.number] = letter;
   revealed[q.number] = true;
+  progresso?.marcar(q.number);
   saveState();
   renderProgress();
   renderNavigator();
@@ -510,7 +547,7 @@ function showResult() {
   const total = exam.total;
   const answered = answeredCount();
   const correct = correctCount();
-  const skipped = Object.values(answers).filter((a) => a === "-").length;
+  const skipped = Object.values(answers).filter((a) => a === "—").length;
   const annulled = exam.questoes.filter((q) => q.annulled).length;
   const valid = Math.max(answered - skipped, 0);
   const wrong = Math.max(valid - correct, 0);
@@ -549,6 +586,7 @@ function showResult() {
   `;
   panel.hidden = false;
   panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  progresso?.enviarAgora();
 
   el("continueBtn").addEventListener("click", () => {
     const first = exam.questoes.findIndex((q) => !answers[q.number]);
@@ -558,6 +596,7 @@ function showResult() {
     answers = {};
     revealed = {};
     current = 0;
+    progresso?.reiniciar();
     saveState();
     renderAll();
     el("questionCard").scrollIntoView({ behavior: "smooth", block: "start" });

@@ -18,7 +18,7 @@ import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from './li
 import { handlePix } from './lib/pix.js';
 import { handleCancel, handleCancelRequest } from './lib/cancel.js';
 import { handleExplicacao } from './lib/explicacao.js';
-import { GET as concursosApi } from './api/concursos.js';
+import { GET as concursosApi, POST as concursosPost } from './api/concursos.js';
 import { GET as statsApi } from './api/stats.js';
 import { ehPrivado } from './tools/build-public.mjs';
 const STRIPE_ROUTES = {
@@ -132,8 +132,13 @@ export function createServer() {
       }
 
       // Catálogo e provas: só com plano (mesma função da Vercel, api/concursos.js)
-      if (pathname === '/api/concursos' || pathname === '/api/provas' || pathname.startsWith('/api/prova/')) {
+      if (pathname === '/api/concursos' || pathname === '/api/provas' || pathname === '/api/progresso' || pathname.startsWith('/api/prova/')) {
         const apiUrl = new URL(url);
+        if (pathname === '/api/progresso') {
+          apiUrl.searchParams.set('tipo', 'progresso');
+          const handler = req.method === 'POST' ? concursosPost : concursosApi;
+          return sendWebResponse(res, await handler(await toWebRequest(req, apiUrl)));
+        }
         if (pathname === '/api/provas') apiUrl.searchParams.set('tipo', 'provas');
         if (pathname.startsWith('/api/prova/')) { apiUrl.searchParams.set('tipo', 'prova'); apiUrl.searchParams.set('c', pathname.slice('/api/prova/'.length)); }
         return sendWebResponse(res, await concursosApi(await toWebRequest(req, apiUrl)));
