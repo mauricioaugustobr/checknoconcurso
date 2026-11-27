@@ -1,5 +1,7 @@
 import { PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/site-info.js';
 import { montarTelaPlano } from './plan-gate.js?v=2';
+import { botaoCompartilharHTML } from './compartilhar.js?v=1';
+import { dadosBotao } from './compartilhar-dados.js?v=1';
 import { lerOrigem, limparOrigem, montarFaixaOrigem, buscarResumo, avisoAssinaturaHTML } from './plano-origem.js?v=2';
 
 // Item 6: aviso "Assinatura ativa. Este é o seu concurso." na ficha do concurso de origem
@@ -1294,6 +1296,12 @@ function renderDetailModal() {
   `;
 
   $('#detailSaveBtn').classList.toggle('saved', saved);
+  // Item 7: Compartilhar (entre Salvar e ✕)
+  const shareSlot = $('#detailShareSlot');
+  if (shareSlot && shareSlot.dataset.id !== c.id) {
+    shareSlot.innerHTML = botaoCompartilharHTML(dadosBotao(c, window.location.origin), { variante: 'ficha' });
+    shareSlot.dataset.id = c.id;
+  }
 
   const taxaLabel = c.taxaInscricao === 0 ? 'Gratuita' : formatBRL(c.taxaInscricao);
   const provaLabel = c.dataProva ? formatDateBR(c.dataProva) : (c.status === 'Previsto / Autorizado' ? 'A definir' : 'Sem prova escrita');

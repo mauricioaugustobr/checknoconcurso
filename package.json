@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
-    "test": "node tests/smoke.test.mjs && node tests/auth.test.mjs && node tests/search.test.mjs && node tests/admin.test.mjs && node tests/stripe.test.mjs && node tests/acesso.test.mjs && node tests/acesso-manual.test.mjs && node tests/progresso.test.mjs && node tests/materias.test.mjs && node tests/amostra.test.mjs && node tests/plano-origem.test.mjs && node --experimental-test-module-mocks --no-warnings --test tests/blog-aeo.test.mjs"
+    "test": "node tests/smoke.test.mjs && node tests/auth.test.mjs && node tests/search.test.mjs && node tests/admin.test.mjs && node tests/stripe.test.mjs && node tests/acesso.test.mjs && node tests/acesso-manual.test.mjs && node tests/progresso.test.mjs && node tests/materias.test.mjs && node tests/amostra.test.mjs && node tests/plano-origem.test.mjs && node tests/compartilhar.test.mjs && node --experimental-test-module-mocks --no-warnings --test tests/blog-aeo.test.mjs"
   },
   "engines": {
     "node": ">=22.0.0"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.2.1"
+    "@neondatabase/serverless": "^1.2.1",
+    "@resvg/resvg-js": "^2.6.2",
+    "satori": "^0.63.2"
   }
 }

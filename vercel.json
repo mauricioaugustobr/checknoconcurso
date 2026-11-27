@@ -14,7 +14,7 @@
       "includeFiles": "public/provas/index.json"
     },
     "api/page.js": {
-      "includeFiles": "content/blog/**"
+      "includeFiles": "{content/blog/**,lib/og-fonts/**,public/brand/logo-horizontal-escuro.svg}"
     }
   },
   "headers": [
@@ -132,6 +132,10 @@
     {
       "source": "/llms-full.txt",
       "destination": "/api/page?tipo=llms&completo=1"
+    },
+    {
+      "source": "/og/:formato/:arquivo",
+      "destination": "/api/page?tipo=og&formato=:formato&arquivo=:arquivo"
     },
     {
       "source": "/concurso/:id",

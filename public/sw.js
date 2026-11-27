@@ -1,4 +1,4 @@
-const CACHE_NAME = 'check-no-concurso-v39';
+const CACHE_NAME = 'check-no-concurso-v40';
 const ASSETS = [
   '/',
   '/index.html',
@@ -32,7 +32,10 @@ const ASSETS = [
   '/js/data/amostras.js',
   '/css/amostra-questao.css',
   '/js/plano-origem.js',
-  '/css/plano-origem.css'
+  '/css/plano-origem.css',
+  '/js/compartilhar.js',
+  '/js/compartilhar-dados.js',
+  '/css/compartilhar.css'
 ];
 
 self.addEventListener('install', (event) => {
