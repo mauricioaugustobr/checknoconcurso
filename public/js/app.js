@@ -2289,6 +2289,15 @@ function openFromLink() {
   else if (concursoId) concursoPendente = concursoId;
   // Links "/#planos" das páginas públicas abrem a escolha de plano
   if (window.location.hash === '#planos') switchView('plano');
+  // Botões "Assinar" da questão de exemplo nas páginas públicas: abre a assinatura do Completo
+  const assinar = params.get('assinar');
+  if (['completo-mensal', 'completo-anual'].includes(assinar)) {
+    switchView('plano');
+    // Espera saber se a pessoa já está conectada (a sessão chega pelo google-auth.js)
+    const abrir = () => setTimeout(() => openCheckoutModal(assinar), 300);
+    if (window.__cncAuthLast) abrir();
+    else window.addEventListener('cnc:auth-session', abrir, { once: true });
+  }
   if (params.has('entrar') && !state.user) openAuthModal('login');
   // Volta para a página de origem depois do login (só caminhos conhecidos deste site)
   const voltar = params.get('voltar');

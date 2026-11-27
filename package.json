@@ -1,11 +1,11 @@
 {
   "name": "check-no-concurso",
   "version": "0.2.0",
-  "description": "Check no Concurso (checknoconcurso.com.br) Ã¢â‚¬â€ Site + App PWA com todos os concursos abertos e encerrados do Brasil, datas de prova atualizadas, editais, comparador de cursos e 5 provas anteriores.",
+  "description": "Check no Concurso (checknoconcurso.com.br) ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Site + App PWA com todos os concursos abertos e encerrados do Brasil, datas de prova atualizadas, editais, comparador de cursos e 5 provas anteriores.",
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
-    "test": "node tests/smoke.test.mjs && node tests/auth.test.mjs && node tests/search.test.mjs && node tests/admin.test.mjs && node tests/stripe.test.mjs && node tests/acesso.test.mjs && node tests/acesso-manual.test.mjs && node tests/progresso.test.mjs && node tests/materias.test.mjs && node --experimental-test-module-mocks --no-warnings --test tests/blog-aeo.test.mjs"
+    "test": "node tests/smoke.test.mjs && node tests/auth.test.mjs && node tests/search.test.mjs && node tests/admin.test.mjs && node tests/stripe.test.mjs && node tests/acesso.test.mjs && node tests/acesso-manual.test.mjs && node tests/progresso.test.mjs && node tests/materias.test.mjs && node tests/amostra.test.mjs && node --experimental-test-module-mocks --no-warnings --test tests/blog-aeo.test.mjs"
   },
   "engines": {
     "node": ">=22.0.0"
