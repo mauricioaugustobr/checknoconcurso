@@ -1266,7 +1266,7 @@ function renderSavedView() {
     const examDays = daysUntil(c.dataProva);
     const examSummary = !c.dataProva
       ? c.provaObservacao
-      : `Data da prova: ${formatDateBR(c.dataProva)} (${examDays >= 0 ? `faltam ${examDays} dias` : 'já realizada'})`;
+      : `Data da prova: ${formatDateBR(c.dataProva)} (${examDays > 1 ? `faltam ${examDays} dias` : examDays === 1 ? 'falta 1 dia' : examDays === 0 ? 'é hoje' : 'já realizada'})`;
     // Item 12: o que mudou, próximo passo, link oficial e treino rápido (Completo)
     const info = infoAcompanhado(c.id);
     const treino = hasCompleto() && PROVAS[c.id]
