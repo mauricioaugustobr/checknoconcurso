@@ -458,6 +458,42 @@ function textoNota(n) {
   ].join('\n');
 }
 
+/* Enviar a nota por e-mail: abre o Gmail (ou o app de e-mail) com o endereço da pessoa e o texto pronto.
+   Você anexa o PDF da nota e envia. Nada é enviado pelo site. */
+const ASSUNTO_ENVIO = 'Sua nota fiscal - Check no Concurso';
+function mensagemEnvioNota(n, numero) {
+  const primeiroNome = String(n.nome || '').trim().split(/\s+/)[0] || '';
+  return [
+    `Olá${primeiroNome ? `, ${primeiroNome}` : ''}!`,
+    '',
+    `Segue em anexo a nota fiscal${numero ? ` nº ${numero}` : ''} da sua assinatura do Check no Concurso.`,
+    '',
+    `Plano: ${PLANO_NOTA[n.plano] || n.plano || '—'}`,
+    `Valor: ${brl(n.centavos / 100)}`,
+    `Pago em: ${n.pagoEm ? new Date(n.pagoEm).toLocaleDateString('pt-BR') : '—'}`,
+    '',
+    'Obrigado por assinar! Qualquer dúvida, é só responder este e-mail.',
+    '',
+    'Equipe Check no Concurso'
+  ].join('\n');
+}
+
+function linksEnvioNota(n, numero) {
+  const para = String(n.email || '');
+  const assunto = numero ? `${ASSUNTO_ENVIO} (nº ${numero})` : ASSUNTO_ENVIO;
+  const corpo = mensagemEnvioNota(n, numero);
+  return {
+    gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(para)}&su=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`,
+    app: `mailto:${para}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`
+  };
+}
+
+function botoesEnvioNota(n) {
+  if (!n.email || !EMAIL_LINK_OK.test(n.email)) return '<span class="ad-alerta">sem e-mail válido para enviar a nota</span>';
+  return `<button type="button" class="ad-btn ad-btn-sm" data-nota-enviar="gmail">Enviar nota por e-mail</button>
+        <button type="button" class="ad-link-btn" data-nota-enviar="app">ou abrir no app de e-mail</button>`;
+}
+
 async function loadNotas() {
   const data = await api(`/api/admin/notas?filtro=${filtroNotas}`);
   $$('[data-notas-filtro]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.notasFiltro === filtroNotas)));
@@ -482,6 +518,7 @@ async function loadNotas() {
         <input type="text" data-nota-numero maxlength="40" placeholder="nº da nota (opcional)" aria-label="Número da nota" value="${esc(n.numero || '')}">
         ${n.emitida && n.emitidaEm ? `<span class="ad-muted">em ${quando(n.emitidaEm)}</span>` : ''}
         <button type="button" class="ad-btn-ghost ad-btn-sm" data-nota-copiar>Copiar dados</button>
+        ${botoesEnvioNota(n)}
       </td></tr>`).join('')
     || `<tr><td colspan="9" class="ad-muted">${filtroNotas === 'pendentes' ? 'Nenhum pagamento sem nota.' : 'Nenhum pagamento real ainda.'}</td></tr>`;
 }
@@ -492,6 +529,19 @@ function bindNotas() {
     loadNotas().catch((err) => toast(err.message));
   }));
   $('#adNotasRows').addEventListener('click', async (e) => {
+    // Enviar nota por e-mail: Gmail em nova aba ou o app de e-mail do computador, com tudo preenchido
+    const enviar = e.target.closest('[data-nota-enviar]');
+    if (enviar) {
+      const linha = enviar.closest('tr[data-ref]');
+      const item = linha && itensNotas.get(`${linha.dataset.origem}:${linha.dataset.ref}`);
+      if (!item) return;
+      const numero = String($('[data-nota-numero]', linha)?.value || '').replace(/[<>"']/g, '').trim();
+      const links = linksEnvioNota(item, numero);
+      if (enviar.dataset.notaEnviar === 'gmail') window.open(links.gmail, '_blank', 'noopener');
+      else window.location.href = links.app;
+      toast('Anexe o PDF da nota e envie. Depois marque "Nota emitida".');
+      return;
+    }
     const botao = e.target.closest('[data-nota-copiar]');
     if (!botao) return;
     const tr = botao.closest('tr[data-ref]');
