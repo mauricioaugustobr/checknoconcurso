@@ -461,19 +461,14 @@ function textoNota(n) {
 /* Enviar a nota por e-mail: abre o Gmail (ou o app de e-mail) com o endereço da pessoa e o texto pronto.
    Você anexa o PDF da nota e envia. Nada é enviado pelo site. */
 const ASSUNTO_ENVIO = 'Sua nota fiscal - Check no Concurso';
+// Texto aprovado pelo Maurício (28/11/2026): só mudam o número da nota, o plano, o valor e a data
 function mensagemEnvioNota(n, numero) {
-  const primeiroNome = String(n.nome || '').trim().split(/\s+/)[0] || '';
+  const pagoEm = n.pagoEm ? new Date(n.pagoEm).toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : '—';
   return [
-    `Olá${primeiroNome ? `, ${primeiroNome}` : ''}!`,
-    '',
+    'Olá!',
     `Segue em anexo a nota fiscal${numero ? ` nº ${numero}` : ''} da sua assinatura do Check no Concurso.`,
-    '',
-    `Plano: ${PLANO_NOTA[n.plano] || n.plano || '—'}`,
-    `Valor: ${brl(n.centavos / 100)}`,
-    `Pago em: ${n.pagoEm ? new Date(n.pagoEm).toLocaleDateString('pt-BR') : '—'}`,
-    '',
+    `Plano: ${PLANO_NOTA[n.plano] || n.plano || '—'} · Valor: ${brl(n.centavos / 100)} · Pago em: ${pagoEm}`,
     'Obrigado por assinar! Qualquer dúvida, é só responder este e-mail.',
-    '',
     'Equipe Check no Concurso'
   ].join('\n');
 }
