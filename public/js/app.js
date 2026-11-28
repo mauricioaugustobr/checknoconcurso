@@ -1,10 +1,11 @@
 import { PLATAFORMAS_PARCEIRAS, REGIOES_BRASIL, PLANOS, MARCA, ESTADOS_BRASIL } from './data/site-info.js';
 import { montarTelaPlano } from './plan-gate.js?v=2';
 import { botaoCompartilharHTML } from './compartilhar.js?v=1';
-import { seloHTML, seloPrazo } from './ultimos-dias.js?v=1';
+import { seloHTML, seloPrazo, hojeBR } from './ultimos-dias.js?v=1';
 import { dadosBotao } from './compartilhar-dados.js?v=1';
 import { lerOrigem, limparOrigem, montarFaixaOrigem, buscarResumo, avisoAssinaturaHTML } from './plano-origem.js?v=2';
 import { cadeadoTreinoHTML, faixaTreinoTravadaHTML, buscarPrevia, previaPronta } from './cadeado-essencial.js?v=1';
+import { sincronizarAcompanhados, alterarAcompanhado, esquecerListaDaConta, listaNaConta, infoAcompanhado, mudancasHTML, proximoPassoHTML, linkOficialHTML } from './acompanhados.js?v=1';
 
 // Item 6: aviso "Assinatura ativa. Este é o seu concurso." na ficha do concurso de origem
 let avisoAssinatura = null; // { id, resumo }
@@ -41,7 +42,8 @@ function semProvaNotice() {
 import { scoreConcurso, SEARCH_SUGGESTIONS } from './search.js?v=3';
 
 const STORAGE_KEY = 'check_no_concurso_state_v3';
-const TODAY_ISO = '2026-11-24';
+// Data de hoje no horário de Brasília (antes era fixa em 24/11/2026 e a contagem de dias ficava atrasada)
+const TODAY_ISO = hojeBR();
 
 const DEFAULT_STATE = {
   tier: 'guest', // 'guest' | 'essencial' | 'completo-mensal' | 'completo-anual'
@@ -268,6 +270,8 @@ async function sincronizarAcesso() {
   if (!statsPublicas && !catalogoCarregado) await carregarStatsPublicas();
   if (catalogoCarregado) populateSelects();
   renderAll();
+  // Item 12: a lista "Meus concursos" vem da conta
+  if (catalogoCarregado && hasEssencial() && state.user?.email) atualizarListaDaConta();
   if (concursoPendente && catalog.some((c) => c.id === concursoPendente)) {
     openContestDetail(concursoPendente);
     concursoPendente = null;
@@ -824,6 +828,7 @@ function bindAuthEvents() {
     } else if (state.user && state.user.provider === 'google') {
       // A sessão do Google expirou no servidor: encerra também no navegador
       state.user = null;
+      esquecerListaDaConta(state);
       applyServerRole(null);
       saveState();
       sincronizarAcesso();
@@ -849,6 +854,7 @@ function bindAuthEvents() {
   $('#logoutBtn').addEventListener('click', () => {
     if (state.user && state.user.provider === 'google') window.dispatchEvent(new CustomEvent('cnc:auth-logout'));
     state.user = null;
+    esquecerListaDaConta(state); // item 12: a lista da conta não fica neste navegador
     applyServerRole(null);
     saveState();
     renderAll();
@@ -1074,7 +1080,7 @@ function renderConcursosGrid() {
             ${secondaryBadge}
             ${semProvaAnterior(c.id) ? `<span class="badge-neutral" title="${escapeHtml(SEM_PROVA_TEXTO)}">Sem prova anterior</span>` : ''}
           </div>
-          <button type="button" class="save-icon-btn ${saved ? 'saved' : ''}" data-save-id="${escapeHtml(c.id)}" aria-label="${saved ? 'Remover dos salvos' : 'Salvar concurso'}" title="${saved ? 'Salvo' : 'Salvar concurso'}">
+          <button type="button" class="save-icon-btn ${saved ? 'saved' : ''}" data-save-id="${escapeHtml(c.id)}" aria-label="${saved ? 'Deixar de acompanhar' : 'Acompanhar este concurso'}" title="${saved ? 'Acompanhando' : 'Acompanhar este concurso'}">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
           </button>
         </div>
@@ -1242,8 +1248,8 @@ function renderSavedView() {
   if (savedItems.length === 0) {
     container.innerHTML = `
       <div class="empty-state">
-        <h3>Você ainda não salvou nenhum concurso</h3>
-        <p>Toque no ícone de marcador em qualquer concurso para acompanhar datas de prova atualizadas, editais e ativar alertas no app.</p>
+        <h3>Você ainda não acompanha nenhum concurso</h3>
+        <p>Toque no ícone de marcador em qualquer concurso para acompanhar. Aqui você vê o que mudou no edital, o próximo passo e o link oficial${listaNaConta() ? ', em qualquer aparelho em que entrar' : ''}.</p>
         <button type="button" class="btn-primary-sm" data-view-jump="concursos">Explorar concursos</button>
       </div>
     `;
@@ -1256,9 +1262,14 @@ function renderSavedView() {
     const examSummary = !c.dataProva
       ? c.provaObservacao
       : `Data da prova: ${formatDateBR(c.dataProva)} (${examDays >= 0 ? `faltam ${examDays} dias` : 'já realizada'})`;
+    // Item 12: o que mudou, próximo passo, link oficial e treino rápido (Completo)
+    const info = infoAcompanhado(c.id);
+    const treino = hasCompleto() && PROVAS[c.id]
+      ? `<a class="btn-gold-sm mc-treinar" href="/prova.html?c=${encodeURIComponent(c.id)}&amp;treino=5">Treinar 5 questões</a>`
+      : '';
     return `
-      <div class="saved-item">
-        <div>
+      <div class="saved-item${info ? ' mc-item' : ''}">
+        <div class="mc-main">
           <div class="card-badges" style="margin-bottom:6px;">
             <span class="${statusBadgeClass(c.status)}">${escapeHtml(c.status)}</span>
             <span class="badge-neutral">${escapeHtml(c.uf)} · ${escapeHtml(c.banca)}</span>
@@ -1267,13 +1278,17 @@ function renderSavedView() {
           <p class="muted-sm">
             <strong>${escapeHtml(examSummary)}</strong> · Salário até ${formatBRL(c.salarioMax)}
           </p>
+          ${proximoPassoHTML(info)}
+          ${mudancasHTML(info)}
         </div>
         <div class="saved-item-actions">
+          ${treino}
+          ${linkOficialHTML(info)}
           <button type="button" class="btn-outline-sm" data-toggle-alert="${escapeHtml(c.id)}">
             ${alertOn ? 'Alerta Ativo ✓' : 'Ativar Alerta'}
           </button>
           <button type="button" class="btn-primary-sm" data-open-id="${escapeHtml(c.id)}">Abrir Concurso</button>
-          <button type="button" class="icon-btn" data-save-id="${escapeHtml(c.id)}" title="Remover dos salvos" aria-label="Remover dos salvos">&times;</button>
+          <button type="button" class="icon-btn" data-save-id="${escapeHtml(c.id)}" title="Deixar de acompanhar" aria-label="Deixar de acompanhar ${escapeHtml(c.sigla)}">&times;</button>
         </div>
       </div>
     `;
@@ -1322,6 +1337,9 @@ function renderDetailModal() {
   `;
 
   $('#detailSaveBtn').classList.toggle('saved', saved);
+  $('#detailSaveBtn').title = saved ? 'Acompanhando · toque para deixar de acompanhar' : 'Acompanhar este concurso';
+  $('#detailSaveBtn').setAttribute('aria-label', saved ? 'Deixar de acompanhar este concurso' : 'Acompanhar este concurso');
+  $('#detailSaveBtn').setAttribute('aria-pressed', String(saved));
   // Item 7: Compartilhar (entre Salvar e ✕)
   const shareSlot = $('#detailShareSlot');
   if (shareSlot && shareSlot.dataset.id !== c.id) {
@@ -1830,16 +1848,41 @@ function switchView(viewName) {
   if (viewName === 'salvos') renderSavedView();
 }
 
+// Item 12: busca a lista da conta e redesenha o que depende dela
+let listaPedido = null;
+function atualizarListaDaConta() {
+  if (listaPedido) return listaPedido;
+  listaPedido = sincronizarAcompanhados(state, { email: state.user?.email })
+    .then((ok) => { if (ok) { saveState(); redesenharLista(); } return ok; })
+    .finally(() => { listaPedido = null; });
+  return listaPedido;
+}
+function redesenharLista(id = activeDetailId) {
+  renderAuthUI();
+  renderConcursosGrid();
+  if (activeView === 'salvos') renderSavedView();
+  if (id && activeDetailId === id && !$('#detailModal').hidden) renderDetailModal();
+}
+function enviarLista(acao, id, extra) {
+  if (!listaNaConta()) return;
+  alterarAcompanhado(state, acao, id, extra)
+    .then(() => { saveState(); redesenharLista(id); })
+    .catch((err) => { showToast(err.message); atualizarListaDaConta(); });
+}
+
 function toggleSaveContest(id) {
   const idx = state.savedIds.indexOf(id);
+  state.savedTouched = true;
   if (idx >= 0) {
     state.savedIds.splice(idx, 1);
     state.alertIds = state.alertIds.filter((a) => a !== id);
-    showToast('Concurso removido dos seus salvos.');
+    showToast('Você deixou de acompanhar este concurso.');
+    enviarLista('remove', id);
   } else {
     state.savedIds.push(id);
     state.alertIds.push(id);
-    showToast('Concurso salvo! Avisaremos sobre alterações na data da prova.');
+    showToast(listaNaConta() ? 'Concurso acompanhado! Ele fica em Meus concursos, na sua conta.' : 'Concurso acompanhado! Ele fica em Meus concursos.');
+    enviarLista('add', id);
   }
   saveState();
   renderAuthUI();
@@ -2055,9 +2098,11 @@ function bindEvents() {
       if (state.alertIds.includes(id)) {
         state.alertIds = state.alertIds.filter((x) => x !== id);
         showToast('Alerta pausado para este concurso.');
+        enviarLista('alerta', id, { alerta: false });
       } else {
         state.alertIds.push(id);
         showToast('Alerta ativado! Avisaremos sobre mudanças na data da prova.');
+        enviarLista('alerta', id, { alerta: true });
       }
       saveState();
       renderSavedView();

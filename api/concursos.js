@@ -7,6 +7,7 @@ import { aplicarPadroes, aplicarPadroesIndice } from '../lib/materias.js';
 import { origemValida, resumoOrigem } from '../lib/plano-origem.js';
 import { handleUltimosDias } from '../lib/ultimos-dias.js';
 import { previaDaProva } from '../lib/prova-previa.js';
+import { handleAcompanhados } from '../lib/acompanhados.js';
 
 // Conteúdo pago: nunca fica em cache compartilhado (cada resposta depende da sessão)
 const privado = (res) => {
@@ -21,6 +22,7 @@ const privado = (res) => {
  * /api/prova/:id (tipo=prova) → prova completa com gabarito (plano Completo)
  * /api/prova-previa/:id (tipo=previa) → prévia com cadeado: matérias e 1 enunciado, sem respostas (Essencial)
  * /api/progresso (tipo=progresso) → progresso das provas salvo na conta (GET e POST, plano Completo)
+ * /api/acompanhados (tipo=acompanhados) → concursos que a pessoa acompanha, na conta (GET e POST, Essencial ou Completo)
  * Uma função só, por causa do limite de funções do plano Hobby da Vercel.
  */
 export async function GET(request) {
@@ -29,6 +31,7 @@ export async function GET(request) {
     const tipo = url.searchParams.get('tipo');
 
     if (tipo === 'progresso') return await handleProgresso(request);
+    if (tipo === 'acompanhados') return await handleAcompanhados(request);
 
     // Item 8: concursos que fecham as inscrições em 7 dias (público, mesmos dados das páginas públicas)
     if (tipo === 'ultimos') return await handleUltimosDias();
@@ -73,10 +76,12 @@ export async function GET(request) {
   }
 }
 
-// Só o progresso das provas aceita envio (as outras rotas desta função são de leitura)
+// Só o progresso das provas e a lista de acompanhados aceitam envio (as outras rotas desta função são de leitura)
 export async function POST(request) {
   try {
-    if (new URL(request.url).searchParams.get('tipo') !== 'progresso') {
+    const tipo = new URL(request.url).searchParams.get('tipo');
+    if (tipo === 'acompanhados') return await handleAcompanhados(request);
+    if (tipo !== 'progresso') {
       return jsonResponse({ error: 'Método não permitido' }, 405);
     }
     return await handleProgresso(request);

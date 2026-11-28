@@ -2,6 +2,9 @@
 import { criarProgresso } from "./progresso-sync.js?v=1";
 
 const examKey = new URLSearchParams(location.search).get("c") || "pm-sp-soldado-2026";
+// Item 12: "Treinar 5 questões" (vem de Meus concursos) — começa na 1ª não respondida e conta 5
+const TREINO_N = new URLSearchParams(location.search).get("treino") === "5" ? 5 : 0;
+let treinoFeitas = 0;
 let semAcesso = null; // "login" | "completo" | "plano"
 async function loadExam(key) {
   if (!/^[a-z0-9-]+$/i.test(key)) return null;
@@ -186,6 +189,14 @@ function initExam() {
     event.preventDefault();
     checkAnswer();
   });
+
+  if (TREINO_N) {
+    // Depois do módulo inteiro carregar (as variáveis lá embaixo já existem)
+    setTimeout(() => {
+      el("startBtn").click();
+      renderTreino();
+    }, 0);
+  }
 
   document.addEventListener("keydown", (event) => {
     if (runner.hidden) return;
@@ -419,6 +430,34 @@ function checkAnswer() {
   el("skipBtn").hidden = true;
   paintAnswer(q, letter);
   el("explanation").hidden = false;
+  if (TREINO_N) {
+    treinoFeitas += 1;
+    renderTreino();
+  }
+}
+
+/** Faixa do treino rápido: "Treino rápido: 2 de 5" e, no fim, o botão do resultado. */
+function renderTreino() {
+  let box = el("treinoRapido");
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "treinoRapido";
+    box.className = "treino-rapido";
+    box.setAttribute("role", "status");
+    el("progressText").after(box);
+  }
+  const feitas = Math.min(treinoFeitas, TREINO_N);
+  if (feitas < TREINO_N) {
+    box.textContent = `Treino rápido: ${feitas} de ${TREINO_N} questões`;
+    return;
+  }
+  box.textContent = `Treino rápido concluído: ${TREINO_N} de ${TREINO_N}. `;
+  const ver = document.createElement("button");
+  ver.type = "button";
+  ver.className = "treino-rapido-btn";
+  ver.textContent = "Ver meu resultado";
+  ver.addEventListener("click", showResult);
+  box.append(ver, " ou continue a prova.");
 }
 
 function paintAnswer(q, chosen) {

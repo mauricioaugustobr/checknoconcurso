@@ -1,0 +1,57 @@
+/* Item 12 · "Meus concursos": o que mudou, próximo passo, link oficial e treino rápido */
+.saved-item.mc-item { align-items: flex-start; }
+.mc-main { flex: 1 1 420px; min-width: 0; }
+.mc-passo { margin: 8px 0 0; font-size: 14px; color: var(--text-primary); }
+.mc-passo-rot {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  border: 1px solid var(--brand-border);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+.mc-passo strong { font-variant-numeric: tabular-nums; }
+
+.mc-mudou {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-subtle);
+}
+.mc-mudou-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; margin: 0 0 6px; font-size: 13.5px; color: var(--text-primary); }
+.mc-mudou-head span { color: var(--text-muted); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.mc-mudou ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.mc-mudou li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; font-size: 13.5px; color: var(--text-secondary); }
+.mc-campo { font-weight: 700; color: var(--text-primary); min-width: 150px; }
+.mc-antes s { color: var(--text-muted); }
+.mc-agora strong { color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.mc-antes, .mc-agora { font-variant-numeric: tabular-nums; }
+
+.mc-treinar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 16px;
+  border-radius: var(--radius-md, 12px);
+  background: var(--accent-premium);
+  color: var(--text-on-accent);
+  border: 1px solid var(--accent-border);
+  font: 700 14px/1.2 var(--font-body);
+  text-decoration: none;
+}
+.mc-treinar:hover { background: var(--accent-hover); }
+.mc-treinar:focus-visible, .mc-oficial:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+.mc-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 560px) {
+  .mc-campo { min-width: 0; width: 100%; }
+  .mc-item .saved-item-actions { width: 100%; }
+  .mc-item .saved-item-actions > a,
+  .mc-item .saved-item-actions > button:not(.icon-btn) { flex: 1 1 auto; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
+  .mc-item .saved-item-actions > .icon-btn { min-width: 48px; min-height: 48px; }
+}

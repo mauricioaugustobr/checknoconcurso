@@ -134,10 +134,10 @@ export function createServer() {
       }
 
       // Catálogo e provas: só com plano (mesma função da Vercel, api/concursos.js)
-      if (pathname === '/api/concursos' || pathname === '/api/ultimos-dias' || pathname === '/api/provas' || pathname === '/api/progresso' || pathname.startsWith('/api/prova/') || pathname.startsWith('/api/prova-previa/')) {
+      if (pathname === '/api/concursos' || pathname === '/api/ultimos-dias' || pathname === '/api/provas' || pathname === '/api/progresso' || pathname === '/api/acompanhados' || pathname.startsWith('/api/prova/') || pathname.startsWith('/api/prova-previa/')) {
         const apiUrl = new URL(url);
-        if (pathname === '/api/progresso') {
-          apiUrl.searchParams.set('tipo', 'progresso');
+        if (pathname === '/api/progresso' || pathname === '/api/acompanhados') {
+          apiUrl.searchParams.set('tipo', pathname === '/api/progresso' ? 'progresso' : 'acompanhados');
           const handler = req.method === 'POST' ? concursosPost : concursosApi;
           return sendWebResponse(res, await handler(await toWebRequest(req, apiUrl)));
         }
