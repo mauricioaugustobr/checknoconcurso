@@ -6,6 +6,7 @@ import { handleProgresso } from '../lib/progresso.js';
 import { aplicarPadroes, aplicarPadroesIndice } from '../lib/materias.js';
 import { origemValida, resumoOrigem } from '../lib/plano-origem.js';
 import { handleUltimosDias } from '../lib/ultimos-dias.js';
+import { previaDaProva } from '../lib/prova-previa.js';
 
 // Conteúdo pago: nunca fica em cache compartilhado (cada resposta depende da sessão)
 const privado = (res) => {
@@ -18,6 +19,7 @@ const privado = (res) => {
  * /api/concursos              → catálogo completo (plano Essencial ou Completo)
  * /api/provas  (tipo=provas)  → índice das provas para treinar (qualquer plano)
  * /api/prova/:id (tipo=prova) → prova completa com gabarito (plano Completo)
+ * /api/prova-previa/:id (tipo=previa) → prévia com cadeado: matérias e 1 enunciado, sem respostas (Essencial)
  * /api/progresso (tipo=progresso) → progresso das provas salvo na conta (GET e POST, plano Completo)
  * Uma função só, por causa do limite de funções do plano Hobby da Vercel.
  */
@@ -55,6 +57,12 @@ export async function GET(request) {
     if (response) return response;
 
     if (tipo === 'provas') return privado(jsonResponse(aplicarPadroesIndice(lerIndiceProvas())));
+
+    // Item 11: prévia com cadeado (Essencial). Sem alternativas, gabarito ou explicação.
+    if (tipo === 'previa') {
+      const previa = previaDaProva(url.searchParams.get('c') || '');
+      return privado(jsonResponse(previa || { error: 'Prova não encontrada.' }, previa ? 200 : 404));
+    }
 
     // Catálogo com os ajustes feitos no painel de admin (sem os concursos ocultos)
     const items = await getLiveCatalog();

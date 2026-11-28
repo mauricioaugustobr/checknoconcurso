@@ -1,0 +1,132 @@
+/* Item 11 · Prévia com cadeado para quem assina o Check Essencial (aba de treino e faixa da ficha) */
+.cad {
+  border: 1px solid var(--accent-border);
+  background: linear-gradient(180deg, var(--bg-surface) 0%, var(--accent-soft) 100%);
+  border-radius: 16px;
+  padding: 22px;
+}
+.cad-titulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin: 10px 0 6px;
+}
+.cad-sub { color: var(--text-secondary); font-size: 14px; line-height: 1.55; margin: 0 0 16px; max-width: 620px; }
+.cad-carregando { color: var(--text-muted); font-size: 13px; margin: 0 0 14px; }
+.cad-bloco { margin: 0 0 16px; }
+.cad-rotulo {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+/* Matérias (dado real, sem borrar: mostra o tamanho do treino) */
+.cad-materias {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 16px;
+}
+.cad-materias li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  font-size: 13.5px;
+  color: var(--text-primary);
+}
+.cad-materias li span { min-width: 0; overflow-wrap: anywhere; }
+.cad-materias strong { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cad-materias .cad-mais { color: var(--text-muted); background: transparent; border-style: dashed; }
+
+/* Questão: enunciado aberto, alternativas fechadas */
+.cad-questao {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.cad-q-head { font-size: 12.5px; font-weight: 700; color: var(--text-muted); margin: 0 0 6px; }
+.cad-q-stem { font-size: 15px; line-height: 1.6; color: var(--text-primary); margin: 0 0 12px; }
+.cad-alts { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 8px; }
+.cad-alts li { display: flex; align-items: center; gap: 10px; }
+.cad-let {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--border-default);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+.cad-bar {
+  display: block;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--bg-surface-alt);
+  filter: blur(1.5px);
+}
+.cad-selo {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+.cad-selo svg { flex: 0 0 auto; margin-top: 2px; color: var(--accent-text); }
+
+/* Botões */
+.cad-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+.cad-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: var(--radius-md, 12px);
+  font: 700 14.5px/1.2 var(--font-body);
+  cursor: pointer;
+  text-align: center;
+}
+.cad-btn-main { background: var(--accent-premium); color: var(--text-on-accent); border: 1px solid var(--accent-border); }
+.cad-btn-main:hover { background: var(--accent-hover); }
+.cad-btn-line { background: var(--bg-surface); color: var(--text-primary); border: 1.5px solid var(--border-strong); }
+.cad-btn-line:hover { border-color: var(--text-primary); }
+.cad-btn:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+.cad-note { margin: 8px 0 0; font-size: 12.5px; color: var(--text-muted); }
+
+/* Faixa "Treinar" da ficha para o Essencial: mais discreta que a do Completo */
+.train-now.is-travada { background: var(--accent-soft); border-bottom-color: var(--accent-border); }
+.cad-faixa-titulo { display: inline-flex !important; align-items: center; gap: 6px; }
+.cad-faixa-titulo svg { color: var(--accent-text); flex: 0 0 auto; }
+.train-now-btn.cad-faixa-btn { background: var(--bg-surface); color: var(--text-primary); border: 1.5px solid var(--border-strong); }
+.train-now-btn.cad-faixa-btn:hover { background: var(--bg-surface-alt); }
+
+/* Tela de planos e faixa da inicial para quem já tem o Essencial */
+.essencial-subir-nota { margin: 10px 0 0; font-size: 13px; color: var(--text-muted); }
+
+@media (max-width: 560px) {
+  .cad { padding: 16px; border-radius: 14px; }
+  .cad-titulo { font-size: 20px; }
+  .cad-materias { grid-template-columns: 1fr; }
+  .cad-btn { width: 100%; }
+}

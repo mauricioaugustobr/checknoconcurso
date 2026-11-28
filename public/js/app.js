@@ -4,6 +4,7 @@ import { botaoCompartilharHTML } from './compartilhar.js?v=1';
 import { seloHTML, seloPrazo } from './ultimos-dias.js?v=1';
 import { dadosBotao } from './compartilhar-dados.js?v=1';
 import { lerOrigem, limparOrigem, montarFaixaOrigem, buscarResumo, avisoAssinaturaHTML } from './plano-origem.js?v=2';
+import { cadeadoTreinoHTML, faixaTreinoTravadaHTML, buscarPrevia, previaPronta } from './cadeado-essencial.js?v=1';
 
 // Item 6: aviso "Assinatura ativa. Este é o seu concurso." na ficha do concurso de origem
 let avisoAssinatura = null; // { id, resumo }
@@ -355,6 +356,27 @@ function renderHeroStats() {
   $('#statProvas').textContent = `${totalProvas.toLocaleString('pt-BR')} provas`;
 }
 
+// Item 11: quem já tem o Essencial lê textos de "subir de plano" na tela de planos e na faixa da inicial.
+// Os textos originais ficam guardados e voltam para quem não assina ou já tem o Completo.
+const TEXTOS_ESSENCIAL = {
+  '#view-plano .pricing-hero h2': 'Você já tem o Essencial. Falta só o treino.',
+  '#view-plano .pricing-hero > p': 'Suba para o Check Completo e continue com tudo do Essencial. Você ganha o treino com questões de provas anteriores: responde, confere pelo gabarito oficial e lê a explicação em 3 parágrafos logo abaixo. O anual sai por R$ 199,90 (R$ 16,66/mês).',
+  '#upgradeStrip h2': 'Você já tem o Essencial. Falta só o treino com provas anteriores.',
+  '#upgradeStrip .upgrade-strip-content p': 'No Check Completo, você responde questões de provas anteriores dos seus concursos e confere na hora: gabarito oficial e explicação em 3 parágrafos. Continua com tudo do Essencial. Anual por R$ 199,90 ou mensal por R$ 23,99.',
+  '#upgradeStrip .price-big': 'R$ 199,90 <small>/ano</small>',
+  '#upgradeStrip .price-unit': 'ou R$ 23,99/mês',
+  '#stripSubscribeBtn': 'Subir para o Completo'
+};
+function textosParaEssencial(ligado) {
+  for (const [sel, texto] of Object.entries(TEXTOS_ESSENCIAL)) {
+    const el = document.querySelector(sel);
+    if (!el) continue;
+    if (el.dataset.textoOriginal === undefined) el.dataset.textoOriginal = el.innerHTML;
+    const alvo = ligado ? texto : el.dataset.textoOriginal;
+    if (el.innerHTML !== alvo) el.innerHTML = alvo;
+  }
+}
+
 function renderBillingCycleUI() {
   const isAnual = billingCycle === 'anual';
   $('#billMonthlyBtn').classList.toggle('active', !isAnual);
@@ -365,14 +387,14 @@ function renderBillingCycleUI() {
     $('#completoPlanSubnote').innerHTML = `Equivale a <strong>R$ 16,66/mês</strong> — economize <strong>R$ 87,98</strong> por ano vs. mensal`;
     $('#subCompletoBtn').dataset.pickPlan = 'completo-anual';
     if (!hasCompleto()) {
-      $('#subCompletoBtn').textContent = 'Assinar Completo Anual · R$ 199,90/ano';
+      $('#subCompletoBtn').textContent = state.tier === 'essencial' ? 'Subir para o Completo anual · R$ 199,90/ano' : 'Assinar Completo Anual · R$ 199,90/ano';
     }
   } else {
     $('#completoPlanPrice').innerHTML = `<strong>R$ 23,99</strong><span>/mês</span>`;
     $('#completoPlanSubnote').innerHTML = `Ou <strong>R$ 199,90/ano</strong> (equivale a R$ 16,66/mês — economize R$ 87,98)`;
     $('#subCompletoBtn').dataset.pickPlan = 'completo-mensal';
     if (!hasCompleto()) {
-      $('#subCompletoBtn').textContent = 'Assinar Completo · R$ 23,99/mês';
+      $('#subCompletoBtn').textContent = state.tier === 'essencial' ? 'Subir para o Completo · R$ 23,99/mês' : 'Assinar Completo · R$ 23,99/mês';
     }
   }
 }
@@ -433,6 +455,8 @@ function renderAuthUI() {
     subCompletoBtn.disabled = false;
     renderBillingCycleUI();
   }
+
+  textosParaEssencial(state.tier === 'essencial');
 
   $('#navSavedCount').textContent = String(state.savedIds.length);
   $('#mobileSavedDot').hidden = state.savedIds.length === 0;
@@ -1500,6 +1524,22 @@ function renderDetailModal() {
   }
 
   if (activeDetailTab === 'provas') {
+    // Item 11: quem já tem o Essencial vê um pedaço real da prova, com cadeado, e o botão para subir de plano
+    if (!pastExamsUnlocked && state.tier === 'essencial') {
+      const indice = PROVAS[c.id];
+      const previa = indice ? previaPronta(c.id) : null;
+      body.innerHTML = cadeadoTreinoHTML(c, indice, previa);
+      if (indice && previa === undefined) {
+        buscarPrevia(c.id).then(() => {
+          if (activeDetailId === c.id && activeDetailTab === 'provas' && !$('#detailModal').hidden) renderDetailModal();
+        });
+      } else if (!indice && !provasCarregadas) {
+        carregarProvas().then(() => {
+          if (activeDetailId === c.id && activeDetailTab === 'provas' && !$('#detailModal').hidden) renderDetailModal();
+        });
+      }
+      return;
+    }
     if (!pastExamsUnlocked) {
       const sampleRow = c.provasAnteriores.slice(0, 2).map((p) => `
         <div class="past-exam-row">
@@ -1565,6 +1605,19 @@ function renderDetailModal() {
 function renderTrainNow(c) {
   const bar = $('#detailTrainNow');
   if (!bar) return;
+  bar.classList.remove('is-travada');
+  // Item 11: o Essencial vê a faixa com cadeado, que leva à prévia da prova
+  if (!hasCompleto() && state.tier === 'essencial' && !semProvaAnterior(c.id)) {
+    bar.innerHTML = faixaTreinoTravadaHTML(PROVAS[c.id]);
+    bar.classList.add('is-travada');
+    bar.hidden = false;
+    $('#trainNowTabBtn')?.addEventListener('click', () => {
+      activeDetailTab = 'provas';
+      renderDetailModal();
+      showDetailTabTop();
+    });
+    return;
+  }
   if (!hasCompleto()) {
     bar.hidden = true;
     bar.innerHTML = '';
