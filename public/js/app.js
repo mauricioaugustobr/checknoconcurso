@@ -668,6 +668,9 @@ function renderAccountUI() {
   $('#mobileAccountLabel').textContent = user ? 'Conta' : 'Entrar';
   const freeSignup = $('#freeSignupBtn');
   if (freeSignup) freeSignup.hidden = Boolean(user);
+  // Atalho para o painel admin, só na conta de administrador (definida no servidor)
+  const adminLink = $('#accountAdminLink');
+  if (adminLink) adminLink.hidden = !(user && user.role === 'admin');
   if (!user) return;
   const firstName = user.name.split(/\s+/)[0];
   $('#accountAvatar').textContent = userInitials(user.name);

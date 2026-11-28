@@ -159,6 +159,9 @@
 }
 .account-menu-item:hover, .account-menu-item:focus-visible { background: var(--surface-alt); outline: none; }
 .account-menu-item.is-danger { color: var(--status-danger-fg, #B91C1C); }
+/* Atalho do painel admin: só aparece para a conta de administrador (o servidor confere de novo) */
+.account-menu-item[hidden] { display: none; }
+.account-menu-item.is-admin { color: var(--brand, #0C4F83); font-weight: 800; }
 
 /* MODAL DE LOGIN / CRIAR CONTA */
 .auth-dialog {

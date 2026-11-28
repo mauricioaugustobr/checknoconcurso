@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import { createSessionToken } from '../lib/auth.js';
 import { handleNotas } from '../lib/admin-api.js';
-import { montarConsulta, formatarCpf, marcarNota, listarNotas } from '../lib/notas.js';
+import { montarConsulta, formatarCpf, formatarDocumento, whatsapp, marcarNota, listarNotas } from '../lib/notas.js';
+import { documentoValido, normalizarDocumento } from '../lib/pix.js';
 import { assinaturaDoCheck, faturaDoCheck, registrarPagamentoStripe, portalDoCheck, handleWebhook, modoDaChave } from '../lib/stripe.js';
 
 // Testes sem banco: DATABASE_URL fica vazia de propósito
@@ -39,16 +40,36 @@ async function run() {
   assert.equal(formatarCpf('123.456.789-09'), '123.456.789-09');
   assert.equal(formatarCpf(''), null);
   assert.equal(formatarCpf(null), null);
+  assert.equal(formatarDocumento('59147417000124'), '59.147.417/0001-24', 'CNPJ no formato da nota');
+  assert.equal(formatarDocumento('12ABC34501DE35'), '12.ABC.345/01DE-35', 'CNPJ alfanumérico');
+
+  // 3b. Compra aceita CPF ou CNPJ válidos (o CNPJ alfanumérico da Receita também)
+  assert.equal(documentoValido(normalizarDocumento('529.982.247-25')), true, 'CPF válido');
+  assert.equal(documentoValido(normalizarDocumento('529.982.247-24')), false, 'CPF com dígito errado');
+  assert.equal(documentoValido(normalizarDocumento('59.147.417/0001-24')), true, 'CNPJ válido');
+  assert.equal(documentoValido(normalizarDocumento('59.147.417/0001-25')), false, 'CNPJ com dígito errado');
+  assert.equal(documentoValido(normalizarDocumento('12.ABC.345/01DE-35')), true, 'CNPJ alfanumérico válido');
+  assert.equal(documentoValido(normalizarDocumento('11.111.111/1111-11')), false, 'CNPJ repetido');
+  assert.equal(documentoValido('123'), false);
+
+  // 3c. WhatsApp: número legível e link com o 55 do Brasil
+  assert.deepEqual(whatsapp('11987654321'), { numero: '(11) 98765-4321', link: 'https://wa.me/5511987654321' });
+  assert.deepEqual(whatsapp('5511987654321'), { numero: '(11) 98765-4321', link: 'https://wa.me/5511987654321' });
+  assert.deepEqual(whatsapp('2133334444'), { numero: '(21) 3333-4444', link: 'https://wa.me/552133334444' });
+  assert.deepEqual(whatsapp(''), { numero: null, link: null });
 
   // 4. Consulta: Pix pago + cartão real (modo teste e valor zero ficam de fora)
   assert.equal(montarConsulta({ pix: false, cartao: false, contatos: false }), null, 'sem tabelas de pagamento, nada a listar');
   const soPix = montarConsulta({ pix: true, cartao: false, contatos: false });
   assert.ok(soPix.includes('from cnc_pix_orders o where o.paid_at is not null'));
+  assert.ok(soPix.includes('o.phone as telefone'), 'WhatsApp do Pix entra na lista');
   assert.ok(!soPix.includes('cnc_stripe_payments'));
   const tudo = montarConsulta({ pix: true, cartao: true, contatos: true }, { pendentes: true });
   assert.ok(tudo.includes('union all'));
   assert.ok(tudo.includes('left join cnc_billing_contacts bc on bc.account = p.email'), 'nome e CPF do cartão vêm do cadastro feito antes do pagamento');
   assert.ok(tudo.includes('where p.livemode and p.cents > 0'), 'cartão em modo teste não entra');
+  assert.ok(tudo.includes('coalesce(p.buyer_name, bc.buyer_name)') && tudo.includes('coalesce(p.phone, bc.phone) as telefone'),
+    'cartão: primeiro os dados guardados no pagamento, depois o cadastro');
   assert.ok(tudo.includes('where not coalesce(nf.emitida, false)'), 'filtro "Sem nota"');
   assert.ok(!montarConsulta({ pix: true, cartao: true, contatos: false }).includes('cnc_billing_contacts'), 'sem cadastro de cobrança, a consulta não depende dele');
   assert.ok(montarConsulta({ pix: true, cartao: false, contatos: false }, { limite: 50000 }).trim().endsWith('limit 1000'));

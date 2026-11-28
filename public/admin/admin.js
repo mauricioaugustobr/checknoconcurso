@@ -385,6 +385,41 @@ const ACOES = {
 /* ---------------- Notas a emitir (a nota é feita à mão; aqui só a marcação) ---------------- */
 let filtroNotas = 'pendentes';
 const PLANO_NOTA = { essencial: 'Essencial mensal', 'completo-mensal': 'Completo mensal', 'completo-anual': 'Completo anual' };
+const itensNotas = new Map();
+// Mensagem pronta para pedir os dados da nota por e-mail ou WhatsApp (você revisa antes de enviar)
+const ASSUNTO_NOTA = 'Dados para a sua nota fiscal - Check no Concurso';
+const PEDIDO_NOTA = 'Olá! Aqui é do Check no Concurso. Obrigado pela assinatura! Para emitir a sua nota fiscal, pode confirmar o seu nome completo e o CPF (ou o CNPJ e a razão social, se for empresa)?';
+const EMAIL_LINK_OK = /^[^\s"'<>?&#]+@[^\s"'<>?&#]+$/;
+
+function contatoNota(n) {
+  const email = n.email
+    ? (EMAIL_LINK_OK.test(n.email)
+      ? `<a href="mailto:${esc(n.email)}?subject=${encodeURIComponent(ASSUNTO_NOTA)}&amp;body=${encodeURIComponent(PEDIDO_NOTA)}">${esc(n.email)}</a>`
+      : `<span>${esc(n.email)}</span>`)
+    : '<span class="ad-muted">sem e-mail</span>';
+  const zap = n.whatsapp
+    ? (n.whatsappLink
+      ? `<a href="${esc(n.whatsappLink)}?text=${encodeURIComponent(PEDIDO_NOTA)}" target="_blank" rel="noopener">WhatsApp ${esc(n.whatsapp)}</a>`
+      : `<span>WhatsApp ${esc(n.whatsapp)}</span>`)
+    : '<span class="ad-muted">sem WhatsApp</span>';
+  const conta = n.conta && n.conta !== n.email ? `<span class="ad-muted">conta no site: ${esc(n.conta)}</span>` : '';
+  return `${email}${zap}${conta}`;
+}
+
+/** Texto com todos os dados do pagamento, para colar no emissor de nota. */
+function textoNota(n) {
+  return [
+    `Nome: ${n.nome || '(não informado)'}`,
+    `${n.tipoDocumento || 'CPF'}: ${n.cpf || '(não informado)'}`,
+    `E-mail: ${n.email || '(não informado)'}`,
+    `WhatsApp: ${n.whatsapp || '(não informado)'}`,
+    ...(n.conta && n.conta !== n.email ? [`Conta no site: ${n.conta}`] : []),
+    `Valor: ${brl(n.centavos / 100)}`,
+    `Plano: ${PLANO_NOTA[n.plano] || n.plano || '—'}`,
+    `Forma de pagamento: ${n.origem === 'pix' ? 'Pix' : 'Cartão'}`,
+    `Pago em: ${quando(n.pagoEm)}`
+  ].join('\n');
+}
 
 async function loadNotas() {
   const data = await api(`/api/admin/notas?filtro=${filtroNotas}`);
@@ -393,18 +428,21 @@ async function loadNotas() {
   $('#adNotasResumo').textContent = data.semBanco
     ? 'Banco de dados indisponível agora.'
     : (r.pendentes ? `${num(r.pendentes)} ${r.pendentes === 1 ? 'pagamento sem nota' : 'pagamentos sem nota'} · ${brl(r.pendentesCentavos / 100)}` : 'Nenhum pagamento sem nota.');
+  itensNotas.clear();
+  (data.itens || []).forEach((n) => itensNotas.set(`${n.origem}:${n.ref}`, n));
   $('#adNotasRows').innerHTML = (data.itens || []).map((n) => `<tr data-origem="${esc(n.origem)}" data-ref="${esc(n.ref)}">
       <td class="ad-nowrap">${quando(n.pagoEm)}</td>
       <td>${esc(n.nome || '—')}${n.nome ? '' : '<br><span class="ad-muted">sem nome no cadastro</span>'}</td>
-      <td class="ad-nowrap">${esc(n.cpf || '—')}</td>
+      <td class="ad-nowrap">${n.cpf ? `${esc(n.cpf)}<br><span class="ad-muted">${esc(n.tipoDocumento || 'CPF')}</span>` : '—'}</td>
       <td class="ad-nowrap">${brl(n.centavos / 100)}</td>
       <td>${esc(PLANO_NOTA[n.plano] || n.plano || '—')}</td>
       <td>${n.origem === 'pix' ? 'Pix' : 'Cartão'}</td>
-      <td>${esc(n.email || '—')}</td>
+      <td class="ad-contato">${contatoNota(n)}</td>
       <td class="ad-nota">
         <label class="ad-check"><input type="checkbox" data-nota-emitida ${n.emitida ? 'checked' : ''}> Nota emitida</label>
         <input type="text" data-nota-numero maxlength="40" placeholder="nº da nota (opcional)" aria-label="Número da nota" value="${esc(n.numero || '')}">
         ${n.emitida && n.emitidaEm ? `<span class="ad-muted">em ${quando(n.emitidaEm)}</span>` : ''}
+        <button type="button" class="ad-btn-ghost ad-btn-sm" data-nota-copiar>Copiar dados</button>
       </td></tr>`).join('')
     || `<tr><td colspan="8" class="ad-muted">${filtroNotas === 'pendentes' ? 'Nenhum pagamento sem nota.' : 'Nenhum pagamento real ainda.'}</td></tr>`;
 }
@@ -414,6 +452,19 @@ function bindNotas() {
     filtroNotas = b.dataset.notasFiltro;
     loadNotas().catch((err) => toast(err.message));
   }));
+  $('#adNotasRows').addEventListener('click', async (e) => {
+    const botao = e.target.closest('[data-nota-copiar]');
+    if (!botao) return;
+    const tr = botao.closest('tr[data-ref]');
+    const n = tr && itensNotas.get(`${tr.dataset.origem}:${tr.dataset.ref}`);
+    if (!n) return;
+    try {
+      await navigator.clipboard.writeText(textoNota(n));
+      toast('Dados copiados. Cole no emissor da nota.');
+    } catch {
+      toast('Não foi possível copiar. Selecione os dados na linha da tabela.');
+    }
+  });
   $('#adNotasRows').addEventListener('change', async (e) => {
     const tr = e.target.closest('tr[data-ref]');
     if (!tr || !e.target.matches('[data-nota-emitida], [data-nota-numero]')) return;

@@ -91,3 +91,6 @@ input:focus, select:focus, textarea:focus { outline: 2px solid #0C4F83; outline-
 .ad-nota { display: flex; flex-direction: column; gap: 6px; min-width: 190px; }
 .ad-nota input[type="text"] { font-size: .85rem; padding: 6px 8px; border-radius: 8px; }
 [data-notas-filtro][aria-pressed="true"] { background: #0C4F83; color: #fff; border-color: #0C4F83; }
+.ad-contato { display: flex; flex-direction: column; gap: 4px; min-width: 210px; }
+.ad-contato a { color: #0C4F83; font-weight: 600; overflow-wrap: anywhere; }
+.ad-btn-sm { padding: 6px 12px; font-size: .82rem; align-self: flex-start; }
