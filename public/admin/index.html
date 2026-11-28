@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/tokens.css?v=10" />
-  <link rel="stylesheet" href="/admin/admin.css?v=8" />
+  <link rel="stylesheet" href="/admin/admin.css?v=9" />
 </head>
 <body>
   <header class="ad-top">
@@ -41,6 +41,59 @@
       <!-- VISÃO GERAL -->
       <section data-panel="geral">
         <h1>Visão geral</h1>
+
+        <!-- MOVIMENTO DO DIA: acessos por hora, cadastros e contas ativas (public/admin/movimento.js) -->
+        <section class="ad-mov" id="adMov" aria-labelledby="adMovTitulo">
+          <div class="ad-mov-topo">
+            <div>
+              <h2 id="adMovTitulo">Movimento do dia</h2>
+              <p class="ad-muted" id="adMovSub">Horário de Brasília.</p>
+            </div>
+            <div class="ad-mov-filtro" role="group" aria-label="Escolher o dia">
+              <button type="button" class="ad-btn-ghost ad-btn-sm" data-mov-dia="hoje" aria-pressed="true">Hoje</button>
+              <button type="button" class="ad-btn-ghost ad-btn-sm" data-mov-dia="ontem" aria-pressed="false">Ontem</button>
+              <label class="ad-mov-data">Outro dia <input type="date" id="adMovDia" /></label>
+              <button type="button" class="ad-btn ad-btn-sm" id="adMovAtualizar">Atualizar</button>
+            </div>
+          </div>
+          <div class="ad-warn" id="adMovAviso" role="alert" hidden></div>
+          <div class="ad-mov-cards" id="adMovCards"><p class="ad-muted">Carregando o movimento do dia…</p></div>
+          <div class="ad-mov-graficos">
+            <figure class="ad-graf ad-graf-grande" data-grafico="acessos"></figure>
+            <figure class="ad-graf" data-grafico="cadastros"></figure>
+            <figure class="ad-graf" data-grafico="contas"></figure>
+          </div>
+          <p class="ad-muted ad-mov-nota" id="adMovNota"></p>
+          <details class="ad-mov-detalhe">
+            <summary>Ver os números hora a hora</summary>
+            <div class="ad-table-wrap"><table class="ad-table ad-mov-tabela">
+              <thead><tr><th scope="col">Hora</th><th scope="col">Acessos</th><th scope="col">Páginas abertas</th><th scope="col">Cadastros</th><th scope="col">Contas ativas</th></tr></thead>
+              <tbody id="adMovHoras"></tbody>
+            </table></div>
+          </details>
+          <div class="ad-mov-listas">
+            <div>
+              <h3>De onde vieram os acessos</h3>
+              <ul class="ad-list ad-mov-origens" id="adMovOrigens"></ul>
+            </div>
+            <div>
+              <h3 id="adMovCadTitulo">Cadastros do dia</h3>
+              <div class="ad-table-wrap"><table class="ad-table">
+                <thead><tr><th scope="col">Hora</th><th scope="col">Pessoa</th><th scope="col">Entrou com</th></tr></thead>
+                <tbody id="adMovCadastros"></tbody>
+              </table></div>
+            </div>
+          </div>
+          <details class="ad-mov-detalhe">
+            <summary id="adMovContasResumo">Ver as contas ativas no dia</summary>
+            <div class="ad-table-wrap"><table class="ad-table">
+              <thead><tr><th scope="col">Pessoa</th><th scope="col">Horas com uso</th><th scope="col">Última hora</th></tr></thead>
+              <tbody id="adMovContas"></tbody>
+            </table></div>
+          </details>
+        </section>
+
+        <h2>Resumo do site</h2>
         <div class="ad-cards" id="adStats"></div>
         <div class="ad-warn" id="adNoDb" hidden>O banco de dados não está ligado neste ambiente. Blog, usuários e edições de concursos só funcionam no site publicado.</div>
         <h2>Prazo de inscrição já passou, mas o status ainda diz "Inscrições Abertas"</h2>
@@ -171,6 +224,6 @@
   </dialog>
 
   <div class="ad-toast" id="adToast" role="status" aria-live="polite" hidden></div>
-  <script type="module" src="/admin/admin.js?v=10"></script>
+  <script type="module" src="/admin/admin.js?v=11"></script>
 </body>
 </html>

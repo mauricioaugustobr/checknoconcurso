@@ -13,14 +13,14 @@ import { handleAuthConfig, handleGoogleLogin, handleSession, handleLogout } from
 import { getLiveCatalog } from './lib/catalog-overrides.js';
 import { renderImagemConcurso } from './lib/og-rota.js';
 import { renderConcursoPage, renderEstadoPage, renderBlogIndex, renderBlogPost, renderBlogRecentes, renderSitemap, renderLlms } from './lib/pages.js';
-import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts, handleCancelamentos, handleNotas } from './lib/admin-api.js';
+import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts, handleCancelamentos, handleNotas, handleMetricas } from './lib/admin-api.js';
 import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from './lib/stripe.js';
 
 import { handlePix } from './lib/pix.js';
 import { handleCancel, handleCancelRequest } from './lib/cancel.js';
 import { handleExplicacao } from './lib/explicacao.js';
 import { GET as concursosApi, POST as concursosPost } from './api/concursos.js';
-import { GET as statsApi } from './api/stats.js';
+import { GET as statsApi, POST as statsPost } from './api/stats.js';
 import { ehPrivado } from './tools/build-public.mjs';
 const STRIPE_ROUTES = {
   pix: handlePix,
@@ -41,6 +41,7 @@ const DYNAMIC_ROUTES = [
   [/^\/api\/admin\/posts$/, (r) => handleAdminPosts(r)],
   [/^\/api\/admin\/cancelamentos$/, (r) => handleCancelamentos(r)],
   [/^\/api\/admin\/notas$/, (r) => handleNotas(r)],
+  [/^\/api\/admin\/metricas$/, (r) => handleMetricas(r)],
   [/^\/og\/(concurso|stories)\/([^/]+)$/, (r, m) => renderImagemConcurso(r, m[1], decodeURIComponent(m[2]))],
   [/^\/concurso\/([^/]+)\/?$/, (r, m) => renderConcursoPage(r, decodeURIComponent(m[1]))],
   [/^\/concursos\/([a-zA-Z]{2})\/?$/, (r, m) => renderEstadoPage(r, m[1])],
@@ -128,6 +129,13 @@ export function createServer() {
 
       if (pathname === '/api/stats') {
         return sendWebResponse(res, await statsApi());
+      }
+
+      // Contador de acessos (mesma função da Vercel: /api/uso → /api/stats?acao=uso)
+      if (pathname === '/api/uso') {
+        const apiUrl = new URL(url);
+        apiUrl.searchParams.set('acao', 'uso');
+        return sendWebResponse(res, await statsPost(await toWebRequest(req, apiUrl)));
       }
 
       if (pathname === '/api/estados') {

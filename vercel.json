@@ -178,6 +178,10 @@
       "destination": "/api/admin?acao=:acao"
     },
     {
+      "source": "/api/uso",
+      "destination": "/api/stats?acao=uso"
+    },
+    {
       "source": "/api/stripe/:acao",
       "destination": "/api/stripe?acao=:acao"
     },

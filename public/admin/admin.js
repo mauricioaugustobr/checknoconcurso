@@ -3,6 +3,7 @@
  * Toda permissão é conferida no servidor (/api/admin/*). Esta tela só mostra e envia dados.
  */
 import { renderMarkdown, slugify, escapeHtml as esc } from '/js/markdown.js?v=1';
+import { iniciarMovimento, carregarMovimento } from '/admin/movimento.js?v=1';
 
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -51,6 +52,7 @@ async function boot() {
   bindPosts();
   bindUsers();
   bindNotas();
+  iniciarMovimento();
   openTab(location.hash.replace('#', '') || 'geral');
 }
 
@@ -72,6 +74,8 @@ function bindTabs() {
 
 /* ---------------- Visão geral ---------------- */
 async function loadOverview() {
+  // Movimento do dia (acessos, cadastros e contas ativas por hora) carrega junto, em paralelo
+  carregarMovimento({ silencioso: true });
   const d = await api('/api/admin/overview');
   $('#adNoDb').hidden = d.banco;
   const cards = [

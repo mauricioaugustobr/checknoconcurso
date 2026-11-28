@@ -43,6 +43,7 @@
   <link rel="stylesheet" href="/css/theme-dark.css?v=1" />
   <script src="/js/theme.js?v=1"></script>
   <script src="/js/consent.js?v=1"></script>
+  <script src="/js/uso.js?v=1" defer></script>
 </head>
 <body>
   <header>
@@ -82,7 +83,7 @@
           <tr><td data-label="Situação">Conta criada com e-mail e senha</td><td data-label="Dados">Nome e e-mail ficam guardados nos nossos servidores para a sua conta. <strong>A senha nunca é guardada em texto:</strong> guardamos só um resumo embaralhado (scrypt), que não permite descobrir a senha. Também registramos tentativas de senha erradas, para travar a conta por alguns minutos e proteger você, e os pedidos de senha nova.</td></tr>
           <tr><td data-label="Situação">Compra com Pix</td><td data-label="Dados">Nome completo ou razão social, CPF ou CNPJ, e-mail e WhatsApp informados no checkout, além do plano, valor, data e identificador da transação. Esses quatro dados são obrigatórios em todo pagamento, porque são necessários para emitir a nota fiscal.</td></tr>
           <tr><td data-label="Situação">Compra com cartão</td><td data-label="Dados">Nome completo ou razão social, CPF ou CNPJ, e-mail e WhatsApp informados antes do pagamento (obrigatórios, para a nota fiscal), além do plano, status da assinatura e datas de cobrança. O cartão é digitado na página da operadora (Stripe): <strong>não armazenamos o número do cartão nem o código de segurança</strong>.</td></tr>
-          <tr><td data-label="Situação">Uso do site e do app</td><td data-label="Dados">Concursos salvos, alertas ativados, filtros e preferências, guardados no seu navegador. Para quem assina e entra com a conta, a lista de concursos que você acompanha e os alertas ativados também ficam guardados na sua conta, para aparecer em qualquer aparelho; ao sair da conta, essa lista sai deste navegador. Registramos também dados técnicos de acesso, como data, hora e endereço IP, para segurança e cumprimento legal.</td></tr>
+          <tr><td data-label="Situação">Uso do site e do app</td><td data-label="Dados">Concursos salvos, alertas ativados, filtros e preferências, guardados no seu navegador. Para quem assina e entra com a conta, a lista de concursos que você acompanha e os alertas ativados também ficam guardados na sua conta, para aparecer em qualquer aparelho; ao sair da conta, essa lista sai deste navegador. Registramos também dados técnicos de acesso, como data, hora e endereço IP, para segurança e cumprimento legal. Quando você está conectado, registramos em que horas a sua conta usou o site, para medir o uso do serviço.</td></tr>
           <tr><td data-label="Situação">Atendimento</td><td data-label="Dados">Mensagens e observações que você envia pelos nossos canais, incluindo pedidos de cancelamento.</td></tr>
         </tbody>
       </table>
@@ -95,6 +96,7 @@
         <li><strong>Liberar o plano contratado e controlar o acesso:</strong> executar o contrato.</li>
         <li><strong>Processar pagamentos, confirmar o Pix e emitir nota fiscal:</strong> executar o contrato e cumprir obrigação legal e fiscal (art. 7º, II).</li>
         <li><strong>Prevenir fraudes, abusos e incidentes de segurança:</strong> legítimo interesse (art. 7º, IX) e obrigação legal.</li>
+        <li><strong>Medir o uso do site (acessos por hora, de onde vêm as visitas e contas ativas) para melhorar o serviço:</strong> legítimo interesse (art. 7º, IX).</li>
         <li><strong>Responder pedidos de suporte, cancelamento e direitos do titular:</strong> cumprir obrigação legal e executar o contrato.</li>
       </ul>
       <p><strong>Não vendemos, alugamos e nem cedemos seus dados para publicidade de terceiros.</strong> Não usamos seus dados para decisões automatizadas que afetem seus direitos.</p>
@@ -128,6 +130,7 @@
         <li><strong>Cookie de sessão:</strong> um cookie próprio, seguro (HttpOnly, SameSite) e assinado digitalmente, que mantém você conectado por até 30 dias.</li>
         <li><strong>Armazenamento local do navegador:</strong> concursos salvos, alertas, filtros e preferências de exibição. Com a conta, a lista de concursos acompanhados fica também no servidor.</li>
         <li><strong>Google Analytics (opcional):</strong> só é ativado se você clicar em “Aceitar” no aviso de cookies. Ele usa os cookies <code>_ga</code> e <code>_ga_*</code> para contar visitas e páginas vistas de forma agregada. Não ligamos o Analytics à sua conta, não enviamos seu nome, e-mail ou CPF e não usamos os dados para anúncios. Saiba <a href="https://policies.google.com/technologies/partner-sites?hl=pt-BR" rel="noopener" target="_blank">como o Google usa as informações de sites que usam os serviços dele</a>.</li>
+        <li><strong>Contador de acessos próprio (sem cookies):</strong> cada página aberta soma 1 na contagem por hora, junto com o tipo de origem da visita (por exemplo, anúncio, busca no Google ou link direto). Não guardamos o seu IP, o navegador nem as páginas que você viu, e a contagem não identifica você. No navegador fica só uma marca de que a visita já foi contada, que some ao fechar a aba.</li>
         <li><strong>Sua escolha sobre cookies:</strong> fica guardada no próprio navegador.</li>
         <li><strong>Funcionamento offline:</strong> o aplicativo guarda uma cópia das páginas visitadas para abrir sem internet.</li>
       </ul>
@@ -137,7 +140,8 @@
       <ul>
         <li><strong>Conta e preferências:</strong> enquanto a conta estiver ativa. Depois, pelo prazo necessário para atender obrigações legais e exercer direitos.</li>
         <li><strong>Compras, notas fiscais e registros financeiros:</strong> pelos prazos fiscais e legais aplicáveis, em regra 5 anos.</li>
-        <li><strong>Registros de acesso (IP, data e hora):</strong> pelo prazo legal de guarda de registros de aplicações, de 6 meses.</li>
+        <li><strong>Registros de acesso (IP, data e hora):</strong> pelo prazo legal de guarda de registros de aplicações, de 6 meses. O registro das horas em que cada conta usou o site segue o mesmo prazo.</li>
+        <li><strong>Contagem de acessos por hora:</strong> são só números somados, sem dados pessoais, e podem ficar guardados para comparar períodos.</li>
         <li><strong>Pedidos de cancelamento e atendimento:</strong> pelo tempo necessário para comprovar o atendimento e cumprir obrigações legais.</li>
       </ul>
       <p>Encerrados os prazos, os dados são eliminados ou anonimizados de forma segura.</p>
