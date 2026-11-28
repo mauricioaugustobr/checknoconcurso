@@ -94,3 +94,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid #0C4F83; outline-
 .ad-contato { display: flex; flex-direction: column; gap: 4px; min-width: 210px; }
 .ad-contato a { color: #0C4F83; font-weight: 600; overflow-wrap: anywhere; }
 .ad-btn-sm { padding: 6px 12px; font-size: .82rem; align-self: flex-start; }
+/* Usuários: forma de entrar e pedido de senha nova */
+.ad-tag-entrada { display: inline-block; margin-top: 4px; padding: 2px 8px; border-radius: 999px; background: #E9F0F6; color: #0B2540; font-size: .75rem; font-weight: 700; }
+.ad-alerta { color: #9A3412; font-size: .82rem; font-weight: 700; }
+.ad-nova-senha { margin-top: 6px; }

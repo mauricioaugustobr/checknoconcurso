@@ -741,7 +741,7 @@ function completeLogin(user) {
   showToast(`Pronto, ${user.name.split(/\s+/)[0]}! Você está conectado.`);
 }
 
-function handleAuthSubmit(e) {
+async function handleAuthSubmit(e) {
   e.preventDefault();
   clearAuthErrors();
   const email = $('#authEmail').value.trim();
@@ -763,7 +763,27 @@ function handleAuthSubmit(e) {
   }
   const typedName = $('#authName').value.trim();
   const fallbackName = email.split('@')[0].replace(/[._-]+/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase());
-  completeLogin({ name: (authMode === 'signup' && typedName) || fallbackName, email, provider: 'email' });
+  const criar = authMode === 'signup';
+  const btn = $('#authSubmitBtn');
+  btn.disabled = true;
+  try {
+    // Conta de verdade no servidor, com a mesma sessão do login com Google: assim a pessoa paga por Pix ou cartão
+    const res = await fetch('/api/auth/session', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ acao: criar ? 'criar' : 'entrar', nome: (criar && typedName) || fallbackName, email, senha: password, lembrar: $('#authRemember').checked })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.user) throw new Error(data.error || 'Não foi possível entrar agora. Tente de novo.');
+    // Mesmo caminho do login com Google (plano, admin e pagamento vêm do servidor)
+    window.dispatchEvent(new CustomEvent('cnc:auth-login', { detail: data.user }));
+  } catch (err) {
+    $('#authPassword').setAttribute('aria-invalid', 'true');
+    showToast(navigator.onLine === false ? 'Sem internet. Conecte-se para entrar na sua conta.' : err.message);
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 function closeAccountMenu() {
@@ -796,10 +816,24 @@ function bindAuthEvents() {
     $('#togglePasswordBtn').setAttribute('aria-pressed', String(show));
     $('#togglePasswordBtn').setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
   });
-  $('#forgotPasswordBtn').addEventListener('click', () => {
+  $('#forgotPasswordBtn').addEventListener('click', async () => {
     const email = $('#authEmail').value.trim();
-    showToast(email ? `Enviamos um link de redefinição para ${email} (simulação).` : 'Digite seu e-mail acima para receber o link de redefinição.');
-    if (!email) $('#authEmail').focus();
+    if (!email) {
+      showToast('Digite o seu e-mail acima e toque de novo em "Esqueci minha senha".');
+      $('#authEmail').focus();
+      return;
+    }
+    // O pedido vai para o painel do Check: a equipe envia uma senha nova para o e-mail da conta
+    try {
+      const res = await fetch('/api/auth/session', {
+        method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ acao: 'esqueci', email })
+      });
+      const data = await res.json().catch(() => ({}));
+      showToast(data.mensagem || data.error || 'Não foi possível pedir a senha nova agora. Tente de novo.');
+    } catch {
+      showToast('Sem internet. Conecte-se e tente de novo.');
+    }
   });
   // Botão reserva: só aparece se o botão oficial do Google não carregar (google-auth.js).
   $('#googleLoginBtn').addEventListener('click', () => {
@@ -814,7 +848,8 @@ function bindAuthEvents() {
   window.addEventListener('cnc:auth-login', (e) => {
     const u = e.detail || {};
     if (!u.email) return;
-    completeLogin({ name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: 'google', role: u.role || 'user' });
+    // Google ou e-mail e senha: as duas formas têm sessão no servidor e podem pagar
+    completeLogin({ name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: u.provider || 'google', servidor: true, role: u.role || 'user' });
     applyServerRole(u);
     saveState();
     renderAll();
@@ -824,14 +859,16 @@ function bindAuthEvents() {
     if (u === undefined) return; // sem internet: mantém o estado local
     if (u && u.email) {
       if (!state.user || state.user.email !== u.email) {
-        state.user = { name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: 'google' };
+        state.user = { name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: u.provider || 'google' };
       }
-      state.user.provider = 'google'; // há sessão no servidor: é a conta do Google (pode pagar)
+      // Há sessão no servidor (Google ou e-mail e senha): a pessoa pode pagar
+      state.user.provider = u.provider || 'google';
+      state.user.servidor = true;
       applyServerRole(u);
       saveState();
       sincronizarAcesso();
-    } else if (state.user && state.user.provider === 'google') {
-      // A sessão do Google expirou no servidor: encerra também no navegador
+    } else if (state.user && (state.user.provider === 'google' || state.user.servidor)) {
+      // A sessão expirou no servidor: encerra também no navegador
       state.user = null;
       esquecerListaDaConta(state);
       applyServerRole(null);
@@ -857,7 +894,7 @@ function bindAuthEvents() {
     if (!e.target.closest('#accountWrap')) closeAccountMenu();
   });
   $('#logoutBtn').addEventListener('click', () => {
-    if (state.user && state.user.provider === 'google') window.dispatchEvent(new CustomEvent('cnc:auth-logout'));
+    if (state.user && (state.user.provider === 'google' || state.user.servidor)) window.dispatchEvent(new CustomEvent('cnc:auth-logout'));
     state.user = null;
     esquecerListaDaConta(state); // item 12: a lista da conta não fica neste navegador
     applyServerRole(null);
@@ -1802,12 +1839,17 @@ function openCheckoutModal(initialPlan = 'essencial') {
     showToast('Você é admin: todos os planos já estão liberados para você.');
     return;
   }
-  // Pagamento real exige a conta do Google: o servidor só reconhece essa sessão.
-  // Quem entrou só com e-mail e senha neste aparelho entra com o Google e o pagamento abre em seguida.
-  if (stripeOn() && state.user.provider !== 'google') {
+  // Pagamento real exige conta com sessão no servidor: Google ou e-mail e senha.
+  // Quem tinha só a conta antiga deste aparelho (sem servidor) cria a senha agora e o pagamento abre em seguida.
+  if (stripeOn() && !(state.user.servidor || state.user.provider === 'google')) {
     pendingCheckoutPlan = initialPlan;
-    openAuthModal('login');
-    showToast('Para pagar, entre com a sua conta do Google.');
+    const antiga = state.user;
+    openAuthModal(antiga.provider === 'email' ? 'signup' : 'login');
+    if (antiga.provider === 'email') {
+      $('#authName').value = antiga.name || '';
+      $('#authEmail').value = antiga.email || '';
+    }
+    showToast('Para pagar, crie a sua senha (ou entre com o Google). Leva 30 segundos.');
     return;
   }
   // Pagamento real: página segura da Stripe (leva junto o concurso de origem, se houver)

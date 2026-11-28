@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
-    "test": "node tests/smoke.test.mjs && node tests/auth.test.mjs && node tests/search.test.mjs && node tests/admin.test.mjs && node tests/stripe.test.mjs && node tests/acesso.test.mjs && node tests/acesso-manual.test.mjs && node tests/progresso.test.mjs && node tests/materias.test.mjs && node tests/amostra.test.mjs && node tests/plano-origem.test.mjs && node tests/compartilhar.test.mjs && node tests/ultimos-dias.test.mjs && node tests/cadeado-essencial.test.mjs && node tests/acompanhados.test.mjs && node tests/agenda.test.mjs && node tests/notas.test.mjs && node --experimental-test-module-mocks --no-warnings --test tests/blog-aeo.test.mjs"
+    "test": "node tests/smoke.test.mjs && node tests/auth.test.mjs && node tests/search.test.mjs && node tests/admin.test.mjs && node tests/stripe.test.mjs && node tests/acesso.test.mjs && node tests/acesso-manual.test.mjs && node tests/progresso.test.mjs && node tests/materias.test.mjs && node tests/amostra.test.mjs && node tests/plano-origem.test.mjs && node tests/compartilhar.test.mjs && node tests/ultimos-dias.test.mjs && node tests/cadeado-essencial.test.mjs && node tests/acompanhados.test.mjs && node tests/agenda.test.mjs && node tests/notas.test.mjs && node tests/conta-email.test.mjs && node --experimental-test-module-mocks --no-warnings --test tests/blog-aeo.test.mjs"
   },
   "engines": {
     "node": ">=22.0.0"

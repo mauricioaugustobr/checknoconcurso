@@ -315,16 +315,45 @@ async function loadUsers() {
   const r = $('#adUserResumo');
   if (r) r.textContent = `${num(users.length)} cadastros · ${num(resumo.liberado || 0)} com acesso · ${num(resumo['sem-plano'] || 0)} sem plano · ${num(resumo.bloqueado || 0)} bloqueados · ${brl(resumo.total / 100)} recebidos`;
   $('#adUserRows').innerHTML = users.map((u) => `<tr>
-      <td>${esc(u.name || '—')}<br><span class="ad-muted">${esc(u.email)}</span></td>
+      <td>${esc(u.name || '—')}<br><span class="ad-muted">${esc(u.email)}</span>${celulaEntrada(u)}</td>
       <td>${celulaSituacao(u.situacao)}</td>
       <td>${celulaPago(u.pago)}</td>
-      <td>${celulaAcao(u)}</td>
+      <td>${celulaAcao(u)}${botaoNovaSenha(u)}</td>
       <td class="ad-nowrap">${num(u.logins)}x<br><span class="ad-muted">${quando(u.last_login_at)}</span></td></tr>`).join('')
-    || '<tr><td colspan="5" class="ad-muted">Ninguém entrou com o Google ainda.</td></tr>';
+    || '<tr><td colspan="5" class="ad-muted">Ninguém entrou ainda.</td></tr>';
+}
+
+/* Conta com e-mail e senha: forma de entrar, pedido de senha nova e senha provisória */
+function celulaEntrada(u) {
+  const tipo = u.entrada === 'senha' ? 'E-mail e senha' : 'Google';
+  const pedido = u.senha?.pedidoEm ? `<br><span class="ad-alerta">Pediu senha nova em ${quando(u.senha.pedidoEm)}</span>` : '';
+  const bloqueada = u.senha?.bloqueadaAte && new Date(u.senha.bloqueadaAte) > new Date() ? '<br><span class="ad-muted">Senha bloqueada por tentativas erradas</span>' : '';
+  return `<br><span class="ad-tag-entrada">${tipo}</span>${pedido}${bloqueada}`;
+}
+
+function botaoNovaSenha(u) {
+  if (u.entrada !== 'senha' || u.situacao?.acesso === 'admin') return '';
+  return `<button type="button" class="ad-btn-ghost ad-btn-sm ad-nova-senha" data-nova-senha="${esc(u.email)}">Nova senha</button>`;
 }
 
 function bindUsers() {
   const rows = $('#adUserRows');
+  rows.addEventListener('click', async (e) => {
+    const botao = e.target.closest('[data-nova-senha]');
+    if (!botao) return;
+    const email = botao.dataset.novaSenha;
+    if (!confirm(`Gerar uma senha nova para ${email}? A senha antiga deixa de valer.`)) return;
+    botao.disabled = true;
+    try {
+      const r = await api('/api/admin/users', { method: 'POST', body: { email, acao: 'nova-senha' } });
+      // Mostrada só agora: copie e envie para a pessoa pelo e-mail ou WhatsApp dela
+      prompt(`Senha provisória de ${email}. Copie e envie para a pessoa (ela entra com o e-mail e esta senha):`, r.senhaProvisoria);
+      await loadUsers();
+    } catch (err) {
+      toast(err.message);
+      botao.disabled = false;
+    }
+  });
   rows.addEventListener('change', (e) => {
     if (e.target.name !== 'acao') return;
     const label = e.target.closest('form').querySelector('.ad-user-ate');
@@ -379,7 +408,8 @@ const ACOES = {
   'concurso.editar': 'editou o concurso', 'concurso.ocultar': 'ocultou o concurso', 'concurso.restaurar': 'desfez as edições do concurso',
   'post.criar': 'criou o post', 'post.editar': 'editou o post', 'post.excluir': 'excluiu o post',
   'usuario.liberar': 'liberou o acesso de', 'usuario.bloquear': 'bloqueou', 'usuario.automatico': 'voltou ao automático o acesso de',
-  'nota.emitida': 'marcou nota emitida do pagamento', 'nota.desmarcada': 'desfez a marcação de nota do pagamento'
+  'nota.emitida': 'marcou nota emitida do pagamento', 'nota.desmarcada': 'desfez a marcação de nota do pagamento',
+  'usuario.senha': 'gerou senha provisória para'
 };
 
 /* ---------------- Notas a emitir (a nota é feita à mão; aqui só a marcação) ---------------- */
