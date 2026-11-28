@@ -826,6 +826,7 @@ function bindAuthEvents() {
       if (!state.user || state.user.email !== u.email) {
         state.user = { name: u.name || u.email.split('@')[0], email: u.email, picture: u.picture || null, provider: 'google' };
       }
+      state.user.provider = 'google'; // há sessão no servidor: é a conta do Google (pode pagar)
       applyServerRole(u);
       saveState();
       sincronizarAcesso();
@@ -1799,6 +1800,14 @@ function openCheckoutModal(initialPlan = 'essencial') {
   // ADMIN já tem todos os planos liberados, sem pagar
   if (state.user.role === 'admin') {
     showToast('Você é admin: todos os planos já estão liberados para você.');
+    return;
+  }
+  // Pagamento real exige a conta do Google: o servidor só reconhece essa sessão.
+  // Quem entrou só com e-mail e senha neste aparelho entra com o Google e o pagamento abre em seguida.
+  if (stripeOn() && state.user.provider !== 'google') {
+    pendingCheckoutPlan = initialPlan;
+    openAuthModal('login');
+    showToast('Para pagar, entre com a sua conta do Google.');
     return;
   }
   // Pagamento real: página segura da Stripe (leva junto o concurso de origem, se houver)
