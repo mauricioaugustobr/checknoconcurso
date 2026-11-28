@@ -1,67 +1,103 @@
-/* Item 13 · Agenda da semana (concursos acompanhados), no topo de "Meus concursos" */
+/* ======================================================
+   Item 13 · Agenda da semana (concursos acompanhados), no topo de "Meus concursos"
+   Revisão da Designer UI/UX (27/11/2026):
+   - Os 7 dias ficam numa faixa só, com divisórias; o dia de hoje é uma coluna azul-marca.
+   - Dias sem nada não viram caixas: só o cabeçalho do dia, esmaecido.
+   - Cada evento tem barra lateral + rótulo na cor do tipo (mesmas cores dos selos do site).
+   - No celular, linha do tempo vertical: dias com data primeiro, dias vazios agrupados.
+   - "Mais adiante" vira linhas leves com a mesma cor de tipo; nota discreta no rodapé.
+   ====================================================== */
 .ag {
   background: var(--bg-surface);
   border: 1px solid var(--border-default);
   border-radius: 16px;
-  padding: 18px;
+  padding: 20px;
   margin-bottom: 16px;
   container-type: inline-size;
 }
-.ag-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px 16px; margin-bottom: 14px; }
+.ag-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px 16px; margin-bottom: 16px; }
 .ag-titulo { font-family: var(--font-display); font-weight: 600; font-size: 22px; line-height: 1.2; margin: 0; color: var(--text-primary); }
 .ag-sub { margin: 4px 0 0; font-size: 13.5px; color: var(--text-muted); }
 .ag-ics { min-height: 44px; }
 .ag-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
+/* ---------- Semana: uma faixa, 7 colunas com divisórias ---------- */
 .ag-dias {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 8px;
-}
-.ag-dia {
-  min-width: 0;
-  min-height: 112px;
-  padding: 8px;
-  border-radius: 12px;
-  background: var(--bg-canvas);
   border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-surface);
 }
-.ag-dia.is-hoje { border: 2px solid var(--brand-primary); background: var(--brand-soft); }
-.ag-data { display: flex; align-items: baseline; justify-content: space-between; gap: 4px; margin: 0 0 6px; font-size: 13px; color: var(--text-primary); }
-.ag-data span { color: var(--text-muted); font-variant-numeric: tabular-nums; font-size: 12.5px; }
-.ag-nada { margin: 0; color: var(--text-muted); font-size: 13px; }
-.ag-evs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ag-dia { min-width: 0; padding: 10px 10px 12px; border-left: 1px solid var(--border-subtle); }
+.ag-dia:first-child { border-left: 0; }
+.ag-data {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 4px;
+  margin: 0 0 8px; font-size: 13px; color: var(--text-primary);
+}
+.ag-data strong { font-weight: 700; }
+.ag-data span { color: var(--text-muted); font-variant-numeric: tabular-nums; font-size: 12px; }
 
+/* Hoje: coluna inteira na cor da marca */
+.ag-dia.is-hoje { background: var(--brand-soft); box-shadow: inset 0 3px 0 var(--brand-primary); }
+.ag-dia.is-hoje .ag-data strong { color: var(--brand-primary); }
+html[data-theme="dark"] .ag-dia.is-hoje .ag-data strong { color: var(--text-primary); }
+
+/* Dia sem nada: só o cabeçalho, esmaecido; a coluna acompanha a altura das outras */
+.ag-dia.is-vazio .ag-data strong, .ag-dia.is-vazio .ag-data span { color: var(--text-muted); font-weight: 600; }
+.ag-nada { margin: 0; color: var(--border-strong); font-size: 13px; }
+
+/* Eventos: barra lateral + rótulo na cor do tipo */
+.ag-evs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .ag-ev {
   width: 100%;
   min-height: 44px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1px;
-  padding: 6px 8px;
+  gap: 2px;
+  padding: 7px 9px 7px 10px;
   border-radius: 8px;
-  border: 1px solid;
+  border: 1px solid var(--border-subtle);
+  border-left-width: 3px;
+  background: var(--bg-surface);
   text-align: left;
   font: inherit;
   cursor: pointer;
+  transition: border-color .12s ease, box-shadow .12s ease;
 }
+.ag-ev:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
 .ag-ev:focus-visible, .ag-linha:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
-.ag-tipo { font-size: 11.5px; font-weight: 700; letter-spacing: .02em; }
-.ag-nome { font-size: 13px; font-weight: 600; color: var(--text-primary); overflow-wrap: anywhere; }
-.ag-fim { background: var(--status-warning-bg); border-color: var(--status-warning-border); }
+.ag-tipo { font-size: 11px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+.ag-nome { font-size: 13.5px; font-weight: 600; color: var(--text-primary); overflow-wrap: anywhere; line-height: 1.25; }
+
+.ag-fim { border-left-color: var(--status-warning-border); }
 .ag-fim .ag-tipo { color: var(--status-warning-fg); }
-.ag-prova { background: var(--status-scheduled-bg); border-color: var(--status-scheduled-border); }
+.ag-prova { border-left-color: var(--status-scheduled-border); }
 .ag-prova .ag-tipo { color: var(--status-scheduled-fg); }
-.ag-abre { background: var(--status-open-bg); border-color: var(--status-open-border); }
+.ag-abre { border-left-color: var(--status-open-border); }
 .ag-abre .ag-tipo { color: var(--status-open-fg); }
 
-.ag-depois { margin-top: 14px; }
+/* No modo noturno, caixa branca com texto e borda da cor (padrão aprovado do site) */
+html[data-theme="dark"] .ag-ev { background: #FFFFFF; border-color: #FFFFFF; }
+html[data-theme="dark"] .ag-ev .ag-nome { color: #0F2236; }
+html[data-theme="dark"] .ag-fim { border-left-color: #B45309; }
+html[data-theme="dark"] .ag-fim .ag-tipo { color: #8A4600; }
+html[data-theme="dark"] .ag-prova { border-left-color: #5B21B6; }
+html[data-theme="dark"] .ag-prova .ag-tipo { color: #5B21B6; }
+html[data-theme="dark"] .ag-abre { border-left-color: #0C6B3B; }
+html[data-theme="dark"] .ag-abre .ag-tipo { color: #0C6B3B; }
+html[data-theme="dark"] .ag-ev:hover { border-color: #FFFFFF; box-shadow: 0 2px 8px rgba(2, 10, 20, .45); }
+
+/* ---------- Mais adiante: linhas leves, cor só no tipo ---------- */
+.ag-depois { margin-top: 16px; }
 .ag-depois-tit { margin: 0 0 6px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
-.ag-depois ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.ag-depois ul { list-style: none; margin: 0; padding: 0; }
+.ag-depois li + li { border-top: 1px solid var(--border-subtle); }
 .ag-linha {
   width: 100%;
   min-height: 44px;
@@ -70,35 +106,52 @@
   align-items: center;
   gap: 4px 12px;
   padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-canvas);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
   color: var(--text-primary);
   font: inherit;
   font-size: 14px;
   text-align: left;
   cursor: pointer;
 }
-.ag-linha:hover, .ag-ev:hover { filter: brightness(0.97); }
+.ag-linha:hover { background: var(--bg-surface-alt); }
 .ag-quando { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 88px; }
-.ag-tipo-txt { color: var(--text-secondary); }
-.ag-nota { margin: 12px 0 0; font-size: 12.5px; color: var(--text-muted); }
+.ag-tipo-txt { font-size: 13px; font-weight: 600; }
+.ag-fim-txt { color: var(--status-warning-fg); }
+.ag-prova-txt { color: var(--status-scheduled-fg); }
+.ag-abre-txt { color: var(--status-open-fg); }
+.ag-nota { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--border-subtle); font-size: 12.5px; color: var(--text-muted); }
 
-/* Espaço estreito (celular ou coluna menor): os dias viram linhas; dia sem nada fica numa linha fina */
+/* ---------- Espaço estreito: linha do tempo vertical ---------- */
 @container (max-width: 760px) {
-  .ag-dias { grid-template-columns: 1fr; gap: 6px; }
-  .ag-dia { min-height: 0; display: grid; grid-template-columns: 92px 1fr; align-items: start; gap: 8px; }
-  .ag-data { flex-direction: column; align-items: flex-start; gap: 0; margin: 0; padding-top: 4px; }
-  .ag-dia.is-vazio { padding-top: 4px; padding-bottom: 4px; }
-  .ag-dia.is-vazio .ag-data { flex-direction: row; gap: 6px; align-items: baseline; padding-top: 0; }
-  .ag-dia.is-vazio .ag-nada { padding-top: 0; }
-  .ag-ev { min-height: 48px; }
+  .ag-dias { display: block; border: 0; border-radius: 0; overflow: visible; background: transparent; }
+  .ag-dia { position: relative; display: grid; grid-template-columns: 64px 1fr; gap: 4px 12px; padding: 10px 0; border-left: 0; align-items: start; }
+  .ag-dia + .ag-dia { border-top: 1px solid var(--border-subtle); }
+  .ag-data { grid-column: 1; grid-row: 1; flex-direction: column; align-items: flex-start; gap: 0; margin: 0; padding-top: 2px; }
+  .ag-data strong { font-size: 14px; }
+  .ag-data span { font-size: 12px; }
+  .ag-evs { grid-column: 2; grid-row: 1; }
+
+  /* Hoje continua destacado, agora como bloco arredondado */
+  .ag-dia.is-hoje { border-radius: 12px; padding: 10px 12px; margin: 2px 0; box-shadow: inset 3px 0 0 var(--brand-primary); }
+  .ag-dia.is-hoje.is-vazio { padding: 8px 12px; }
+  .ag-dia.is-hoje + .ag-dia { border-top: 0; }
+
+  /* Dias vazios: uma linha fina só; o traço vira "sem datas" (o texto para leitor de tela continua) */
+  .ag-dia.is-vazio { display: flex; align-items: baseline; gap: 10px; padding: 7px 0; }
+  .ag-dia.is-vazio .ag-data { flex-direction: row; align-items: baseline; gap: 6px; padding-top: 0; }
+  .ag-dia.is-vazio .ag-nada { font-size: 0; color: var(--text-muted); }
+  .ag-dia.is-vazio .ag-nada::before { content: "sem datas"; font-size: 12px; }
+  .ag-dia:not(.is-vazio) + .ag-dia.is-vazio { margin-top: 4px; }
+
+  .ag-ev { min-height: 48px; padding: 8px 10px 8px 12px; }
+  .ag-nome { font-size: 14px; }
   .ag-linha { min-height: 48px; }
-}
-@media (max-width: 560px) {
-  .ag-ics { width: 100%; min-height: 48px; }
 }
 @media (max-width: 560px) {
   .ag { padding: 14px; }
   .ag-titulo { font-size: 20px; }
+  .ag-ics { width: 100%; min-height: 48px; }
 }
+@media (prefers-reduced-motion: reduce) { .ag-ev { transition: none; } }
