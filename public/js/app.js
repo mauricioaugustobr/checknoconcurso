@@ -5,6 +5,7 @@ import { seloHTML, seloPrazo, hojeBR } from './ultimos-dias.js?v=1';
 import { dadosBotao } from './compartilhar-dados.js?v=1';
 import { lerOrigem, limparOrigem, montarFaixaOrigem, buscarResumo, avisoAssinaturaHTML } from './plano-origem.js?v=2';
 import { cadeadoTreinoHTML, faixaTreinoTravadaHTML, buscarPrevia, previaPronta } from './cadeado-essencial.js?v=1';
+import { agendaHTML, baixarAgendaICS } from './agenda.js?v=1';
 import { sincronizarAcompanhados, alterarAcompanhado, esquecerListaDaConta, listaNaConta, infoAcompanhado, mudancasHTML, proximoPassoHTML, linkOficialHTML } from './acompanhados.js?v=1';
 
 // Item 6: aviso "Assinatura ativa. Este é o seu concurso." na ficha do concurso de origem
@@ -1246,6 +1247,7 @@ function renderSavedView() {
   const container = $('#savedListContainer');
 
   if (savedItems.length === 0) {
+    if ($('#agendaSlot')) $('#agendaSlot').innerHTML = '';
     container.innerHTML = `
       <div class="empty-state">
         <h3>Você ainda não acompanha nenhum concurso</h3>
@@ -1256,6 +1258,9 @@ function renderSavedView() {
     return;
   }
 
+  // Item 13: agenda da semana dos concursos acompanhados, acima da lista (largura toda)
+  const agendaSlot = $('#agendaSlot');
+  if (agendaSlot) agendaSlot.innerHTML = agendaHTML(savedItems, TODAY_ISO);
   container.innerHTML = savedItems.map((c) => {
     const alertOn = state.alertIds.includes(c.id);
     const examDays = daysUntil(c.dataProva);
@@ -2049,6 +2054,12 @@ function bindEvents() {
     if (saveBtn) {
       e.stopPropagation();
       toggleSaveContest(saveBtn.dataset.saveId);
+      return;
+    }
+
+    if (e.target.closest('[data-agenda-ics]')) {
+      baixarAgendaICS(catalog.filter((c) => state.savedIds.includes(c.id)));
+      showToast('Arquivo da agenda baixado. Abra no celular ou no computador para adicionar ao seu calendário.');
       return;
     }
 

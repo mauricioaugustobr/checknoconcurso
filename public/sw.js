@@ -1,4 +1,4 @@
-const CACHE_NAME = 'check-no-concurso-v44';
+const CACHE_NAME = 'check-no-concurso-v45';
 const ASSETS = [
   '/',
   '/index.html',
@@ -41,7 +41,9 @@ const ASSETS = [
   '/js/cadeado-essencial.js',
   '/css/cadeado-essencial.css',
   '/js/acompanhados.js',
-  '/css/acompanhados.css'
+  '/css/acompanhados.css',
+  '/js/agenda.js',
+  '/css/agenda.css'
 ];
 
 self.addEventListener('install', (event) => {
