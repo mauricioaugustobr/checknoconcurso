@@ -50,11 +50,12 @@ async function boot() {
   bindConcursos();
   bindPosts();
   bindUsers();
+  bindNotas();
   openTab(location.hash.replace('#', '') || 'geral');
 }
 
 /* ---------------- Abas ---------------- */
-const loaders = { geral: loadOverview, concursos: loadConcursos, blog: loadPosts, usuarios: loadUsers, cancelamentos: loadCancelamentos, registro: loadAudit };
+const loaders = { geral: loadOverview, concursos: loadConcursos, blog: loadPosts, usuarios: loadUsers, notas: loadNotas, cancelamentos: loadCancelamentos, registro: loadAudit };
 
 function openTab(name) {
   if (!loaders[name]) name = 'geral';
@@ -377,8 +378,57 @@ async function loadCancelamentos() {
 const ACOES = {
   'concurso.editar': 'editou o concurso', 'concurso.ocultar': 'ocultou o concurso', 'concurso.restaurar': 'desfez as edições do concurso',
   'post.criar': 'criou o post', 'post.editar': 'editou o post', 'post.excluir': 'excluiu o post',
-  'usuario.liberar': 'liberou o acesso de', 'usuario.bloquear': 'bloqueou', 'usuario.automatico': 'voltou ao automático o acesso de'
+  'usuario.liberar': 'liberou o acesso de', 'usuario.bloquear': 'bloqueou', 'usuario.automatico': 'voltou ao automático o acesso de',
+  'nota.emitida': 'marcou nota emitida do pagamento', 'nota.desmarcada': 'desfez a marcação de nota do pagamento'
 };
+
+/* ---------------- Notas a emitir (a nota é feita à mão; aqui só a marcação) ---------------- */
+let filtroNotas = 'pendentes';
+const PLANO_NOTA = { essencial: 'Essencial mensal', 'completo-mensal': 'Completo mensal', 'completo-anual': 'Completo anual' };
+
+async function loadNotas() {
+  const data = await api(`/api/admin/notas?filtro=${filtroNotas}`);
+  $$('[data-notas-filtro]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.notasFiltro === filtroNotas)));
+  const r = data.resumo || { pendentes: 0, pendentesCentavos: 0 };
+  $('#adNotasResumo').textContent = data.semBanco
+    ? 'Banco de dados indisponível agora.'
+    : (r.pendentes ? `${num(r.pendentes)} ${r.pendentes === 1 ? 'pagamento sem nota' : 'pagamentos sem nota'} · ${brl(r.pendentesCentavos / 100)}` : 'Nenhum pagamento sem nota.');
+  $('#adNotasRows').innerHTML = (data.itens || []).map((n) => `<tr data-origem="${esc(n.origem)}" data-ref="${esc(n.ref)}">
+      <td class="ad-nowrap">${quando(n.pagoEm)}</td>
+      <td>${esc(n.nome || '—')}${n.nome ? '' : '<br><span class="ad-muted">sem nome no cadastro</span>'}</td>
+      <td class="ad-nowrap">${esc(n.cpf || '—')}</td>
+      <td class="ad-nowrap">${brl(n.centavos / 100)}</td>
+      <td>${esc(PLANO_NOTA[n.plano] || n.plano || '—')}</td>
+      <td>${n.origem === 'pix' ? 'Pix' : 'Cartão'}</td>
+      <td>${esc(n.email || '—')}</td>
+      <td class="ad-nota">
+        <label class="ad-check"><input type="checkbox" data-nota-emitida ${n.emitida ? 'checked' : ''}> Nota emitida</label>
+        <input type="text" data-nota-numero maxlength="40" placeholder="nº da nota (opcional)" aria-label="Número da nota" value="${esc(n.numero || '')}">
+        ${n.emitida && n.emitidaEm ? `<span class="ad-muted">em ${quando(n.emitidaEm)}</span>` : ''}
+      </td></tr>`).join('')
+    || `<tr><td colspan="8" class="ad-muted">${filtroNotas === 'pendentes' ? 'Nenhum pagamento sem nota.' : 'Nenhum pagamento real ainda.'}</td></tr>`;
+}
+
+function bindNotas() {
+  $$('[data-notas-filtro]').forEach((b) => b.addEventListener('click', () => {
+    filtroNotas = b.dataset.notasFiltro;
+    loadNotas().catch((err) => toast(err.message));
+  }));
+  $('#adNotasRows').addEventListener('change', async (e) => {
+    const tr = e.target.closest('tr[data-ref]');
+    if (!tr || !e.target.matches('[data-nota-emitida], [data-nota-numero]')) return;
+    const caixa = $('[data-nota-emitida]', tr);
+    const emitida = caixa.checked;
+    try {
+      await api('/api/admin/notas', { method: 'POST', body: { origem: tr.dataset.origem, ref: tr.dataset.ref, emitida, numero: $('[data-nota-numero]', tr).value } });
+      toast(emitida ? 'Nota marcada como emitida.' : 'Marcação salva.');
+      if (filtroNotas === 'pendentes' && emitida) loadNotas().catch(() => {});
+    } catch (err) {
+      if (e.target === caixa) caixa.checked = !emitida;
+      toast(err.message);
+    }
+  });
+}
 
 async function loadAudit() {
   const { items } = await api('/api/admin/audit');

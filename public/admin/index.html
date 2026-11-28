@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/tokens.css?v=10" />
-  <link rel="stylesheet" href="/admin/admin.css?v=3" />
+  <link rel="stylesheet" href="/admin/admin.css?v=4" />
 </head>
 <body>
   <header class="ad-top">
@@ -32,6 +32,7 @@
       <button type="button" role="tab" data-tab="concursos" aria-selected="false">Concursos</button>
       <button type="button" role="tab" data-tab="blog" aria-selected="false">Blog</button>
       <button type="button" role="tab" data-tab="usuarios" aria-selected="false">Usuários</button>
+      <button type="button" role="tab" data-tab="notas" aria-selected="false">Notas a emitir</button>
       <button type="button" role="tab" data-tab="cancelamentos" aria-selected="false">Cancelamentos</button>
       <button type="button" role="tab" data-tab="registro" aria-selected="false">Registro</button>
     </nav>
@@ -86,6 +87,23 @@
         <div class="ad-table-wrap"><table class="ad-table">
           <thead><tr><th>Usuário</th><th>Situação</th><th>Pagou</th><th>Acesso (admin)</th><th>Acessos</th></tr></thead>
           <tbody id="adUserRows"></tbody>
+        </table></div>
+      </section>
+
+      <!-- NOTAS A EMITIR -->
+      <section data-panel="notas" hidden>
+        <div class="ad-row-between">
+          <h1>Notas a emitir</h1>
+          <div class="ad-filters" role="group" aria-label="Mostrar">
+            <button type="button" class="ad-btn-ghost" data-notas-filtro="pendentes" aria-pressed="true">Sem nota</button>
+            <button type="button" class="ad-btn-ghost" data-notas-filtro="todas" aria-pressed="false">Todas</button>
+          </div>
+        </div>
+        <p class="ad-muted">Cada pagamento real, de Pix e de cartão, com os dados da nota fiscal. A nota é emitida à mão, fora do site. Aqui você só marca a que já foi feita. Pagamentos de cartão em modo teste não aparecem.</p>
+        <p class="ad-muted" id="adNotasResumo"></p>
+        <div class="ad-table-wrap"><table class="ad-table">
+          <thead><tr><th>Pago em</th><th>Nome</th><th>CPF</th><th>Valor</th><th>Plano</th><th>Forma</th><th>E-mail</th><th>Nota emitida</th></tr></thead>
+          <tbody id="adNotasRows"></tbody>
         </table></div>
       </section>
 
@@ -152,6 +170,6 @@
   </dialog>
 
   <div class="ad-toast" id="adToast" role="status" aria-live="polite" hidden></div>
-  <script type="module" src="/admin/admin.js?v=4"></script>
+  <script type="module" src="/admin/admin.js?v=5"></script>
 </body>
 </html>

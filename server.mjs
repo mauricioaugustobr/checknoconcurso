@@ -13,7 +13,7 @@ import { handleAuthConfig, handleGoogleLogin, handleSession, handleLogout } from
 import { getLiveCatalog } from './lib/catalog-overrides.js';
 import { renderImagemConcurso } from './lib/og-rota.js';
 import { renderConcursoPage, renderEstadoPage, renderBlogIndex, renderBlogPost, renderBlogRecentes, renderSitemap, renderLlms } from './lib/pages.js';
-import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts, handleCancelamentos } from './lib/admin-api.js';
+import { handleOverview, handleUsers, handleAudit, handleAdminConcursos, handleAdminPosts, handleCancelamentos, handleNotas } from './lib/admin-api.js';
 import { handleCheckout, handleConfirm, handlePortal, handleWebhook } from './lib/stripe.js';
 
 import { handlePix } from './lib/pix.js';
@@ -40,6 +40,7 @@ const DYNAMIC_ROUTES = [
   [/^\/api\/admin\/concursos$/, (r) => handleAdminConcursos(r)],
   [/^\/api\/admin\/posts$/, (r) => handleAdminPosts(r)],
   [/^\/api\/admin\/cancelamentos$/, (r) => handleCancelamentos(r)],
+  [/^\/api\/admin\/notas$/, (r) => handleNotas(r)],
   [/^\/og\/(concurso|stories)\/([^/]+)$/, (r, m) => renderImagemConcurso(r, m[1], decodeURIComponent(m[2]))],
   [/^\/concurso\/([^/]+)\/?$/, (r, m) => renderConcursoPage(r, decodeURIComponent(m[1]))],
   [/^\/concursos\/([a-zA-Z]{2})\/?$/, (r, m) => renderEstadoPage(r, m[1])],
