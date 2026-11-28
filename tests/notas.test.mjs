@@ -3,7 +3,8 @@ import crypto from 'node:crypto';
 import { createSessionToken } from '../lib/auth.js';
 import { handleNotas } from '../lib/admin-api.js';
 import { montarConsulta, formatarCpf, formatarDocumento, whatsapp, marcarNota, listarNotas } from '../lib/notas.js';
-import { documentoValido, normalizarDocumento } from '../lib/pix.js';
+import { documentoValido, normalizarDocumento, normalizarTelefone, telefoneValido, conferirDadosDaNota } from '../lib/pix.js';
+import { dadosDaNotaCompletos } from '../lib/stripe.js';
 import { assinaturaDoCheck, faturaDoCheck, registrarPagamentoStripe, portalDoCheck, handleWebhook, modoDaChave } from '../lib/stripe.js';
 
 // Testes sem banco: DATABASE_URL fica vazia de propósito
@@ -57,6 +58,23 @@ async function run() {
   assert.deepEqual(whatsapp('5511987654321'), { numero: '(11) 98765-4321', link: 'https://wa.me/5511987654321' });
   assert.deepEqual(whatsapp('2133334444'), { numero: '(21) 3333-4444', link: 'https://wa.me/552133334444' });
   assert.deepEqual(whatsapp(''), { numero: null, link: null });
+  assert.deepEqual(whatsapp('011987654321'), { numero: '(11) 98765-4321', link: 'https://wa.me/5511987654321' }, 'zero na frente');
+
+  // 3d. Padrão do pagamento: nome, CPF/CNPJ, e-mail e WhatsApp obrigatórios (Pix e cartão)
+  assert.equal(normalizarTelefone('0 (11) 98765-4321'), '11987654321');
+  assert.equal(normalizarTelefone('+55 11 98765-4321'), '11987654321');
+  assert.equal(telefoneValido('11987654321'), true);
+  assert.equal(telefoneValido('1133334444'), true, 'fixo com DDD');
+  assert.equal(telefoneValido('987654321'), false, 'sem DDD');
+  const ok = { name: 'Pessoa Exemplo', cpf: '52998224725', email: 'pessoa@exemplo.com', phone: '11987654321' };
+  assert.equal(conferirDadosDaNota(ok), null);
+  assert.match(conferirDadosDaNota({ ...ok, name: '' }), /nome completo/);
+  assert.match(conferirDadosDaNota({ ...ok, cpf: '123' }), /CPF ou CNPJ/);
+  assert.match(conferirDadosDaNota({ ...ok, email: 'sem-arroba' }), /e-mail/);
+  assert.match(conferirDadosDaNota({ ...ok, phone: '' }), /WhatsApp com DDD/);
+  assert.equal(dadosDaNotaCompletos({ buyer_name: 'A', cpf: '52998224725', email: 'a@b.com', phone: '11987654321' }), true);
+  assert.equal(dadosDaNotaCompletos({ buyer_name: 'A', cpf: '52998224725', email: 'a@b.com', phone: '' }), false, 'sem WhatsApp o cartão não abre');
+  assert.equal(dadosDaNotaCompletos({}), false);
 
   // 4. Consulta: Pix pago + cartão real (modo teste e valor zero ficam de fora)
   assert.equal(montarConsulta({ pix: false, cartao: false, contatos: false }), null, 'sem tabelas de pagamento, nada a listar');

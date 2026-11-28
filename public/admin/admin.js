@@ -421,19 +421,26 @@ const ASSUNTO_NOTA = 'Dados para a sua nota fiscal - Check no Concurso';
 const PEDIDO_NOTA = 'Olá! Aqui é do Check no Concurso. Obrigado pela assinatura! Para emitir a sua nota fiscal, pode confirmar o seu nome completo e o CPF (ou o CNPJ e a razão social, se for empresa)?';
 const EMAIL_LINK_OK = /^[^\s"'<>?&#]+@[^\s"'<>?&#]+$/;
 
-function contatoNota(n) {
+/* Padrão do pagamento: e-mail e WhatsApp sempre presentes, cada um na sua coluna */
+function celulaEmailNota(n) {
   const email = n.email
     ? (EMAIL_LINK_OK.test(n.email)
       ? `<a href="mailto:${esc(n.email)}?subject=${encodeURIComponent(ASSUNTO_NOTA)}&amp;body=${encodeURIComponent(PEDIDO_NOTA)}">${esc(n.email)}</a>`
       : `<span>${esc(n.email)}</span>`)
-    : '<span class="ad-muted">sem e-mail</span>';
-  const zap = n.whatsapp
-    ? (n.whatsappLink
-      ? `<a href="${esc(n.whatsappLink)}?text=${encodeURIComponent(PEDIDO_NOTA)}" target="_blank" rel="noopener">WhatsApp ${esc(n.whatsapp)}</a>`
-      : `<span>WhatsApp ${esc(n.whatsapp)}</span>`)
-    : '<span class="ad-muted">sem WhatsApp</span>';
+    : '<span class="ad-alerta">faltando</span>';
   const conta = n.conta && n.conta !== n.email ? `<span class="ad-muted">conta no site: ${esc(n.conta)}</span>` : '';
-  return `${email}${zap}${conta}`;
+  return `${email}${conta}`;
+}
+
+function celulaWhatsNota(n) {
+  if (!n.whatsapp) return '<span class="ad-alerta">faltando</span>';
+  return n.whatsappLink
+    ? `<a href="${esc(n.whatsappLink)}?text=${encodeURIComponent(PEDIDO_NOTA)}" target="_blank" rel="noopener">${esc(n.whatsapp)}</a>`
+    : `<span>${esc(n.whatsapp)}</span>`;
+}
+
+function contatoNota(n) {
+  return `${celulaEmailNota(n)}${celulaWhatsNota(n)}`;
 }
 
 /** Texto com todos os dados do pagamento, para colar no emissor de nota. */
@@ -455,26 +462,28 @@ async function loadNotas() {
   const data = await api(`/api/admin/notas?filtro=${filtroNotas}`);
   $$('[data-notas-filtro]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.notasFiltro === filtroNotas)));
   const r = data.resumo || { pendentes: 0, pendentesCentavos: 0 };
+  const incompletos = r.incompletos ? ` · ${num(r.incompletos)} com dados faltando (de antes do padrão)` : '';
   $('#adNotasResumo').textContent = data.semBanco
     ? 'Banco de dados indisponível agora.'
-    : (r.pendentes ? `${num(r.pendentes)} ${r.pendentes === 1 ? 'pagamento sem nota' : 'pagamentos sem nota'} · ${brl(r.pendentesCentavos / 100)}` : 'Nenhum pagamento sem nota.');
+    : (r.pendentes ? `${num(r.pendentes)} ${r.pendentes === 1 ? 'pagamento sem nota' : 'pagamentos sem nota'} · ${brl(r.pendentesCentavos / 100)}` : 'Nenhum pagamento sem nota.') + incompletos;
   itensNotas.clear();
   (data.itens || []).forEach((n) => itensNotas.set(`${n.origem}:${n.ref}`, n));
   $('#adNotasRows').innerHTML = (data.itens || []).map((n) => `<tr data-origem="${esc(n.origem)}" data-ref="${esc(n.ref)}">
       <td class="ad-nowrap">${quando(n.pagoEm)}</td>
-      <td>${esc(n.nome || '—')}${n.nome ? '' : '<br><span class="ad-muted">sem nome no cadastro</span>'}</td>
-      <td class="ad-nowrap">${n.cpf ? `${esc(n.cpf)}<br><span class="ad-muted">${esc(n.tipoDocumento || 'CPF')}</span>` : '—'}</td>
+      <td>${n.nome ? esc(n.nome) : '<span class="ad-alerta">faltando</span>'}</td>
+      <td class="ad-nowrap">${n.cpf ? `${esc(n.cpf)}<br><span class="ad-muted">${esc(n.tipoDocumento || 'CPF')}</span>` : '<span class="ad-alerta">faltando</span>'}</td>
+      <td class="ad-contato">${celulaEmailNota(n)}</td>
+      <td class="ad-nowrap">${celulaWhatsNota(n)}</td>
       <td class="ad-nowrap">${brl(n.centavos / 100)}</td>
       <td>${esc(PLANO_NOTA[n.plano] || n.plano || '—')}</td>
       <td>${n.origem === 'pix' ? 'Pix' : 'Cartão'}</td>
-      <td class="ad-contato">${contatoNota(n)}</td>
       <td class="ad-nota">
         <label class="ad-check"><input type="checkbox" data-nota-emitida ${n.emitida ? 'checked' : ''}> Nota emitida</label>
         <input type="text" data-nota-numero maxlength="40" placeholder="nº da nota (opcional)" aria-label="Número da nota" value="${esc(n.numero || '')}">
         ${n.emitida && n.emitidaEm ? `<span class="ad-muted">em ${quando(n.emitidaEm)}</span>` : ''}
         <button type="button" class="ad-btn-ghost ad-btn-sm" data-nota-copiar>Copiar dados</button>
       </td></tr>`).join('')
-    || `<tr><td colspan="8" class="ad-muted">${filtroNotas === 'pendentes' ? 'Nenhum pagamento sem nota.' : 'Nenhum pagamento real ainda.'}</td></tr>`;
+    || `<tr><td colspan="9" class="ad-muted">${filtroNotas === 'pendentes' ? 'Nenhum pagamento sem nota.' : 'Nenhum pagamento real ainda.'}</td></tr>`;
 }
 
 function bindNotas() {

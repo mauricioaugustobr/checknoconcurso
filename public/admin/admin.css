@@ -98,3 +98,5 @@ input:focus, select:focus, textarea:focus { outline: 2px solid #0C4F83; outline-
 .ad-tag-entrada { display: inline-block; margin-top: 4px; padding: 2px 8px; border-radius: 999px; background: #E9F0F6; color: #0B2540; font-size: .75rem; font-weight: 700; }
 .ad-alerta { color: #9A3412; font-size: .82rem; font-weight: 700; }
 .ad-nova-senha { margin-top: 6px; }
+/* Notas a emitir: aviso do padrão de dados do pagamento */
+.ad-padrao { margin: 4px 0 8px; padding: 10px 14px; border-left: 4px solid #0C4F83; border-radius: 10px; background: #E9F0F6; color: #0B2540; font-size: .92rem; }
