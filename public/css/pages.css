@@ -49,6 +49,9 @@ h2 { font-size: 1.35rem; margin: 36px 0 12px; }
 .pg-prose img { border-radius: 10px; }
 .pg-footer { border-top: 1px solid var(--border-subtle, #DFE8F0); background: #fff; padding: 24px 0 calc(24px + env(safe-area-inset-bottom)); font-size: .9rem; color: var(--text-secondary, #2E465E); }
 .pg-footer-links a { color: inherit; }
+/* Contato no rodapé das páginas: e-mail e Instagram em destaque */
+.pg-footer-contato { margin-top: 6px; }
+.pg-footer-contato a { color: var(--brand-primary, #0C4F83); font-weight: 600; overflow-wrap: anywhere; }
 @media (max-width: 600px) {
   .pg-wrap { width: min(1040px, 100% - 28px); }
   .pg-nav { gap: 12px; font-size: .88rem; }

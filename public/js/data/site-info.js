@@ -8,7 +8,11 @@ export const MARCA = {
   nome: 'Check no Concurso',
   dominio: 'checknoconcurso.com.br',
   atualizadoEm: '2026-11-24',
-  tagline: 'Concursos reais abertos e encerrados em todo o Brasil, datas de prova atualizadas, editais, cursos e treino com questões de provas anteriores.'
+  tagline: 'Concursos reais abertos e encerrados em todo o Brasil, datas de prova atualizadas, editais, cursos e treino com questões de provas anteriores.',
+  // Contato oficial (28/11/2026)
+  email: 'contato@checknoconcurso.com.br',
+  instagram: 'https://www.instagram.com/checknoconcurso/',
+  instagramArroba: '@checknoconcurso'
 };
 
 export const PLANOS = {

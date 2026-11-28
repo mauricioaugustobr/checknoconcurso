@@ -1,3 +1,9 @@
+/* Contato no rodapé: e-mail e Instagram (área de toque de 44 px no celular) */
+.footer-contato { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: center; margin-top: 6px; }
+.footer-contato a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--brand-primary, #0C4F83); font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+.footer-contato a:hover, .footer-contato a:focus-visible { text-decoration: underline; }
+.footer-contato svg { flex: none; }
+
 /* Links por estado no rodapé (SEO): discretos, quebram linha no celular */
 .footer-seo { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-subtle, #DFE8F0); font-size: .85rem; }
 .footer-seo-title { margin: 0 0 8px; }
